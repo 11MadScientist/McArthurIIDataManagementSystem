@@ -1,18 +1,20 @@
 <?php
+include('../autoloader.inc.php');
+
 if(isset($_POST['submit-registry']))
 {
   $fname =  $_POST['fname'];
   $lname = $_POST['lname'];
   $email = $_POST['email'];
   $pass = $_POST['pass'];
+  $level = $_POST['level'];
   $confpass = $_POST['confpass'];
 
-  echo $fname;
-  echo $lname;
-  echo $email;
-  echo $pass;
-  echo $confpass;
-
+  if($_POST['level'] === null)
+  {
+    header("Location: ../register.php?error=nullposition&fname=".$fname."&lname".$lname."&email=".$email);
+    exit();
+  }
 
   if(!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z]*$/", $fname) && !preg_match("/^[a-zA-Z]*$/", $lname))
   {
@@ -39,7 +41,21 @@ if(isset($_POST['submit-registry']))
     header("Location: ../register.php?error=passwordmissmatch&fname=".$fname."&lname".$lname."&email=".$email);
     exit();
   }
+  else
+  {
+    $obj = new User();
+    $same =$obj->emailChecker($email);
 
+    if($same != null)
+    {
+      header("Location: ../register.php?error=emailtaken&fname=".$fname."&lname".$lname);
+      exit();
+    }
+  }
+
+  $hashedpass = password_hash($pass, PASSWORD_DEFAULT);
+  $obj = new User();
+  $obj->setUserInfo($hashedpass, $lname, $fname, $level, $email);
   header("Location: ../login.php?success=signedupsuccessfully");
   exit();
 

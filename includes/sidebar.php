@@ -1,3 +1,4 @@
+
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -56,7 +57,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Attendance
                     </a>
-                    <a class="nav-link" href="calendar.php">
+                    <a class="nav-link" href="Calendar.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Calendar
                     </a>

@@ -35,6 +35,14 @@
                                         {
                                           echo'<p class = "error">Invalid Email Address!</p>';
                                         }
+                                        elseif($_GET['error'] == "nosuchemail")
+                                        {
+                                          echo'<p class = "error">There is no user with such email!</p>';
+                                        }
+                                        elseif($_GET['error'] == "incorrectPassword")
+                                        {
+                                          echo'<p class = "error">Password is incorrect!</p>';
+                                        }
                                       }
 
                                      ?>

@@ -12,33 +12,69 @@
   font-size: 1.0rem;
   text-align: center;
 }
+/* css for the select tag */
+    .demo
+    {
+      margin: 0px,0px,0px,0px;
+    }
+    .dropdown-container {
+      width: 250px;
+      margin: 0px,0px,0px,0px ;
+      position: relative;
+    }
 
-/*Calendar making css*/
-.cal
-{
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
-}
-h2.heading
-{
-  position: center;
-}
-/*
-  #999 => gray
-  #ccc =>not so dark gray
-  #eee => not so light gray
-  #eceff5=>light gray
+    select {
+      width: 100%;
+      height: 50px;
+      font-size: 90%;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0;
+      background-color: #c0392b;
+      border: none;
+      border-bottom: 2px solid #962d22;
+      color: white;
+      appearance: none;
+      padding: 10px;
+      padding-right: 38px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
+    }
 
-*/
+    /* For IE <= 11 */
+    select::-ms-expand {
+      display: none;
+    }
 
-table.calendar		{ border-left:1px solid #999; }
-tr.calendar-row	{  }
-td.calendar-day	{ min-height:80px; font-size:11px; position:relative; } * html div.calendar-day { height:80px; }
-td.calendar-day:hover	{ background:#eceff5; }
-td.calendar-day-np	{ background:#eee; min-height:80px; } * html div.calendar-day-np { height:80px; }
-td.calendar-day-head { background:#ccc; font-weight:bold; text-align:center; width:120px; padding:5px; border-bottom:1px solid #999; border-top:1px solid #999; border-right:1px solid #999; }
-div.day-number		{ background:#999; padding:5px; color:#fff; font-weight:bold; float:right; margin:-5px -5px 0 0; width:20px; text-align:center; }
-/* shared */
-td.calendar-day, td.calendar-day-np { width:120px; padding:5px; border-bottom:1px solid #999; border-right:1px solid #999; }
+    .select-icon {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 40px;
+      height: 38px;
+      pointer-events: none;
+      border: 2px solid #962d22;
+      padding-left: 5px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .select-icon svg.icon {
+      transition: fill 0.3s ease;
+      fill: white;
+    }
+
+    select:hover,
+    select:focus {
+      color: #c0392b;
+      background-color: white;
+      border-bottom-color: #DCDCDC;
+    }
+    select:hover ~ .select-icon,
+    select:focus ~ .select-icon {
+      background-color: white;
+      border-color: #DCDCDC;
+    }
+    select:hover ~ .select-icon svg.icon,
+    select:focus ~ .select-icon svg.icon {
+      fill: #c0392b;
+    }

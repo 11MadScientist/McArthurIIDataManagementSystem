@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Register</title>
+        <title>Register2</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href ="css/lee.css" rel = "stylesheet"/>
         <script src="js/selecttag.js"></script>

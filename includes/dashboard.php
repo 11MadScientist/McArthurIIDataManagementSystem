@@ -18,7 +18,7 @@
     </head>
     <body class="sb-nav-fixed">
       <?php include('topbar.php'); ?>
-      <?php include('sidebar.php') ?>
+      <?php include('sidebar.php'); ?>
       <div></div>
             <div id="layoutSidenav_content">
                 <main>
@@ -64,6 +64,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php echo $_SESSION['user_level']; ?>
                         </div>
 
                   </div>

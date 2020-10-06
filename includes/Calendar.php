@@ -8,10 +8,18 @@
         <meta name="author" content="" />
         <title>McArthurII District Calendar</title>
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/lee.css" rel="stylesheet" />
+        <link href="css/lee.css" type="text/css" rel="stylesheet" />
+        <link href="css/buttons.css" type="text/css" rel="stylesheet" />
+        <!-- this is the css of the calendar -->
+        <link rel="stylesheet" href="fullcalendar/css/calendar.css">
+        <!-- calendar links and scripts -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+
     </head>
     <body class="sb-nav-fixed">
       <?php
@@ -26,81 +34,14 @@
                             <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                             <li class="breadcrumb-item active">Calendar</li>
                         </ol>
+
+                          <a class="button gotocalendar" href = "fullcalendar/index.php">Go to Calendar</a>
+                          <a class="button schedule">Schedule an Event</a>
+
                     </div>
-                  <div style="margin: auto; width: 50%; border: 3px solid green; padding: 10px;">
-                    <?php
-                    /* draws a calendar */
-                    function draw_calendar($month,$year)
-                    {
+                    <!-- this is the calendar html -->
 
-                        /* draw table */
-                          $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
 
-                          /* table headings */
-                          $headings = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-                          $calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
-
-                          /* days and weeks vars now ... */
-                          $running_day = date('w',mktime(0,0,0,$month,1,$year));
-                          $days_in_month = date('t',mktime(0,0,0,$month,1,$year));
-                          $days_in_this_week = 1;
-                          $day_counter = 0;
-                          $dates_array = array();
-
-                          /* row for week one */
-                          $calendar.= '<tr class="calendar-row">';
-
-                          /* print "blank" days until the first of the current week */
-                          for($x = 0; $x < $running_day; $x++):
-                            $calendar.= '<td class="calendar-day-np"> </td>';
-                            $days_in_this_week++;
-                            endfor;
-
-                            /* keep going with days.... */
-                            for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-                              $calendar.= '<td class="calendar-day">';
-                              /* add in the day number */
-                              $calendar.= '<div class="day-number">'.$list_day.'</div>';
-
-                              /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
-                              $calendar.= str_repeat('<p> </p>',2);
-
-                              $calendar.= '</td>';
-                              if($running_day == 6):
-                                $calendar.= '</tr>';
-                                if(($day_counter+1) != $days_in_month):
-                                  $calendar.= '<tr class="calendar-row">';
-                                endif;
-                                $running_day = -1;
-                                $days_in_this_week = 0;
-                              endif;
-                              $days_in_this_week++; $running_day++; $day_counter++;
-                            endfor;
-
-                            /* finish the rest of the days in the week */
-                            if($days_in_this_week < 8):
-                              for($x = 1; $x <= (8 - $days_in_this_week); $x++):
-                                $calendar.= '<td class="calendar-day-np"> </td>';
-                              endfor;
-                            endif;
-
-                            /* final row */
-                            $calendar.= '</tr>';
-
-                            /* end the table */
-                            $calendar.= '</table>';
-
-                            /* all done, return result */
-                            return $calendar;
-                          }
-                          /*date extraction*/
-                          $month = date('M');
-                          $year = date('Y');
-                          /* Date input */
-                          echo '<h2>'.$month." ".$year.'</h2>';
-                          echo draw_calendar(date('m'),date('Y'));
-                     ?>
-                  </div>
               </main>
             <?php
               include('footer.php');
