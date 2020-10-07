@@ -43,7 +43,7 @@ if(isset($_POST['submit-registry']))
   }
   else
   {
-    $obj = new User();
+    $obj = new GetUser();
     $same =$obj->emailChecker($email);
 
     if($same != null)
@@ -54,7 +54,7 @@ if(isset($_POST['submit-registry']))
   }
 
   $hashedpass = password_hash($pass, PASSWORD_DEFAULT);
-  $obj = new User();
+  $obj = new SetUser();
   $obj->setUserInfo($hashedpass, $lname, $fname, $level, $email);
   header("Location: ../login.php?success=signedupsuccessfully");
   exit();

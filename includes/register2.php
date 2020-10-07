@@ -20,7 +20,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Just a little bit more</h3></div>
                                     <?php
                                         if(isset($_GET['error']))
                                         {
@@ -59,7 +59,10 @@
 
                                     <div class="card-body">
                                       <!-- this is the start of the form-->
-                                        <form action= "forms/registration.form.php" method="post">
+                                        <form action= "forms/registration2.form.php" method="post" enctype="multipart/form-data">
+                                          <label for="prfileimg">Upload Profile Picture:</label>
+                                           <input type="file" name="img-profile" id = "prfileimg">
+
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">

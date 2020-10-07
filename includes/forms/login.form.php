@@ -18,7 +18,7 @@ if(isset($_POST['login-user']))
 
   else
   {
-    $userObj = new User();
+    $userObj = new GetUser();
     $user = $userObj->emailChecker($email);
 
     if($user == null)
@@ -38,6 +38,7 @@ if(isset($_POST['login-user']))
       elseif($passcheck == true)
       {
           session_start();
+          $_SESSION['user_id'] = $user['user_id'];
           $_SESSION['user_fname'] = $user['f_name'];
           $_SESSION['user_lname'] = $user['l_name'];
           $_SESSION['user_email'] = $user['email'];
