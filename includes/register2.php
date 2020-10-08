@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  include('autoloader.inc.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,6 +13,7 @@
         <title>Register2</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href ="css/lee.css" rel = "stylesheet"/>
+        <link href ="css/register2.css" rel = "stylesheet"/>
         <script src="js/selecttag.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -20,99 +25,270 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Just a little bit more</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Now for the Confidential stuff</h3></div>
                                     <?php
                                         if(isset($_GET['error']))
                                         {
-                                            if($_GET['error'] == "invalidemailfirstnamelastname")
+                                            if($_GET['error'] == "nodesignation")
                                             {
-                                              echo '<p class="error">Invalid Email Address & Name must not contain any number/symbols!</p>';
+                                              echo '<p class="error">Please choose a position!</p>';
                                             }
-                                            elseif($_GET['error'] == "invalidemail")
+                                            elseif($_GET['error'] == "invalidContactNumber")
                                             {
-                                              echo '<p class="error">Invalid Email Address!</p>';
+                                              echo '<p class="error">Invalid Contact Number!</p>';
                                             }
-                                            elseif($_GET['error'] == "invalidfirstname")
+                                            elseif($_GET['error'] == "noCivilStatus")
                                             {
-                                              echo '<p class="error">First Name must not contain any numbers and symbols!</p>';
+                                              echo '<p class="error">Please choose Civil Status!</p>';
                                             }
-                                            elseif($_GET['error'] == "invalidlastname")
-                                            {
-                                              echo '<p class="error">Last Name must not contain any numbers and symbols!</p>';
-                                            }
-                                            elseif($_GET['error'] == "passwordmissmatch")
-                                            {
-                                              echo '<p class="error">Password does not match confirm Password!</p>';
-                                            }
-                                            elseif($_GET['error'] == "nullposition")
-                                            {
-                                              echo '<p class="error">Please choose position!</p>';
-                                            }
-                                            elseif($_GET['error'] == "emailtaken")
-                                            {
-                                              echo '<p class="error">Email is already taken!</p>';
-                                            }
-
 
                                         }
+
                                      ?>
 
-                                    <div class="card-body">
-                                      <!-- this is the start of the form-->
-                                        <form action= "forms/registration2.form.php" method="post" enctype="multipart/form-data">
-                                          <label for="prfileimg">Upload Profile Picture:</label>
-                                           <input type="file" name="img-profile" id = "prfileimg">
+                                    <div class="card-body" >
+                                      <form action="forms/registration2.form.php" method="post" enctype="multipart/form-data">
+                                        <label class = "pic-lbl" >Upload Profile Picture</label>
+                                         <input class = "input" name="img-profile" type="file"  required>
+                                         <button class = "button" type="submit" name="img-submit">UPLOAD IMAGE</button>
+                                      </form>
+                                      <?php
+                                       if(isset($_GET['success']))
+                                       {
+                                            $conn = mysqli_connect("localhost", "root", "", "mddb");
 
+                                            $obj = new ProfilePic();
+                                            $result = $obj->get_profile($_SESSION['user_id']);
+
+ 	                                          while($row = mysqli_fetch_array($result))
+                                            {
+                                      ?>
+ 		                                           <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                                      <?php
+ 	                                          }
+                                             mysqli_close($conn);
+
+                                       }
+                                       else
+                                       {
+                                         echo '<img class = "image" src="forms/profpic-uploads/unknown.jpg">';
+                                       }
+                                       ?>
+                                       <!-- <img class = "image" src='forms/profpic-uploads/unknown.jpg'> -->
+                                      <!-- this is the start of the form-->
+                                        <form action= "forms/registration2.form.php" method="post">
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputFirstName">First Name</label>
-                                                        <!--firstname-->
-                                                        <input class="form-control py-4" name = "fname" id="inputFirstName" type="text" placeholder="Enter first name" required />
+                                                        <label class="small mb-1" for="inputFirstName">School/Station</label>
+                                                        <!--name of school user is in-->
+                                                        <?php
+                                                            if(isset($_GET['station']))
+                                                            {
+                                                                $station = $_GET['station'];
+                                                                echo '<input class="form-control py-4" value = "'.$station.'" name = "station" id="inputFirstName" type="text" placeholder="Enter School Stationed" required />';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input class="form-control py-4" name = "station" id="inputFirstName" type="text" placeholder="Enter School Stationed" required />';
+                                                            }
+                                                         ?>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputLastName">Last Name</label>
-                                                        <!--lastname-->
-                                                        <input class="form-control py-4" name = "lname" id="inputLastName" type="text" placeholder="Enter last name" required/>
+                                                        <label class="small mb-1" for="inputLastName">Major</label>
+                                                        <!--his major subject-->
+                                                        <?php
+                                                            if(isset($_GET['major']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['major'].'" class="form-control py-4" name = "major" id="inputLastName" type="text" placeholder="Enter Major" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input class="form-control py-4" name = "major" id="inputLastName" type="text" placeholder="Enter Major" required/>';
+                                                            }
+                                                         ?>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputEmailAddress">Email Address</label>
-                                                <!--email address-->
-                                                <input class="form-control py-4" name = "email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required/>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="small mb-1" for="inputLastName">Highest Educational Attainment</label>
+                                                      <!--his major subject-->
+                                                      <?php
+                                                          if(isset($_GET['highesteducattn']))
+                                                          {
+                                                              echo '<input value = "'.$_GET['highesteducattn'].'" class="form-control py-4" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
+                                                          }
+                                                          else
+                                                          {
+                                                              echo '<input class="form-control py-4" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
+                                                          }
+                                                       ?>
+
+                                                  </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputConfirmPassword">Date of Birth</label>
+                                                        <!--date of birth-->
+                                                        <?php
+                                                            if(isset($_GET['dateofbirth']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['dateofbirth'].'" type="date" class="form-control py-4" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input type="date" class="form-control py-4" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
+                                                            }
+                                                         ?>
+
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="demo">
-                                                <label for="position" style="font-size: 80%;">Choose a Position:</label>
-                                                <div class="dropdown-container">
-                                                  <select name = "level" id = "position" required>
-                                                    <option selected disabled hidden>Choose here</option>
-                                                    <option value="teacher">Teacher</option>
-                                                    <option value="principal">Principal</option>
-                                                    <option value="supervisor">Supervisor</option>
-                                                  </select>
-                                                  <div class="select-icon">
-                                                    <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
-                                                      <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
-                                                    </svg>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputPassword">Contact Number</label>
+                                                        <!--contact number-->
+                                                        <?php
+                                                            if(isset($_GET['contactnum']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['contactnum'].'" type="text" class="form-control py-4" name = "contact-num" id="inputPassword" placeholder="Enter Contact number" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input type="text" class="form-control py-4" name = "contact-num" id="inputPassword" placeholder="Enter Contact number" required/>';
+                                                            }
+                                                         ?>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputConfirmPassword">FB UserName</label>
+                                                        <!--fb username-->
+                                                        <?php
+                                                            if(isset($_GET['fbacct']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['fbacct'].'" type="text" class="form-control py-4" name = "fb-username" id="inputConfirmPassword"  placeholder="Enter FB UserName" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input type="text" class="form-control py-4" name = "fb-username" id="inputConfirmPassword"  placeholder="Enter FB UserName" required/>';
+                                                            }
+                                                         ?>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <div class="form-row">
+                                                  <div class="col-md-6">
+                                                      <div class="form-group">
+                                                        <div class="demo">
+                                                            <label for="position" style="font-size: 80%;">Choose a Position:</label>
+                                                            <div class="dropdown-container">
+                                                              <?php
+                                                                  if(isset($_GET['desig']))
+                                                                  {
+                                                                      echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
+                                                                        <option disabled hidden>Choose here</option>
+                                                                        <option value="teacher">Teacher</option>
+                                                                        <option value="principal">Principal</option>
+                                                                        <option value="supervisor">Supervisor</option>
+                                                                        </select>';
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                    echo '<select name = "desig" id = "position" required>
+                                                                      <option selected disabled hidden>Choose here</option>
+                                                                      <option value="teacher">Teacher</option>
+                                                                      <option value="principal">Principal</option>
+                                                                      <option value="supervisor">Supervisor</option>
+                                                                      </select>';
+                                                                  }
+                                                               ?>
+
+                                                              <div class="select-icon">
+                                                                <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
+                                                                  <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
+                                                                </svg>
+                                                              </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
                                                   </div>
-                                                  </div>
+                                                    <div class="col-md-6">
+                                                      <div class="demo">
+                                                          <label for="position" style="font-size: 80%;">Civil Status:</label>
+                                                          <div class="dropdown-container">
+                                                            <?php
+                                                                if(isset($_GET['civilstatus']))
+                                                                {
+                                                                    echo '<select value = "'.$_GET['civilstatus'].'" name = "civil-stat" id = "position" required>
+                                                                            <option disabled hidden>Choose here</option>
+                                                                            <option value="teacher">Single</option>
+                                                                            <option value="principal">Married</option>
+                                                                          </select>';
+                                                                }
+                                                                else
+                                                                {
+                                                                  echo '<select name = "civil-stat" id = "position" required>
+                                                                          <option selected disabled hidden>Choose here</option>
+                                                                          <option value="teacher">Single</option>
+                                                                          <option value="principal">Married</option>
+                                                                        </select>';
+                                                                }
+                                                             ?>
+
+                                                            <div class="select-icon">
+                                                              <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
+                                                                <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
+                                                              </svg>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputPassword">Password</label>
-                                                        <!--password-->
-                                                        <input class="form-control py-4" name = "pass" id="inputPassword" type="password" placeholder="Enter password" required/>
+                                                        <label class="small mb-1" for="inputPassword">Date of Original Appointment</label>
+                                                        <!--date of original appointment-->
+                                                        <?php
+                                                            if(isset($_GET['orig_appointment']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['orig_appointment'].'" type="date" class="form-control py-4" name = "orig-appointment" id="inputPassword" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input type="date" class="form-control py-4" name = "orig-appointment" id="inputPassword" required/>';
+                                                            }
+                                                         ?>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
-                                                        <!--firstname-->
-                                                        <input class="form-control py-4" name = "confpass" id="inputConfirmPassword" type="password" placeholder="Confirm password" required/>
+                                                        <label class="small mb-1" for="inputConfirmPassword">Date of Latest Promotion</label>
+                                                        <!--date of latest promotion-->
+                                                        <?php
+                                                            if(isset($_GET['dateofpromo']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['dateofpromo'].'" type = "date" class="form-control py-4" name = "lat-promotion" id="inputConfirmPassword" placeholder="Confirm password" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input type = "date" class="form-control py-4" name = "lat-promotion" id="inputConfirmPassword" placeholder="Confirm password" required/>';
+                                                            }
+                                                         ?>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +304,7 @@
                     </div>
                 </main>
             </div>
-            <div id="layoutAuthentication_footer">
+            <div id="layoutAuthentication_footer" style="margin-top: 20px;">
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">

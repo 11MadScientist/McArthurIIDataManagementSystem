@@ -1,0 +1,28 @@
+.image
+{
+  height:180px;
+  width:180px;
+  margin-left: 350px;
+  position: relative;
+}
+.pic-lbl
+{
+  font-size: 120%;
+  margin-left: 70px;
+  margin-top: -10px;
+  position: absolute;
+  width: 190px;
+}
+.input
+{
+  margin-top: 80px;
+  margin-left: 30px;
+  position: absolute;
+}
+.button
+{
+  margin-top: 140px;
+  margin-left:30px;
+  position: absolute;
+  width: 250px;
+}

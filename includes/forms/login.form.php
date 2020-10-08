@@ -18,12 +18,12 @@ if(isset($_POST['login-user']))
 
   else
   {
-    $userObj = new GetUser();
+    $userObj = new User();
     $user = $userObj->emailChecker($email);
 
     if($user == null)
     {
-      header("Location: ../login.php?error=nosuchemail&fname=".$fname."&lname".$lname);
+      header("Location: ../login.php?error=nosuchemail");
       exit();
     }
     else
@@ -32,7 +32,7 @@ if(isset($_POST['login-user']))
       echo $user['pass_word'];
       if($passcheck == false)
       {
-        header("Location: ../login.php?error=incorrectPassword&email =".$email);
+        header("Location: ../login.php?error=incorrectPassword&email=".$email);
         exit();
       }
       elseif($passcheck == true)

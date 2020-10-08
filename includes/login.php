@@ -52,7 +52,17 @@
                                             <div class="form-group" id = "email-error">
                                                 <label class="small mb-1" for="inputEmailAddress">Email Address</label>
                                                 <!--Email address textbox-->
-                                                <input class="form-control py-4" name = "email" id="inputEmailAddress" type="email" placeholder="Enter email address" required />
+                                                <?php
+                                                    if(isset($_GET['email']))
+                                                    {
+                                                        echo '<input value = "'.$_GET['email'].'" class="form-control py-4" name = "email" id="inputEmailAddress" type="email" placeholder="Enter email address" required />';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<input class="form-control py-4" name = "email" id="inputEmailAddress" type="email" placeholder="Enter email address" required />';
+                                                    }
+                                                 ?>
+
                                             </div>
                                             <div class="form-group" id = "email-error">
                                                 <label class="small mb-1" for="inputPassword">Password</label>

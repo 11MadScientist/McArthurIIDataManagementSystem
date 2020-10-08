@@ -1,7 +1,7 @@
 <?php
 include('../autoloader.inc.php');
 
-if(isset($_POST['submit-registry']))
+if(isset($_POST['submit-next']))
 {
   $fname =  $_POST['fname'];
   $lname = $_POST['lname'];
@@ -43,7 +43,7 @@ if(isset($_POST['submit-registry']))
   }
   else
   {
-    $obj = new GetUser();
+    $obj = new User();
     $same =$obj->emailChecker($email);
 
     if($same != null)
@@ -54,9 +54,15 @@ if(isset($_POST['submit-registry']))
   }
 
   $hashedpass = password_hash($pass, PASSWORD_DEFAULT);
-  $obj = new SetUser();
+  $obj = new User();
   $obj->setUserInfo($hashedpass, $lname, $fname, $level, $email);
-  header("Location: ../login.php?success=signedupsuccessfully");
+
+  $id =$obj->emailChecker($email);
+  session_start();
+  $_SESSION['user_id'] = $id['user_id'];
+
+
+  header("Location: ../register2.php?success=signedupsuccessfully");
   exit();
 
 

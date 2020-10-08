@@ -65,21 +65,51 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">First Name</label>
                                                         <!--firstname-->
-                                                        <input class="form-control py-4" name = "fname" id="inputFirstName" type="text" placeholder="Enter first name" required />
+                                                        <?php
+                                                            if(isset($_GET['fname']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['fname'].'" class="form-control py-4" name = "fname" id="inputFirstName" type="text" placeholder="Enter first name" required />';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input class="form-control py-4" name = "fname" id="inputFirstName" type="text" placeholder="Enter first name" required />';
+                                                            }
+                                                         ?>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputLastName">Last Name</label>
                                                         <!--lastname-->
-                                                        <input class="form-control py-4" name = "lname" id="inputLastName" type="text" placeholder="Enter last name" required/>
+                                                        <?php
+                                                            if(isset($_GET['lname']))
+                                                            {
+                                                                echo '<input value = "'.$_GET['lname'].'" class="form-control py-4" name = "lname" id="inputLastName" type="text" placeholder="Enter last name" required/>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input class="form-control py-4" name = "lname" id="inputLastName" type="text" placeholder="Enter last name" required/>';
+                                                            }
+                                                         ?>
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Email Address</label>
                                                 <!--email address-->
-                                                <input class="form-control py-4" name = "email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required/>
+                                                <?php
+                                                    if(isset($_GET['email']))
+                                                    {
+                                                        echo '<input value = "'.$_GET['email'].'" class="form-control py-4" name = "email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required/>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<input class="form-control py-4" name = "email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required/>';
+                                                    }
+                                                 ?>
+
                                             </div>
                                             <div class="demo">
                                                 <label for="position" style="font-size: 80%;">Choose a Position:</label>
@@ -113,7 +143,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><button type = "submit" value = "submit" name = "submit-registry" class="btn btn-primary btn-block" >Create Account</button></div>
+                                            <div class="form-group mt-4 mb-0"><button type = "submit" value = "submit" name = "submit-next" class="btn btn-primary btn-block" >Create Account</button></div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
