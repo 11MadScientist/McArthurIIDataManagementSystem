@@ -1,5 +1,5 @@
 
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<nav style="background-color:#03C04A" id = "topbar" class="sb-topnav navbar navbar-expand navbar-dark">
     <a class="navbar-brand" href="dashboard.php">MDDMS</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->

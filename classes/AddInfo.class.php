@@ -1,6 +1,6 @@
 <?php
 // select users through email
-class User extends Dbh
+class AddInfo extends Dbh
 {
   public function getAddInfo($id)
   {

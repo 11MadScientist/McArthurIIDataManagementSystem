@@ -62,7 +62,7 @@ if(isset($_POST['submit-next']))
   $_SESSION['user_id'] = $id['user_id'];
 
 
-  header("Location: ../register2.php?success=signedupsuccessfully");
+  header("Location: ../register2.php?fullyoperational");
   exit();
 
 

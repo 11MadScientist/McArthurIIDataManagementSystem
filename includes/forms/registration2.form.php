@@ -4,6 +4,13 @@ include('../autoloader.inc.php');
 
 if(isset($_POST['img-submit']))
 {
+  if($_SESSION['user_id']==null)
+  {
+    header("Location: login.php");
+    exit();
+  }
+
+
   $file = $_FILES['img-profile'];
   $filename = $_FILES['img-profile']['name'];
   $fileTmpName = $_FILES['img-profile']['tmp_name'];
@@ -26,9 +33,10 @@ if(isset($_POST['img-submit']))
         $imgData =addslashes(file_get_contents($_FILES['img-profile']['tmp_name']));
   	    $imageProperties = getimageSize($_FILES['img-profile']['tmp_name']);
         $obj = new ProfilePic();
-        $obj->pic_upload($_SESSION['user_id'], $imageProperties, $imgData);
-        echo "complete";
-        header("Location: ../register2.php?success");
+        $confid = $obj->pic_upload($_SESSION['user_id'], $imageProperties, $imgData);
+
+       header("Location: ../register2.php?success");
+
         exit();
       }
       else
@@ -51,6 +59,12 @@ if(isset($_POST['img-submit']))
 
 elseif(isset($_POST['submit-registry']))
 {
+  if($_SESSION['user_id']==null)
+  {
+    header("Location: login.php");
+    exit();
+  }
+
   $designation =  $_POST['desig'];
   $station = $_POST['station'];
   $dateofbirth = $_POST['dateofbirth'];
@@ -84,13 +98,15 @@ elseif(isset($_POST['submit-registry']))
     exit();
   }
 
+  $obj = new AddInfo();
 
-  setAddInfo($_SESSION['user_id'], $designation, $station, $dateofbirth, $civilstatus, $highesteducattn, $major, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
-  header("Location: ../login.php.php?success=signedupsuccessfully");
+  $obj->setAddInfo($_SESSION['user_id'], $designation, $station, $dateofbirth, $civilstatus, $highesteducattn, $major, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
+  header("Location: ../login.php?success=signedupsuccessfully");
   exit();
 }
 
 else
 {
-
+  header("Location: ../login.php");
+  exit();
 }

@@ -54,6 +54,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
@@ -4572,7 +4573,8 @@ input[type=button].btn-block {
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
   padding-right: 0.5rem;
-  color: #6c757d;
+  color:
+   #6c757d;
   content: "/";
 }
 .breadcrumb-item + .breadcrumb-item:hover::before {
@@ -10154,7 +10156,8 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 .sb-topnav.navbar-light #sidebarToggle {
-  color: #212529;
+  color:#212529;
+  /* 580615 maroon color */
 }
 
 .sb-sidenav {

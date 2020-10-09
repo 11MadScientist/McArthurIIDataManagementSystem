@@ -1,6 +1,11 @@
 <?php
   session_start();
   include('autoloader.inc.php');
+  if($_SESSION['user_id'] == null)
+  {
+    header("Location: login.php");
+    exit();
+  }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +40,7 @@
                                             }
                                             elseif($_GET['error'] == "invalidContactNumber")
                                             {
-                                              echo '<p class="error">Invalid Contact Number!</p>';
+                                              echo '<p class="error">Please follow number format 0##-####-####!</p>';
                                             }
                                             elseif($_GET['error'] == "noCivilStatus")
                                             {
@@ -47,34 +52,44 @@
                                      ?>
 
                                     <div class="card-body" >
-                                      <form action="forms/registration2.form.php" method="post" enctype="multipart/form-data">
-                                        <label class = "pic-lbl" >Upload Profile Picture</label>
-                                         <input class = "input" name="img-profile" type="file"  required>
-                                         <button class = "button" type="submit" name="img-submit">UPLOAD IMAGE</button>
-                                      </form>
-                                      <?php
-                                       if(isset($_GET['success']))
-                                       {
-                                            $conn = mysqli_connect("localhost", "root", "", "mddb");
+                                      <div class="group">
+                                        <div class="text">
+                                          <form action="forms/registration2.form.php" method="post" enctype="multipart/form-data">
+                                            <label class = "pic-lbl" >Upload Profile Picture</label>
+                                             <input class = "input" name="img-profile" type="file"  required>
+                                             <button class = "button" type="submit" name="img-submit">UPLOAD IMAGE</button>
+                                          </form>
+                                        </div>
 
-                                            $obj = new ProfilePic();
-                                            $result = $obj->get_profile($_SESSION['user_id']);
+                                        <div class="images">
+                                          <?php
+                                           if(isset($_GET['success']))
+                                           {
+                                                $conn = mysqli_connect("localhost", "root", "", "mddb");
 
- 	                                          while($row = mysqli_fetch_array($result))
-                                            {
-                                      ?>
- 		                                           <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
-                                      <?php
- 	                                          }
-                                             mysqli_close($conn);
+                                                $obj = new ProfilePic();
+                                                $result = $obj->get_profile($_SESSION['user_id']);
 
-                                       }
-                                       else
-                                       {
-                                         echo '<img class = "image" src="forms/profpic-uploads/unknown.jpg">';
-                                       }
-                                       ?>
-                                       <!-- <img class = "image" src='forms/profpic-uploads/unknown.jpg'> -->
+     	                                          while($row = mysqli_fetch_array($result))
+                                                {
+                                          ?>
+     		                                           <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                                          <?php
+     	                                          }
+                                                 mysqli_close($conn);
+
+                                           }
+                                           else
+                                           {
+                                             echo '<img class = "image" src="forms/profpic-uploads/unknown.jpg">';
+                                           }
+                                           ?>
+
+                                        </div>
+                                      </div>
+
+
+
                                       <!-- this is the start of the form-->
                                         <form action= "forms/registration2.form.php" method="post">
                                             <div class="form-row">
@@ -159,11 +174,11 @@
                                                         <?php
                                                             if(isset($_GET['contactnum']))
                                                             {
-                                                                echo '<input value = "'.$_GET['contactnum'].'" type="text" class="form-control py-4" name = "contact-num" id="inputPassword" placeholder="Enter Contact number" required/>';
+                                                                echo '<input value = "'.$_GET['contactnum'].'" type="tel" class="form-control py-4" name = "contact-num" id="inputPassword" placeholder="use format: 0##-####-####" required/>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<input type="text" class="form-control py-4" name = "contact-num" id="inputPassword" placeholder="Enter Contact number" required/>';
+                                                                echo '<input type="tel" class="form-control py-4" name = "contact-num" id="inputPassword" placeholder="use format: 0##-####-####" required/>';
                                                             }
                                                          ?>
 

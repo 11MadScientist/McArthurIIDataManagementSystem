@@ -143,7 +143,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><button type = "submit" value = "submit" name = "submit-next" class="btn btn-primary btn-block" >Create Account</button></div>
+                                            <div class="form-group mt-4 mb-0"><button type = "submit" value = "submit" name = "submit-next" class="btn btn-primary btn-block" >Next Step</button></div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">

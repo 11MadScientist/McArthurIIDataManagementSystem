@@ -7,9 +7,6 @@ if(isset($_POST['login-user']))
   $pass = $_POST['pass'];
 
 
-  echo $email;
-  echo $pass;
-
   if(!filter_var($email, FILTER_VALIDATE_EMAIL))
   {
     header("Location: ../login.php?error=invalidEmail");
@@ -29,7 +26,7 @@ if(isset($_POST['login-user']))
     else
     {
       $passcheck = password_verify($pass, $user['pass_word']);
-      echo $user['pass_word'];
+
       if($passcheck == false)
       {
         header("Location: ../login.php?error=incorrectPassword&email=".$email);

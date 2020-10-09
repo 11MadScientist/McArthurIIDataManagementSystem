@@ -1,28 +1,46 @@
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.text {
+  float: left;
+  width: 55%;
+}
+
+.images {
+  float: left;
+  width: 30%;
+}
+
 .image
 {
   height:180px;
   width:180px;
-  margin-left: 350px;
-  position: relative;
+  ;
 }
+
 .pic-lbl
 {
   font-size: 120%;
   margin-left: 70px;
-  margin-top: -10px;
-  position: absolute;
+  position: relative;
   width: 190px;
+  display: inline;
 }
 .input
 {
-  margin-top: 80px;
+  margin-top: 10%;
   margin-left: 30px;
-  position: absolute;
+  position: relative;
+  display: inline;
 }
 .button
 {
-  margin-top: 140px;
+  margin-top: 10%;
   margin-left:30px;
-  position: absolute;
+  position: relative;
   width: 250px;
+  display: inline;
 }

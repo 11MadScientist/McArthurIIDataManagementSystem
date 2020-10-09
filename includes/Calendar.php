@@ -22,30 +22,23 @@
 
     </head>
     <body class="sb-nav-fixed">
-      <?php
-        include('topbar.php');
-            include('sidebar.php');
-       ?>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid">
-                        <h1 class="mt-4">Calendar</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Calendar</li>
-                        </ol>
-
-                          <a class="button gotocalendar" href = "fullcalendar/index.php">Go to Calendar</a>
-                          <a class="button schedule">Schedule an Event</a>
-
-                    </div>
-                    <!-- this is the calendar html -->
+      <?php include('topbar.php'); ?>
+      <?php include('sidebar.php'); ?>
+      <div></div>
+      <div id="layoutSidenav_content">
+          <main>
+              <div class="container-fluid">
+                  <h1 class="mt-4">Calendar</h1>
+                  <ol style = "background-color:#86B898" class="breadcrumb mb-4">
+                      <li class="breadcrumb-item active">Calendar</li>
+                      <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                  </ol>
 
 
-              </main>
-            <?php
-              include('footer.php');
-            ?>
-         </div>
+              </div>
+
+          </main>
+        <?php include('footer.php') ?>
+        </div>
     </body>
 </html>
