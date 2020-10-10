@@ -102,6 +102,9 @@ elseif(isset($_POST['submit-registry']))
 
   $obj->setAddInfo($_SESSION['user_id'], $designation, $station, $dateofbirth, $civilstatus, $highesteducattn, $major, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
   header("Location: ../login.php?success=signedupsuccessfully");
+  session_unset();
+  session_destroy();
+
   exit();
 }
 

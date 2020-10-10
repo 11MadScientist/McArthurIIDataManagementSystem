@@ -12,8 +12,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
-                    
-                    <div class="sb-sidenav-menu-heading">Statistics</div>
+                    <div style="color:white;" class="sb-sidenav-menu-heading">Statistics</div>
                     <a class="nav-link" href="attendance.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Attendance
