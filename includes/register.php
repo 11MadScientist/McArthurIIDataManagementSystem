@@ -124,19 +124,46 @@
                                             <div class="demo">
                                                 <label for="position" style="font-size: 80%;">Choose a Position:</label>
                                                 <div class="dropdown-container">
-                                                  <select name = "level" id = "position" required>
-                                                    <option selected disabled hidden>Choose here</option>
-                                                    <option value="teacher">Teacher</option>
-                                                    <option value="principal">Principal</option>
-                                                    <option value="supervisor">Supervisor</option>
-                                                  </select>
+                                                  <?php
+                                                      if(isset($_GET['level']))
+                                                      {
+
+                                                          echo '
+                                                          <select name = "level" id = "position" required>
+                                                            <option disabled hidden>Choose here</option>
+                                                            <option id ="1" value="teacher">Teacher</option>
+                                                            <option id ="2" value="principal">Principal</option>
+                                                            <option id ="3" value="supervisor">Supervisor</option>
+                                                            </select>
+
+                                                            <script>
+                                                            function myFunction()
+                                                            {
+                                                              document.getElementById("position").value = "'.$_GET['level'].'";
+                                                            }
+                                                            myFunction();
+                                                            </script>
+                                                            ';
+                                                      }
+                                                      else
+                                                      {
+                                                        echo '<select name = "level" id = "position" required>
+                                                          <option selected disabled hidden>Choose here</option>
+                                                          <option value="teacher">Teacher</option>
+                                                          <option value="principal">Principal</option>
+                                                          <option value="supervisor">Supervisor</option>
+                                                          </select>';
+                                                      }
+                                                   ?>
+
                                                   <div class="select-icon">
                                                     <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
                                                       <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
                                                     </svg>
                                                   </div>
                                                   </div>
-                                                </div>
+                                              </div>
+
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">

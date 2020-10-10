@@ -12,7 +12,7 @@ if(isset($_POST['submit-next']))
 
   if($_POST['level'] === null)
   {
-    header("Location: ../register.php?error=nullposition&fname=".$fname."&lname".$lname."&email=".$email);
+    header("Location: ../register.php?error=nullposition&fname=".$fname."&lname=".$lname."&email=".$email);
     exit();
   }
 
@@ -23,22 +23,22 @@ if(isset($_POST['submit-next']))
   }
   else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
   {
-    header("Location: ../register.php?error=invalidemail&fname=".$fname."&lname".$lname);
+    header("Location: ../register.php?error=invalidemail&fname=".$fname."&lname".$lname."&level=".$level);
     exit();
   }
-  else if(!preg_match("/^[a-zA-Z]*$/", $fname))
+  else if(!preg_match("/^[a-zA-Z\s]*$/", $fname))
   {
-    header("Location: ../register.php?error=invalidfirstname&lname".$lname."&email=".$email);
+    header("Location: ../register.php?error=invalidfirstname&lname=".$lname."&email=".$email."&level=".$level);
     exit();
   }
   else if(!preg_match("/^[a-zA-Z]*$/",$lname))
   {
-    header("Location: ../register.php?error=invalidlastname&fname=".$fname."&email=".$email);
+    header("Location: ../register.php?error=invalidlastname&fname=".$fname."&email=".$email."&level=".$level);
     exit();
   }
   else if($pass !== $confpass)
   {
-    header("Location: ../register.php?error=passwordmissmatch&fname=".$fname."&lname".$lname."&email=".$email);
+    header("Location: ../register.php?error=passwordmissmatch&fname=".$fname."&lname=".$lname."&email=".$email."&level=".$level);
     exit();
   }
   else
@@ -48,7 +48,7 @@ if(isset($_POST['submit-next']))
 
     if($same != null)
     {
-      header("Location: ../register.php?error=emailtaken&fname=".$fname."&lname".$lname);
+      header("Location: ../register.php?error=emailtaken&fname=".$fname."&lname=".$lname."&level=".$level);
       exit();
     }
   }

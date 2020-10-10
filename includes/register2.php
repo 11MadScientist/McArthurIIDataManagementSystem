@@ -21,6 +21,7 @@
 
         <link href ="css/register2.css" rel = "stylesheet"/>
         <script src="js/selecttag.js"></script>
+        <script src="js/dropdown.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="backgound">
@@ -213,12 +214,21 @@
                                                               <?php
                                                                   if(isset($_GET['desig']))
                                                                   {
-                                                                      echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
+                                                                      echo '
+                                                                      <select name = "desig" id = "position" required>
                                                                         <option disabled hidden>Choose here</option>
                                                                         <option value="teacher">Teacher</option>
                                                                         <option value="principal">Principal</option>
                                                                         <option value="supervisor">Supervisor</option>
-                                                                        </select>';
+                                                                        </select>
+                                                                        <script>
+                                                                        function myFunction()
+                                                                        {
+                                                                          document.getElementById("position").value = "'.$_GET['desig'].'";
+                                                                        }
+                                                                        myFunction();
+                                                                        </script>
+                                                                        ';
                                                                   }
                                                                   else
                                                                   {
@@ -247,11 +257,19 @@
                                                             <?php
                                                                 if(isset($_GET['civilstatus']))
                                                                 {
-                                                                    echo '<select value = "'.$_GET['civilstatus'].'" name = "civil-stat" id = "position" required>
+                                                                    echo '<select value = "'.$_GET['civilstatus'].'" name = "civil-stat" id = "civil" required>
                                                                             <option disabled hidden>Choose here</option>
                                                                             <option value="teacher">Single</option>
                                                                             <option value="principal">Married</option>
-                                                                          </select>';
+                                                                          </select>
+                                                                          <script>
+                                                                          function myFunction()
+                                                                          {
+                                                                            document.getElementById("civil").value = "'.$_GET['civilstatus'].'";
+                                                                          }
+                                                                          myFunction();
+                                                                          </script>
+                                                                          ';
                                                                 }
                                                                 else
                                                                 {
