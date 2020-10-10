@@ -9,18 +9,28 @@
         <title>Register</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href ="css/lee.css" rel = "stylesheet"/>
+        <link href ="css/login.css" rel = "stylesheet"/>
         <script src="js/selecttag.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body class="background">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                <div class="card shadow-lg border-0 rounded-lg mt-5" style = "margin-bottom: 12%;">
+                                    <div class="card-header">
+                                      <div class="group">
+                                        <div class="images">
+                                         <img class = "image" src="forms/profpic-uploads/logo.png" style = "width:100px;height:100px; margin-left:20%; margin-top:10%;">
+                                        </div>
+                                        <div class="text">
+                                          <h2 class="text-center font-weight-light my-4">Create Account</h2>
+                                        </div>
+                                    </div>
+                                    </div>
                                     <?php
                                         if(isset($_GET['error']))
                                         {

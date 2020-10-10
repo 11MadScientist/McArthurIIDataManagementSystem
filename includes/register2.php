@@ -18,11 +18,12 @@
         <title>Register2</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href ="css/lee.css" rel = "stylesheet"/>
+
         <link href ="css/register2.css" rel = "stylesheet"/>
         <script src="js/selecttag.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body class="backgound">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>

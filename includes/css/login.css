@@ -1,0 +1,16 @@
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.text {
+  margin-top: 6%;
+  float: left;
+  width: 40%;
+}
+
+.images {
+  float: left;
+  width: 30%;
+}

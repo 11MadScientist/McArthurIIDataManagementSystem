@@ -9,10 +9,11 @@
         <title>McArthurII District LOGIN PAGE</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href ="css/lee.css" rel = "stylesheet"/>
+        <link href ="css/login.css" rel = "stylesheet"/>
         <script defer src="login-script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body class="background">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -20,7 +21,15 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-header">
+                                      <div class="group">
+                                        <div class="images">
+                                         <img class = "image" src="forms/profpic-uploads/logo.png" style = "width:100px;height:100px; margin-left:10px;">
+                                        </div>
+                                        <div class="text">
+                                          <h2 class="text-center font-weight-light my-4">Login</h2>
+                                        </div>
+                                    </div>
                                     <?php
                                       if(isset($_GET['success']))
                                       {

@@ -2471,13 +2471,19 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #03C04A;
+  border-color: #03C04A;
+  width: 50%;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: #1F5C2E;
+  border-color: #1F5C2E;
 }
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
