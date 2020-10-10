@@ -1,0 +1,12 @@
+.card-container
+{
+  width: 1200px;
+  height: 250px;
+  background: #fff;
+  border-radius:6px;
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 1px 10px 1px #000;
+}

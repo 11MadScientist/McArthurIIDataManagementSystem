@@ -13,6 +13,7 @@
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/dashboard.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -23,12 +24,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Dashboard</h1>
-                        <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
+                        <div class="card-container container-fluid">
+                          <div class="upper-container">
 
-                            <?php echo $_SESSION['user_level']; ?>
+                          </div>
+
+                        </div>
                     </div>
 
                 </main>
