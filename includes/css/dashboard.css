@@ -1,12 +1,27 @@
+#head
+{
+	margin: 2px;
+	border-radius: 4px;
+	background-color: black;
+	height: 370px;
+  box-sizing: border-box;
+  margin-top: 1%;
+  text-align: center;
+  padding: 3%;
+  background-image: url('../forms/profpic-uploads/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+}
+
 .card-container
 {
-  width: 1200px;
+  width: 200px;
   height: 250px;
   background: #fff;
   border-radius:6px;
   position: absolute;
-  top: 30%;
-  left: 60%;
-  transform: translate(-50%, -50%);
+  left: 280px;
+  top: 280px;
   box-shadow: 0px 1px 10px 1px #000;
 }

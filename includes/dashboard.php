@@ -23,14 +23,15 @@
       <div></div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid">
+                    <div class="container-fluid mt-auto">
+                      <div id="head">
                         <div class="card-container container-fluid">
-                          <div class="upper-container">
-
-                          </div>
 
                         </div>
-                    </div>
+			                     <h1></h1>
+		                    </div>
+
+                      </div>
 
                 </main>
               <?php include('footer.php') ?>
