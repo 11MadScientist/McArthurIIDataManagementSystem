@@ -54,14 +54,35 @@
 
 
                         <div class="contact">
-                          <p>helloworld</p>
-                          <p>hello world</p>
-                          <p>helloworld</p>
-                          <p>hello world</p>
-                          <p>helloworld</p>
-                          <p>hello world</p>
-                          <p>helloworld</p>
-                          <p>hello world</p>
+                          <?php
+                          
+                           ?>
+                          <ul>
+                            <div class="icon">
+                              <i class="fas fa-phone"></i>
+                              <span>Phone Number</span>
+                            </div>
+
+                            <div class="icon">
+                              <i class="fas fa-envelope"></i>
+                              <span>Email Address</span>
+                            </div>
+
+                            <div class="icon">
+                              <i class = "fab fa-facebook-f"></i>
+                              <span>Facebook Account:</span>
+                            </div>
+
+
+                            <div class="icon">
+                              <i class = "fas fa-graduation-cap"></i>
+                              <span>Highest Educational Attainment</span>
+                            </div>
+
+
+
+                          </ul>
+
                         </div>
                         <div class="underline">
                           <hr></hr>

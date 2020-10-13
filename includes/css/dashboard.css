@@ -59,6 +59,13 @@
 	width:100%;
 	min-width: 300px;
 	padding-left: 250px;
+	padding-top: 20px;
+}
+.icon
+{
+	font-size: 18px;
+	margin-right: 50px;
+	display: inline-block;
 }
 .contact p
 {
