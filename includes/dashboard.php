@@ -1,5 +1,6 @@
 <?php
-  session_start()
+  session_start();
+  include('autoloader.inc.php');
 ?>
 
 
@@ -25,13 +26,62 @@
                 <main>
                     <div class="container-fluid mt-auto">
                       <div id="head">
-                        <div class="card-container container-fluid">
+                            <?php
+                             if(isset($_GET['success']))
+                             {
+                                  $conn = mysqli_connect("localhost", "root", "", "mddb");
 
+                                  $obj = new ProfilePic();
+                                  $result = $obj->get_profile($_SESSION['user_id']);
+
+                                  while($row = mysqli_fetch_array($result))
+                                  {
+                            ?>
+
+                                     <img class = "card-container" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                            <?php
+                                  }
+                                   mysqli_close($conn);
+
+                             }
+                             ?>
+                        <div class = "user-name">
+                            <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_lname']; ?></h2>
+                            <h4><?php echo $_SESSION['user_level'] ?></h4>
                         </div>
-			                     <h1></h1>
 		                    </div>
 
+
+
+                        <div class="contact">
+                          <p>helloworld</p>
+                          <p>hello world</p>
+                          <p>helloworld</p>
+                          <p>hello world</p>
+                          <p>helloworld</p>
+                          <p>hello world</p>
+                          <p>helloworld</p>
+                          <p>hello world</p>
+                        </div>
+                        <div class="underline">
+                          <hr></hr>
+                        </div>
+                        <div class="content left-box">
+
+                        </div>
+                        <div class="content right-box">
+
+                        </div>
+                        <div class="content left-box">
+
+                        </div>
+                        <div class="content right-box">
+
+                        </div>
+
+
                       </div>
+
 
                 </main>
               <?php include('footer.php') ?>

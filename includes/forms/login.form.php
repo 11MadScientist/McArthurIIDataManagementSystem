@@ -50,7 +50,7 @@ if(isset($_POST['login-user']))
       }
     }
   }
-  header("Location: ../dashboard.php");
+  header("Location: ../dashboard.php?success");
   exit();
 
 
