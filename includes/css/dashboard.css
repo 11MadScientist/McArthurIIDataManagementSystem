@@ -1,0 +1,104 @@
+#head
+{
+	margin: 2px;
+	border-radius: 4px;
+	background-color: black;
+	height: 370px;
+  box-sizing: border-box;
+  margin-top: 1%;
+  padding: 3%;
+  background-image: url('../forms/profpic-uploads/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+	min-width: 800px;
+	position: relative;
+}
+
+
+.card-container
+{
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  border-radius:6px;
+  position: absolute;
+  left: 30px;
+  top: 280px;
+  box-shadow: 0px 1px 10px 1px  #03C04A;
+	background-image: url('../forms/profpic-uploads/unknown.jpg');
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+
+
+}
+
+.user-name
+{
+
+	color:white;
+	text-align: center;
+	width: 500px;
+  height: 80px;
+  background: #03C04A;
+  border-radius:6px;
+  position: absolute;
+  left: 235px;
+  top: 285px;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+
+
+}
+.contact
+{
+	border-radius: 4px;
+	display: inline-block;
+	height: 115px;
+	width:100%;
+	min-width: 300px;
+	padding-left: 250px;
+	padding-top: 20px;
+}
+.icon
+{
+	font-size: 18px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+	display: inline-block;
+}
+.contact p
+{
+	display: inline;
+	margin-right: 30px;
+	margin-left: 30px;
+}
+.underline
+{
+
+}
+
+.content
+{
+	min-width: 450px;
+	display: inline-block;
+
+	width: 40%;
+  height: 450px;
+  background: #fff;
+  border-radius:6px;
+
+  box-shadow: 0px 1px 10px 1px #000;
+	background-size: 100% 100%;
+	margin-bottom: 4%;
+}
+.left-box
+{
+	margin-right: 4%;
+	margin-left: 6%;
+}
+.right-box
+{
+	margin-right: 4%;
+}

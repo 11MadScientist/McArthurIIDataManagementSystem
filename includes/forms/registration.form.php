@@ -60,6 +60,8 @@ if(isset($_POST['submit-next']))
   $id =$obj->emailChecker($email);
   session_start();
   $_SESSION['user_id'] = $id['user_id'];
+  $_SESSION['user_level'] = $id['level'];
+  
 
 
   header("Location: ../register2.php?fullyoperational");
