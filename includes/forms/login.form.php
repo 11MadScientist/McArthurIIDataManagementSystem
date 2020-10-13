@@ -40,7 +40,7 @@ if(isset($_POST['login-user']))
           $_SESSION['user_lname'] = $user['l_name'];
           $_SESSION['user_email'] = $user['email'];
           $_SESSION['user_level'] = $user['level'];
-          header("Location: ../dashboard.php");
+          header("Location: ../dashboard.php?success");
           exit();
       }
       else
@@ -50,8 +50,7 @@ if(isset($_POST['login-user']))
       }
     }
   }
-  header("Location: ../dashboard.php?success");
-  exit();
+
 
 
 }

@@ -213,21 +213,79 @@
                                                               <?php
                                                                   if(isset($_GET['desig']))
                                                                   {
-                                                                      echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
-                                                                        <option disabled hidden>Choose here</option>
-                                                                        <option value="teacher">Teacher</option>
-                                                                        <option value="principal">Principal</option>
-                                                                        <option value="supervisor">Supervisor</option>
-                                                                        </select>';
+                                                                      if($_GET['desig'] != null)
+                                                                      {
+                                                                        if($_SESSION['level'] == "teacher")
+                                                                        {
+                                                                          echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
+                                                                            <option value="Teacher I"></option>
+                                                                            <option value="Teacher II"></option>
+                                                                            <option value="Teacher III"></option>
+                                                                            <option value="Master Teacher I"></option>
+                                                                            <option value="Master Teacher II"></option>
+                                                                            <option value="Master Teacher III"></option>
+                                                                            <option value="Head Teacher I"></option>
+                                                                            <option value="Head Teacher II"></option>
+                                                                            <option value="Head Teacher III"></option>
+                                                                            </select>';
+                                                                        }
+                                                                        elseif($_SESSION['level'] == "principal")
+                                                                        {
+                                                                          echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
+                                                                            <option value="Principal I"></option>
+                                                                            <option value="Principal II"></option>
+                                                                            </select>';
+                                                                        }
+                                                                      }
+                                                                      else
+                                                                      {
+                                                                        if($_SESSION['level'] == "teacher")
+                                                                        {
+                                                                          echo '<select name = "desig" id = "position" required>
+                                                                            <option value="Teacher I"></option>
+                                                                            <option value="Teacher II"></option>
+                                                                            <option value="Teacher III"></option>
+                                                                            <option value="Master Teacher I"></option>
+                                                                            <option value="Master Teacher II"></option>
+                                                                            <option value="Master Teacher III"></option>
+                                                                            <option value="Head Teacher I"></option>
+                                                                            <option value="Head Teacher II"></option>
+                                                                            <option value="Head Teacher III"></option>
+                                                                            </select>';
+                                                                        }
+                                                                        elseif($_SESSION['level'] == "principal")
+                                                                        {
+                                                                          echo '<select name = "desig" id = "position" required>
+                                                                            <option value="Principal I"></option>
+                                                                            <option value="Principal II"></option>
+                                                                            </select>';
+                                                                        }
+                                                                      }
+
                                                                   }
                                                                   else
                                                                   {
-                                                                    echo '<select name = "desig" id = "position" required>
-                                                                      <option selected disabled hidden>Choose here</option>
-                                                                      <option value="teacher">Teacher</option>
-                                                                      <option value="principal">Principal</option>
-                                                                      <option value="supervisor">Supervisor</option>
-                                                                      </select>';
+                                                                    if($_SESSION['level'] == "teacher")
+                                                                    {
+                                                                      echo '<select name = "desig" id = "position" required>
+                                                                        <option value="Teacher I"></option>
+                                                                        <option value="Teacher II"></option>
+                                                                        <option value="Teacher III"></option>
+                                                                        <option value="Master Teacher I"></option>
+                                                                        <option value="Master Teacher II"></option>
+                                                                        <option value="Master Teacher III"></option>
+                                                                        <option value="Head Teacher I"></option>
+                                                                        <option value="Head Teacher II"></option>
+                                                                        <option value="Head Teacher III"></option>
+                                                                        </select>';
+                                                                    }
+                                                                    elseif($_SESSION['level'] == "principal")
+                                                                    {
+                                                                      echo '<select name = "desig" id = "position" required>
+                                                                        <option value="Principal I"></option>
+                                                                        <option value="Principal II"></option>
+                                                                        </select>';
+                                                                    }
                                                                   }
                                                                ?>
 

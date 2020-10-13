@@ -25,15 +25,15 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid mt-auto">
+
                       <div id="head">
                             <?php
-                             if(isset($_GET['success']))
+                            $conn = mysqli_connect("localhost", "root", "", "mddb");
+
+                            $obj = new ProfilePic();
+                            $result = $obj->get_profile($_SESSION['user_id']);
+                             if($result != null)
                              {
-                                  $conn = mysqli_connect("localhost", "root", "", "mddb");
-
-                                  $obj = new ProfilePic();
-                                  $result = $obj->get_profile($_SESSION['user_id']);
-
                                   while($row = mysqli_fetch_array($result))
                                   {
                             ?>
@@ -44,6 +44,13 @@
                                    mysqli_close($conn);
 
                              }
+                             else
+                              {
+                                ?>
+
+                                    <img class = "card-container">
+                            <?php
+                              }
                              ?>
                         <div class = "user-name">
                             <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_lname']; ?></h2>
@@ -55,28 +62,24 @@
 
                         <div class="contact">
                           <?php
-                          
+                              $obj = new AddInfo();
+                              $info = $obj->getAddInfo($_SESSION['user_id']);
+
                            ?>
                           <ul>
                             <div class="icon">
                               <i class="fas fa-phone"></i>
-                              <span>Phone Number</span>
+                              <span>Phone Number : <?php echo $info['contact_num'] ?></span>
                             </div>
 
                             <div class="icon">
                               <i class="fas fa-envelope"></i>
-                              <span>Email Address</span>
+                              <span>Email Address : <?php echo $_SESSION['user_email'] ?></span>
                             </div>
 
                             <div class="icon">
                               <i class = "fab fa-facebook-f"></i>
-                              <span>Facebook Account:</span>
-                            </div>
-
-
-                            <div class="icon">
-                              <i class = "fas fa-graduation-cap"></i>
-                              <span>Highest Educational Attainment</span>
+                              <span>Facebook Account : <?php echo $info['fb_acct'] ?></span>
                             </div>
 
 

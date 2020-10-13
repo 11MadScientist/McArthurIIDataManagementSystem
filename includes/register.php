@@ -128,7 +128,6 @@
                                                     <option selected disabled hidden>Choose here</option>
                                                     <option value="teacher">Teacher</option>
                                                     <option value="principal">Principal</option>
-                                                    <option value="supervisor">Supervisor</option>
                                                   </select>
                                                   <div class="select-icon">
                                                     <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
