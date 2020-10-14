@@ -37,6 +37,7 @@ if(isset($_POST['login-user']))
           session_start();
           $_SESSION['user_id'] = $user['user_id'];
           $_SESSION['user_fname'] = $user['f_name'];
+          $_SESSION['user_mname'] = $user['m_name'];
           $_SESSION['user_lname'] = $user['l_name'];
           $_SESSION['user_email'] = $user['email'];
           $_SESSION['user_level'] = $user['level'];

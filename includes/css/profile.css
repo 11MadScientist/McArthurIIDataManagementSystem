@@ -1,0 +1,124 @@
+.profile-box
+{
+	min-width: 450px;
+  margin-left: 15%;
+  margin-top: 5%;
+	width: 70%;
+  background: #fff;
+  border-radius:6px;
+  position: relative;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+	background-size: 100% 100%;
+	margin-bottom: 4%;
+  font-size: 18px;
+  font-family: "Century Gothic";
+  padding-bottom: 10px;
+
+}
+
+.content
+{
+  color: #413D3E;
+
+}
+.divider-inline1
+{
+  display: inline-block;
+  min-width: min-width: 450px;
+  margin-right: 7%;
+
+}
+.divider-inline1.contact-content
+{
+  display: block;
+}
+.divider-inline2
+{
+  display: inline-block;
+  width: 100%;
+}
+
+.divider-inline2.contact-content
+{
+  display: inline-block;
+}
+
+.divider-block
+{
+  display: block;
+}
+
+
+.profile-pic
+{
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  border-radius:6px;
+  position: absolute;
+  left: 70px;
+  top: 80px;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+	background-image: url('../forms/profpic-uploads/unknown.jpg');
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+
+
+}
+
+.name
+{
+  padding-top: 120px;
+  padding-left: 270px;
+  min-height: 310px;
+  width:100%;
+  min-width: 300px;
+  background: white;
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+}
+.name p
+{
+  font-size: 23px;
+  color: #03C04A;
+}
+.name-content
+{
+  margin-bottom: 15px;
+  color: #03C04A;
+}
+
+.horizontal-rule
+{
+  width: 96%;
+  height: 2px;
+  box-shadow: 0px 1px 10px 1px  #000;
+  margin-left: 2%;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.contact
+{
+  padding-left: 40px;
+  width:100%;
+  min-width: 300px;
+  background: white;
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+
+
+}
+.contact p
+{
+  margin-left: 10px;
+  color: #03C04A;
+  font-size: 23px;
+
+}
+.contact-content
+{
+  margin-bottom: 25px;
+  margin-right: 55px;
+  color: #03C04A;
+}

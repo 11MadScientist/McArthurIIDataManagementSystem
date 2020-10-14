@@ -59,7 +59,7 @@
                                           <form action="forms/registration2.form.php" method="post" enctype="multipart/form-data">
                                             <label class = "pic-lbl" >Upload Profile Picture</label>
                                              <input class = "input" name="img-profile" type="file"  required>
-                                             <button class = "button" type="submit" name="img-submit">UPLOAD IMAGE</button>
+                                             <button class = "btn-primary button " type="submit" name="img-submit">UPLOAD IMAGE</button>
                                           </form>
                                         </div>
 
@@ -97,7 +97,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputFirstName">Designation</label>
+                                                        <label class="small mb-1" for="inputFirstName">School Assigned</label>
                                                         <!--name of school user is in-->
                                                         <?php
                                                             if(isset($_GET['station']))
@@ -297,8 +297,8 @@
                                                                 {
                                                                     echo '<select value = "'.$_GET['civilstatus'].'" name = "civil-stat" id = "civil" required>
                                                                             <option disabled hidden>Choose here</option>
-                                                                            <option value="teacher">Single</option>
-                                                                            <option value="principal">Married</option>
+                                                                            <option value="Single">Single</option>
+                                                                            <option value="Married">Married</option>
                                                                           </select>
                                                                           <script>
                                                                           function myFunction()
@@ -313,8 +313,8 @@
                                                                 {
                                                                   echo '<select name = "civil-stat" id = "position" required>
                                                                           <option selected disabled hidden>Choose here</option>
-                                                                          <option value="teacher">Single</option>
-                                                                          <option value="principal">Married</option>
+                                                                          <option value="Single">Single</option>
+                                                                          <option value="Married">Married</option>
                                                                         </select>';
                                                                 }
                                                              ?>
