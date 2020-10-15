@@ -23,9 +23,72 @@
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                   </ol>
 
+                  <!--ATTENDANCE TABLE-->
+                    <table style='width:100%' class='display table table-hover center' cellspacing='0'>
+                      <thead>
+                        <tr style="text-align: center">
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          date_default_timezone_set('Asia/Manila');
+                          $day = date('M-d',strtotime('today'));
+                          $today = date('M-d',strtotime('today'));
+                          //echo $day;
+                          // loop for getting the 1 week before up to this day
+                          for($i= 8; $i > 0; $i--)
+                          {
+                        ?>
+                            <tr>
+                              <!-- Getting today to the previous days -->
+                              <td>
+                                <nobr><?php echo gmdate("l", strtotime('+1 day', strtotime($today)))?></nobr>
+                                <br><?php echo date('M-d',strtotime($today));?></br>
+                              </td>
+                              <td style="text-align:center">
+                                <?php
+                                  // today determiner
+                                  if($day == $today)
+                                  {
+                                    //attendance for today
+                                    echo "<button type='submit' value='submit' name='submitAttendance' class='btn btn-primary'>Submit Attendance</button>";
+                                  }
+                                  else
+                                    //timestamp for the previous days
+                                  {
+                                    echo "8am-5pm";
+                                  }
+                                ?>
+                              </td>
+                              <!-- determine of the status (present or absent) -->
+                              <td style="text-align:center">
+                                <?php
+                                    // today determiner
+                                    if($day == $today)
+                                    {
+                                      //status for today
+                                      echo "N/A";
+                                    }
+                                    else
+                                      //status for the previous days
+                                    {
+                                      echo "Present";
+                                    }
+                                  ?>
+                              </td>
+                            </tr>
+                            <?php 
+                            // day iterator
+                            $today = date('M-d', strtotime('-1 day', strtotime($today)));
+                          }
+                            ?>                                 
+                      </tbody>
+                    </table>
 
               </div>
-
           </main>
         <?php include('footer.php') ?>
         </div>
