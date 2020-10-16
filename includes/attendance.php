@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+session_start();
+include('autoloader.inc.php'); ?>
+!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -52,23 +55,40 @@
                                     //prints the day of the week in the table
                                     echo gmdate("l", strtotime('+1 day', strtotime($day)));
                                     //prints the month and day in the table
-                                    echo date('   M-d',strtotime($day));
+                                    echo date('M-d',strtotime($day));
                                   ?>
                                 </br>
                               </td>
                               <td style="text-align:center; vertical-align: middle;">
                                 <?php
+                                $ymd = date('Y-m-d', strtotime($day));
+                                $obj = new Attendance();
+                                $info = $obj->getTime($_SESSION['user_id'],$ymd);
                                   // determines if today is today
                                   if($day == $today)
                                   {
                                     //attendance for today
                                     //i dunnno how to insert database here :)
-                                    echo "<button type='submit' value='submit' name='submitAttendance' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>";
+                                      if($info['attn_time']?? null != null)
+                                      {
+                                        echo $info['attn_time'];
+                                      }
+                                      else
+                                      {
+                                        ?>
+                                          <form class="" action="forms/attendance.form.php" method="post">
+                                              <input type="hidden" name="status" value="Present">
+                                              <button type='submit' value='submit' name='submitAttn' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                          </form>
+
+                                        <?php
+                                      }
+
                                   }
                                   else
                                     //timestamp for the previous days
                                   {
-                                    echo "8am-5pm";
+                                    echo $info['attn_time']?? "No Time-in";
                                   }
                                 ?>
                               </td>
@@ -79,21 +99,24 @@
                                     if($day == $today)
                                     {
                                       //status for today
-                                      echo "N/A";
+                                      if($info['status']?? null != null)
+                                      {
+                                        echo $info['status'];
+                                      }
                                     }
                                     else
                                       //status for the previous days
                                     {
-                                      echo "Present";
+                                      echo $info['status']?? "Absent";
                                     }
                                   ?>
                               </td>
                             </tr>
-                            <?php 
+                            <?php
                             // day iterator
                             $day = date('M-d', strtotime('-1 day', strtotime($day)));
                           }
-                            ?>                                 
+                            ?>
                       </tbody>
                     </table>
 
