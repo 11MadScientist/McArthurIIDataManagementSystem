@@ -36,35 +36,35 @@
                                         {
                                             if($_GET['error'] == "invalidemailfirstnamemiddlenamelastname")
                                             {
-                                              echo '<p class="error">Invalid Email Address & Name must not contain any number/symbols!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Email Address & Name must not contain any number/symbols!</p>';
                                             }
                                             elseif($_GET['error'] == "invalidemail")
                                             {
-                                              echo '<p class="error">Invalid Email Address!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Email Address!</p>';
                                             }
                                             elseif($_GET['error'] == "invalidfirstname")
                                             {
-                                              echo '<p class="error">First Name must not contain any numbers and symbols!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>First Name must not contain any numbers and symbols!</p>';
                                             }
                                             elseif($_GET['error'] == "invalidmiddlename")
                                             {
-                                              echo '<p class="error">Middle Name must not contain any numbers and symbols!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Middle Name must not contain any numbers and symbols!</p>';
                                             }
                                             elseif($_GET['error'] == "invalidlastname")
                                             {
-                                              echo '<p class="error">Last Name must not contain any numbers and symbols!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Last Name must not contain any numbers and symbols!</p>';
                                             }
                                             elseif($_GET['error'] == "passwordmissmatch")
                                             {
-                                              echo '<p class="error">Password does not match confirm Password!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Password does not match confirm Password!</p>';
                                             }
                                             elseif($_GET['error'] == "nullposition")
                                             {
-                                              echo '<p class="error">Please choose position!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Please choose position!</p>';
                                             }
                                             elseif($_GET['error'] == "emailtaken")
                                             {
-                                              echo '<p class="error">Email is already taken!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Email is already taken!</p>';
                                             }
 
 
@@ -94,7 +94,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputLastName">Middle Name</label>
+                                                        <label class="small mb-1" for="inputMiddleName">Middle Name</label>
                                                         <!--middle name-->
                                                         <?php
                                                             if(isset($_GET['mname']))

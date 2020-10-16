@@ -38,15 +38,15 @@
                                         {
                                             if($_GET['error'] == "nodesignation")
                                             {
-                                              echo '<p class="error">Please choose a position!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Please choose a position!</p>';
                                             }
                                             elseif($_GET['error'] == "invalidContactNumber")
                                             {
-                                              echo '<p class="error">Please follow number format 0##-####-####!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Please follow number format 0##-####-####!</p>';
                                             }
                                             elseif($_GET['error'] == "noCivilStatus")
                                             {
-                                              echo '<p class="error">Please choose Civil Status!</p>';
+                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Please choose Civil Status!</p>';
                                             }
 
                                         }
@@ -99,17 +99,59 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">School Assigned</label>
                                                         <!--name of school user is in-->
-                                                        <?php
-                                                            if(isset($_GET['station']))
-                                                            {
-                                                                $station = $_GET['station'];
-                                                                echo '<input class="form-control py-4" value = "'.$station.'" name = "station" id="inputFirstName" type="text" placeholder="Enter School Designation" required />';
-                                                            }
-                                                            else
-                                                            {
-                                                                echo '<input class="form-control py-4" name = "station" id="inputFirstName" type="text" placeholder="Enter School Designation" required />';
-                                                            }
-                                                         ?>
+                                                        <div class="dropdown-container">
+                                                          <?php
+                                                              if($info['station']?? null != null)
+                                                              {
+
+                                                                  echo '<select name = "station" id = "station" required>
+                                                                    <option value="Batug E.S">Batug E.S</option>
+                                                                    <option value="CM Closa E.S">CM Closa E.S</option>
+                                                                    <option value="Danao E.S">Danao E.S</option>
+                                                                    <option value="Kiling E.S">Kiling E.S</option>
+                                                                    <option value="Liwayway E.S">Liwayway E.S</option>
+                                                                    <option value="Maya E.S">Maya E.S</option>
+                                                                    <option value="Oguisan E.S">Oguisan E.S</option>
+                                                                    <option value="Olmedo E.S">Olmedo E.S</option>
+                                                                    <option value="Palale C.S">Palale C.S</option>
+                                                                    <option value="Salvacion E.S">Salvacion E.S</option>
+                                                                    <option value="San Antonio E.S">San Antonio E.S</option>
+                                                                    <option value="San Pedro E.S">San Pedro E.S</option>
+                                                                    <option value="San Vicente E.S">San Vicente E.S</option>
+                                                                    <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                                                    <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                                                    </select>
+                                                                    <script>
+                                                                    function myFunction()
+                                                                    {
+                                                                      document.getElementById("station").value = "'.$info['station'].'";
+                                                                    }
+                                                                    myFunction();
+                                                                    </script>';
+
+
+                                                              }
+                                                              else
+                                                              {
+                                                                echo '<select name = "station" id = "station" required>
+                                                                  <option value="Batug E.S">Batug E.S</option>
+                                                                  <option value="CM Closa E.S">CM Closa E.S</option>
+                                                                  <option value="Danao E.S">Danao E.S</option>
+                                                                  <option value="Kiling E.S">Kiling E.S</option>
+                                                                  <option value="Liwayway E.S">Liwayway E.S</option>
+                                                                  <option value="Maya E.S">Maya E.S</option>
+                                                                  <option value="Oguisan E.S">Oguisan E.S</option>
+                                                                  <option value="Olmedo E.S">Olmedo E.S</option>
+                                                                  <option value="Palale C.S">Palale C.S</option>
+                                                                  <option value="Salvacion E.S">Salvacion E.S</option>
+                                                                  <option value="San Antonio E.S">San Antonio E.S</option>
+                                                                  <option value="San Pedro E.S">San Pedro E.S</option>
+                                                                  <option value="San Vicente E.S">San Vicente E.S</option>
+                                                                  <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                                                  <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                                                  </select>';
+                                                              }
+                                                           ?>
 
                                                     </div>
                                                 </div>
@@ -295,7 +337,7 @@
                                                             <?php
                                                                 if(isset($_GET['civilstatus']))
                                                                 {
-                                                                    echo '<select value = "'.$_GET['civilstatus'].'" name = "civil-stat" id = "civil" required>
+                                                                    echo '<select  name = "civil-stat" id = "civil" required>
                                                                             <option disabled hidden>Choose here</option>
                                                                             <option value="Single">Single</option>
                                                                             <option value="Married">Married</option>
@@ -353,11 +395,11 @@
                                                         <?php
                                                             if(isset($_GET['dateofpromo']))
                                                             {
-                                                                echo '<input value = "'.$_GET['dateofpromo'].'" type = "date" class="form-control py-4" name = "lat-promotion" id="inputConfirmPassword" placeholder="Confirm password" required/>';
+                                                                echo '<input value = "'.$_GET['dateofpromo'].'" type = "date" class="form-control py-4" name = "lat-promotion" id="inputConfirmPassword"  required/>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<input type = "date" class="form-control py-4" name = "lat-promotion" id="inputConfirmPassword" placeholder="Confirm password" required/>';
+                                                                echo '<input type = "date" class="form-control py-4" name = "lat-promotion" id="inputConfirmPassword"  required/>';
                                                             }
                                                          ?>
 

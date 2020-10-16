@@ -1,0 +1,315 @@
+/* foregin css */
+.group-box
+{
+  margin-top: 10%;
+  position: relative;
+  margin-bottom: 20px;
+}
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.text {
+  float: left;
+  width: 55%;
+}
+
+.images {
+  float: left;
+  width: 30%;
+}
+
+.image
+{
+  height:210px;
+  width:210px;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+  border-radius: 6px;
+
+}
+.input
+{
+  float: right;
+  margin-top: 40px;
+  margin-right:20%;
+  position: relative;
+  width: 50%;
+  display: inline;
+}
+
+.button
+{
+  float: right;
+  margin-top: 40px;
+  margin-right:20%;
+  position: relative;
+  width: 50%;
+  display: inline;
+}
+
+.changepassbtn
+{
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  font-size:
+  float: right;
+  margin-left:5%;
+  position: relative;
+  width: 30%;
+  height: 40px;
+  display: inline;
+  border-radius: 3px;
+}
+
+.passbtn
+{
+  font-size: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size:
+  float: right;
+  margin-right:20%;
+  position: relative;
+  width: 10%;
+  height: 40px;
+  display: inline;
+  border-radius: 3px;
+}
+.formpassbtn
+{
+  margin-left: 25%;
+  font-size: 21px;
+  text-align: center;
+  font-size:
+  margin-left:5%;
+  position: relative;
+  width: 40%;
+  height: 50px;
+  border-radius: 3px;
+}
+
+.pic-lbl
+{
+  color: #03C04A;
+  font-size: 23px;
+  float: right;
+  margin-right:20%;
+}
+
+/* css for dropdown */
+.demo
+{
+  margin: 0px,0px,0px,0px;
+  display: inline-block;
+}
+.dropdown-container {
+  width: 250px;
+  margin-left: 16px;
+  position: relative;
+  display: inline-block;
+
+}
+
+select {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 50px;
+  font-size: 90%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 11px;
+  background-color:#03C04A;
+  border: none;
+  border-bottom: 2px solid #03C04A;
+  color: white;
+  appearance: none;
+  padding: 10px;
+  padding-right: 38px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+/* For IE <= 11 */
+select::-ms-expand {
+  display: none;
+}
+
+.select-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 40px;
+  height: 38px;
+  pointer-events: none;
+  border: 2px solid #03C04A;
+  padding-left: 5px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.select-icon svg.icon {
+  transition: fill 0.3s ease;
+  fill: white;
+}
+
+select:hover,
+select:focus {
+  color:white;
+  background-color: #1F5C2E;
+  border-bottom-color: #1FF22A;
+}
+select:hover ~ .select-icon,
+select:focus ~ .select-icon {
+  background-color:#1FF22A;
+  border-color: white ;
+}
+select:hover ~ .select-icon svg.icon,
+select:focus ~ .select-icon svg.icon {
+  fill: white;
+}
+
+
+
+/* native css */
+.profile-box
+{
+	min-width: 480px;
+  margin-left: 15%;
+  margin-top: 5%;
+	width: 70%;
+  background: #fff;
+  border-radius:6px;
+  position: relative;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+	background-size: 100% 100%;
+	margin-bottom: 4%;
+  font-size: 18px;
+  font-family: "Century Gothic";
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+}
+a
+{
+	margin-right: 10px;
+	margin-top: 10px;
+	float: right;
+}
+.text-box
+{
+  outline: 3px #1F5C2E;
+  border-style: none;
+  border-color: #1F5C2E;
+  border-radius: 6px;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+  width: 45%;
+}
+.text-box:focus
+{
+  border-style: solid;
+  outline: 3px #1F5C2E;
+  border-color: green;
+  border-radius: 6px;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+}
+
+.content
+{
+  color: #413D3E;
+
+}
+.divider-inline1
+{
+  display: inline-block;
+  min-width: 450px;
+  margin-right: 7%;
+
+}
+.divider-inline1.contact-content
+{
+  display: block;
+}
+.divider-inline2
+{
+  display: inline-block;
+  width: 100%;
+}
+
+.divider-inline2.contact-content
+{
+  display: inline-block;
+}
+
+.divider-block
+{
+  display: block;
+}
+
+
+.name
+{
+  padding-left: 40px;
+  width:100%;
+  min-width: 300px;
+  background: white;
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+
+}
+.category
+{
+  color: #03C04A;
+  font-size: 23px;
+  margin-left: 10px;
+  display: inline-block;
+}
+.name-content
+{
+  margin-bottom: 15px;
+  color: #03C04A;
+}
+
+.horizontal-rule
+{
+  width: 96%;
+  height: 2px;
+  box-shadow: 0px 1px 10px 1px  #000;
+  margin-left: 2%;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.contact
+{
+  padding-left: 40px;
+  width:100%;
+  min-width: 300px;
+  background: white;
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+
+
+}
+
+.contact-content
+{
+  margin-bottom: 25px;
+  margin-right: 55px;
+  color: #03C04A;
+}
+.error
+{
+  color: red;
+  margin-left: 50px;
+  font-size: 21px;
+  display: inline-block;
+}
+.success
+{
+  color: #56F73B;
+  margin-left: 50px;
+  font-size: 21px;
+  display: inline-block;
+}

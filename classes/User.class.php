@@ -13,6 +13,24 @@ class User extends Dbh
 
   }
 
+  public function idChecker($id)
+  {
+    $sql = "SELECT * FROM users WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+    $info = $stmt->fetch();
+    return $info;
+  }
+
+  public function changePass($id,$pass)
+  {
+    $sql = "UPDATE users
+    SET pass_word = ?
+    WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$pass, $id]);
+  }
+
   public function setUserInfo($pass, $lname, $mname, $fname, $level, $email)
   {
     $sql = "INSERT INTO users(pass_word, l_name, m_name, f_name, level, email) VALUES (?, ?, ?, ?, ?,?)";

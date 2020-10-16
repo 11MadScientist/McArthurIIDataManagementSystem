@@ -35,22 +35,22 @@
                                       {
                                         if($_GET['success'] == "signedupsuccessfully")
                                         {
-                                          echo'<p class = "success">You have Signed Up Successfully!</p>';
+                                          echo'<p class = "success"><i class="fas fa-check"></i>You have Signed Up Successfully!</p>';
                                         }
                                       }
                                       elseif(isset($_GET['error']))
                                       {
                                         if($_GET['error'] == "invalidEmail")
                                         {
-                                          echo'<p class = "error">Invalid Email Address!</p>';
+                                          echo'<p class = "error"><i class = "fas fa-exclamation-triangle"></i>Invalid Email Address!</p>';
                                         }
                                         elseif($_GET['error'] == "nosuchemail")
                                         {
-                                          echo'<p class = "error">There is no user with such email!</p>';
+                                          echo'<p class = "error"><i class = "fas fa-exclamation-triangle"></i>There is no user with such email!</p>';
                                         }
                                         elseif($_GET['error'] == "incorrectPassword")
                                         {
-                                          echo'<p class = "error">Password is incorrect!</p>';
+                                          echo'<p class = "error"><i class = "fas fa-exclamation-triangle"></i>Password is incorrect!</p>';
                                         }
                                       }
 
