@@ -133,33 +133,53 @@
                                                       <label for="position" style="font-size: 80%;">Choose a Position:</label>
                                                       <div class="dropdown-container">
                                                         <?php
-                                                            if(isset($_GET['level']))
+                                                            if(isset($_GET['desig']))
                                                             {
+                                                                if($_GET['desig'] != null)
+                                                                {
+                                                                    echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
 
-                                                                echo '
-                                                                <select name = "level" id = "position" required>
-                                                                  <option disabled hidden>Choose here</option>
-                                                                  <option id ="1" value="teacher">Teacher</option>
-                                                                  <option id ="2" value="principal">Principal</option>
-                                                                  </select>
+                                                                      <option value="Teacher I">Teacher I</option>
+                                                                      <option value="Teacher II">Teacher II</option>
+                                                                      <option value="Teacher III">Teacher III</option>
+                                                                      <option value="Master Teacher I">Master Teacher I</option>
+                                                                      <option value="Master Teacher II">Master Teacher II</option>
+                                                                      <option value="Master Teacher III">Master Teacher III</option>
+                                                                      <option value="Head Teacher I">Head Teacher I</option>
+                                                                      <option value="Head Teacher II">Head Teacher II</option>
+                                                                      <option value="Head Teacher III">Head Teacher III</option>
+                                                                      <option value="Principal I">Principal I</option>
+                                                                      <option value="Principal II">Principal II</option>
+                                                                      </select>
+                                                                      <script>
+                                                                      function myFunction()
+                                                                      {
+                                                                        document.getElementById("position").value = "'.$_GET['desig'].'";
+                                                                      }
+                                                                      myFunction();
+                                                                      </script>';
 
-                                                                  <script>
-                                                                  function myFunction()
-                                                                  {
-                                                                    document.getElementById("position").value = "'.$_GET['level'].'";
-                                                                  }
-                                                                  myFunction();
-                                                                  </script>
-                                                                  ';
+
+                                                                }
                                                             }
                                                             else
                                                             {
-                                                              echo '<select name = "level" id = "position" required>
-                                                                <option selected disabled hidden>Choose here</option>
-                                                                <option value="teacher">Teacher</option>
-                                                                <option value="principal">Principal</option>
-                                                                </select>';
+                                                                echo '<select name = "desig" id = "position" required>
+                                                                  <option disabled hidden>Choose here</option>
+                                                                  <option value="Teacher I">Teacher I</option>
+                                                                  <option value="Teacher II">Teacher II</option>
+                                                                  <option value="Teacher III">Teacher III</option>
+                                                                  <option value="Master Teacher I">Master Teacher I</option>
+                                                                  <option value="Master Teacher II">Master Teacher II</option>
+                                                                  <option value="Master Teacher III">Master Teacher III</option>
+                                                                  <option value="Head Teacher I">Head Teacher I</option>
+                                                                  <option value="Head Teacher II">Head Teacher II</option>
+                                                                  <option value="Head Teacher III">Head Teacher III</option>
+                                                                  <option value="Principal I">Principal I</option>
+                                                                  <option value="Principal II">Principal II</option>
+                                                                  </select>';
                                                             }
+
                                                          ?>
 
                                                         <div class="select-icon">

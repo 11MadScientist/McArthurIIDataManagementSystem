@@ -84,6 +84,13 @@
                            <span>Middle Name:</span>
                            <span class = "content"><?php echo $_SESSION['user_mname']?? ''; ?></span>
                          </div>
+                         <div class="name-content">
+                           <i class = "fas fa-clock"></i>
+                           <span>Age:</span>
+                           <span class = "content"><?php echo $info['age']?? ''; ?></span>
+                         </div>
+
+
                        </ul>
                      </div>
                      <!-- horizontal rule -->

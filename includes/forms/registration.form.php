@@ -8,10 +8,10 @@ if(isset($_POST['submit-next']))
   $lname = $_POST['lname'];
   $email = $_POST['email'];
   $pass = $_POST['pass'];
-  $level = $_POST['level'];
+  $desig = $_POST['desig'];
   $confpass = $_POST['confpass'];
 
-  if($_POST['level'] === null)
+  if($_POST['desig'] === null)
   {
     header("Location: ../register.php?error=nullposition&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email);
     exit();
@@ -24,27 +24,27 @@ if(isset($_POST['submit-next']))
   }
   else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
   {
-    header("Location: ../register.php?error=invalidemail&fname=".$fname."&mname=".$mname."&lname".$lname."&level=".$level);
+    header("Location: ../register.php?error=invalidemail&fname=".$fname."&mname=".$mname."&lname".$lname."&desig=".$desig);
     exit();
   }
   else if(!preg_match("/^[a-zA-Z\s]*$/", $fname))
   {
-    header("Location: ../register.php?error=invalidfirstname&lname=".$lname."&mname=".$mname."&email=".$email."&level=".$level);
+    header("Location: ../register.php?error=invalidfirstname&lname=".$lname."&mname=".$mname."&email=".$email."&desig=".$desig);
     exit();
   }
   else if(!preg_match("/^[a-zA-Z]*$/",$lname))
   {
-    header("Location: ../register.php?error=invalidlastname&fname=".$fname."&mname=".$mname."&email=".$email."&level=".$level);
+    header("Location: ../register.php?error=invalidlastname&fname=".$fname."&mname=".$mname."&email=".$email."&desig=".$desig);
     exit();
   }
   else if(!preg_match("/^[a-zA-Z]*$/",$mname))
   {
-    header("Location: ../register.php?error=invalidmiddlename&fname=".$fname."&lname=".$lname."&email=".$email."&level=".$level);
+    header("Location: ../register.php?error=invalidmiddlename&fname=".$fname."&lname=".$lname."&email=".$email."&desig=".$desig);
     exit();
   }
   else if($pass !== $confpass)
   {
-    header("Location: ../register.php?error=passwordmissmatch&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email."&level=".$level);
+    header("Location: ../register.php?error=passwordmissmatch&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email."&desig=".$desig);
     exit();
   }
   else
@@ -54,19 +54,18 @@ if(isset($_POST['submit-next']))
 
     if($same != null)
     {
-      header("Location: ../register.php?error=emailtaken&fname=".$fname."&mname=".$mname."&lname=".$lname."&level=".$level);
+      header("Location: ../register.php?error=emailtaken&fname=".$fname."&mname=".$mname."&lname=".$lname."&desig=".$desig);
       exit();
     }
   }
 
   $hashedpass = password_hash($pass, PASSWORD_DEFAULT);
   $obj = new User();
-  $obj->setUserInfo($hashedpass, $lname,$mname, $fname, $level, $email);
+  $obj->setUserInfo($hashedpass, $lname,$mname, $fname, $desig, $email);
 
   $id =$obj->emailChecker($email);
   session_start();
   $_SESSION['user_id'] = $id['user_id'];
-  $_SESSION['user_level'] = $id['level'];
 
 
 

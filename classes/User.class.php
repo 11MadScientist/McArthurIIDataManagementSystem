@@ -12,6 +12,15 @@ class User extends Dbh
     return $names;
 
   }
+  public function realEmailChecker($email, $id)
+  {
+    $sql = "SELECT * FROM users WHERE email = ? AND user_id <> ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$email, $id]);
+    $names = $stmt->fetch();
+    return $names;
+
+  }
 
   public function idChecker($id)
   {
@@ -31,10 +40,17 @@ class User extends Dbh
     $stmt->execute([$pass, $id]);
   }
 
-  public function setUserInfo($pass, $lname, $mname, $fname, $level, $email)
+  public function setUserInfo($pass, $lname, $mname, $fname, $desig, $email)
   {
-    $sql = "INSERT INTO users(pass_word, l_name, m_name, f_name, level, email) VALUES (?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO users(pass_word, l_name, m_name, f_name, designation, email) VALUES (?, ?, ?, ?, ?,?)";
     $stmt = $this->connect()->prepare($sql);
-    $stmt->execute([$pass, $lname, $mname, $fname, $level, $email]);
+    $stmt->execute([$pass, $lname, $mname, $fname, $desig, $email]);
+  }
+
+  public function updateUserInfo($id,$lname, $mname, $fname, $desig, $email)
+  {
+    $sql = "UPDATE users SET l_name = ?, m_name = ?, f_name = ?, designation = ?, email = ? WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$lname, $mname, $fname, $desig, $email,$id]);
   }
 }

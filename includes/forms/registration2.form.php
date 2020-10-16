@@ -64,43 +64,51 @@ elseif(isset($_POST['submit-registry']))
     header("Location: login.php");
     exit();
   }
-
-  $designation =  $_POST['desig'];
+  $age = $_POST['age'];
   $station = $_POST['station'];
   $dateofbirth = $_POST['dateofbirth'];
   $civilstatus = $_POST['civil-stat'];
   $highesteducattn = $_POST['high-educ'];
-  $major = $_POST['major'];
+  $specification = $_POST['specification'];
   $orig_appointment = $_POST['orig-appointment'];
   $dateofpromo = $_POST['lat-promotion'];
   $contactnum = $_POST['contact-num'];
   $fbacct = $_POST['fb-username'];
 
-  if($_POST['desig'] == null)
+  if($age < 0 or $age >160 or preg_match("/[a-zA-Z]/"))
   {
-    header("Location: ../register2.php?error=nodesignation&station=".$station."&dateofbirth="
-    .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&major=".$major.
+    header("Location: ../register2.php?error=invalidAge&station=".$station."&dateofbirth="
+    .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
     exit();
   }
+
   if($_POST['civil-stat'] == null)
   {
     header("Location: ../register2.php?error=noCivilStatus&station=".$station."&dateofbirth="
-    .$dateofbirth."&desig=".$designation."&highesteducattn=".$highesteducattn."&major=".$major.
+    .$dateofbirth."&desig=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
+    exit();
+  }
+
+  if($_POST['station'] == null)
+  {
+    header("Location: ../register2.php?error=noSchoolAssigned&civilstatus=".$civilstatus."&dateofbirth="
+    .$dateofbirth."&desig=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
     exit();
   }
   elseif(!preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $_POST['contact-num']))
   {
     header("Location: ../register2.php?error=invalidContactNumber&station=".$station."&dateofbirth="
-    .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&major=".$major.
-    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&desig=".$designation."&fbacct=".$fbacct);
+    .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&desig=".$age."&fbacct=".$fbacct);
     exit();
   }
 
   $obj = new AddInfo();
 
-  $obj->setAddInfo($_SESSION['user_id'], $designation, $station, $dateofbirth, $civilstatus, $highesteducattn, $major, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
+  $obj->setAddInfo($_SESSION['user_id'], $age, $station, $dateofbirth, $civilstatus, $highesteducattn, $specification, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
   header("Location: ../login.php?success=signedupsuccessfully");
   session_unset();
   session_destroy();

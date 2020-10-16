@@ -40,7 +40,7 @@ if(isset($_POST['login-user']))
           $_SESSION['user_mname'] = $user['m_name'];
           $_SESSION['user_lname'] = $user['l_name'];
           $_SESSION['user_email'] = $user['email'];
-          $_SESSION["user_level"] = $user['level'];
+          $_SESSION['designation'] = $user['designation'];
           header("Location: ../dashboard.php?success");
           exit();
       }
