@@ -23,9 +23,81 @@
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                   </ol>
 
+                  <!--ATTENDANCE TABLE-->
+                    <table style='width:100%' class='display table table-hover center' cellspacing='0'>
+                      <thead>
+                        <tr style="text-align: center; vertical-align: middle;">
+                          <th><i class='fas fa-calendar-alt' style='font-size:15px'></i>  Date</th>
+                          <th><i class='fas fa-clock' style='font-size:15px'></i>  Time</th>
+                          <th><i class='fas fa-exclamation-circle' style='font-size:15px'></i>  Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          date_default_timezone_set('Asia/Manila');
+                          //this is a day counter
+                          $day = date('M-d',strtotime('today'));
+                          //this is for today
+                          $today = date('M-d',strtotime('today'));
+
+                          // loop for getting today up to 1 week before
+                          for($i= 8; $i > 0; $i--)
+                          {
+                        ?>
+                            <tr>
+                              <!-- Getting today to the previous days -->
+                              <td style="text-align: center; vertical-align: middle;">
+                                <br>
+                                  <?php
+                                    //prints the day of the week in the table
+                                    echo gmdate("l", strtotime('+1 day', strtotime($day)));
+                                    //prints the month and day in the table
+                                    echo date('   M-d',strtotime($day));
+                                  ?>
+                                </br>
+                              </td>
+                              <td style="text-align:center; vertical-align: middle;">
+                                <?php
+                                  // determines if today is today
+                                  if($day == $today)
+                                  {
+                                    //attendance for today
+                                    //i dunnno how to insert database here :)
+                                    echo "<button type='submit' value='submit' name='submitAttendance' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>";
+                                  }
+                                  else
+                                    //timestamp for the previous days
+                                  {
+                                    echo "8am-5pm";
+                                  }
+                                ?>
+                              </td>
+                              <!-- determine of the status (present or absent) -->
+                              <td style="text-align:center; vertical-align: middle;">
+                                <?php
+                                    // today determiner
+                                    if($day == $today)
+                                    {
+                                      //status for today
+                                      echo "N/A";
+                                    }
+                                    else
+                                      //status for the previous days
+                                    {
+                                      echo "Present";
+                                    }
+                                  ?>
+                              </td>
+                            </tr>
+                            <?php 
+                            // day iterator
+                            $day = date('M-d', strtotime('-1 day', strtotime($day)));
+                          }
+                            ?>                                 
+                      </tbody>
+                    </table>
 
               </div>
-
           </main>
         <?php include('footer.php') ?>
         </div>
@@ -37,5 +109,10 @@
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="assets/demo/chart-pie-demo.js"></script>
+        <script>
+          function submit(str) {
+            alert(`You have successfully submitted your attendance! Timestamp: ${str}`)
+          }
+        </script>
     </body>
 </html>
