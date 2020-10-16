@@ -28,34 +28,30 @@
                     <a href="EditProfile.php"><u>Edit Profile</u></a>
 
                     <!-- sql command for the profile picture -->
-                   <?php
-                   if($_SESSION['user_id']?? null != null)
-                   {
-                    $conn = mysqli_connect("localhost", "root", "", "mddb");
 
-                    $obj = new ProfilePic();
-                    $result = $obj->get_profile($_SESSION['user_id']);
-                     if($result != null)
-                     {
-                          while($row = mysqli_fetch_array($result))
-                          {
-                    ?>
-
-                             <img class = "profile-pic" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
                     <?php
-                          }
-                           mysqli_close($conn);
+                     $conn = mysqli_connect("localhost", "root", "", "mddb");
 
-                     }
-                   }
-                     else
-                      {
-                        ?>
-
-                            <img class = "profile-pic" src="forms/profpic-uploads/unknown.jpg">
-                    <?php
-                      }
+                     $obj = new ProfilePic();
+                     $result = $obj->get_profile($_SESSION['user_id']);
+                        $row = mysqli_fetch_array($result);
+                          if($row != null)
+                           {
                      ?>
+                              <img class = "profile-pic" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                     <?php
+                           }
+
+                           else
+                           {
+                     ?>
+                              <img class = "profile-pic" src="forms/profpic-uploads/unknown.jpg">
+                     <?php
+                           }
+                             mysqli_close($conn);
+                      ?>
+
+
                      <!-- sql command for the add info -->
                      <?php
                       $obj = new AddInfo();

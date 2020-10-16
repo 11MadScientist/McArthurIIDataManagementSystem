@@ -48,34 +48,26 @@
 
                         <div class="images">
                           <?php
-                          if($_SESSION['user_id']?? null != null)
-                          {
                            $conn = mysqli_connect("localhost", "root", "", "mddb");
 
                            $obj = new ProfilePic();
                            $result = $obj->get_profile($_SESSION['user_id']);
-                            if($result != null)
-                            {
-                                 while($row = mysqli_fetch_array($result))
+                              $row = mysqli_fetch_array($result);
+                                if($row != null)
                                  {
                            ?>
-
                                     <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
                            <?php
                                  }
-                                  mysqli_close($conn);
 
-                            }
-                          }
-                            else
-                             {
-                               ?>
-
-                                   <img class = "profile-pic" src="forms/profpic-uploads/unknown.jpg">
+                                 else
+                                 {
+                           ?>    
+                                    <img class = "image" src="forms/profpic-uploads/unknown.jpg">
                            <?php
-                             }
+                                 }
+                                   mysqli_close($conn);
                             ?>
-
                         </div>
                       </div>
                     </div>
@@ -581,6 +573,7 @@
                                    if(isset($_GET['station']))
                                    {
                                      echo '<select name = "station" id = "station" required>
+                                       <option disabled value = "1" hidden>Choose here</option>
                                        <option value="Batug E.S">Batug E.S</option>
                                        <option value="CM Closa E.S">CM Closa E.S</option>
                                        <option value="Danao E.S">Danao E.S</option>
@@ -608,10 +601,11 @@
                                    }
                                    else
                                    {
-                                     if($info['station']?? null != null)
+                                     if($info['station']?? "1" != null)
                                      {
 
                                          echo '<select name = "station" id = "station" required>
+                                           <option disabled value = "1" hidden>Choose here</option>
                                            <option value="Batug E.S">Batug E.S</option>
                                            <option value="CM Closa E.S">CM Closa E.S</option>
                                            <option value="Danao E.S">Danao E.S</option>
@@ -638,26 +632,7 @@
 
 
                                      }
-                                     else
-                                     {
-                                       echo '<select name = "station" id = "station" required>
-                                         <option value="Batug E.S">Batug E.S</option>
-                                         <option value="CM Closa E.S">CM Closa E.S</option>
-                                         <option value="Danao E.S">Danao E.S</option>
-                                         <option value="Kiling E.S">Kiling E.S</option>
-                                         <option value="Liwayway E.S">Liwayway E.S</option>
-                                         <option value="Maya E.S">Maya E.S</option>
-                                         <option value="Oguisan E.S">Oguisan E.S</option>
-                                         <option value="Olmedo E.S">Olmedo E.S</option>
-                                         <option value="Palale C.S">Palale C.S</option>
-                                         <option value="Salvacion E.S">Salvacion E.S</option>
-                                         <option value="San Antonio E.S">San Antonio E.S</option>
-                                         <option value="San Pedro E.S">San Pedro E.S</option>
-                                         <option value="San Vicente E.S">San Vicente E.S</option>
-                                         <option value="Tin-awan E.S">Tin-awan E.S</option>
-                                         <option value="Villa Imelda E.S">Villa Imelda E.S</option>
-                                         </select>';
-                                     }
+
                                    }
                                 ?>
                                 <div class="select-icon">

@@ -65,7 +65,7 @@ elseif(isset($_POST['submit-registry']))
     exit();
   }
   $age = $_POST['age'];
-  $station = $_POST['station'];
+  $station = $_POST['station']?? "1";
   $dateofbirth = $_POST['dateofbirth'];
   $civilstatus = $_POST['civil-stat'];
   $highesteducattn = $_POST['high-educ'];
@@ -86,15 +86,15 @@ elseif(isset($_POST['submit-registry']))
   if($_POST['civil-stat'] == null)
   {
     header("Location: ../register2.php?error=noCivilStatus&station=".$station."&dateofbirth="
-    .$dateofbirth."&desig=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    .$dateofbirth."&age=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
     exit();
   }
 
-  if($_POST['station'] == null)
+  if($station === null or $station == "1")
   {
     header("Location: ../register2.php?error=noSchoolAssigned&civilstatus=".$civilstatus."&dateofbirth="
-    .$dateofbirth."&desig=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    .$dateofbirth."&age=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
     exit();
   }
@@ -102,7 +102,7 @@ elseif(isset($_POST['submit-registry']))
   {
     header("Location: ../register2.php?error=invalidContactNumber&station=".$station."&dateofbirth="
     .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.
-    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&desig=".$age."&fbacct=".$fbacct);
+    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&age=".$age."&fbacct=".$fbacct);
     exit();
   }
 

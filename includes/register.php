@@ -137,8 +137,7 @@
                                                             {
                                                                 if($_GET['desig'] != null)
                                                                 {
-                                                                    echo '<select value = "'.$_GET['desig'].'" name = "desig" id = "position" required>
-
+                                                                    echo '<select name = "desig" id = "position" required>
                                                                       <option value="Teacher I">Teacher I</option>
                                                                       <option value="Teacher II">Teacher II</option>
                                                                       <option value="Teacher III">Teacher III</option>
@@ -165,7 +164,7 @@
                                                             else
                                                             {
                                                                 echo '<select name = "desig" id = "position" required>
-                                                                  <option disabled hidden>Choose here</option>
+                                                                  <option disabled selected hidden>Choose here</option>
                                                                   <option value="Teacher I">Teacher I</option>
                                                                   <option value="Teacher II">Teacher II</option>
                                                                   <option value="Teacher III">Teacher III</option>

@@ -246,6 +246,7 @@
                                                               {
 
                                                                   echo '<select name = "station" id = "station" required>
+                                                                    <option disabled value = "1" hidden>Choose here</option>
                                                                     <option value="Batug E.S">Batug E.S</option>
                                                                     <option value="CM Closa E.S">CM Closa E.S</option>
                                                                     <option value="Danao E.S">Danao E.S</option>
@@ -275,7 +276,7 @@
                                                               else
                                                               {
                                                                 echo '<select name = "station" id = "station" required>
-                                                                  <option disabled hidden>Choose here</option>
+                                                                  <option disabled selected hidden>Choose here</option>
                                                                   <option value="Batug E.S">Batug E.S</option>
                                                                   <option value="CM Closa E.S">CM Closa E.S</option>
                                                                   <option value="Danao E.S">Danao E.S</option>

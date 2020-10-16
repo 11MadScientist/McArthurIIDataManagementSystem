@@ -165,7 +165,15 @@ elseif(isset($_POST['formpass-submit']))
   if($_POST['civil-stat'] == null)
   {
     header("Location: ../EditProfile.php?error=noCivilStatus&station=".$station."&dateofbirth="
-    .$dateofbirth."&desig=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    .$dateofbirth."&age=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct.
+    "&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email."&desig=".$desig);
+    exit();
+  }
+  if($station === null or $station == "1")
+  {
+    header("Location: ../EditProfile.php?error=noSchoolAssigned&civilstatus=".$civilstatus."&dateofbirth="
+    .$dateofbirth."&age=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct.
     "&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email."&desig=".$desig);
     exit();
@@ -174,13 +182,13 @@ elseif(isset($_POST['formpass-submit']))
   {
     header("Location: ../EditProfile.php?error=invalidContactNumber&station=".$station."&dateofbirth="
     .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.
-    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&desig=".$age."&fbacct=".$fbacct.
+    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&d=".$age."&fbacct=".$fbacct.
     "&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email."&desig=".$desig);
      exit();
   }
 
 
-  if($_POST['desig'] === null)
+  if($desig === null or $desig == " ")
   {
     header("Location: ../EditProfile.php?error=nullposition&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email."
     &station=".$station."&dateofbirth=".$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.

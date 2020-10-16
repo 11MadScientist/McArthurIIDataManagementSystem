@@ -8,16 +8,16 @@ if(isset($_POST['submit-next']))
   $lname = $_POST['lname'];
   $email = $_POST['email'];
   $pass = $_POST['pass'];
-  $desig = $_POST['desig'];
+  $desig = $_POST['desig']??  " ";
   $confpass = $_POST['confpass'];
 
-  if($_POST['desig'] === null)
+  if($desig === null or $desig == " ")
   {
     header("Location: ../register.php?error=nullposition&fname=".$fname."&mname=".$mname."&lname=".$lname."&email=".$email);
     exit();
   }
 
-  if(!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z]*$/", $fname) && !preg_match("/^[a-zA-Z]*$/", $mname) && !preg_match("/^[a-zA-Z]*$/", $lname))
+  elseif(!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z]*$/", $fname) && !preg_match("/^[a-zA-Z]*$/", $mname) && !preg_match("/^[a-zA-Z]*$/", $lname))
   {
     header("Location: ../register.php?error=invalidemailfirstnamemiddlenamelastname");
     exit();
