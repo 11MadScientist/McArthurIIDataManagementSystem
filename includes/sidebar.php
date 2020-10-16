@@ -21,9 +21,9 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Calendar
                     </a>
-                    <a class="nav-link" href="charts.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Charts
+                    <a class="nav-link" href="Reports.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                        Reports
                     </a>
 
                 </div>
