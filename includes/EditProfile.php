@@ -20,6 +20,7 @@
         <title>McArthurII District Attendance</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/editprofile.css" rel="stylesheet" />
+        <script src="js/profileLoader.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
@@ -39,11 +40,12 @@
                     <div class="group-box">
                       <div class="group">
                         <div class="text">
+
                           <form action="forms/editprofile.form.php" method="post" enctype="multipart/form-data">
                             <label class = "pic-lbl" ><u>Upload Profile Picture</u></label>
-                             <input class = "input" name="img-profile" type="file"  required>
-                             <button class = "btn-primary button " type="submit" name="img-submit">UPLOAD IMAGE</button>
-                          </form>
+                             <input onchange="readURL(this);" class = "input" name="img-profile" type="file">
+
+
                         </div>
 
                         <div class="images">
@@ -56,14 +58,14 @@
                                 if($row != null)
                                  {
                            ?>
-                                    <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                                    <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" id="blah" src="#"/>
                            <?php
                                  }
 
                                  else
                                  {
-                           ?>    
-                                    <img class = "image" src="forms/profpic-uploads/unknown.jpg">
+                           ?>
+                                    <img id="blah" src="#" onerror="this.src='forms/profpic-uploads/unknown.jpg';"  class = "image" src="forms/profpic-uploads/unknown.jpg">
                            <?php
                                  }
                                    mysqli_close($conn);
@@ -79,118 +81,11 @@
                        $info = $obj->getAddInfo($_SESSION['user_id']?? '');
                       ?>
 
-
                       <!-- horizontal rule -->
                       <div class="horizontal-rule">
                       </div>
 
-                      <!-- Password change -->
-                        <div class="contact">
-                          <p class = "category"><u>Change Password</u></p>
-                            <?php if(isset($_GET['error']))
-                                  {
-                                    if(($_GET['error'] == "incorrectPassword"))
-                                          echo '<p class="error "><i class = "fas fa-exclamation-triangle"></i>Incorrect Password! </p>';
 
-                                    elseif($_GET['error'] == "passwordMismatch")
-                                          echo '<p class="error "><i class = "fas fa-exclamation-triangle"></i>NewPassword ConfirmPassword Mismatch! </p>';
-                                  }
-                                  elseif(isset($_GET['success']))
-                                  {
-                                    if($_GET['success'] == "passwordCorrect")
-                                    echo '<p class="success" ><i class="fas fa-check"></i>Correct Password!</p>';
-
-                                    elseif($_GET['success'] == "passwordChangedSuccessfully")
-                                    echo '<p class="success" ><i class="fas fa-check"></i>Changed Password Successfully!</p>';
-                                  }
-
-
-                            ?>
-                          <ul>
-
-                            <div class="name-content">
-
-                              <form action="forms/editprofile.form.php" method="post" id = "currpassform">
-                                <i class = "fas fa-user"></i>
-                                <label class="small mb-1" for="currentpass">Enter Current Password:</label>
-                                <?php
-                                        echo '<input class="text-box" name = "currpass" id="currentpass" type="password" placeholder="Enter Current Password" required />';
-                                 ?>
-                                 <button class = "btn-primary passbtn" type="submit" name="currentpass-submit">OK</button>
-                              </form>
-                              <?php
-                                 if($_SESSION['passcheck']?? '' == "success")
-                                 {
-                               ?>
-                               <script type="text/javascript">
-                                   function showBox() {
-                                                       var T = document.getElementById("currpassform");
-                                                       T.style.display = "none";  // <-- Set it to block
-                                                       }
-                                   showBox();
-                               </script>
-                               <?php
-                                 }
-                                ?>
-
-                            </div>
-
-                            <div class="newpass" id = "newpassbox" style="display: none">
-                              <?php
-                                 if($_SESSION['passcheck']?? '' == "success")
-                                 {
-                               ?>
-                               <script type="text/javascript">
-                                   function showBox() {
-                                                       var T = document.getElementById("newpassbox");
-                                                       T.style.display = "block";  // <-- Set it to block
-
-
-                                                       }
-                                   showBox();
-                               </script>
-                               <?php
-                                 }
-                                ?>
-                              <form class="" action="forms/editprofile.form.php" method="post" id = "changepassform">
-                                <div class="name-content">
-                                  <i class="fas fa-chalkboard-teacher"></i>
-                                  <label for="newpass">Enter New Password:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                  <?php
-                                          echo '<input class="text-box" name = "newpass" id="newpass" type="password" placeholder="Enter New Password" autofocus required />';
-                                   ?>
-
-                                 </div>
-
-                                <div class="name-content">
-                                  <i class = "fas fa-heart"></i>
-                                  <label  for="confnewpass">Confirm New Password:</label>
-                                  <?php
-                                          echo '<input class="text-box" name = "confpass" id="confnewpass" type="password" placeholder="Confirm New Password" required />';
-                                   ?>
-                              </div>
-                              <script type="text/javascript">
-                                function cancel()
-                                {
-                                  var T = document.getElementById("newpass");
-                                  T.value = "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
-                                  var T = document.getElementById("confnewpass");
-                                  T.value = "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
-                                }
-                              </script>
-                              <button onclick="cancel()" class = "btn-primary changepassbtn" type="submit" name="cancelpass-submit">Cancel</button>
-                              <button class = "btn-primary changepassbtn" type="submit" name="changepass-submit">Change Password</button>
-                              </form>
-
-
-                            </div>
-                          </ul>
-                      </div>
-                      <!-- horizontal rule -->
-                      <div class="horizontal-rule">
-                      </div>
-
-                  <form action="forms/editprofile.form.php" method="post">
                     <!-- name information -->
                    <div class="name">
                      <p class="category"><u> User Information</u></p>
@@ -212,10 +107,7 @@
                              {
                                echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Last Name must not contain any numbers and symbols!</p>';
                              }
-                             elseif($_GET['error'] == "invalidAge")
-                             {
-                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Age!</p>';
-                             }
+
                            }
 
                      ?>
@@ -223,7 +115,7 @@
 
                        <div class="name-content">
                          <i class = "fas fa-user"></i>
-                         <label for="inputLastName">Last Name:&nbsp;&nbsp;&nbsp;</label>
+                         <label for="inputLastName">Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                          <?php
                              if(isset($_GET['lname']))
                              {
@@ -245,7 +137,7 @@
 
                        <div class="name-content">
                          <i class="fas fa-chalkboard-teacher"></i>
-                         <label for="inputFirstName">First Name: &nbsp;</label>
+                         <label for="inputFirstName">First Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                          <!--firstname-->
                          <?php
                              if(isset($_GET['fname']))
@@ -268,7 +160,7 @@
 
                        <div class="name-content">
                          <i class = "fas fa-heart"></i>
-                         <label class="small mb-1" for="inputMiddleName">Middle Name: &nbsp;&nbsp;</label>
+                         <label class="small mb-1" for="inputMiddleName">Middle Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                          <!--middle name-->
                          <?php
                              if(isset($_GET['mname']))
@@ -293,22 +185,22 @@
 
                       <div class="name-content">
                         <i class = "fas fa-clock"></i>
-                           <label for="age">Age: &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;</label>
+                           <label for="grade">Grade/Subject:</label>
                            <!--his specification subject-->
                            <?php
-                              if(isset($_GET['age']))
+                              if(isset($_GET['grade']))
                               {
-                                echo '<input class="text-box" value = "'.$_GET['age'].'" name = "age" id="age" type="number" placeholder="Enter Age" required/>';
+                                echo '<input class="text-box" value = "'.$_GET['grade'].'" name = "grade" id="grade" type="text" placeholder="Enter Grade/Subject" required/>';
                               }
                               else
                               {
-                                if($info['age']?? null != null)
+                                if($info['grade']?? null != null)
                                 {
-                                  echo '<input class="text-box" value = "'.$info['age'].'" name = "age" id="age" type="number" placeholder="Enter Age" required/>';
+                                  echo '<input class="text-box" value = "'.$info['grade'].'" name = "grade" id="grade" type="text" placeholder="Enter Grade/Subject" required/>';
                                 }
                                 else
                                 {
-                                    echo '<input class="text-box" name = "age" id="age" type="number" placeholder="Enter Age" required/>';
+                                    echo '<input class="text-box" name = "grade" id="grade" type="number" placeholder="Enter Grade/Subject" required/>';
                                 }
                               }
 
@@ -349,24 +241,45 @@
                        <div class="divider-inline2">
                          <div class="contact-content">
                            <i class = "fas fa-address-book"></i>
-                           <label class="small mb-1" for="inputPassword">Contact Number:&nbsp;&nbsp; </label>
+                           <label class="small mb-1" for="contactnum">Contact Number:&nbsp;&nbsp; </label>
                            <?php
                                if(isset($_GET['contactnum']))
                                {
-                                 echo '<input value = "'.$_GET['contactnum'].'" class="text-box" type="tel" name = "contact-num" id="inputPassword" placeholder="use format: 0##-####-####" required/>';
+                                 echo '<input onkeypress = "numSyntax()" value = "'.$_GET['contactnum'].'" class="text-box" type="tel" name = "contact-num" id="contactnum" placeholder="use format: 0##-####-####" required/>';
                                }
                                else
                                {
                                  if($info['contact_num']?? null != null)
                                  {
-                                     echo '<input value = "'.$info['contact_num'].'" class="text-box" type="tel" name = "contact-num" id="inputPassword" placeholder="use format: 0##-####-####" required/>';
+                                     echo '<input onkeypress = "numSyntax()" value = "'.$info['contact_num'].'" class="text-box" type="tel" name = "contact-num" id="contactnum" placeholder="use format: 0##-####-####" required/>';
                                  }
                                  else
                                  {
-                                     echo '<input type="tel" class="text-box" name = "contact-num" id="inputPassword" placeholder="use format: 0##-####-####" required/>';
+                                     echo '<input onkeypress = "numSyntax()" type="tel" class="text-box" name = "contact-num" id="contactnum" placeholder="use format: 0##-####-####" required/>';
                                  }
                                }
                             ?>
+                            <script type="text/javascript">
+                              function numSyntax()
+                              {
+                                var x = document.getElementById("contactnum").value;
+                                if(x.length == 3 || x.length == 8)
+                                {
+                                  document.getElementById("contactnum").value = x+"-";
+                                }
+                                else if(x.length == 13)
+                                {
+                                  document.getElementById("contactnum").value = x.slice(0, -1);
+                                  alert("Too much numbers!");
+                                }
+                                else if(x.length > 14)
+                                {
+                                  document.getElementById("contactnum").value = 0;
+                                  alert("Too much numbers!");
+                                }
+
+                              }
+                            </script>
                          </div>
                        </div>
                        <div class="divider-inline2">
@@ -508,10 +421,9 @@
                                       {
                                         $userobj = new User();
                                         $userInfo = $userobj->idChecker($_SESSION['user_id']);
-                                            if($userInfo['designation'] != null)
+                                            if($userInfo['designation']?? null != null)
                                             {
                                                 echo '<select name = "desig" id = "position" required>
-
                                                   <option value="Teacher I">Teacher I</option>
                                                   <option value="Teacher II">Teacher II</option>
                                                   <option value="Teacher III">Teacher III</option>
@@ -601,7 +513,7 @@
                                    }
                                    else
                                    {
-                                     if($info['station']?? "1" != null)
+                                     if($info['station']?? "1" != "1")
                                      {
 
                                          echo '<select name = "station" id = "station" required>
@@ -632,6 +544,34 @@
 
 
                                      }
+                                     else
+                                       {
+                                         echo '<select name = "station" id = "station" required>
+                                           <option disabled  value = "1" hidden>Choose here</option>
+                                           <option value="Batug E.S">Batug E.S</option>
+                                           <option value="CM Closa E.S">CM Closa E.S</option>
+                                           <option value="Danao E.S">Danao E.S</option>
+                                           <option value="Kiling E.S">Kiling E.S</option>
+                                           <option value="Liwayway E.S">Liwayway E.S</option>
+                                           <option value="Maya E.S">Maya E.S</option>
+                                           <option value="Oguisan E.S">Oguisan E.S</option>
+                                           <option value="Olmedo E.S">Olmedo E.S</option>
+                                           <option value="Palale C.S">Palale C.S</option>
+                                           <option value="Salvacion E.S">Salvacion E.S</option>
+                                           <option value="San Antonio E.S">San Antonio E.S</option>
+                                           <option value="San Pedro E.S">San Pedro E.S</option>
+                                           <option value="San Vicente E.S">San Vicente E.S</option>
+                                           <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                           <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                           </select>
+                                           <script>
+                                           function myFunction()
+                                           {
+                                             document.getElementById("station").value = 1;
+                                           }
+                                           myFunction();
+                                           </script>';
+                                       }
 
                                    }
                                 ?>
@@ -774,7 +714,7 @@
                                }
                                else
                                {
-                                 if($info['date_of_latest_promo'])
+                                 if($info['date_of_latest_promo']?? null != null)
                                  {
                                      echo '<input value = "'.$info['date_of_latest_promo'].'" type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
                                  }
@@ -798,7 +738,7 @@
                                }
                                else
                                {
-                                 if($info['date_of_orig_appointment'])
+                                 if($info['date_of_orig_appointment']?? null != null)
                                  {
                                    echo '<input value = "'.$info['date_of_orig_appointment'].'" type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
                                  }

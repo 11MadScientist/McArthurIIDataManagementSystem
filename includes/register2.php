@@ -22,6 +22,8 @@
         <link href ="css/register2.css" rel = "stylesheet"/>
         <script src="js/selecttag.js"></script>
         <script src="js/dropdown.js"></script>
+        <script src="js/profileLoader.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="background">
@@ -48,10 +50,7 @@
                                             {
                                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Please choose Civil Status!</p>';
                                             }
-                                            elseif($_GET['error'] == "invalidAge")
-                                            {
-                                              echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Age!</p>';
-                                            }
+
                                             elseif($_GET['error'] == "noSchoolAssigned")
                                             {
                                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Choose a School!</p>';
@@ -65,44 +64,43 @@
                                     <div class="card-body" >
                                       <div class="group">
                                         <div class="text">
+
                                           <form action="forms/registration2.form.php" method="post" enctype="multipart/form-data">
-                                            <label class = "pic-lbl" >Upload Profile Picture</label>
-                                             <input class = "input" name="img-profile" type="file"  required>
-                                             <button class = "btn-primary button " type="submit" name="img-submit">UPLOAD IMAGE</button>
-                                          </form>
+                                            <label class = "pic-lbl" ><u>Upload Profile Picture</u></label>
+                                             <input onchange="readURL(this);" class = "input" name="img-profile" type="file">
+
+
                                         </div>
 
                                         <div class="images">
                                           <?php
-                                           if(isset($_GET['success']))
-                                           {
-                                                $conn = mysqli_connect("localhost", "root", "", "mddb");
+                                           $conn = mysqli_connect("localhost", "root", "", "mddb");
 
-                                                $obj = new ProfilePic();
-                                                $result = $obj->get_profile($_SESSION['user_id']);
-
-     	                                          while($row = mysqli_fetch_array($result))
-                                                {
-                                          ?>
-     		                                           <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
-                                          <?php
-     	                                          }
-                                                 mysqli_close($conn);
-
-                                           }
-                                           else
-                                           {
-                                             echo '<img class = "image" src="forms/profpic-uploads/unknown.jpg">';
-                                           }
+                                           $obj = new ProfilePic();
+                                           $result = $obj->get_profile($_SESSION['user_id']);
+                                              $row = mysqli_fetch_array($result);
+                                                if($row != null)
+                                                 {
                                            ?>
+                                                    <img class = "image" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" id="blah" src="#"/>
+                                           <?php
+                                                 }
 
+                                                 else
+                                                 {
+                                           ?>
+                                                    <img id="blah" src="#" onerror="this.src='forms/profpic-uploads/unknown.jpg';"  class = "image" src="forms/profpic-uploads/unknown.jpg">
+                                           <?php
+                                                 }
+                                                   mysqli_close($conn);
+                                            ?>
                                         </div>
                                       </div>
 
 
 
                                       <!-- this is the start of the form-->
-                                        <form action= "forms/registration2.form.php" method="post">
+
                                             <div class="form-row">
 
                                                 <div class="col-md-6">
@@ -124,16 +122,16 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="age">Age</label>
+                                                        <label class="small mb-1" for="grade">Grade/Subject</label>
                                                         <!--his specification subject-->
                                                         <?php
-                                                            if(isset($_GET['age']))
+                                                            if(isset($_GET['grade']))
                                                             {
-                                                                echo '<input value = "'.$_GET['age'].'" class="form-control py-4" name = "age" id="inputLastName" type="number" placeholder="Enter Age" required/>';
+                                                                echo '<input value = "'.$_GET['grade'].'" class="form-control py-4" name = "grade" id="inputLastName" type="text" required/>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<input class="form-control py-4" name = "age" id="age" type="number" placeholder="Enter Age" required/>';
+                                                                echo '<input class="form-control py-4" name = "grade" id="grade" type="text" placeholder="Enter Grade/Subject" required/>';
                                                             }
                                                          ?>
 

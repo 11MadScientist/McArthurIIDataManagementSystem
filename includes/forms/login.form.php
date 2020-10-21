@@ -23,6 +23,11 @@ if(isset($_POST['login-user']))
       header("Location: ../login.php?error=nosuchemail");
       exit();
     }
+    elseif($user['status'] == null)
+    {
+      header("Location: ../login.php?error=notActivated&email=".$email);
+      exit();
+    }
     else
     {
       $passcheck = password_verify($pass, $user['pass_word']);
@@ -41,6 +46,7 @@ if(isset($_POST['login-user']))
           $_SESSION['user_lname'] = $user['l_name'];
           $_SESSION['user_email'] = $user['email'];
           $_SESSION['designation'] = $user['designation'];
+          $_SESSION['status'] = $user['status'];
           header("Location: ../dashboard.php?success");
           exit();
       }

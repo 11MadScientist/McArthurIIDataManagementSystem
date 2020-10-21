@@ -2,14 +2,14 @@
 session_start();
 include('../autoloader.inc.php');
 
-if(isset($_POST['img-submit']))
+if(isset($_POST['submit-registry']))
 {
-  if($_SESSION['user_id']==null)
+  if($_SESSION['user_id']===null)
   {
-    header("Location: login.php");
+    // header("Location: login.php");
+    echo $_SESSION['user_id'];
     exit();
   }
-
 
   $file = $_FILES['img-profile'];
   $filename = $_FILES['img-profile']['name'];
@@ -34,10 +34,6 @@ if(isset($_POST['img-submit']))
   	    $imageProperties = getimageSize($_FILES['img-profile']['tmp_name']);
         $obj = new ProfilePic();
         $confid = $obj->pic_upload($_SESSION['user_id'], $imageProperties, $imgData);
-
-       header("Location: ../register2.php?success");
-
-        exit();
       }
       else
       {
@@ -55,16 +51,7 @@ if(isset($_POST['img-submit']))
     echo "invalid filetype";
   }
 
-}
-
-elseif(isset($_POST['submit-registry']))
-{
-  if($_SESSION['user_id']==null)
-  {
-    header("Location: login.php");
-    exit();
-  }
-  $age = $_POST['age'];
+  $grade = $_POST['grade'];
   $station = $_POST['station']?? "1";
   $dateofbirth = $_POST['dateofbirth'];
   $civilstatus = $_POST['civil-stat'];
@@ -75,18 +62,12 @@ elseif(isset($_POST['submit-registry']))
   $contactnum = $_POST['contact-num'];
   $fbacct = $_POST['fb-username'];
 
-  if($age < 0 or $age >160 or preg_match("/[a-zA-Z]/"))
-  {
-    header("Location: ../register2.php?error=invalidAge&station=".$station."&dateofbirth="
-    .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.
-    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
-    exit();
-  }
+
 
   if($_POST['civil-stat'] == null)
   {
     header("Location: ../register2.php?error=noCivilStatus&station=".$station."&dateofbirth="
-    .$dateofbirth."&age=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    .$dateofbirth."&grade=".$grade."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
     exit();
   }
@@ -94,7 +75,7 @@ elseif(isset($_POST['submit-registry']))
   if($station === null or $station == "1")
   {
     header("Location: ../register2.php?error=noSchoolAssigned&civilstatus=".$civilstatus."&dateofbirth="
-    .$dateofbirth."&age=".$age."&highesteducattn=".$highesteducattn."&specification=".$specification.
+    .$dateofbirth."&grade=".$grade."&highesteducattn=".$highesteducattn."&specification=".$specification.
     "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&contactnum=".$contactnum."&fbacct=".$fbacct);
     exit();
   }
@@ -102,13 +83,13 @@ elseif(isset($_POST['submit-registry']))
   {
     header("Location: ../register2.php?error=invalidContactNumber&station=".$station."&dateofbirth="
     .$dateofbirth."&civilstatus=".$civilstatus."&highesteducattn=".$highesteducattn."&specification=".$specification.
-    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&age=".$age."&fbacct=".$fbacct);
+    "&orig_appointment=".$orig_appointment."&dateofpromo=".$dateofpromo."&grade=".$grade."&fbacct=".$fbacct);
     exit();
   }
 
   $obj = new AddInfo();
 
-  $obj->setAddInfo($_SESSION['user_id'], $age, $station, $dateofbirth, $civilstatus, $highesteducattn, $specification, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
+  $obj->setAddInfo($_SESSION['user_id'], $grade, $station, $dateofbirth, $civilstatus, $highesteducattn, $specification, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
   header("Location: ../login.php?success=signedupsuccessfully");
   session_unset();
   session_destroy();
@@ -118,6 +99,7 @@ elseif(isset($_POST['submit-registry']))
 
 else
 {
-  header("Location: ../login.php");
+  // header("Location: ../login.php");
+  echo "hello";
   exit();
 }

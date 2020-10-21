@@ -26,14 +26,12 @@
 .error
 {
   color: #F60002;
-  font-size:1.0rem;
   text-align:center;
 }
 /*#12E41D =>green*/
 .success
 {
   color: #12E41D;
-  font-size: 1.0rem;
   text-align: center;
 }
 /* css for the select tag */

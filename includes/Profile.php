@@ -82,8 +82,8 @@
                          </div>
                          <div class="name-content">
                            <i class = "fas fa-clock"></i>
-                           <span>Age:</span>
-                           <span class = "content"><?php echo $info['age']?? ''; ?></span>
+                           <span>Grade:</span>
+                           <span class = "content"><?php echo $info['grade']?? ''; ?></span>
                          </div>
 
 
@@ -133,14 +133,14 @@
                          <div class="divider-inline1">
                            <div class="contact-content">
                              <i class = "fas fa-address-book"></i>
-                             <span>Major:</span>
-                             <span class = "content"><?php echo $info['major']?? ''; ?></span>
+                             <span>Specification:</span>
+                             <span class = "content"><?php echo $info['specification']?? ''; ?></span>
                            </div>
 
                              <div class="contact-content">
                                <i class = "fas fa-cog"></i>
                                <span>Designation:</span>
-                               <span class = "content"><?php echo $info['designation']?? ''; ?></span>
+                               <span class = "content"><?php echo $_SESSION['designation']?? ''; ?></span>
                              </div>
                            </div>
                            <div class="divider-inline1">

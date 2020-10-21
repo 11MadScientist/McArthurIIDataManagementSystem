@@ -62,7 +62,7 @@ a
   background: #fff;
   border-radius:6px;
   position: absolute;
-  left: 70px;
+  left: 150px;
   top: 118px;
   box-shadow: 0px 1px 10px 1px #03C04A;
 	background-image: url('../forms/profpic-uploads/unknown.jpg');
@@ -75,7 +75,7 @@ a
 .name
 {
   padding-top: 120px;
-  padding-left: 270px;
+  padding-left: 400px;
   min-height: 310px;
   width:100%;
   min-width: 300px;

@@ -52,6 +52,10 @@
                                         {
                                           echo'<p class = "error"><i class = "fas fa-exclamation-triangle"></i>Password is incorrect!</p>';
                                         }
+                                        elseif($_GET['error'] == "notActivated")
+                                        {
+                                          echo'<p class = "error"><i class = "fas fa-exclamation-triangle"></i>Account not yet Activated!</p>';
+                                        }
                                       }
 
                                      ?>

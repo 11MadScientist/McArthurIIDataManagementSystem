@@ -1,6 +1,7 @@
 <?php
 session_start();
-include('autoloader.inc.php'); ?>
+include('autoloader.inc.php');
+ ?>
 !DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,6 +12,7 @@ include('autoloader.inc.php'); ?>
         <meta name="author" content="" />
         <title>McArthurII District Attendance</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/attendance.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
