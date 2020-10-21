@@ -52,7 +52,7 @@
                           ?>
 
                         <div class = "user-name">
-                            <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_lname']; ?></h2>
+                            <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_mname']." ".$_SESSION['user_lname']; ?></h2>
                             <h4><?php echo $_SESSION['designation'] ?></h4>
                         </div>
 		                    </div>

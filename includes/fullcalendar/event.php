@@ -10,7 +10,7 @@ while( $rows = mysqli_fetch_assoc($resultset) ) {
 	$calendar[] = array(
         'id' =>$rows['id'],
         'title' => $rows['title'],
-        'url' => "../dashboard.php",
+        'url' => "../viewEvent.php?id=".$rows['id'],
 		"class" => 'event-important',
         'start' => "$start",
         'end' => "$end"

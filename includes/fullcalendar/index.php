@@ -20,7 +20,7 @@ include('header.php');
 				<button class="btn btn-warning" data-calendar-view="day">Day</button>
 			</div>
 		</div>
-		<h3 style="font-size: 180%; font-family:'Century Gothic'; "></h3>
+		<h3 class="monthName"></h3>
 
 	</div>
 	<div class="row">
@@ -33,7 +33,7 @@ include('header.php');
 		</div>
 	</div>
 	<div style="margin:50px 0px 0px 0px;">
-		<a class="btn btn-default read-more" style="background:#3399ff;color:white" href="../dashboard.php">Back to Tutorial</a>
+		<a class="btn btn-default read-more" href="../Events.php">Back</a>
 	</div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
