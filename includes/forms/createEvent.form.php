@@ -98,7 +98,7 @@
     }
     elseif($_FILES['event-img']['name'] == null)
     {
-      header("Location: ../CreateEvent.php?success=eventEdited&id=".$id);
+      header("Location: ../CreateEvent.php?success=eventCreated&id=".$id);
       exit();
     }
 

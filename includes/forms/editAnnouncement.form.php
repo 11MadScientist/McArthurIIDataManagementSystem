@@ -2,27 +2,14 @@
   session_start();
   include('../autoloader.inc.php');
 
-  if(isset($_POST['event-submit']))
+  if(isset($_POST['ann-submit']))
   {
     $id = $_POST['id'];
-    $start_date = date('Y-m-d H:i:s', strtotime($_POST['start_date']. $_POST['start_time']));
-    $end_date = date('Y-m-d H:i:s', strtotime($_POST['end_date'].$_POST['end_time']));
     $title = $_POST['title'];
     $description = $_POST['description'];
 
-    if($start_date > $end_date)
-    {
-      header("Location: ../CreateEvent.php?error=invalidDateTime&title=".$title.
-      "&description=".$description."&event-img=".$_FILES['event-img']."&id=".$id);
-      exit();
-    }
-
-
-
-    $obj = new Events();
-    $obj->editEvent($id,$_SESSION['user_id'],$start_date, $end_date, $title, $description);
-
-
+    $obj = new Announcement();
+    $obj->editAnn($id, $_SESSION['user_id'], $title, $description);
 
 //image upload code
 
@@ -53,18 +40,17 @@
 
             $imgData =addslashes(file_get_contents($_FILES['event-img']['tmp_name']));
             $imageProperties = getimageSize($_FILES['event-img']['tmp_name']);
-            $obj = new Events();
+            $obj = new Announcement();
+            $obj->editImg($id, $imageProperties, $imgData);
 
-            $obj->imgUpdate($id, $imageProperties, $imgData);
-
-            header("Location: ../CreateEvent.php?success=eventEdited&id=".$id);
+            header("Location: ../CreateAnnouncement.php?success=announcementEdited&id=".$id);
             exit();
 
           }
           else
           {
             echo $fileSize;
-            header("Location: ../CreateEvent.php?error=imageSizeTooBig&start_date=".$_POST['start_date'].
+            header("Location: ../CreateAnnouncement.php?error=imageSizeTooBig&start_date=".$_POST['start_date'].
             "&start_time=".$_POST['start_time']."&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
             "&description=".$description."&event-img=".$_FILES['event-img']."&title=".$title."&id=".$id);
             exit();
@@ -74,7 +60,7 @@
         else
         {
           echo "there was an error in uploading the file";
-          header("Location: ../CreateEvent.php?error=errorInUploadingFile&start_date=".$_POST['start_date'].
+          header("Location: ../CreateAnnouncement.php?error=errorInUploadingFile&start_date=".$_POST['start_date'].
           "&start_time=".$_POST['start_time']."&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
           "&description=".$description."&event-img=".$_FILES['event-img']."&title=".$title."&id=".$id);
           exit();
@@ -88,7 +74,7 @@
     }
     elseif($_FILES['event-img']['name'] == null)
     {
-      header("Location: ../CreateEvent.php?success=eventEdited&id=".$id);
+      header("Location: ../CreateAnnouncement.php?success=announcementEdited&id=".$id);
       exit();
     }
 

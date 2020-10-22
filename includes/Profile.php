@@ -25,15 +25,28 @@
               <div class="container-fluid">
 
                   <div class="profile-box">
-                    <a href="EditProfile.php"><u>Edit Profile</u></a>
+
 
                     <!-- sql command for the profile picture -->
 
                     <?php
+                      $prof_id;
+                      if(isset($_GET['id']))
+                      {
+                        $prof_id = $_GET['id'];
+                      }
+                      else
+                      {
+                        $prof_id = $_SESSION['user_id'];
+                        echo '  <a id ="editlink" href="EditProfile.php"><u>Edit Profile</u></a>';
+                      }
+
+
+
                      $conn = mysqli_connect("localhost", "root", "", "mddb");
 
                      $obj = new ProfilePic();
-                     $result = $obj->get_profile($_SESSION['user_id']);
+                     $result = $obj->get_profile($prof_id);
                         $row = mysqli_fetch_array($result);
                           if($row != null)
                            {
@@ -55,7 +68,7 @@
                      <!-- sql command for the add info -->
                      <?php
                       $obj = new AddInfo();
-                      $info = $obj->getAddInfo($_SESSION['user_id']?? '');
+                      $info = $obj->getAddInfo($prof_id?? '');
 
                       ?>
                       <!-- name information -->

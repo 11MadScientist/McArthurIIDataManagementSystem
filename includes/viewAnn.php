@@ -10,14 +10,14 @@ include('autoloader.inc.php');
          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
          <meta name="description" content="" />
          <meta name="author" content="" />
-         <title>McArthurII District ViewEvent</title>
+         <title>McArthurII District Announcement</title>
          <link href="css/styles.css" rel="stylesheet" />
          <link href="css/createEvent.css" rel="stylesheet" />
          <link href="css/viewEvent.css" rel="stylesheet" />
 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
-         <!-- time picker -->
+         <!-- image loader script -->
          <script src="js/imageLoader.js"></script>
 
      </head>
@@ -28,39 +28,31 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">ViewEvent</h1>
+                   <h1 class="mt-4">Announcement</h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">ViewEvent</li>
+                       <li class="breadcrumb-item active">Announcement</li>
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                    </ol>
 
                    <div class="createEvent-box">
-                     <p>Event Details</p>
+                     <p style="margin-top: 40px;">Announcement</p>
                      <?php
-                          $obj = new Events();
-                          $info = $obj->getOneEvent($_GET['id']);
-                          $start = explode(' ', $info['start_date']);
-                          $end = explode(' ', $info['end_date']);
+                          $obj = new Announcement();
+                          $info = $obj->getSingleAnn($_GET['id']);
+                          $obj1 = new User();
+                          $creator = $obj1->idChecker($info['user_id'])
+
                       ?>
 
 
-                       <div class="start">
-                         <label for="startdate">Start Date:</label>
-                          <p class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($start[0]));?></p>
+                       <div style="width:100%;" class="start">
+                         <label for="startdate">Date Created:</label>
+                          <p style="margin-right:20%;" class="info" id = "startdate"><?php echo date('Y-M-d h:ia', strtotime($info['date_created']));?></p>
 
-                         <label for="starttime">Start Time:&nbsp;</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($start[1]));?></p>
-
+                          <label for="startdate">Created By:</label>
+                           <p class="info" href="#" id = "startdate"><a href="Profile.php?id=<?php echo $info['user_id'] ?>"><?php echo $creator['f_name']." "
+                           .$creator['l_name'];?></a></p>
                         </div>
-
-                        <div class="end">
-                          <label for="enddate">End Date:</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($end[0]));?></p>
-
-                         <label for="endtime">End Time:&nbsp;</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($end[1]));?></p>
-
-                       </div>
 
                        <label style="display:block;" for="title">Title</label>
                           <p class="main"><?php echo $info['title']?></p>
@@ -71,7 +63,7 @@ include('autoloader.inc.php');
 
 
                        <label style="display:block;" for = eventimage><u>Event Image</u></label>
-                        <img class = "main" src="eventImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
+                        <img class = "main" src="annImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
                         <script>
                           function showImg()
                           {
@@ -79,10 +71,10 @@ include('autoloader.inc.php');
                           }
                         </script>
 
-                       <a href="Events.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
+                       <a href="Announcements.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
 
 
-                       <a href="CreateEvent.php?id=<?php echo $_GET['id']; ?>" class = "btn-primary passbtn" type="submit" name="event-submit">Edit</a>
+                       <a href="CreateAnnouncement.php?id=<?php echo $_GET['id']; ?>" class = "btn-primary passbtn" type="submit" name="event-submit">Edit</a>
                    </div>
 
 
@@ -98,10 +90,6 @@ include('autoloader.inc.php');
          <script src="assets/demo/chart-area-demo.js"></script>
          <script src="assets/demo/chart-bar-demo.js"></script>
          <script src="assets/demo/chart-pie-demo.js"></script>
-         <script>
-           function submit(str) {
-             alert(`You have successfully submitted your ViewEvent! Timestamp: ${str}`)
-           }
-         </script>
+
      </body>
  </html>

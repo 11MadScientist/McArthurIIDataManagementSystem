@@ -117,3 +117,8 @@ label
   display: inline;
   border-radius: 3px;
 }
+.buttons
+{
+  display: block;
+  margin-top: 20px;
+}

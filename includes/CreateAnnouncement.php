@@ -10,7 +10,7 @@ include('autoloader.inc.php');
          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
          <meta name="description" content="" />
          <meta name="author" content="" />
-         <title>McArthurII District CreateEvent</title>
+         <title>McArthurII District Create Announcement</title>
          <link href="css/styles.css" rel="stylesheet" />
          <link href="css/createEvent.css" rel="stylesheet" />
          <link href="css/lee.css" rel="stylesheet" />
@@ -27,14 +27,14 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">CreateEvent</h1>
+                   <h1 class="mt-4">Create Announcement</h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">CreateEvent</li>
+                       <li class="breadcrumb-item active">CreateAnnouncement</li>
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                    </ol>
 
                    <div class="createEvent-box">
-                     <p>Event Details</p>
+                     <p>Announcement Details</p>
                      <?php
                          if(isset($_GET['error']))
                          {
@@ -59,121 +59,37 @@ include('autoloader.inc.php');
                          elseif(isset($_GET['success']))
                          {
 
-                           if($_GET['success'] == "eventCreated")
+                           if($_GET['success'] == "announcementCreated")
                            {
-                             echo '<p class="success"><i class = "fas fa-check"></i>Event Successfully Created!</p>';
+                             echo '<p class="success"><i class = "fas fa-check"></i>Announcement Successfully Created!</p>';
                            }
-                           if($_GET['success'] == "eventEdited")
+                           if($_GET['success'] == "announcementEdited")
                            {
-                             echo '<p class="success"><i class = "fas fa-check"></i>Event Successfully Edited!</p>';
+                             echo '<p class="success"><i class = "fas fa-check"></i>Announcement Successfully Edited!</p>';
                            }
                          }
 
                          // retrieving information if id is present
                          if(isset($_GET['id']))
                          {
-                           $obj = new Events();
-                           $info = $obj->getOneEvent($_GET['id']);
-                           $start = explode(' ', $info['start_date']);
-                           $end = explode(' ', $info['end_date']);
+                           $obj = new Announcement();
+                           $info = $obj->getSingleAnn($_GET['id']);
+
                          }
 
 
                     if(isset($_GET['id']))
                     {
-                      echo '<form class="" action="forms/editEvent.form.php" method="post" enctype="multipart/form-data">
+                      echo '<form class="" action="forms/editAnnouncement.form.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="'.$_GET['id'].'">';
 
                     }
                     else
                     {
-                      echo '<form class="" action="forms/createEvent.form.php" method="post" enctype="multipart/form-data">';
+                      echo '<form class="" action="forms/createAnnouncement.form.php" method="post" enctype="multipart/form-data">';
                     }
                       ?>
-                       <div class="start">
-                         <label for="startdate">Start Date:</label>
-                         <?php
-                            if(isset($_GET['id']))
-                            {
-                                echo '<input value ='.$start[0].' type="date" class="date-time" name="start_date" id = "startdate" value="">';
-                            }
-                            else
-                            {
-                              if(isset($_GET['start_date']))
-                              {
-                                echo '<input value ='.$_GET['start_date'].' type="date" class="date-time" name="start_date" id = "startdate" value="">';
-                              }
-                              else
-                              {
-                                echo '<input type="date" class="date-time" name="start_date" id = "startdate" value="">';
-                              }
-                            }
-                          ?>
 
-
-
-                         <label for="starttime">Start Time:&nbsp;</label>
-                         <?php
-                            if(isset($_GET['id']))
-                            {
-                               echo ' <input value ='.$start[1].' type="time" class="date-time"  name="start_time" id = "starttime" value="">';
-                            }
-                            else
-                            {
-                              if(isset($_GET['start_time']))
-                              {
-                                echo ' <input value ='.$_GET['start_time'].' type="time" class="date-time"  name="start_time" id = "starttime" value="">';
-                              }
-                              else
-                              {
-                                echo ' <input type="time" class="date-time"  name="start_time" id = "starttime" value="">';
-                              }
-                            }
-                          ?>
-
-                        </div>
-                        <div class="end">
-                          <label for="enddate">End Date:</label>
-                          <?php
-                            if(isset($_GET['id']))
-                            {
-                                echo '<input type="date" class="date-time" name="end_date" id = "enddate" value='.$end[0].'>';
-                            }
-                            else
-                            {
-                              if(isset($_GET['end_time']))
-                              {
-                                echo '<input type="date" class="date-time" name="end_date" id = "enddate" value='.$_GET['end_date'].'>';
-                              }
-                              else
-                              {
-                                 echo '<input type="date" class="date-time" name="end_date" id = "enddate">';
-                              }
-                            }
-                           ?>
-
-
-
-                         <label for="endtime">End Time:&nbsp;</label>
-                         <?php
-                            if(isset($_GET['id']))
-                            {
-                                echo '<input type="time" class="date-time"  name="end_time" id = "endtime" value='.$end[1].'>';
-                            }
-                            else
-                            {
-                              if(isset($_GET['end_time']))
-                              {
-                                  echo '<input type="time" class="date-time"  name="end_time" id = "endtime" value='.$_GET['end_time'].'>';
-                              }
-                              else
-                              {
-                                  echo '<input type="time" class="date-time"  name="end_time" id = "endtime">';
-                              }
-                            }
-                          ?>
-
-                       </div>
 
                        <label style="display:block;" for="title">Title:</label>
                        <?php
@@ -239,7 +155,7 @@ include('autoloader.inc.php');
                             if(isset($_GET['id']))
                             {
                               ?>
-                                <img class = "main" src="eventImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" onerror="showImg();"  />
+                                <img class = "main" src="annImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" onerror="showImg();"  />
                               <?php
                             }
                             else
@@ -257,8 +173,8 @@ include('autoloader.inc.php');
 
 
                        <div class="buttons">
-                         <a href="Events.php" class = "btn-primary passbtn" type="submit" name="event-submit">Cancel</a>
-                         <button class = "btn-primary passbtn" type="submit" name="event-submit">OK</button>
+                         <a href="Announcements.php" class = "btn-primary passbtn" type="submit" name="event-submit">Cancel</a>
+                         <button class = "btn-primary passbtn" type="submit" name="ann-submit">OK</button>
                        </div>
                      </form>
                    </div>
@@ -276,10 +192,6 @@ include('autoloader.inc.php');
          <script src="assets/demo/chart-area-demo.js"></script>
          <script src="assets/demo/chart-bar-demo.js"></script>
          <script src="assets/demo/chart-pie-demo.js"></script>
-         <script>
-           function submit(str) {
-             alert(`You have successfully submitted your CreateEvent! Timestamp: ${str}`)
-           }
-         </script>
+
      </body>
  </html>

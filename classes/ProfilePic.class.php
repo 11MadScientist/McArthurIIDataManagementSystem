@@ -1,5 +1,5 @@
 <?php
-include('dbh.class.php');
+
 class ProfilePic extends Dbh
 {
   public function pic_upload($id, $imageProperties, $imgData)

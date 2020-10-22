@@ -59,6 +59,8 @@
 
 
 
+
+
                         <div class="contact">
                           <?php
                               $obj = new AddInfo();
@@ -67,35 +69,45 @@
                            ?>
                           <ul>
                             <div class="icon">
-                              <i class="fas fa-phone"></i>
-                              <span>Phone Number : <?php echo $info['contact_num']?? '' ?></span>
+                              <i class="fas fa-phone"> </i> Phone Number &nbsp;&nbsp;&nbsp;&nbsp;
+                              <span>: <?php echo $info['contact_num']?? '' ?></span>
                             </div>
 
                             <div class="icon">
-                              <i class="fas fa-envelope"></i>
-                              <span>Email Address : <?php echo $_SESSION['user_email']?? '' ?></span>
+                              <i class="fas fa-envelope"> </i> Email Address :
+                              <span><?php echo $_SESSION['user_email']?? '' ?></span>
                             </div>
-
-                            <div class="icon">
-                              <i class = "fab fa-facebook-f"></i>
-                              <span>Facebook Account : <?php echo $info['fb_acct']?? '' ?></span>
-                            </div>
-
                           </ul>
 
+                        </div>
+
+                        <div class="contact">
+                          <ul>
+                            <div class="icon">
+                              <i class = "fab fa-facebook-f"> </i> &nbsp;Facebook Account
+                              <span> : <?php echo $info['fb_acct']?? '' ?></span>
+                            </div>
+
+                            <div class="icon">
+                              <i class = "fas fa-atom"> </i> &nbsp;Grade/Subject :
+                              <span><?php echo $info['grade']?? '' ?></span>
+                            </div>
+                          </ul>
                         </div>
                         <div class="underline" >
                           <hr></hr>
                         </div>
-
-                        <div class="content" id = "content-box">
-                          <div class="tag">
+                        <div class="signboard">
+                          <div class="tag" id = "ann">
                             <u>Announcements</u>
+                          </div>
+                          <div class="tag" id = "side">
+                            <u>Sideboard</u>
                           </div>
                         </div>
 
                         <div class="sideline" id = "sideone">
-                            <div class="tag">
+                            <div class="tag" style="width:100%;margin-bottom:20px;">
                               <u>Events</u>
                             </div>
                             <div class="event-cont">
@@ -106,7 +118,6 @@
 
                                   while($row = mysqli_fetch_array($result))
                                   {
-
                                     echo "<a class=link href=viewEvent.php?id=".$row['id'].">".$row['title']."</a>";
                                   }
 
@@ -116,6 +127,46 @@
                             </div>
 
                         </div>
+
+                        <?php
+                          $newObj = new Announcement();
+                          $user = new User();
+
+                          $ann = $newObj->getAnn();
+                          while($row = mysqli_fetch_array($ann))
+                          {
+                            $creator = $user->idChecker($row['user_id']);
+                        ?>
+                        <div class="content" id = "content-box">
+                            <div class="ann-tag">
+                              <div class="ann-icon">
+                                <i class = "fas fa-bullhorn"> </i> Announcement :
+                                <span><?php echo $row['title'] ?></span>
+                              </div>
+                              <div class="ann-mini">
+                                <i class = "fas fa-user"> </i> Created by :
+                                <span><a href="Profile.php?id=<?php echo $row['user_id'] ?>">
+                                  <?php echo $creator['f_name']." ".$creator['l_name'];?></a></span>
+                              </div>
+                            </div>
+                            <div class="body">
+                              <p><?php echo $row['description'] ?></p>
+                            </div>
+                            <div class="img">
+                              <img class = "main" src="annImgView.php?id=<?php echo $row["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
+                              <script>
+                                function showImg()
+                                {
+                                  document.getElementById("blah").style.display = "none";
+                                }
+                              </script>
+
+                            </div>
+                        </div>
+
+                        <?php
+                          }
+                         ?>
                       </div>
 
 
