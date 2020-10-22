@@ -34,7 +34,7 @@ include('autoloader.inc.php');
                    </ol>
 
                    <div class="createEvent-box">
-                     <p>Announcement Details</p>
+                     <p class="header">Announcement Details</p>
                      <?php
                          if(isset($_GET['error']))
                          {
@@ -91,7 +91,7 @@ include('autoloader.inc.php');
                       ?>
 
 
-                       <label style="display:block;" for="title">Title:</label>
+                       <label class="block-head" style="display:block;" for="title">Title:</label>
                        <?php
                           if(isset($_GET['id']))
                           {
@@ -112,7 +112,7 @@ include('autoloader.inc.php');
                         ?>
 
 
-                       <label for="description">Description:</label>
+                       <label class="block-head" for="description">Description:</label>
                        <?php
                           if(isset($_GET['id']))
                           {

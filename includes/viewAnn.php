@@ -35,7 +35,7 @@ include('autoloader.inc.php');
                    </ol>
 
                    <div class="createEvent-box">
-                     <p style="margin-top: 40px;">Announcement</p>
+                     <p  class="header">Announcement</p>
                      <?php
                           $obj = new Announcement();
                           $info = $obj->getSingleAnn($_GET['id']);
@@ -47,22 +47,20 @@ include('autoloader.inc.php');
 
                        <div style="width:100%;" class="start">
                          <label for="startdate">Date Created:</label>
-                          <p style="margin-right:20%;" class="info" id = "startdate"><?php echo date('Y-M-d h:ia', strtotime($info['date_created']));?></p>
+                          <p style="margin-right:20%;" class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($info['date_created']));?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
                           <label for="startdate">Created By:</label>
                            <p class="info" href="#" id = "startdate"><a href="Profile.php?id=<?php echo $info['user_id'] ?>"><?php echo $creator['f_name']." "
                            .$creator['l_name'];?></a></p>
                         </div>
 
-                       <label style="display:block;" for="title">Title</label>
+                       <label class="block-head" style="display:block;" for="title">Title</label>
                           <p class="main"><?php echo $info['title']?></p>
 
 
-                       <label for="description">Description</label>
+                       <label class="block-head" for="description">Description</label>
                         <p class="main"><?php echo $info['description']?></p>
 
-
-                       <label style="display:block;" for = eventimage><u>Event Image</u></label>
                         <img class = "main" src="annImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
                         <script>
                           function showImg()

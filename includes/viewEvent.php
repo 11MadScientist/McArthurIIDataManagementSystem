@@ -35,7 +35,7 @@ include('autoloader.inc.php');
                    </ol>
 
                    <div class="createEvent-box">
-                     <p>Event Details</p>
+                     <p class = "header">Event Details</p>
                      <?php
                           $obj = new Events();
                           $info = $obj->getOneEvent($_GET['id']);
@@ -62,15 +62,14 @@ include('autoloader.inc.php');
 
                        </div>
 
-                       <label style="display:block;" for="title">Title</label>
+                       <label class="block-head" style="display:block;" for="title">Title</label>
                           <p class="main"><?php echo $info['title']?></p>
 
 
-                       <label for="description">Description</label>
+                       <label class="block-head" for="description">Description</label>
                         <p class="main"><?php echo $info['description']?></p>
 
 
-                       <label style="display:block;" for = eventimage><u>Event Image</u></label>
                         <img class = "main" src="eventImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
                         <script>
                           function showImg()

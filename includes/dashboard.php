@@ -118,7 +118,7 @@
 
                                   while($row = mysqli_fetch_array($result))
                                   {
-                                    echo "<a class=link href=viewEvent.php?id=".$row['id'].">".$row['title']."</a>";
+                                    echo "<a class=link href=viewEvent.php?id=".$row['id']."><i class='fas fa-table'></i> ".$row['title']."</a>";
                                   }
 
                                  ?>

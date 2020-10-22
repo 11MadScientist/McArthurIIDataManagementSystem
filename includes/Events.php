@@ -39,8 +39,9 @@
                   </div>
 
                   <table style='width:100%;' class='display table table-hover center' cellspacing='0'>
-                    <col style="width:10%">
-	                   <col style="width:20%">
+                    <col style="width:20%">
+                    <col style="width:20%">
+	                   <col style="width:30%">
 	                    <col style="width:30%">
                     <thead>
                       <p class="tag">Events for the Month</p>

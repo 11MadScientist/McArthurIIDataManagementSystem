@@ -1,8 +1,8 @@
 
 p
 {
-  font-size: 36px;
-  font-family: "Century Gothic";
+  font-size: 18px;
+  font-family: "Century Gothic";;
 
 }
 .title
@@ -37,6 +37,20 @@ p
 label
 {
   font-size: 23px;
+  font-family: "Century Gothic";
+}
+.block-head
+{
+  font-weight: bold;
+  font-size: 30px;
+  font-family: Helvetica;
+}
+.header
+{
+  margin-top: 20px;
+  font-family: Helvetica;
+  font-size: 30px;
+  font-weight: bold;
 }
 .start
 {
