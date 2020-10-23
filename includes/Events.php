@@ -56,6 +56,7 @@
 
                     <tbody>
                       <?php
+                    
                       date_default_timezone_set('Asia/Manila');
                       //this is a day counter
                         $month = date('Y-m',strtotime('today'));

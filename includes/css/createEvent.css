@@ -116,6 +116,22 @@ label
   font-size: 23px;
   margin-bottom: 40px;
 }
+
+.back
+{
+  position: absolute;
+  top: 10px;
+  left: 9%;
+  font-size: 22px;
+  text-align: center;
+  text-decoration: underline;
+  width: 8%;
+  height: 40px;
+  display: inline;
+  border-radius: 3px;
+
+}
+
 .passbtn
 {
   color: white;
@@ -135,4 +151,21 @@ label
 {
   display: block;
   margin-top: 20px;
+}
+
+.delete
+{
+  background: red;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  display: inline-block;
+  font-size:
+  float: right;
+  margin-right:1%;
+  position: relative;
+  width: 30%;
+  height: 50px;
+  display: inline;
+  border-radius: 3px;
 }

@@ -37,6 +37,13 @@ class Announcement extends Dbh
     $current_id = mysqli_query($conn, $sql) or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_error($conn));
   }
 
+  public function delImg($id)
+  {
+    $sql = "DELETE FROM ann_img WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+  }
+
 
   public function createAnn($user_id, $title, $desc)
   {
@@ -77,5 +84,12 @@ class Announcement extends Dbh
     $sql = "SELECT * FROM announcement";
     $info = $this->mySqli($sql);
     return $info;
+  }
+
+  public function delAnn($id)
+  {
+    $sql = "DELETE FROM announcement WHERE id=?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
   }
 }

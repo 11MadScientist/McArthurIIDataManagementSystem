@@ -20,7 +20,7 @@ function hideSide()
     elmnt.style.display = "inline-block";
   }
 
-  var elmnt = document.getElementById("s");
+  var elmnt = document.getElementById("side");
   if(document.body.clientWidth <= 1410)
   {
       elmnt.style.display = "none";

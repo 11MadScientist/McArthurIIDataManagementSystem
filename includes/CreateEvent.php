@@ -81,7 +81,7 @@ include('autoloader.inc.php');
 
                     if(isset($_GET['id']))
                     {
-                      echo '<form class="" action="forms/editEvent.form.php" method="post" enctype="multipart/form-data">
+                      echo '<form id="form" action="forms/editEvent.form.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="'.$_GET['id'].'">';
 
                     }
@@ -90,6 +90,9 @@ include('autoloader.inc.php');
                       echo '<form class="" action="forms/createEvent.form.php" method="post" enctype="multipart/form-data">';
                     }
                       ?>
+
+                    <a href="Events.php" class = " back" type="submit" name="event-submit"><i class="fas fa-arrow-left"></i>Back</a>
+
                        <div class="start">
                          <label for="startdate">Start Date:</label>
                          <?php
@@ -257,7 +260,27 @@ include('autoloader.inc.php');
 
 
                        <div class="buttons">
-                         <a href="Events.php" class = "btn-primary passbtn" type="submit" name="event-submit">Cancel</a>
+                         <?php
+                          if(isset($_GET['id']))
+                          {
+                            echo '<button onclick="return warning()" id="delete" class = "delete" type="submit" name="delete-event">Delete</button>';
+                          }
+                          ?>
+                          <script>
+                          function warning()
+                          {
+
+                            var result = confirm("Want to delete?");
+                            if(!result)
+                            {
+
+                                alert('Submission Canceled');
+                                return false;
+
+                            }
+                          }
+                          </script>
+
                          <button class = "btn-primary passbtn" type="submit" name="event-submit">OK</button>
                        </div>
                      </form>

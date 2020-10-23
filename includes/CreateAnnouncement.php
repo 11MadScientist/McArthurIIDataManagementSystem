@@ -89,7 +89,7 @@ include('autoloader.inc.php');
                       echo '<form class="" action="forms/createAnnouncement.form.php" method="post" enctype="multipart/form-data">';
                     }
                       ?>
-
+                      <a href="Announcements.php" class = " back" type="submit" name="event-submit"><i class="fas fa-arrow-left"></i>Back</a>
 
                        <label class="block-head" style="display:block;" for="title">Title:</label>
                        <?php
@@ -173,7 +173,26 @@ include('autoloader.inc.php');
 
 
                        <div class="buttons">
-                         <a href="Announcements.php" class = "btn-primary passbtn" type="submit" name="event-submit">Cancel</a>
+                         <?php
+                          if(isset($_GET['id']))
+                          {
+                            echo '<button onclick="return warning()" id="delete" class = "delete" type="submit" name="delete-event">Delete</button>';
+                          }
+                          ?>
+                          <script>
+                          function warning()
+                          {
+
+                            var result = confirm("Want to delete?");
+                            if(!result)
+                            {
+
+                                alert('Submission Canceled');
+                                return false;
+
+                            }
+                          }
+                          </script>
                          <button class = "btn-primary passbtn" type="submit" name="ann-submit">OK</button>
                        </div>
                      </form>

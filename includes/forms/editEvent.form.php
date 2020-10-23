@@ -2,6 +2,20 @@
   session_start();
   include('../autoloader.inc.php');
 
+  if(isset($_POST['delete-event']))
+  {
+
+    $id = $_POST['id'];
+    $event = new Events();
+    $event->delImg($id);
+    $event->delEvent($id);
+    echo "<script>alert('Event Deleted Successfully')</script>";
+    header("Location: ../Events.php?success=deletedsuccessfully");
+    exit();
+
+
+  }
+
   if(isset($_POST['event-submit']))
   {
     $id = $_POST['id'];

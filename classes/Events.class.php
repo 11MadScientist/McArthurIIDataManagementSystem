@@ -67,6 +67,13 @@ class Events extends Dbh
     $stmt->execute([$user_id,$start_date, $end_date, $title, $description,$id]);
   }
 
+  public function delEvent($id)
+  {
+    $sql = "DELETE FROM events WHERE id=?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+  }
+
   public function getId($title)
   {
     $sql = "SELECT id FROM events WHERE title = ?";
@@ -103,5 +110,12 @@ class Events extends Dbh
     $sql = "SELECT user_id FROM prof_pic WHERE user_id =".$id;
     $result = mysqli_query($conn, $sql);
     return $result;
+  }
+
+  public function delImg($id)
+  {
+    $sql = "DELETE FROM events_img WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
   }
 }
