@@ -57,7 +57,7 @@
             $confid = $obj->getId($title);
             $obj->insertImg($confid['id'], $imageProperties, $imgData);
 
-            header("Location: ../CreateAnnouncement.php?success=eventCreated&id=".$confid);
+            header("Location: ../CreateAnnouncement.php?success=eventCreated&id=".$confid['id']);
             exit();
 
           }
@@ -86,7 +86,7 @@
     }
     elseif($_FILES['event-img']['name'] == null)
     {
-      header("Location: ../CreateAnnouncement.php?success=announcementCreated&id=".$confid);
+      header("Location: ../CreateAnnouncement.php?success=announcementCreated&id=".$confid['id']);
       exit();
     }
 

@@ -12,8 +12,9 @@
         <style>
            .file_drag_area
            {
-                width:80%;
-                height:250px;
+               right: 26px;
+                width:82%;
+                height:325px;
                 border:5px dashed #ccc;
                 line-height:400px;
                 text-align:center;
@@ -22,13 +23,15 @@
                 top:257px;
                 z-index:1;
                 background:white;
-                /* visibility:show; */
            }
            .file_drag_over
            {
                 color:#000;
                 border-color:#000;
-                /* visibility: hidden; */
+           }
+           .hide
+           {
+            transform: translateX(-9999px);
            }
         </style>
     </head>
@@ -45,39 +48,57 @@
                 </ol>
 
                 <div class = "submitted_reports">
-                    <h1 style=" font_size = 24px">Reports Submitted</h1>
+                    <h1 style="font-size=24px;">Reports Submitted</h1>
 
                     <!-- Table for reports submitted -->
-                    <div class = "table" style = "width:100%; height:300px;">
-                        <table  class = "display table table-striped" cellspacing = "0" id = "tableReports">
+                    <div class = "table" style = "width:100%; height:370px; overflow-x: auto">
+                        <table  class = "display table table-striped" cellspacing = "0" id = "tableReports" style="position: static;">
                             <thead>
-                                <th style ="text-align: left"><input type="checkbox" id="checkAll"> Select all</th>
+                                <!-- HEADER -->
+                                <th style ="text-align: left"><input type="checkbox" class="checkAll"> Select all</th>
                                 <th>Name</th>
                                 <th>Last Modified</th>
                                 <th>Size</th>
                                 <th>Type</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style ="text-align: left"><input type="checkbox" class="checkItem"></td>
-                                    <td>EOF.jpg</td>
-                                    <td>02-15-20</td>
-                                    <td>50.5kb</td>
-                                    <td>Image (PNG)</td>
-                                </tr>
+                                <?php
+                                    // LOOP FOR ROWTABLE (DEPENDENT TO THE DATA OF FILE TABLE DATABASE(FETCHING))
+                                    for($i=0;$i<10;$i++)
+                                    {
+                                ?>
+                                    <tr>
+                                        <!-- CHECHBOX COLUMN -->
+                                        <td style ="text-align: left"><input type="checkbox" class="check"></td>
+                                        <!-- NAME COLUMN -->
+                                        <td>EOF.jpg</td>
+                                        <!-- LAST MODIFIED COLUMN -->
+                                        <td>02-15-20</td>
+                                        <!-- SIZE COLUMN -->
+                                        <td>50.5kb</td>
+                                        <!-- TYPE COLUMN -->
+                                        <td>Image (PNG)</td>
+                                    </tr>
+                                <?php
+                                    }
+                                ?>
                             </tbody>
+                            <div class="file_drag_area">
+                                Drag and Drop Files Here to Upload
+                            </div>
                         </table>
                     </div>
-                                <!-- Drag and drop box -->
-                    <div class="file_drag_area">
-                        Drag and Drop Files Here to Upload
-                    </div>
+
+                    <!-- DRAG AND DROP BOX -->
+
+
+                    <!-- BUTTON AREA -->
                     <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
+                        <button type='submit' value='submit' name='deleteReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
                         <button type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%;">Submit Report</button>
-                        <button type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
                     </div>
                 </div>
-              </div>
+            </div>
           </main>
         <?php include('footer.php') ?>
         </div>
@@ -94,35 +115,38 @@
         <!-- SCRIPT FOR DRAG AND DROPPING FILES TO THE BOX -->
         <script>
             $(document).ready(function(){
-                // CHANGING THE COLOR OF THE DRAG BOX
-                $('.file_drag_area').on('dragover', function(){
-                    // console.log($(this));
+                // TO HIGHLIGHT THE DRAG BOX WHEN FILE IS DRAG
+                $('.file_drag_area').on('dragover', function()
+                {
                     $(this).addClass('file_drag_over');
                     return false;
                 });
 
-                // $('.table').on('dragover', function(){
-                //     $('.file_drag_area').style.visibility='visible';
-                //     // $('.file_drag_area').addClass('file_drag_over');
-                //     return false;
-                // });
-
                 //CHANGING IT BACK TO ORIG COLOR WHEN UNHOVERED
-                $('.file_drag_area').on('dragleave', function(){
+                $('.file_drag_area').on('dragleave', function()
+                {
                     $(this).removeClass('file_drag_over');
                     return false;
                 });
 
+                // UNHIDING THE DRAG BOX DURING DRAGGING THE FILE INTO THE TABLE
+                $('.table').on('dragover', function()
+                {
+                    $('.file_drag_area').removeClass('hide');
+                    $('.file_drag_area').addClass('file_drag_over');
+                    return false;
+                });
+
                 //SAVING THE FILE ON DROPPING ON THE DRAG AREA
-                $('.file_drag_area').on('drop', function(e){
+                $('.file_drag_area').on('drop', function(e)
+                {
                     e.preventDefault();
                     $(this).removeClass('file_drag_over');
-                    // this.style.z-index='-1';
-                    this.style.visibility='hidden';
-                    // this.style.display = 'none';
+                    $(this).addClass('hide');
                     var formData = new FormData();
 
                     //getting the details for the multiple files
+                    //CREATES A LIST OF FILES
                     var files_list = e.originalEvent.dataTransfer.files;
 
                     for(var i=0; i<files_list.length; i++)
@@ -149,14 +173,20 @@
                             data:formData,
                             contentType:false,
                             cache: false,
-                            processData: false,
-                            success:function(data){
-                                $('#uploaded_file').html(data);
-                            }
+                            processData: false
                     })
                 });
             });
         </script>
-
+        <!-- SELECT ALL CHECKBOX -->
+        <script>
+            $(function()
+            {
+                $('.checkAll').click(function()
+                {
+                    $('.check').prop('checked', this.checked)
+                })
+            })
+        </script>
     </body>
 </html>

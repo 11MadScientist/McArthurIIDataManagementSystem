@@ -67,6 +67,9 @@
 
                      <!-- sql command for the add info -->
                      <?php
+                      $objUser = new User();
+                      $userInfo = $objUser->idChecker($prof_id);
+
                       $obj = new AddInfo();
                       $info = $obj->getAddInfo($prof_id?? '');
 
@@ -79,19 +82,19 @@
                          <div class="name-content">
                            <i class = "fas fa-user"></i>
                            <span>Last Name:</span>
-                           <span class = "content"><?php echo $_SESSION['user_lname']?? ''; ?></span>
+                           <span class = "content"><?php echo $userInfo['l_name']?? ''; ?></span>
                          </div>
 
                          <div class="name-content">
                            <i class="fas fa-chalkboard-teacher"></i>
                            <span>First Name:</span>
-                           <span class = "content"><?php  echo $_SESSION['user_fname']?? ''; ?></span>
+                           <span class = "content"><?php  echo $userInfo['f_name']?? ''; ?></span>
                          </div>
 
                          <div class="name-content">
                            <i class = "fas fa-heart"></i>
                            <span>Middle Name:</span>
-                           <span class = "content"><?php echo $_SESSION['user_mname']?? ''; ?></span>
+                           <span class = "content"><?php echo $userInfo['m_name']?? ''; ?></span>
                          </div>
                          <div class="name-content">
                            <i class = "fas fa-clock"></i>
@@ -129,7 +132,7 @@
                            <div class="contact-content">
                              <i class="fas fa-envelope"></i>
                              <span>Email Address:</span>
-                             <span class = "content"><?php  echo $_SESSION['user_email']?? ''; ?></span>
+                             <span class = "content"><?php  echo $userInfo['email']?? ''; ?></span>
                            </div>
                          </div>
                        </ul>
@@ -153,7 +156,7 @@
                              <div class="contact-content">
                                <i class = "fas fa-cog"></i>
                                <span>Designation:</span>
-                               <span class = "content"><?php echo $_SESSION['designation']?? ''; ?></span>
+                               <span class = "content"><?php echo $userInfo['designation']?? ''; ?></span>
                              </div>
                            </div>
                            <div class="divider-inline1">

@@ -67,7 +67,7 @@
             echo $confid['id'];
             $obj->imgUpload($confid['id'], $imageProperties, $imgData);
 
-            header("Location: ../CreateEvent.php?success=eventCreated");
+            header("Location: ../CreateEvent.php?success=eventCreated&id=".$confid['id']);
             exit();
 
           }
