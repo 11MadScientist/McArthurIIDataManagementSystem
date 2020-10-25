@@ -23,6 +23,8 @@ include('autoloader.inc.php'); ?>
         <title>McArthurII District Requests</title>
 
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/events.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/table.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
@@ -55,108 +57,105 @@ include('autoloader.inc.php'); ?>
                   <div class ="requests">
 
                     <!--REQUESTS TABLE-->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form class="" action="forms/Requests.form.php" method="post">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"><center>Select All</center></th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Grade/Subject</th>
+                                        <th>School</th>
+                                    </tr>
+                                </thead>
 
-                  <div style = "width:100%; height:420px; overflow-x: auto">
+                                <tbody>
 
-                    <table style='width:100%;' class='display table table-hover center' cellspacing='0'>
+                                    <?php
+                                      if($_GET['error']?? null == 'empty')
+                                      {
+                                        echo "<script>alert('No Checked Data');</script>";
+                                      }
+                                      elseif(isset($_GET['success']))
+                                      {
+                                        if($_GET['success'] === 'deletedSuccessfully')
+                                        {
+                                          echo "<script>alert('Deleted Successfully');</script>";
+                                        }
+                                        elseif($_GET['success'] === 'accptSuccessfully')
+                                        {
+                                          echo "<script>alert('Accepted Successfully');</script>";
+                                        }
+                                      }
 
-                      <thead>
 
-                        <tr style="text-align: center; vertical-align: middle;">
 
-                          <th><input type="checkbox" class="checkAll"> Select all</input></th>
+                                      $obj = new User();
+                                      $res = $obj->getRequest();
 
-                          <th>NAME</th>
+                                      while($row = mysqli_fetch_array($res))
+                                      {
+                                          echo "<tr>
+                                                <td style=text-align:left;><input type=checkbox class='check' name='request[]' value=".$row['user_id']."><center></center></td>
+                                                <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
+                                               "<td>".$row['designation']."</td>".
+                                               "<td>".$row['grade']."</td>".
+                                               "<td>".$row['station']."</td>
+                                                </tr>";
 
-                          <th>DESIGNATION</th>
+                                      }
+                                     ?>
 
-                          <th>GRADE/SUBJECT</th>
 
-                          <th>SCHOOL</th>
+                                </tbody>
+                            </table>
 
-                        </tr>
+                        </div>
+                        <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
 
-                      </thead>
+                            <button onclick="warndel" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DECLINE</button>
+                            <script>
+                            function wardel()
+                            {
 
-                      <tbody>
+                              var result = confirm("Are you sure you want to delete checked request/s?");
+                              if(!result)
+                              {
 
-                        <?php
+                                  alert('Submission Canceled');
+                                  return false;
 
-                          date_default_timezone_set('Asia/Manila');
+                              }
+                            }
+                            </script>
 
-                          // DATA ROW LOOP MUST BE DEPENDENT ON THE DATA AVAILABLE ON THE REQUESTS DATA TABLE
+                            <button onclick="warnAccpt" type='submit' value='submit' name='accpt-req' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">ACCEPT</button>
+                            <script>
+                            function warnAccpt()
+                            {
 
-                          for($i= 20; $i > 0; $i--)
+                              var result = confirm("Are you sure you want to accpet checked request/s?");
+                              if(!result)
+                              {
 
-                          {
+                                  alert('Submission Canceled');
+                                  return false;
 
-                        ?>
+                              }
+                            }
+                            </script>
+                            </form>
+                        </div>
+                </div>
 
-                            <tr>
 
-                              <!-- CHECKBOX COLUMN -->
 
-                              <td style="text-align: center; vertical-align: middle;"><input type="checkbox" class="check"></input></td>
-
-                              <!-- NAME DATA COLUMN -->
-
-                              <td style="text-align: center; vertical-align: middle;">
-
-                                DWYANE WADE
-
-                              </td>
-
-                              <!-- DESIGNATION DATA COLUMN -->
-
-                              <td style="text-align:center; vertical-align: middle;">
-
-                                DESIGNATION DATA SAMPLE
-
-                              </td>
-
-                              <!-- GRADE/SUBJECT DATA COLUMN -->
-
-                              <td style="text-align:center; vertical-align: middle;">
-
-                                GRADE/SUBJECT DATA SAMPLE
-
-                              </td>
-
-                              <!-- SCHOOL DATA COLUMN -->
-
-                              <td style="text-align:center; vertical-align: middle;">
-
-                                SCHOOL DATA SAMPLE
-
-                              </td>
-
-                            </tr>
-
-                          <?php  
-
-                          }
-
-                          ?>
-
-                      </tbody>
-
-                    </table>
-
-                  </div>
-
-                    
-
-                    <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
-
-                        <button type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%; background:red">DECLINE</button>
-
-                        <button type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%;">ACCEPT</button>
-
-                    </div>
 
                   </div>
 
-                  
+
 
               </div>
 
@@ -167,36 +166,30 @@ include('autoloader.inc.php'); ?>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
         <script src="js/scripts.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-
-        <script src="assets/demo/chart-area-demo.js"></script>
-
-        <script src="assets/demo/chart-bar-demo.js"></script>
-
-        <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
 
         <!-- SCRIPT FOR SELECT ALL CHECKBOX -->
 
         <script>
+        $(document).ready(function()
+        {
+          $('#checkAll').click(function()
+        {
+          if($(this).is(':checked'))
+          {
+            $('.check').prop('checked', true);
+          }
+          else
+          {
+            $('.check').prop('checked', false);
+          }
+        });
+        });
 
-          $(function()
-
-            {
-
-                $('.checkAll').click(function()
-
-                {
-
-                    $('.check').prop('checked', this.checked)
-
-                })
-
-            })
 
         </script>
 

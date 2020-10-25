@@ -1,0 +1,20 @@
+.custom-select-sm
+{
+  left: 20px;
+  top: 23px;
+  position: absolute;
+  width: 70px;
+  margin-bottom: 20px;
+}
+label
+{
+  font-family: "Century Gothic";
+  color: #03C04A;
+}
+.form-control-sm
+{
+  visibility: visible;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+  border-color: #03C04A;
+
+}

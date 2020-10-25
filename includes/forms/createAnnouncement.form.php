@@ -21,6 +21,7 @@
 
     $obj = new Announcement();
     $obj->createAnn($_SESSION['user_id'],$title, $description);
+    $confid = $obj->getId($title);
 
 
 
@@ -53,7 +54,6 @@
 
             $imgData =addslashes(file_get_contents($_FILES['event-img']['tmp_name']));
             $imageProperties = getimageSize($_FILES['event-img']['tmp_name']);
-            $obj = new Announcement();
             $confid = $obj->getId($title);
             $obj->insertImg($confid['id'], $imageProperties, $imgData);
 

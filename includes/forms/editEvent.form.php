@@ -70,8 +70,7 @@
             $obj = new Events();
 
             $obj->imgUpdate($id, $imageProperties, $imgData);
-
-            header("Location: ../CreateEvent.php?success=eventEdited&id=".$id);
+             header("Location: ../CreateEvent.php?success=eventEdited&id=".$id);
             exit();
 
           }

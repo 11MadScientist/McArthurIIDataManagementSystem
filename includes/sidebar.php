@@ -29,6 +29,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-bullhorn"></i></div>
                         Announcement
                     </a>
+                    <a class="nav-link" href="Requests.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                        Requests
+                    </a>
 
                 </div>
             </div>

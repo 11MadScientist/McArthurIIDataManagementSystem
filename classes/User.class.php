@@ -53,4 +53,29 @@ class User extends Dbh
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$lname, $mname, $fname, $desig, $email,$id]);
   }
+
+  // request sql
+  public function getRequest()
+  {
+    $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
+             INNER JOIN add_info ON users.user_id = add_info.user_id
+              WHERE status = ''";
+    $res = $this->mySqli($sql);
+    return $res;
+
+  }
+  public function deleteReq($id)
+  {
+    $sql = "DELETE  FROM users WHERE user_id=?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+  }
+
+  public function setStatus($id)
+  {
+    $sql = "UPDATE users SET status = 'Activated'
+            WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+  }
 }

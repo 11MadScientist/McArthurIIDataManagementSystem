@@ -18,6 +18,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/events.css">
+        <link rel="stylesheet" href="css/table.css">
 
     </head>
     <body class="sb-nav-fixed">
@@ -38,50 +39,45 @@
                     <a class="create-event btn-primary" name="create-event" href = "CreateAnnouncement.php">Create Announcement</a>
                   </div>
 
-                  <table style='width:100%;' class='display table table-hover center' cellspacing='0'>
-                    <col style="width:10%">
-	                   <col style="width:20%">
-	                    <col style="width:30%">
-                    <thead>
-                      <p class="tag">Announcements</p>
-                      <tr style="text-align: center; vertical-align: middle;">
-                        <th><i class='fas fa-calendar-alt' style='font-size:15px'></i> Date Created</th>
-                        <th><i class='fas fa-exclamation-circle' style='font-size:15px'></i> Announcement</th>
-                        <th><i class='fas fa-info' style='font-size:15px'></i> Description</th>
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <col style="width:10%">
+        	                   <col style="width:20%">
+        	                    <col style="width:30%">
+                              <thead>
+                                  <tr>
+                                    <th><i class='fas fa-calendar-alt' style='font-size:15px'></i> Date Created</th>
+                                    <th><i class='fas fa-exclamation-circle' style='font-size:15px'></i> Announcement</th>
+                                    <th><i class='fas fa-info' style='font-size:15px'></i> Description</th>
+                                  </tr>
+                              </thead>
 
-                      </tr>
-                    </thead>
+                              <tbody>
+                                <?php
+                                  date_default_timezone_set('Asia/Manila');
+                                  //this is a day counter
+                                    $month = date('Y-m',strtotime('today'));
 
-                    <tbody>
-                      <?php
-                      date_default_timezone_set('Asia/Manila');
-                      //this is a day counter
-                        $month = date('Y-m',strtotime('today'));
+                                    $obj = new Announcement();
+                                    $result = $obj->getAllAnn();
 
-                        $obj = new Announcement();
-                        $result = $obj->getAllAnn();
+                                    if($result !== null)
+                                    {
+                                      while($row = mysqli_fetch_array($result))
+                                      {
+                                          echo "<tr style=text-align: center; vertical-align: middle;>
+                                                <td>".date('Y-M-d h:ia', strtotime($row['date_created']))."</td>".
+                                               "<td><a href=viewAnn.php?id=".$row['id'].">".$row['title']."</a></td>".
+                                               "<td>".$row['description']."</td>
+                                                </tr>";
 
-                        if($result !== null)
-                        {
-                          while($row = mysqli_fetch_array($result))
-                          {
-                              echo "<tr style=text-align: center; vertical-align: middle;>
-                                    <td>".date('Y-M-d h:ia', strtotime($row['date_created']))."</td>".
-                                   "<td><a href=viewAnn.php?id=".$row['id'].">".$row['title']."</a></td>".
-                                   "<td>".$row['description']."</td>
-                                    </tr>";
+                                      }
+                                    }
 
-                          }
-                        }
+                                   ?>
 
-                       ?>
+                              </tbody>
+                          </table>
 
-                    </tbody>
-                  </table>
-
-
-
-              </div>
 
           </main>
         <?php include('footer.php') ?>
@@ -90,9 +86,9 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+
     </body>
 </html>

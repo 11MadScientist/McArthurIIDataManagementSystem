@@ -153,13 +153,16 @@
                               <p><?php echo $row['description'] ?></p>
                             </div>
                             <div class="img">
-                              <img class = "main" src="annImgView.php?id=<?php echo $row["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
+                              <div class="">
+                                <img class = "main" src="annImgView.php?id=<?php echo $row["id"]; ?>"  id="<?php echo $row['id']; ?>" src="#" onload="showImg(<?php echo $row['id'] ?>);" />
+                              </div>
                               <script>
-                                function showImg()
+                                function showImg(id)
                                 {
-                                  document.getElementById("blah").style.display = "none";
+                                  document.getElementById(""+id).style.display = "block";
                                 }
                               </script>
+
 
                             </div>
                         </div>

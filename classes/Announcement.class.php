@@ -30,11 +30,31 @@ class Announcement extends Dbh
 
   public function editImg($id, $imageProperties, $imgData)
   {
-    $conn = mysqli_connect("localhost", "root", "", "mddb");
-    $sql = "UPDATE ann_img
-    SET imageType = '{$imageProperties['mime']}', imageData = '{$imgData}'
-    WHERE id =".$id;
-    $current_id = mysqli_query($conn, $sql) or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_error($conn));
+
+    $sql = "SELECT id FROM ann_img WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+    $confid = $stmt->fetch();
+
+    if($confid != null)
+    {
+      $conn = mysqli_connect("localhost", "root", "", "mddb");
+      $sql = "UPDATE ann_img
+      SET imageType = '{$imageProperties['mime']}', imageData = '{$imgData}'
+      WHERE id =".$id;
+      $current_id = mysqli_query($conn, $sql) or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_error($conn));
+
+    }
+    else
+    {
+      $conn = mysqli_connect("localhost", "root", "", "mddb");
+      $sql = "INSERT INTO ann_img(id, imageType, imageData)
+      VALUES('{$id}', '{$imageProperties['mime']}', '{$imgData}')";
+      $current_id = mysqli_query($conn, $sql) or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_error($conn));
+    }
+
+
+
   }
 
   public function delImg($id)
