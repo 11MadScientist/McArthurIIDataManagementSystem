@@ -1,5 +1,10 @@
 <?php
   session_start();
+  if($_SESSION['user_id'] == null)
+  {
+    header("Location: forms/logout.form.php");
+    exit();
+  }
   include('autoloader.inc.php');
 ?>
 
@@ -35,8 +40,16 @@
                   </ol>
 
                   <div class="buttons">
+                    <?php
+                      if($_SESSION['status'] == 'Administrator')
+                      {
+                     ?>
+                     <a class="create-event btn-primary" name="create-event" href = "CreateAnnouncement.php">Create Announcement</a>
+                     <?php
+                      }
+                      ?>
 
-                    <a class="create-event btn-primary" name="create-event" href = "CreateAnnouncement.php">Create Announcement</a>
+
                   </div>
 
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

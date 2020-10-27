@@ -1,5 +1,10 @@
 <?php
 session_start();
+if($_SESSION['user_id'] == null)
+{
+  header("Location: forms/logout.form.php");
+  exit();
+}
 include('autoloader.inc.php');
  ?>
  !DOCTYPE html>
@@ -80,8 +85,15 @@ include('autoloader.inc.php');
 
                        <a href="Events.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
 
+                       <?php
+                          if($_SESSION['status'] == 'Administrator')
+                          {
+                            ?>
+                              <a href="CreateEvent.php?id=<?php echo $_GET['id']; ?>" class = "btn-primary passbtn" type="submit" name="event-submit">Edit</a>
+                            <?php
+                          }
+                        ?>
 
-                       <a href="CreateEvent.php?id=<?php echo $_GET['id']; ?>" class = "btn-primary passbtn" type="submit" name="event-submit">Edit</a>
                    </div>
 
 

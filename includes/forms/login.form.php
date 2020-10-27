@@ -47,6 +47,7 @@ if(isset($_POST['login-user']))
           $_SESSION['user_email'] = $user['email'];
           $_SESSION['designation'] = $user['designation'];
           $_SESSION['status'] = $user['status'];
+          $_SESSION['day'] = date('Y-m-d',strtotime('today'));
           header("Location: ../dashboard.php?success");
           exit();
       }

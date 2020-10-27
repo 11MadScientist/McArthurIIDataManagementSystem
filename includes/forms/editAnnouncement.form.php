@@ -95,5 +95,10 @@
 
 
  }
+ else
+ {
+     header("Location: ../forms/logout.form.php");
+     exit();
+ }
 
 ?>

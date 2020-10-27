@@ -37,7 +37,14 @@
 
                   <div class="buttons">
                     <a class="goto-calendar btn-primary" name="goto-calendar" href = "fullcalendar/index.php">Go To Calendar</a>
-                    <a class="create-event btn-primary" name="create-event" href = "createEvent.php">Create Event</a>
+                    <?php
+                      if($_SESSION['status'] == 'Administrator')
+                      {
+                     ?>
+                     <a class="create-event btn-primary" name="create-event" href = "createEvent.php">Create Event</a>
+                     <?php
+                      }
+                      ?>
                   </div>
 
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

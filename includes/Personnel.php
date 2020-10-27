@@ -20,7 +20,7 @@ include('autoloader.inc.php'); ?>
 
         <meta name="author" content="" />
 
-        <title>McArthurII District Requests</title>
+        <title>McArthurII District Personnel</title>
 
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/events.css" rel="stylesheet" />
@@ -44,11 +44,11 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">Requests</h1>
+                  <h1 class="mt-4">Personnel</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
-                      <li class="breadcrumb-item active">Requests</li>
+                      <li class="breadcrumb-item active">Personnel</li>
 
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
 
@@ -59,7 +59,6 @@ include('autoloader.inc.php'); ?>
                     <!--REQUESTS TABLE-->
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="" action="forms/Requests.form.php" method="post">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -93,7 +92,7 @@ include('autoloader.inc.php'); ?>
 
 
                                       $obj = new User();
-                                      $res = $obj->getRequest();
+                                      $res = $obj->getPersonnel();
 
                                       while($row = mysqli_fetch_array($res))
                                       {
@@ -115,7 +114,7 @@ include('autoloader.inc.php'); ?>
                         </div>
                         <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
 
-                            <button onclick="return warndel();" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DECLINE</button>
+                            <button onclick="warndel()" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DECLINE</button>
                             <script>
                             function warndel()
                             {
@@ -131,7 +130,7 @@ include('autoloader.inc.php'); ?>
                             }
                             </script>
 
-                            <button onclick="return warnAccpt();" type='submit' value='submit' name='accpt-req' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">ACCEPT</button>
+                            <button onclick="warnAccpt()" type='submit' value='submit' name='accpt-req' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">ACCEPT</button>
                             <script>
                             function warnAccpt()
                             {

@@ -59,7 +59,8 @@ class User extends Dbh
   {
     $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
              INNER JOIN add_info ON users.user_id = add_info.user_id
-              WHERE status = ''";
+              WHERE status = ''
+              ORDER BY station, l_name, f_name, m_name, grade";
     $res = $this->mySqli($sql);
     return $res;
 
@@ -77,5 +78,17 @@ class User extends Dbh
             WHERE user_id = ?";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id]);
+  }
+
+  // Personnel sql
+  public function getPersonnel()
+  {
+    $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
+             INNER JOIN add_info ON users.user_id = add_info.user_id
+              WHERE status != ''
+              ORDER BY station, l_name, f_name, m_name, grade";
+    $res = $this->mySqli($sql);
+    return $res;
+
   }
 }
