@@ -12,14 +12,14 @@
         <style>  
            .file_drag_area  
            {  
-                width:82%;  
-                height:325px;  
+                width:100%;  
+                height:67%;  
                 border:5px dashed #ccc;  
                 line-height:400px;  
                 text-align:center;
                 font-size:20px;
                 position:absolute;
-                top:257px;
+                top:100px;
                 z-index:1;
                 background:white;
            }  
@@ -40,17 +40,46 @@
       <div id="layoutSidenav_content">
           <main>
               <div class="container-fluid">
-                <h1 class="mt-4">Reports</h1>
+                <h1 class="mt-4">Reports Submission</h1>
                 <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Reports</li>
                     <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active"><a href="reports-main.php">Reports</a></li>
+                    <li class="breadcrumb-item active">Report Submission</li>
                 </ol>
 
-                <div class = "submitted_reports">
+                <!-- DESCRIPTION AREA -->
+                <div class="reportDescription">
+                  <h4>REPORT TITLE</h4>
+                  <label style="padding-left: 20px">DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descrip tion  DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION </label>
+
+                  <ul style="list-style-type: none;"> 
+                    <?php
+                    //LOOP FOR HOW MANY FILES ATTACHED
+                    for($c=0;$c<2;$c++)
+                    {
+                    ?>
+                    <!-- TO DISPLAY HORIZONTALLY -->
+                    <li style="display: inline;">
+                      <!-- ICON -->
+                      <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
+                      <!-- NAME OF REPORT -->
+                      <span class="report_name" style="font-size: 15px; padding:10px;">REPORT</span>
+                    </li>
+                    <?php
+                    }
+                    ?>
+                  </ul>
+                </div>
+
+                <div class = "submitted_reports" style="position: relative;">
                     <h1 style=" font_size = 24px">Reports Submitted</h1>
+                    <!-- DRAG AND DROP BOX -->
+                    <div class="file_drag_area">
+                        Drag and Drop Files Here to Upload 
+                    </div>
 
                     <!-- Table for reports submitted -->
-                    <div class = "table" style = "width:100%; height:370px; overflow-x: auto">
+                    <div class = "table" style = "width:100%; height:370px; overflow-x: auto; position: relative;">
                         <table  class = "display table table-striped" cellspacing = "0" id = "tableReports" style="position: static;">
                             <thead>
                                 <!-- HEADER -->
@@ -85,16 +114,13 @@
                         </table>
                     </div>
 
-                    <!-- DRAG AND DROP BOX -->
-                    <div class="file_drag_area">
-                        Drag and Drop Files Here to Upload 
-                    </div>
 
                     <!-- BUTTON AREA -->
                     <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
                         <button type='submit' value='submit' name='deleteReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
                         <button type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%;">Submit Report</button>
                     </div>
+
                 </div>
             </div>
           </main>
@@ -138,6 +164,7 @@
                 //SAVING THE FILE ON DROPPING ON THE DRAG AREA
                 $('.file_drag_area').on('drop', function(e)
                 {  
+                    console.log(e);
                     e.preventDefault();  
                     $(this).removeClass('file_drag_over');
                     $(this).addClass('hide');
@@ -171,7 +198,7 @@
                             data:formData,  
                             contentType:false,  
                             cache: false,  
-                            processData: false  
+                            processData: false
                     })  
                 });  
             });  
