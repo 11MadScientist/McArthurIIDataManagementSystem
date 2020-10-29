@@ -68,8 +68,6 @@ date_default_timezone_set('Asia/Manila');
                     <div class="card-body">
                         <div class="table-responsive">
                           <div class="" style="text-align:center;">
-                          <form class="" action="Monitoring.php" method="post">
-
                             <?php
 
                                   if(isset($_POST['date']))
@@ -162,38 +160,8 @@ date_default_timezone_set('Asia/Manila');
                         </div>
                         <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
 
-                            <button onclick="warndel()" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DECLINE</button>
-                            <script>
-                            function warndel()
-                            {
+                            <a href = "LeaveRequests.php" value='submit' name='accpt-req' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">Leave Requests</a>
 
-                              var result = confirm("Are you sure you want to delete checked request/s?");
-                              if(!result)
-                              {
-
-                                  alert('Submission Canceled');
-                                  return false;
-
-                              }
-                            }
-                            </script>
-
-                            <button onclick="warnAccpt()" type='submit' value='submit' name='accpt-req' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">ACCEPT</button>
-                            <script>
-                            function warnAccpt()
-                            {
-
-                              var result = confirm("Are you sure you want to accpet checked request/s?");
-                              if(!result)
-                              {
-
-                                  alert('Submission Canceled');
-                                  return false;
-
-                              }
-                            }
-                            </script>
-                            </form>
                         </div>
                 </div>
 
@@ -221,24 +189,6 @@ date_default_timezone_set('Asia/Manila');
 
         <!-- SCRIPT FOR SELECT ALL CHECKBOX -->
 
-        <script>
-        $(document).ready(function()
-        {
-          $('#checkAll').click(function()
-        {
-          if($(this).is(':checked'))
-          {
-            $('.check').prop('checked', true);
-          }
-          else
-          {
-            $('.check').prop('checked', false);
-          }
-        });
-        });
-
-
-        </script>
 
     </body>
 

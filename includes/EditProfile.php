@@ -200,7 +200,7 @@
                                 }
                                 else
                                 {
-                                    echo '<input class="text-box" name = "grade" id="grade" type="number" placeholder="Enter Grade/Subject" required/>';
+                                    echo '<input class="text-box" name = "grade" id="grade" type="text" placeholder="Enter Grade/Subject" required/>';
                                 }
                               }
 
@@ -396,7 +396,7 @@
                                       if(isset($_GET['desig']))
                                       {
                                         echo '<select name = "desig" id = "position" required>
-
+                                          <option hidden value="Supervisor">Supervisor</option>
                                           <option value="Teacher I">Teacher I</option>
                                           <option value="Teacher II">Teacher II</option>
                                           <option value="Teacher III">Teacher III</option>
@@ -424,6 +424,7 @@
                                             if($userInfo['designation']?? null != null)
                                             {
                                                 echo '<select name = "desig" id = "position" required>
+                                                  <option hidden value="Supervisor">Supervisor</option>
                                                   <option value="Teacher I">Teacher I</option>
                                                   <option value="Teacher II">Teacher II</option>
                                                   <option value="Teacher III">Teacher III</option>

@@ -3,3 +3,12 @@ th
   color: white;
   background-color: #03C04A;
 }
+.but
+{
+  display: relative;
+  position: relative;
+  margin-bottom: 20px;
+  float: right;
+  width: 330px;
+  border-radius: 3px;
+}

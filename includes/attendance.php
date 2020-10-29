@@ -34,6 +34,8 @@ if($_SESSION['user_id'] == null)
                   </ol>
 
                   <!--ATTENDANCE TABLE-->
+                  <a href="RequestLeave.php" name='accpt-req' class='but btn-primary'>Request Leave</a>
+                  <a href="LeaveRequestList.php" name='accpt-req' class='but btn-primary'>Leave Requests List</a>
                     <table style='width:100%' class='display table table-hover center' cellspacing='0'>
                       <thead>
                         <tr style="text-align: center; vertical-align: middle;">
@@ -51,16 +53,23 @@ if($_SESSION['user_id'] == null)
                           $today = date('M-d',strtotime('today'));
 
                           // loop for getting today up to 1 week before
-                          for($i= 8; $i > 0; $i--)
+                          while(date('M',strtotime($day)) == date('M',strtotime('today')))
                           {
+                            if(gmdate("l", strtotime('+1 day', strtotime($day))) == 'Saturday' or gmdate("l", strtotime('+1 day', strtotime($day))) == 'Sunday')
+                            {
+                              $day = date('M-d', strtotime('-1 day', strtotime($day)));
+                              continue;
+                              echo "<script>alert('hello')</script>";
+                            }
                         ?>
+
                             <tr>
                               <!-- Getting today to the previous days -->
                               <td style="text-align: center; vertical-align: middle;">
                                 <br>
                                   <?php
                                     //prints the day of the week in the table
-                                    echo gmdate("l", strtotime('+1 day', strtotime($day)));
+                                    echo gmdate("l-", strtotime('+1 day', strtotime($day)));
                                     //prints the month and day in the table
                                     echo date('M-d',strtotime($day));
                                   ?>
@@ -135,10 +144,10 @@ if($_SESSION['user_id'] == null)
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+
         <script>
           function submit(str) {
             alert(`You have successfully submitted your attendance! Timestamp: ${str}`)

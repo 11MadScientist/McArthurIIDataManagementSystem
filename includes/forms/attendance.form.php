@@ -2,7 +2,7 @@
 session_start();
 include('../autoloader.inc.php');
 
-if(isset($_POST['submitAttn']))
+if(isset($_POST['timein_amsubmit']))
 {
   date_default_timezone_set('Asia/Manila');
   $date = date("Y-m-d");
@@ -15,10 +15,23 @@ if(isset($_POST['submitAttn']))
   }
 
   $obj = new Attendance();
-  $obj->submitAttn($_SESSION['user_id'],$date, $time, $status);
+  $obj->submitTimeInAm($_SESSION['user_id'],$date, $time, $status);
 
   header("Location: ../attendance.php?success&time=".$time."&status=".$status);
-
-
-
 }
+
+elseif(isset($_POST['timeout_amsubmit']))
+{
+  date_default_timezone_set('Asia/Manila');
+  $date = date("Y-m-d");
+  $time = date("h:i:sa");
+  $status = $_POST['status'];
+
+
+  $obj = new Attendance();
+  $obj->submitTimeInAm($_SESSION['user_id'],$date, $time, $status);
+
+  header("Location: ../attendance.php?success&time=".$time."&status=".$status);
+}
+
+elseif()

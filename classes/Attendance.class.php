@@ -1,9 +1,16 @@
 <?php
 class Attendance extends Dbh
 {
-  public function submitAttn($id, $date, $time, $status)
+  public function submitTimeInAm($id, $date, $time, $status)
   {
-    $sql = "INSERT INTO attendance(user_id, attn_date, attn_time, status) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO attendance(user_id, attn_date, timein_am, status) VALUES (?, ?, ?, ?)";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id,$date, $time, $status]);
+  }
+
+  public function submitTimeOutAm()
+  {
+    $sql = "INSERT INTO attendance(user_id, attn_date, timein_am, status) VALUES (?, ?, ?, ?)";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id,$date, $time, $status]);
   }

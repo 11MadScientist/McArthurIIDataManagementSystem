@@ -41,7 +41,7 @@
                     </div>
 
                     <?php
-                      if($_SESSION['status'] == 'Administrator')
+                      if($_SESSION['status']  == 'Administrator')
                       {
                         echo '  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                               <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -59,8 +59,12 @@
                                     Personnel
                                 </a>
                                 <a class="nav-link" href="Monitoring.php">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                     Monitoring
+                                </a>
+                                <a class="nav-link" href="LeaveRequests.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+                                    LeaveRequests
                                 </a>
                               </nav>
                           </div>

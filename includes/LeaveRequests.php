@@ -1,4 +1,4 @@
-<?php
+LeaveLeaveRequests<?php
 
 session_start();
 if($_SESSION['status'] !=  'Administrator')
@@ -25,7 +25,7 @@ include('autoloader.inc.php'); ?>
 
         <meta name="author" content="" />
 
-        <title>McArthurII District Requests</title>
+        <title>McArthurII District LeaveRequests</title>
 
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/events.css" rel="stylesheet" />
@@ -49,11 +49,11 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">Requests</h1>
+                  <h1 class="mt-4">LeaveRequests</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
-                      <li class="breadcrumb-item active">Requests</li>
+                      <li class="breadcrumb-item active">LeaveRequests</li>
 
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
 
@@ -64,50 +64,38 @@ include('autoloader.inc.php'); ?>
                     <!--REQUESTS TABLE-->
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="" action="forms/Requests.form.php" method="post">
+                            <form class="" action="forms/leaveRequests.form.php" method="post">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"><center>Select All</center></th>
+                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"></th>
                                         <th>Name</th>
                                         <th>Position</th>
                                         <th>Grade/Subject</th>
                                         <th>School</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
 
                                     <?php
-                                      if($_GET['error']?? null == 'empty')
-                                      {
-                                        echo "<script>alert('No Checked Data');</script>";
-                                      }
-                                      elseif(isset($_GET['success']))
-                                      {
-                                        if($_GET['success'] === 'deletedSuccessfully')
-                                        {
-                                          echo "<script>alert('Deleted Successfully');</script>";
-                                        }
-                                        elseif($_GET['success'] === 'accptSuccessfully')
-                                        {
-                                          echo "<script>alert('Accepted Successfully');</script>";
-                                        }
-                                      }
 
+                                      $obj = new Leave();
+                                      $res = $obj->leaveList();
 
-
-                                      $obj = new User();
-                                      $res = $obj->getRequest();
 
                                       while($row = mysqli_fetch_array($res))
                                       {
                                           echo "<tr>
-                                                <td style=text-align:left;><input type=checkbox class='check' name='request[]' value=".$row['user_id']."><center></center></td>
+                                                <td style=text-align:left;><input type=checkbox class='check' name='request[]' value=".$row['id']."></td>
                                                 <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
                                                "<td>".$row['designation']."</td>".
                                                "<td>".$row['grade']."</td>".
-                                               "<td>".$row['station']."</td>
+                                               "<td>".$row['station']."</td>".
+                                               "<td>".date('Y-M-d',strtotime($row['start_date']))."</td>".
+                                               "<td>".date('Y-M-d',strtotime($row['end_date']))."</td>
                                                 </tr>";
 
                                       }

@@ -1,5 +1,10 @@
 <?php
   session_start();
+  if($_SESSION['user_id'] == null)
+  {
+    header("Location: forms/logout.form.php");
+    exit();
+  }
   include('autoloader.inc.php');
 ?>
 
