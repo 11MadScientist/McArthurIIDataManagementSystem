@@ -40,7 +40,9 @@ if($_SESSION['user_id'] == null)
                       <thead>
                         <tr style="text-align: center; vertical-align: middle;">
                           <th><i class='fas fa-calendar-alt' style='font-size:15px'></i>  Date</th>
-                          <th><i class='fas fa-clock' style='font-size:15px'></i>  Time</th>
+                          <th><i class='fas fa-clock' style='font-size:15px'></i>  AM/PM</th>
+                          <th><i class='fas fa-clock' style='font-size:15px'></i>  Time-In</th>
+                          <th><i class='fas fa-clock' style='font-size:15px'></i>  Time-Out</th>
                           <th><i class='fas fa-exclamation-circle' style='font-size:15px'></i>  Status</th>
                         </tr>
                       </thead>
@@ -62,7 +64,154 @@ if($_SESSION['user_id'] == null)
                               echo "<script>alert('hello')</script>";
                             }
                         ?>
+                        <!-- table row for pm -->
+                        <tr style="background:#B4F0B4;">
+                          <!-- Getting today to the previous days -->
+                          <td style="text-align: center; vertical-align: middle;">
+                            <br>
+                              <?php
+                                //prints the day of the week in the table
+                                echo gmdate("l-", strtotime('+1 day', strtotime($day)));
+                                //prints the month and day in the table
+                                echo date('M-d',strtotime($day));
+                              ?>
+                            </br>
+                          </td>
+                          <td style="text-align: center; vertical-align: middle;">
+                            <?php echo "PM" ?>
+                          </td>
+                          <!-- td form time in -->
+                          <td style="text-align:center; vertical-align: middle;">
+                            <?php
+                            $ymd = date('Y-m-d', strtotime($day));
+                            $obj = new Attendance();
+                            $info = $obj->getTimeAm($_SESSION['user_id'],$ymd);
+                              // determines if today is today
+                              if($day == $today)
+                              {
+                                //attendance for today
+                                //i dunnno how to insert database here :)
+                                  if($info['timein_pm']?? null != null)
+                                  {
+                                    echo $info['timein_pm'];
+                                  }
+                                  else
+                                  {
+                                    if(date("H:i:sa") >= date("H:i:sa", strtotime('1:00pm')))
+                                    {
+                                      ?>
+                                        <form class="" action="forms/attendance.form.php" method="post">
+                                            <input type="hidden" name="status" value="Present">
+                                            <button type='submit' value='submit' name='timein_pmsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                        </form>
 
+                                      <?php
+                                    }
+                                    else
+                                    {
+                                      echo "--Not-Yet-Time--";
+                                    }
+                                  }
+
+                              }
+                              else
+                                //timestamp for the previous days
+                              {
+                                if($info['timein_pm']?? null == null)
+                                {
+                                  echo "No Time-in";
+                                }
+                                elseif($info['timein_pm'] == false)
+                                {
+                                  echo "No Time-in";
+                                }
+                              }
+                            ?>
+                          </td>
+                          <!-- td for timeout -->
+                          <td style="text-align:center; vertical-align: middle;">
+                            <?php
+                            $ymd = date('Y-m-d', strtotime($day));
+                            $obj = new Attendance();
+                            $info = $obj->getTimeAm($_SESSION['user_id'],$ymd);
+                              // determines if today is today
+                              if($day == $today)
+                              {
+                                //attendance for today
+                                //i dunnno how to insert database here :)
+                                  if($info['timeout_pm']?? null != null)
+                                  {
+                                    echo $info['timeout_pm'];
+                                  }
+                                  else
+                                  {
+                                    if($info['timein_pm']?? null != null)
+                                    {
+                                      ?>
+                                        <form class="" action="forms/attendance.form.php" method="post">
+                                            <input type="hidden" name="status" value="Present">
+                                            <button type='submit' value='submit' name='timeout_pmsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                        </form>
+
+                                      <?php
+                                    }
+                                    else
+                                    {
+                                      echo "No Time-in";
+                                    }
+
+                                  }
+
+                              }
+                              else
+                                //timestamp for the previous days
+                              {
+                                if($info['timeout_pm']?? null == null)
+                                {
+                                  echo "No Time-out";
+                                }
+                                elseif($info['timeout_pm'] == false)
+                                {
+                                  echo "No Time-out";
+                                }
+
+                              }
+                            ?>
+                          </td>
+                          <!-- determine of the status (present or absent) -->
+                          <td style="text-align:center; vertical-align: middle;">
+                            <?php
+                                // today determiner
+                                if($day == $today)
+                                {
+                                  //status for today
+                                  if($info['pm_status']?? null != null)
+                                  {
+                                    echo $info['pm_status'];
+                                  }
+                                  elseif($info['am_status']?? false == false and date("H:i:sa") >= date("H:i:sa", strtotime('6:30pm')))
+                                  {
+                                    echo "Absent";
+                                  }
+                                }
+                                else
+                                  //status for the previous days
+                                {
+                                  if($info['pm_status']?? null == null)
+                                  {
+                                    {echo "Absent";}
+                                  }
+                                  elseif($info['pm_status'] == false)
+                                  {
+                                    {echo "Absent";}
+                                  }
+
+                                }
+                              ?>
+                          </td>
+                        </tr>
+
+                          <!-- table row for am -->
                             <tr>
                               <!-- Getting today to the previous days -->
                               <td style="text-align: center; vertical-align: middle;">
@@ -75,36 +224,91 @@ if($_SESSION['user_id'] == null)
                                   ?>
                                 </br>
                               </td>
+                              <td style="text-align: center; vertical-align: middle;">
+                                <?php echo "AM" ?>
+                              </td>
                               <td style="text-align:center; vertical-align: middle;">
                                 <?php
                                 $ymd = date('Y-m-d', strtotime($day));
                                 $obj = new Attendance();
-                                $info = $obj->getTime($_SESSION['user_id'],$ymd);
+                                $info = $obj->getTimeAm($_SESSION['user_id'],$ymd);
                                   // determines if today is today
                                   if($day == $today)
                                   {
                                     //attendance for today
                                     //i dunnno how to insert database here :)
-                                      if($info['attn_time']?? null != null)
+                                      if($info['timein_am']?? null != null)
                                       {
-                                        echo $info['attn_time'];
+                                        echo $info['timein_am'];
+                                      }
+                                      if(date("H:i:sa") <= date("H:i:sa", strtotime('12:00pm')))
+                                      {
+                                          ?>
+                                            <form class="" action="forms/attendance.form.php" method="post">
+                                                <input type="hidden" name="status" value="Present">
+                                                <button type='submit' value='submit' name='timein_amsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                            </form>
+
+                                          <?php
                                       }
                                       else
                                       {
-                                        ?>
-                                          <form class="" action="forms/attendance.form.php" method="post">
-                                              <input type="hidden" name="status" value="Present">
-                                              <button type='submit' value='submit' name='submitAttn' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
-                                          </form>
-
-                                        <?php
+                                        echo "No Time-in";
                                       }
 
                                   }
                                   else
                                     //timestamp for the previous days
                                   {
-                                    echo $info['attn_time']?? "No Time-in";
+                                    echo $info['timein_am']?? "No Time-in";
+                                  }
+                                ?>
+                              </td>
+                              <td style="text-align:center; vertical-align: middle;">
+                                <?php
+                                $ymd = date('Y-m-d', strtotime($day));
+                                $obj = new Attendance();
+                                $info = $obj->getTimeAm($_SESSION['user_id'],$ymd);
+                                  // determines if today is today
+                                  if($day == $today)
+                                  {
+                                    //attendance for today
+                                    //i dunnno how to insert database here :)
+                                      if($info['timeout_am']?? null != null)
+                                      {
+                                        echo $info['timeout_am'];
+                                      }
+                                      else
+                                      {
+                                        if($info['timeout_am']?? null != null)
+                                        {
+                                          ?>
+                                            <form class="" action="forms/attendance.form.php" method="post">
+                                                <input type="hidden" name="status" value="Present">
+                                                <button type='submit' value='submit' name='timeout_amsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                            </form>
+
+                                          <?php
+                                        }
+                                        else
+                                        {
+                                          echo "No Time-out";
+                                        }
+                                      }
+
+                                  }
+                                  else
+                                    //timestamp for the previous days
+                                  {
+                                    if($info['timeout_am']?? null == null)
+                                    {
+                                      echo "No Time-out";
+                                    }
+                                    elseif($info['timeout_am'] == false)
+                                    {
+                                      echo "No Time-out";
+                                    }
+
                                   }
                                 ?>
                               </td>
@@ -115,15 +319,28 @@ if($_SESSION['user_id'] == null)
                                     if($day == $today)
                                     {
                                       //status for today
-                                      if($info['status']?? null != null)
+                                      if($info['am_status']?? null != null)
                                       {
-                                        echo $info['status'];
+                                        echo $info['am_status'];
+                                      }
+                                      elseif($info['am_status']?? false == false and date("H:i:sa") >= date("H:i:sa", strtotime('12:00pm')))
+                                      {
+                                        echo "Absent";
                                       }
                                     }
                                     else
                                       //status for the previous days
                                     {
-                                      echo $info['status']?? "Absent";
+                                      if($info['am_status']?? null == null)
+                                      {
+                                        {echo "Absent";}
+                                      }
+                                      elseif($info['am_status'] == false)
+                                      {
+                                        echo "Absent";
+                                      }
+
+
                                     }
                                   ?>
                               </td>

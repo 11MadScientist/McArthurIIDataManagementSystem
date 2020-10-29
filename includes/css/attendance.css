@@ -12,3 +12,8 @@ th
   width: 330px;
   border-radius: 3px;
 }
+.btn
+{
+  min-width: 220px;
+  height: 50px;
+}

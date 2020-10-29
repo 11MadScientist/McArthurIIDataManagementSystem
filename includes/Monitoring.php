@@ -68,6 +68,8 @@ date_default_timezone_set('Asia/Manila');
                     <div class="card-body">
                         <div class="table-responsive">
                           <div class="" style="text-align:center;">
+                            <form class="" action="Monitoring.php" method="post">
+
                             <?php
 
                                   if(isset($_POST['date']))
@@ -119,9 +121,11 @@ date_default_timezone_set('Asia/Manila');
                                 <thead>
 
                                     <tr>
-                                        <th>Name</th>
-                                        <th>School</th>
-                                        <th>Position</th>
+                                        <th><i class="fas fa-user"></i> Name</th>
+                                        <th><i class="fas fa-school"></i> School</th>
+                                        <th><i class="fas fa-sun"></i> AM/PM</th>
+                                        <th><i class="fas fa-clock"></i> Time In</th>
+                                        <th><i class="fas fa-clock"></i> Time Out</th>
                                         <th>Status</th>
 
                                     </tr>
@@ -135,19 +139,54 @@ date_default_timezone_set('Asia/Manila');
 
                                       while($row = mysqli_fetch_array($res))
                                       {
-                                        if($row['status'] == '')
+
+                                        if($row['pm_status'] == null)
                                         {
-                                          if($_SESSION['day'] <= date('Y-m-d',strtotime('today')))
-                                          {
-                                            $row['status'] = 'Absent';
-                                          }
+                                            $row['pm_status'] = 'Absent';
                                         }
+                                        if($row['timein_pm'] == false)
+                                        {
+                                          $row['timein_pm'] = 'No-Time-In';
+                                        }
+                                        if($row['timeout_pm'] == false)
+                                        {
+                                          $row['timeout_pm'] = 'No-Time-Out';
+                                        }
+
+
+
+                                          echo "<tr style=background:#B4F0B4>
+                                                <td>".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</td>".
+                                               "<td>".$row['station']."</td>".
+                                               "<td>".'PM'."</td>".
+                                                "<td>".$row['timein_pm'] ."</td>".
+                                                "<td>".$row['timeout_pm'] ."</td>".
+                                               "<td>".$row['pm_status']."</td>
+                                                </tr>";
+
+                                        // am part
+                                        if($row['am_status'] == null)
+                                        {
+                                            $row['am_status'] = 'Absent';
+                                        }
+                                        if($row['timein_am'] == false)
+                                        {
+                                          $row['timein_am'] = 'No-Time-In';
+                                        }
+                                        if($row['timeout_am'] == false)
+                                        {
+                                          $row['timeout_am'] = 'No-Time-Out';
+                                        }
+
+
 
                                           echo "<tr>
                                                 <td>".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</td>".
                                                "<td>".$row['station']."</td>".
-                                               "<td>".$row['designation']."</td>".
-                                               "<td>".$row['status']."</td>
+                                               "<td>".'AM'."</td>".
+                                                "<td>".$row['timein_am'] ."</td>".
+                                                "<td>".$row['timeout_am'] ."</td>".
+                                               "<td>".$row['am_status']."</td>
                                                 </tr>";
 
                                       }

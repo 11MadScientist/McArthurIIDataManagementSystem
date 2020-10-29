@@ -55,3 +55,12 @@
   font-weight: bolder;
   color: white;
 }
+td, th
+{
+  height: 60px;
+}
+td
+{
+  font-size: 17px;
+  font-family: "Century Gothic";
+}
