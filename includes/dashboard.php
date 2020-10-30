@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -20,7 +21,7 @@
         <!-- events script -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
-    <body class="sb-nav-fixed" onresize = "setHeight()">
+    <body class="sb-nav-fixed" onresize = "setHeight();">
       <?php include('topbar.php'); ?>
       <?php include('sidebar.php'); ?>
       <div></div>
@@ -38,62 +39,67 @@
                               if($row != null)
                                {
                          ?>
-                                  <img class = "card-container" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                                  <img id="img-cont" class = "card-container" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
                          <?php
                                }
 
                                else
                                {
                          ?>
-                                  <img class = "card-container">
+                                  <img id="img-cont" class = "card-container">
                          <?php
                                }
                                  mysqli_close($conn);
                           ?>
 
-                        <div class = "user-name">
-                            <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_mname']." ".$_SESSION['user_lname']; ?></h2>
-                            <h4><?php echo $_SESSION['designation'] ?></h4>
-                        </div>
+
+
 		                    </div>
+                        <div class="inform">
+                          <div class="blocker">
+                              <p></p>
+                          </div>
+                          <div class = "user-name">
+                              <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_mname']." ".$_SESSION['user_lname']; ?></h2>
+                              <h4><?php echo $_SESSION['designation'] ?></h4>
+                          </div>
+
+                          <div class="contact">
+                            <?php
+                                $obj = new AddInfo();
+                                $info = $obj->getAddInfo($_SESSION['user_id']);
+
+                             ?>
+                            
+                              <div class="icon">
+                                <i class="fas fa-phone"> </i>
+                                <span>: <?php echo $info['contact_num']?? '' ?></span>
+                              </div>
+
+                              <div class="icon">
+                                <i class="fas fa-envelope"> </i>
+                                <span><?php echo $_SESSION['user_email']?? '' ?></span>
+                              </div>
 
 
 
+                          </div>
+
+                          <div class="contact">
+
+                              <div class="icon">
+                                <i class = "fas fa-atom"> </i>
+                                <span><?php echo $info['grade']?? '' ?></span>
+                              </div>
+                              <div class="icon">
+                                <i class = "fab fa-facebook-f"> </i>
+                                <span> : <?php echo $info['fb_acct']?? '' ?></span>
+                              </div>
 
 
-                        <div class="contact">
-                          <?php
-                              $obj = new AddInfo();
-                              $info = $obj->getAddInfo($_SESSION['user_id']);
-
-                           ?>
-                          <ul>
-                            <div class="icon">
-                              <i class="fas fa-phone"> </i> Phone Number &nbsp;&nbsp;&nbsp;&nbsp;
-                              <span>: <?php echo $info['contact_num']?? '' ?></span>
-                            </div>
-
-                            <div class="icon">
-                              <i class="fas fa-envelope"> </i> Email Address :
-                              <span><?php echo $_SESSION['user_email']?? '' ?></span>
-                            </div>
-                          </ul>
-
+                          </div>
                         </div>
 
-                        <div class="contact">
-                          <ul>
-                            <div class="icon">
-                              <i class = "fab fa-facebook-f"> </i> &nbsp;Facebook Account
-                              <span> : <?php echo $info['fb_acct']?? '' ?></span>
-                            </div>
-
-                            <div class="icon">
-                              <i class = "fas fa-atom"> </i> &nbsp;Grade/Subject :
-                              <span><?php echo $info['grade']?? '' ?></span>
-                            </div>
-                          </ul>
-                        </div>
                         <div class="underline" >
                           <hr></hr>
                         </div>
@@ -107,7 +113,7 @@
                         </div>
 
                         <div class="sideline" id = "sideone">
-                            <div class="tag" style="width:100%;margin-bottom:20px;">
+                            <div class="subtag" style="width:100%;margin-bottom:20px;">
                               <u>Events</u>
                             </div>
                             <div class="event-cont">

@@ -63,7 +63,12 @@ if($_SESSION['user_id'] == null)
                               continue;
                               echo "<script>alert('hello')</script>";
                             }
+                        if($day ==  date('M-d',strtotime('today')) and date("H:i:sa") < date("H:i:sa", strtotime('1:00pm')))
+                        { }
+                        else
+                        {
                         ?>
+
                         <!-- table row for pm -->
                         <tr style="background:#B4F0B4;">
                           <!-- Getting today to the previous days -->
@@ -86,6 +91,7 @@ if($_SESSION['user_id'] == null)
                             $ymd = date('Y-m-d', strtotime($day));
                             $obj = new Attendance();
                             $info = $obj->getTimeAm($_SESSION['user_id'],$ymd);
+
                               // determines if today is today
                               if($day == $today)
                               {
@@ -97,7 +103,14 @@ if($_SESSION['user_id'] == null)
                                   }
                                   else
                                   {
-                                    if(date("H:i:sa") >= date("H:i:sa", strtotime('1:00pm')))
+                                    $lv = new Monitoring();
+                                    $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+                                    if($in and $in !== false)
+                                    {
+                                      echo 'On-Leave';
+                                      $info['pm_status'] = 'On-Leave';
+                                    }
+                                    elseif(date("H:i:sa") >= date("H:i:sa", strtotime('1:00pm')))
                                     {
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">
@@ -107,9 +120,9 @@ if($_SESSION['user_id'] == null)
 
                                       <?php
                                     }
-                                    else
+                                    elseif(date("H:i:sa") > date("H:i:sa", strtotime('6:30pm')))
                                     {
-                                      echo "--Not-Yet-Time--";
+                                      echo "No-Time-In";
                                     }
                                   }
 
@@ -117,13 +130,20 @@ if($_SESSION['user_id'] == null)
                               else
                                 //timestamp for the previous days
                               {
-                                if($info['timein_pm']?? null == null)
+                                $lv = new Monitoring();
+                                $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+                                if($in and $in !== false)
                                 {
-                                  echo "No Time-in";
+                                  echo 'On-Leave';
+                                  $info['pm_status'] = 'On-Leave';
                                 }
-                                elseif($info['timein_pm'] == false)
+                                elseif($info['timein_pm']?? null !== null)
                                 {
-                                  echo "No Time-in";
+                                  echo $info['timein_pm'];
+                                }
+                                elseif($info['timein_pm']?? null === null or $info['timein_pm'] == false)
+                                {
+                                  echo "No-Time-In";
                                 }
                               }
                             ?>
@@ -145,7 +165,14 @@ if($_SESSION['user_id'] == null)
                                   }
                                   else
                                   {
-                                    if($info['timein_pm']?? null != null)
+                                    $lv = new Monitoring();
+                                    $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+                                    if($in and $in !== false)
+                                    {
+                                      echo 'On-Leave';
+                                      $info['pm_status'] = 'On-Leave';
+                                    }
+                                    elseif($info['timein_pm']?? null != null)
                                     {
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">
@@ -155,9 +182,9 @@ if($_SESSION['user_id'] == null)
 
                                       <?php
                                     }
-                                    else
+                                    elseif(date("H:i:sa") > date("H:i:sa", strtotime('6:30pm')))
                                     {
-                                      echo "No Time-in";
+                                      echo "No-Time-out";
                                     }
 
                                   }
@@ -166,13 +193,13 @@ if($_SESSION['user_id'] == null)
                               else
                                 //timestamp for the previous days
                               {
-                                if($info['timeout_pm']?? null == null)
+                                if($info['timeout_pm']?? null !== null)
                                 {
-                                  echo "No Time-out";
+                                  echo $info['timeout_pm'];
                                 }
-                                elseif($info['timeout_pm'] == false)
+                                elseif($info['timeout_pm']?? null === null or $info['timeout_pm'] == false)
                                 {
-                                  echo "No Time-out";
+                                  echo "No-Time-out";
                                 }
 
                               }
@@ -189,7 +216,7 @@ if($_SESSION['user_id'] == null)
                                   {
                                     echo $info['pm_status'];
                                   }
-                                  elseif($info['am_status']?? false == false and date("H:i:sa") >= date("H:i:sa", strtotime('6:30pm')))
+                                  elseif(($info['pm_status']?? false == false or $info['am_status'] == '') and date("H:i:sa") >= date("H:i:sa", strtotime('6:30pm')))
                                   {
                                     echo "Absent";
                                   }
@@ -197,19 +224,21 @@ if($_SESSION['user_id'] == null)
                                 else
                                   //status for the previous days
                                 {
-                                  if($info['pm_status']?? null == null)
+                                  if($info['pm_status']?? null !== null)
                                   {
-                                    {echo "Absent";}
+                                    echo $info['pm_status'];
                                   }
-                                  elseif($info['pm_status'] == false)
+                                  elseif($info['pm_status']?? null === null or $info['pm_status'] == false)
                                   {
-                                    {echo "Absent";}
+                                    echo "Absent";
                                   }
+
 
                                 }
                               ?>
                           </td>
                         </tr>
+                      <?php } ?>
 
                           <!-- table row for am -->
                             <tr>
@@ -241,7 +270,7 @@ if($_SESSION['user_id'] == null)
                                       {
                                         echo $info['timein_am'];
                                       }
-                                      if(date("H:i:sa") <= date("H:i:sa", strtotime('12:00pm')))
+                                      elseif($info['timein_am']?? null == null and date("H:i:sa") <= date("H:i:sa", strtotime('12:00pm')))
                                       {
                                           ?>
                                             <form class="" action="forms/attendance.form.php" method="post">
@@ -251,16 +280,23 @@ if($_SESSION['user_id'] == null)
 
                                           <?php
                                       }
-                                      else
+                                      elseif(date("H:i:sa") > date("H:i:sa", strtotime('12:00pm')))
                                       {
-                                        echo "No Time-in";
+                                        echo "No-Time-In";
                                       }
 
                                   }
                                   else
                                     //timestamp for the previous days
                                   {
-                                    echo $info['timein_am']?? "No Time-in";
+                                    if($info['timein_am']?? null !== null)
+                                    {
+                                      echo $info['timein_am'];
+                                    }
+                                    elseif($info['timein_am']?? null === null or $info['timein_am'] == false)
+                                    {
+                                      echo "No Time-In";
+                                    }
                                   }
                                 ?>
                               </td>
@@ -280,7 +316,7 @@ if($_SESSION['user_id'] == null)
                                       }
                                       else
                                       {
-                                        if($info['timeout_am']?? null != null)
+                                        if($info['timein_am']?? null !== null)
                                         {
                                           ?>
                                             <form class="" action="forms/attendance.form.php" method="post">
@@ -290,9 +326,9 @@ if($_SESSION['user_id'] == null)
 
                                           <?php
                                         }
-                                        else
+                                        elseif(date("H:i:sa") > date("H:i:sa", strtotime('12:00pm')))
                                         {
-                                          echo "No Time-out";
+                                          echo "No-Time-out";
                                         }
                                       }
 
@@ -300,11 +336,11 @@ if($_SESSION['user_id'] == null)
                                   else
                                     //timestamp for the previous days
                                   {
-                                    if($info['timeout_am']?? null == null)
+                                    if($info['timeout_am']?? null !== null)
                                     {
-                                      echo "No Time-out";
+                                      echo $info['timeout_am'];
                                     }
-                                    elseif($info['timeout_am'] == false)
+                                    elseif($info['timeout_am']?? null === null or $info['timeout_am'] == false)
                                     {
                                       echo "No Time-out";
                                     }
@@ -318,15 +354,17 @@ if($_SESSION['user_id'] == null)
                                     // today determiner
                                     if($day == $today)
                                     {
+
                                       //status for today
                                       if($info['am_status']?? null != null)
                                       {
                                         echo $info['am_status'];
                                       }
-                                      elseif($info['am_status']?? false == false and date("H:i:sa") >= date("H:i:sa", strtotime('12:00pm')))
+                                      elseif(($info['am_status']?? false  == false or $info['am_status'] == '') and date("H:i:sa") > date("H:i:sa", strtotime('12:00pm')))
                                       {
                                         echo "Absent";
                                       }
+
                                     }
                                     else
                                       //status for the previous days

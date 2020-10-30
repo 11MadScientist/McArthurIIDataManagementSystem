@@ -1,8 +1,8 @@
 
 function setHeight()
 {
-  // var elmnt = document.getElementById("content-box");
-  // elmnt.style.height = (elmnt.offsetWidth - 300)+"px";
+  var elmnt = document.getElementById("head");
+  elmnt.style.height = (elmnt.offsetWidth / 2)+"px";
   hideSide();
 }
 setHeight();

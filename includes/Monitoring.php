@@ -142,7 +142,18 @@ date_default_timezone_set('Asia/Manila');
 
                                         if($row['pm_status'] == null)
                                         {
+                                          $lv = new Monitoring();
+                                          $info = $lv->getLeave($row['user_id'], $_SESSION['day']);
+                                          if($info and $info !== false)
+                                          {
+                                            echo $info['start_date'];
+                                            $row['pm_status'] = 'On-Leave';
+                                          }
+                                          else
+                                          {
                                             $row['pm_status'] = 'Absent';
+                                          }
+
                                         }
                                         if($row['timein_pm'] == false)
                                         {
@@ -167,7 +178,17 @@ date_default_timezone_set('Asia/Manila');
                                         // am part
                                         if($row['am_status'] == null)
                                         {
+                                          $lv = new Monitoring();
+                                          $info = $lv->getLeave($row['user_id'], $_SESSION['day']);
+                                          if($info and $info !== false)
+                                          {
+                                            echo $info['start_date'];
+                                            $row['am_status'] = 'On-Leave';
+                                          }
+                                          else
+                                          {
                                             $row['am_status'] = 'Absent';
+                                          }
                                         }
                                         if($row['timein_am'] == false)
                                         {
