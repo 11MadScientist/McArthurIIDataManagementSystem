@@ -27,7 +27,7 @@
                                          <img class = "image" src="forms/profpic-uploads/logo.png" style = "width:100px;height:100px; margin-left:10px;">
                                         </div>
                                         <div class="text">
-                                          <h2 class="text-center font-weight-light my-4">Login</h2>
+                                          <p>McArthurII</p>
                                         </div>
                                     </div>
                                     <?php

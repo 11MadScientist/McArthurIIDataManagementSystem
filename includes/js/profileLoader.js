@@ -1,4 +1,5 @@
 function readURL(input) {
+  setHeight();
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -11,4 +12,13 @@ function readURL(input) {
 
             reader.readAsDataURL(input.files[0]);
         }
+
     }
+
+
+    function setHeight()
+    {
+      var elmnt = document.getElementById("blah");
+      elmnt.style.height = (elmnt.offsetWidth)+"px";
+    }
+    setHeight();

@@ -1,19 +1,40 @@
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
+.group
+{
+  text-align: center;
 }
-
 .text {
-  float: left;
-  width: 55%;
+  color: green;
+  text-align:left;
+  margin-top: 6%;
+  /* float: left; */
+  width: 50%;
+  min-width: 240px;
+  /* background: red; */
+  display: inline-block;
+}
+@media screen and (max-width:480px) {
+  .images
+  {
+    margin-right: 30%;
+
+  }
+  .text
+  {
+    background: red;
+    margin: 0px;
+    margin-bottom: 10px;
+
+  }
+
 }
 
 .images {
-  float: left;
-  width: 30%;
+  display: inline-block;
+  /* background: blue; */
+  /* float: left; */
+  width: 20%;
+  min-width: 110px;
 }
-
 .image
 {
   height:180px;
@@ -45,4 +66,19 @@
   position: relative;
   width: 250px;
   display: inline;
+}
+
+.dropdown-container {
+ max-width: 370px;
+ min-width: 120px;
+  /* margin-left: 16px; */
+  position: relative;
+  display: inline-block;
+}
+@media screen and (max-width:480px) {
+  .dropdown-container
+  {
+    width: 190px;
+  }
+
 }

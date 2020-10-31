@@ -14,6 +14,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
@@ -87,7 +88,7 @@
 
 
                     <!-- name information -->
-                   <div class="name">
+                   <div class="contact">
                      <p class="category"><u> User Information</u></p>
                      <?php if(isset($_GET['error']))
                            {
@@ -113,7 +114,7 @@
                      ?>
                      <ul>
 
-                       <div class="name-content">
+                       <div class="contact-content">
                          <i class = "fas fa-user"></i>
                          <label for="inputLastName">Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                          <?php
@@ -135,7 +136,7 @@
                           ?>
                        </div>
 
-                       <div class="name-content">
+                       <div class="contact-content">
                          <i class="fas fa-chalkboard-teacher"></i>
                          <label for="inputFirstName">First Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                          <!--firstname-->
@@ -158,7 +159,7 @@
                           ?>
                        </div>
 
-                       <div class="name-content">
+                       <div class="contact-content">
                          <i class = "fas fa-heart"></i>
                          <label class="small mb-1" for="inputMiddleName">Middle Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                          <!--middle name-->
@@ -183,7 +184,7 @@
                        </div>
 
 
-                      <div class="name-content">
+                      <div class="contact-content">
                         <i class = "fas fa-clock"></i>
                            <label for="grade">Grade/Subject:</label>
                            <!--his specification subject-->
@@ -361,315 +362,325 @@
                            }
 
                      ?>
-                     <ul>
-                       <div class="divider-inline2">
-                         <div class="contact-content">
-                           <i class = "fas fa-address-book"></i>
-                           <label for="inputLastName">Specification:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                           <!--his Specification subject-->
-                           <?php
-                            if(isset($_GET['specification']))
-                            {
-                              echo '<input value = "'.$_GET['specification'].'" class="text-box"name = "specification" id="inputLastName" type="text" placeholder="Enter Specification" required/>';
-                            }
-                            else
-                            {
-                              if($info['specification']?? null != null)
+
+                       <div class="leftside">
+                         <ul>
+                         <div class="divider-inline2">
+                           <div class="contact-content">
+                             <i class = "fas fa-address-book"></i>
+                             <label for="inputLastName">Specification:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                             <!--his Specification subject-->
+                             <?php
+                              if(isset($_GET['specification']))
                               {
-                                  echo '<input value = "'.$info['specification'].'" class="text-box"name = "specification" id="inputLastName" type="text" placeholder="Enter Specification" required/>';
+                                echo '<input value = "'.$_GET['specification'].'" class="text-box"name = "specification" id="inputLastName" type="text" placeholder="Enter Specification" required/>';
                               }
                               else
                               {
-                                  echo '<input class="text-box" name = "specification" id="inputLastName" type="text" placeholder="Enter Specification" required/>';
+                                if($info['specification']?? null != null)
+                                {
+                                    echo '<input value = "'.$info['specification'].'" class="text-box"name = "specification" id="inputLastName" type="text" placeholder="Enter Specification" required/>';
+                                }
+                                else
+                                {
+                                    echo '<input class="text-box" name = "specification" id="inputLastName" type="text" placeholder="Enter Specification" required/>';
+                                }
                               }
-                            }
 
-                            ?>
-                         </div>
+                              ?>
+                           </div>
 
-                           <div class="contact-content">
-                             <i class = "fas fa-cog"></i>
-                             <div class="demo">
-                                 <label for="position" >Designation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                 <div class="dropdown-container">
-                                   <?php
-                                      if(isset($_GET['desig']))
-                                      {
-                                        echo '<select name = "desig" id = "position" required>
-                                          <option hidden value="Supervisor">Supervisor</option>
-                                          <option value="Teacher I">Teacher I</option>
-                                          <option value="Teacher II">Teacher II</option>
-                                          <option value="Teacher III">Teacher III</option>
-                                          <option value="Master Teacher I">Master Teacher I</option>
-                                          <option value="Master Teacher II">Master Teacher II</option>
-                                          <option value="Master Teacher III">Master Teacher III</option>
-                                          <option value="Head Teacher I">Head Teacher I</option>
-                                          <option value="Head Teacher II">Head Teacher II</option>
-                                          <option value="Head Teacher III">Head Teacher III</option>
-                                          <option value="Principal I">Principal I</option>
-                                          <option value="Principal II">Principal II</option>
-                                          </select>
-                                          <script>
-                                          function myFunction()
-                                          {
-                                            document.getElementById("position").value = "'.$_GET['desig'].'";
-                                          }
-                                          myFunction();
-                                          </script>';
-                                      }
-                                      else
-                                      {
-                                        $userobj = new User();
-                                        $userInfo = $userobj->idChecker($_SESSION['user_id']);
-                                            if($userInfo['designation']?? null != null)
+                             <div class="contact-content">
+
+                               <div class="demo">
+                                 <i class = "fas fa-cog"></i>
+                                   <label for="position" >Designation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                   <div class="dropdown-container">
+                                     <?php
+                                        if(isset($_GET['desig']))
+                                        {
+                                          echo '<select name = "desig" id = "position" required>
+                                            <option hidden value="Supervisor">Supervisor</option>
+                                            <option value="Teacher I">Teacher I</option>
+                                            <option value="Teacher II">Teacher II</option>
+                                            <option value="Teacher III">Teacher III</option>
+                                            <option value="Master Teacher I">Master Teacher I</option>
+                                            <option value="Master Teacher II">Master Teacher II</option>
+                                            <option value="Master Teacher III">Master Teacher III</option>
+                                            <option value="Head Teacher I">Head Teacher I</option>
+                                            <option value="Head Teacher II">Head Teacher II</option>
+                                            <option value="Head Teacher III">Head Teacher III</option>
+                                            <option value="Principal I">Principal I</option>
+                                            <option value="Principal II">Principal II</option>
+                                            </select>
+                                            <script>
+                                            function myFunction()
                                             {
-                                                echo '<select name = "desig" id = "position" required>
-                                                  <option hidden value="Supervisor">Supervisor</option>
-                                                  <option value="Teacher I">Teacher I</option>
-                                                  <option value="Teacher II">Teacher II</option>
-                                                  <option value="Teacher III">Teacher III</option>
-                                                  <option value="Master Teacher I">Master Teacher I</option>
-                                                  <option value="Master Teacher II">Master Teacher II</option>
-                                                  <option value="Master Teacher III">Master Teacher III</option>
-                                                  <option value="Head Teacher I">Head Teacher I</option>
-                                                  <option value="Head Teacher II">Head Teacher II</option>
-                                                  <option value="Head Teacher III">Head Teacher III</option>
-                                                  <option value="Principal I">Principal I</option>
-                                                  <option value="Principal II">Principal II</option>
-                                                  </select>
-                                                  <script>
-                                                  function myFunction()
-                                                  {
-                                                    document.getElementById("position").value = "'.$userInfo['designation'].'";
-                                                  }
-                                                  myFunction();
-                                                  </script>';
-
-
+                                              document.getElementById("position").value = "'.$_GET['desig'].'";
                                             }
-
+                                            myFunction();
+                                            </script>';
+                                        }
                                         else
                                         {
-                                            echo '<select name = "desig" id = "position" required>
-                                              <option disabled hidden>Choose here</option>
-                                              <option value="Teacher I">Teacher I</option>
-                                              <option value="Teacher II">Teacher II</option>
-                                              <option value="Teacher III">Teacher III</option>
-                                              <option value="Master Teacher I">Master Teacher I</option>
-                                              <option value="Master Teacher II">Master Teacher II</option>
-                                              <option value="Master Teacher III">Master Teacher III</option>
-                                              <option value="Head Teacher I">Head Teacher I</option>
-                                              <option value="Head Teacher II">Head Teacher II</option>
-                                              <option value="Head Teacher III">Head Teacher III</option>
-                                              <option value="Principal I">Principal I</option>
-                                              <option value="Principal II">Principal II</option>
-                                              </select>';
-                                        }
+                                          $userobj = new User();
+                                          $userInfo = $userobj->idChecker($_SESSION['user_id']);
+                                              if($userInfo['designation']?? null != null)
+                                              {
+                                                  echo '<select name = "desig" id = "position" required>
+                                                    <option hidden value="Supervisor">Supervisor</option>
+                                                    <option value="Teacher I">Teacher I</option>
+                                                    <option value="Teacher II">Teacher II</option>
+                                                    <option value="Teacher III">Teacher III</option>
+                                                    <option value="Master Teacher I">Master Teacher I</option>
+                                                    <option value="Master Teacher II">Master Teacher II</option>
+                                                    <option value="Master Teacher III">Master Teacher III</option>
+                                                    <option value="Head Teacher I">Head Teacher I</option>
+                                                    <option value="Head Teacher II">Head Teacher II</option>
+                                                    <option value="Head Teacher III">Head Teacher III</option>
+                                                    <option value="Principal I">Principal I</option>
+                                                    <option value="Principal II">Principal II</option>
+                                                    </select>
+                                                    <script>
+                                                    function myFunction()
+                                                    {
+                                                      document.getElementById("position").value = "'.$userInfo['designation'].'";
+                                                    }
+                                                    myFunction();
+                                                    </script>';
 
 
-                                     }
-                                    ?>
-                                    <div class="select-icon">
-                                      <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
-                                        <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
-                                      </svg>
-                                    </div>
+                                              }
+
+                                          else
+                                          {
+                                              echo '<select name = "desig" id = "position" required>
+                                                <option disabled hidden>Choose here</option>
+                                                <option value="Teacher I">Teacher I</option>
+                                                <option value="Teacher II">Teacher II</option>
+                                                <option value="Teacher III">Teacher III</option>
+                                                <option value="Master Teacher I">Master Teacher I</option>
+                                                <option value="Master Teacher II">Master Teacher II</option>
+                                                <option value="Master Teacher III">Master Teacher III</option>
+                                                <option value="Head Teacher I">Head Teacher I</option>
+                                                <option value="Head Teacher II">Head Teacher II</option>
+                                                <option value="Head Teacher III">Head Teacher III</option>
+                                                <option value="Principal I">Principal I</option>
+                                                <option value="Principal II">Principal II</option>
+                                                </select>';
+                                          }
+
+
+                                       }
+                                      ?>
+                                      <div class="select-icon">
+                                        <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
+                                          <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
+                                        </svg>
+                                      </div>
+                             </div>
                            </div>
                          </div>
-                         <div class="divider-inline2">
-                           <div class="contact-content">
-                             <i class = "fas fa-school"></i>
-                             <label for="inputFirstName">School Assigned:</label>
-                             <!--name of school user is in-->
-                             <div class="dropdown-container">
-                               <?php
-                                   if(isset($_GET['station']))
-                                   {
-                                     echo '<select name = "station" id = "station" required>
-                                       <option disabled value = "1" hidden>Choose here</option>
-                                       <option value="Batug E.S">Batug E.S</option>
-                                       <option value="CM Closa E.S">CM Closa E.S</option>
-                                       <option value="Danao E.S">Danao E.S</option>
-                                       <option value="Kiling E.S">Kiling E.S</option>
-                                       <option value="Liwayway E.S">Liwayway E.S</option>
-                                       <option value="Maya E.S">Maya E.S</option>
-                                       <option value="Oguisan E.S">Oguisan E.S</option>
-                                       <option value="Olmedo E.S">Olmedo E.S</option>
-                                       <option value="Palale C.S">Palale C.S</option>
-                                       <option value="Salvacion E.S">Salvacion E.S</option>
-                                       <option value="San Antonio E.S">San Antonio E.S</option>
-                                       <option value="San Pedro E.S">San Pedro E.S</option>
-                                       <option value="San Vicente E.S">San Vicente E.S</option>
-                                       <option value="Tin-awan E.S">Tin-awan E.S</option>
-                                       <option value="Villa Imelda E.S">Villa Imelda E.S</option>
-                                       </select>
-                                       <script>
-                                       function myFunction()
-                                       {
-                                         document.getElementById("station").value = "'.$_GET['station'].'";
-                                       }
-                                       myFunction();
-                                       </script>';
+                       </div>
 
-                                   }
-                                   else
-                                   {
-                                     if($info['station']?? "1" != "1")
+                           <div class="divider-inline2">
+                             <div class="contact-content">
+                               <i class = "fas fa-school"></i>
+                               <label for="inputFirstName">School Assigned:</label>
+                               <!--name of school user is in-->
+                               <div class="dropdown-container">
+                                 <?php
+                                     if(isset($_GET['station']))
                                      {
-
-                                         echo '<select name = "station" id = "station" required>
-                                           <option disabled value = "1" hidden>Choose here</option>
-                                           <option value="Batug E.S">Batug E.S</option>
-                                           <option value="CM Closa E.S">CM Closa E.S</option>
-                                           <option value="Danao E.S">Danao E.S</option>
-                                           <option value="Kiling E.S">Kiling E.S</option>
-                                           <option value="Liwayway E.S">Liwayway E.S</option>
-                                           <option value="Maya E.S">Maya E.S</option>
-                                           <option value="Oguisan E.S">Oguisan E.S</option>
-                                           <option value="Olmedo E.S">Olmedo E.S</option>
-                                           <option value="Palale C.S">Palale C.S</option>
-                                           <option value="Salvacion E.S">Salvacion E.S</option>
-                                           <option value="San Antonio E.S">San Antonio E.S</option>
-                                           <option value="San Pedro E.S">San Pedro E.S</option>
-                                           <option value="San Vicente E.S">San Vicente E.S</option>
-                                           <option value="Tin-awan E.S">Tin-awan E.S</option>
-                                           <option value="Villa Imelda E.S">Villa Imelda E.S</option>
-                                           </select>
-                                           <script>
-                                           function myFunction()
-                                           {
-                                             document.getElementById("station").value = "'.$info['station'].'";
-                                           }
-                                           myFunction();
-                                           </script>';
-
+                                       echo '<select name = "station" id = "station" required>
+                                         <option disabled value = "1" hidden>Choose here</option>
+                                         <option value="Batug E.S">Batug E.S</option>
+                                         <option value="CM Closa E.S">CM Closa E.S</option>
+                                         <option value="Danao E.S">Danao E.S</option>
+                                         <option value="Kiling E.S">Kiling E.S</option>
+                                         <option value="Liwayway E.S">Liwayway E.S</option>
+                                         <option value="Maya E.S">Maya E.S</option>
+                                         <option value="Oguisan E.S">Oguisan E.S</option>
+                                         <option value="Olmedo E.S">Olmedo E.S</option>
+                                         <option value="Palale C.S">Palale C.S</option>
+                                         <option value="Salvacion E.S">Salvacion E.S</option>
+                                         <option value="San Antonio E.S">San Antonio E.S</option>
+                                         <option value="San Pedro E.S">San Pedro E.S</option>
+                                         <option value="San Vicente E.S">San Vicente E.S</option>
+                                         <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                         <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                         </select>
+                                         <script>
+                                         function myFunction()
+                                         {
+                                           document.getElementById("station").value = "'.$_GET['station'].'";
+                                         }
+                                         myFunction();
+                                         </script>';
 
                                      }
                                      else
+                                     {
+                                       if($info['station']?? "1" != "1")
                                        {
-                                         echo '<select name = "station" id = "station" required>
-                                           <option disabled  value = "1" hidden>Choose here</option>
-                                           <option value="Batug E.S">Batug E.S</option>
-                                           <option value="CM Closa E.S">CM Closa E.S</option>
-                                           <option value="Danao E.S">Danao E.S</option>
-                                           <option value="Kiling E.S">Kiling E.S</option>
-                                           <option value="Liwayway E.S">Liwayway E.S</option>
-                                           <option value="Maya E.S">Maya E.S</option>
-                                           <option value="Oguisan E.S">Oguisan E.S</option>
-                                           <option value="Olmedo E.S">Olmedo E.S</option>
-                                           <option value="Palale C.S">Palale C.S</option>
-                                           <option value="Salvacion E.S">Salvacion E.S</option>
-                                           <option value="San Antonio E.S">San Antonio E.S</option>
-                                           <option value="San Pedro E.S">San Pedro E.S</option>
-                                           <option value="San Vicente E.S">San Vicente E.S</option>
-                                           <option value="Tin-awan E.S">Tin-awan E.S</option>
-                                           <option value="Villa Imelda E.S">Villa Imelda E.S</option>
-                                           </select>
-                                           <script>
-                                           function myFunction()
-                                           {
-                                             document.getElementById("station").value = 1;
-                                           }
-                                           myFunction();
-                                           </script>';
-                                       }
 
-                                   }
-                                ?>
-                                <div class="select-icon">
-                                  <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
-                                    <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
-                                  </svg>
-                                </div>
-                           </div>
+                                           echo '<select name = "station" id = "station" required>
+                                             <option disabled value = "1" hidden>Choose here</option>
+                                             <option value="Batug E.S">Batug E.S</option>
+                                             <option value="CM Closa E.S">CM Closa E.S</option>
+                                             <option value="Danao E.S">Danao E.S</option>
+                                             <option value="Kiling E.S">Kiling E.S</option>
+                                             <option value="Liwayway E.S">Liwayway E.S</option>
+                                             <option value="Maya E.S">Maya E.S</option>
+                                             <option value="Oguisan E.S">Oguisan E.S</option>
+                                             <option value="Olmedo E.S">Olmedo E.S</option>
+                                             <option value="Palale C.S">Palale C.S</option>
+                                             <option value="Salvacion E.S">Salvacion E.S</option>
+                                             <option value="San Antonio E.S">San Antonio E.S</option>
+                                             <option value="San Pedro E.S">San Pedro E.S</option>
+                                             <option value="San Vicente E.S">San Vicente E.S</option>
+                                             <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                             <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                             </select>
+                                             <script>
+                                             function myFunction()
+                                             {
+                                               document.getElementById("station").value = "'.$info['station'].'";
+                                             }
+                                             myFunction();
+                                             </script>';
 
-                           <div class="contact-content">
-                             <i class = "fas fa-rings-wedding"></i>
-                             <div class="demo">
-                                 <label for="position">Civil Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                 <div class="dropdown-container">
-                                   <?php
-                                       if(isset($_GET['civilstatus']))
-                                       {
-                                         echo '<select  name = "civil-stat" id = "civil" required>
-                                                 <option disabled hidden>Choose here</option>
-                                                 <option value="Single">Single</option>
-                                                 <option value="Married">Married</option>
-                                               </select>
-                                               <script>
-                                               function myFunction()
-                                               {
-                                                 document.getElementById("civil").value = "'.$_GET['civilstatus'].'";
-                                               }
-                                               myFunction();
-                                               </script>
-                                               ';
+
                                        }
                                        else
-                                       {
-                                         if($info['civil_status']?? null != null)
                                          {
-                                             echo '<select  name = "civil-stat" id = "civil" required>
-                                                     <option disabled hidden>Choose here</option>
-                                                     <option value="Single">Single</option>
-                                                     <option value="Married">Married</option>
-                                                   </select>
-                                                   <script>
-                                                   function myFunction()
-                                                   {
-                                                     document.getElementById("civil").value = "'.$info['civil_status'].'";
-                                                   }
-                                                   myFunction();
-                                                   </script>
-                                                   ';
+                                           echo '<select name = "station" id = "station" required>
+                                             <option disabled  value = "1" hidden>Choose here</option>
+                                             <option value="Batug E.S">Batug E.S</option>
+                                             <option value="CM Closa E.S">CM Closa E.S</option>
+                                             <option value="Danao E.S">Danao E.S</option>
+                                             <option value="Kiling E.S">Kiling E.S</option>
+                                             <option value="Liwayway E.S">Liwayway E.S</option>
+                                             <option value="Maya E.S">Maya E.S</option>
+                                             <option value="Oguisan E.S">Oguisan E.S</option>
+                                             <option value="Olmedo E.S">Olmedo E.S</option>
+                                             <option value="Palale C.S">Palale C.S</option>
+                                             <option value="Salvacion E.S">Salvacion E.S</option>
+                                             <option value="San Antonio E.S">San Antonio E.S</option>
+                                             <option value="San Pedro E.S">San Pedro E.S</option>
+                                             <option value="San Vicente E.S">San Vicente E.S</option>
+                                             <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                             <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                             </select>
+                                             <script>
+                                             function myFunction()
+                                             {
+                                               document.getElementById("station").value = 1;
+                                             }
+                                             myFunction();
+                                             </script>';
+                                         }
+
+                                     }
+                                  ?>
+                                  <div class="select-icon">
+                                    <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
+                                      <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
+                                    </svg>
+                                  </div>
+                             </div>
+
+                             <div class="contact-content">
+
+                               <div class="demo">
+                                 <i class = "fas fa-rings-wedding"></i>
+                                   <label for="position">Civil Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                   <div class="dropdown-container">
+                                     <?php
+                                         if(isset($_GET['civilstatus']))
+                                         {
+                                           echo '<select  name = "civil-stat" id = "civil" required>
+                                                   <option disabled hidden>Choose here</option>
+                                                   <option value="Single">Single</option>
+                                                   <option value="Married">Married</option>
+                                                 </select>
+                                                 <script>
+                                                 function myFunction()
+                                                 {
+                                                   document.getElementById("civil").value = "'.$_GET['civilstatus'].'";
+                                                 }
+                                                 myFunction();
+                                                 </script>
+                                                 ';
                                          }
                                          else
                                          {
-                                           echo '<select name = "civil-stat" required>
-                                                   <option selected disabled hidden>Choose here</option>
-                                                   <option value="Single">Single</option>
-                                                   <option value="Married">Married</option>
-                                                 </select>';
+                                           if($info['civil_status']?? null != null)
+                                           {
+                                               echo '<select  name = "civil-stat" id = "civil" required>
+                                                       <option disabled hidden>Choose here</option>
+                                                       <option value="Single">Single</option>
+                                                       <option value="Married">Married</option>
+                                                     </select>
+                                                     <script>
+                                                     function myFunction()
+                                                     {
+                                                       document.getElementById("civil").value = "'.$info['civil_status'].'";
+                                                     }
+                                                     myFunction();
+                                                     </script>
+                                                     ';
+                                           }
+                                           else
+                                           {
+                                             echo '<select name = "civil-stat" required>
+                                                     <option selected disabled hidden>Choose here</option>
+                                                     <option value="Single">Single</option>
+                                                     <option value="Married">Married</option>
+                                                   </select>';
+                                           }
                                          }
-                                       }
-                                    ?>
+                                      ?>
 
-                                   <div class="select-icon">
-                                     <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
-                                       <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
-                                     </svg>
-                                   </div>
-                                   </div>
-                               </div>
+                                     <div class="select-icon">
+                                       <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">
+                                         <path d="m2e1 95a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm0-3e1a9 9 0 0 1 -9 9 9 9 0 0 1 -9 -9 9 9 0 0 1 9 -9 9 9 0 0 1 9 9zm14 55h68v1e1h-68zm0-3e1h68v1e1h-68zm0-3e1h68v1e1h-68z"></path>
+                                       </svg>
+                                     </div>
+                                     </div>
+                                 </div>
+                             </div>
                            </div>
                          </div>
 
-                         <div class="divider-block">
-                           <div class="contact-content">
-                             <i class="fas fa-graduation-cap"></i>
-                             <label class="small mb-1" for="inputLastName">Highest Educational<br> Attainment:</label>
-                             <!--his Highest educational attainment-->
-                             <?php
-                                 if(isset($_GET['highesteducattn']))
-                                 {
-                                   echo '<input value = "'.$_GET['highesteducattn'].'" class="text-box" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
-                                 }
-                                 else
-                                 {
-                                   if($info['highest_educ_attainment']?? null != null)
+                           <div class="divider-block">
+                             <div class="contact-content">
+                               <i class="fas fa-graduation-cap"></i>
+                               <label class="small mb-1" for="inputLastName">Highest Educational<br> Attainment:</label>
+                               <!--his Highest educational attainment-->
+                               <?php
+                                   if(isset($_GET['highesteducattn']))
                                    {
-                                     echo '<input value = "'.$info['highest_educ_attainment'].'" class="text-box" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
+                                     echo '<input value = "'.$_GET['highesteducattn'].'" class="text-box" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
                                    }
                                    else
                                    {
-                                       echo '<input class="text-box" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
+                                     if($info['highest_educ_attainment']?? null != null)
+                                     {
+                                       echo '<input value = "'.$info['highest_educ_attainment'].'" class="text-box" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
+                                     }
+                                     else
+                                     {
+                                         echo '<input class="text-box" name = "high-educ" id="inputLastName" type="text" placeholder="Enter highest attainment" required/>';
+                                     }
                                    }
-                                 }
-                              ?>
-                           </div>
+                                ?>
+                             </div>
+                         </div>
+
+                       </ul>
                        </div>
 
-                     </ul>
                    </div>
 
                    <!-- horizontal rule -->
@@ -678,86 +689,90 @@
                    <!-- contact information -->
                    <div class="contact">
                      <p class="category"><u>Dates Information</u></p>
-                     <ul>
-                       <div class="divider-inline2">
-                         <div class="contact-content">
-                           <i class = "fas fa-birthday-cake"></i>
-                           <label for="inputConfirmPassword">Date of Birth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
-                           <!--date of birth-->
-                           <?php
-                               if(isset($_GET['dateofbirth']))
-                               {
-                                 echo '<input value = "'.$_GET['dateofbirth'].'" type="date" class="text-box" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
-                               }
-                               else
-                               {
-                                 if($info['date_of_birth']?? null != null)
+                     <div class="rightside">
+                       <ul>
+                         <div class="divider-inline2">
+                           <div class="contact-content">
+                             <i class = "fas fa-birthday-cake"></i>
+                             <label for="inputConfirmPassword">Date of Birth: </label>
+                             <!--date of birth-->
+                             <?php
+                                 if(isset($_GET['dateofbirth']))
                                  {
-                                   echo '<input value = "'.$info['date_of_birth'].'" type="date" class="text-box" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
+                                   echo '<input value = "'.$_GET['dateofbirth'].'" type="date" class="text-box" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
                                  }
                                  else
                                  {
-                                     echo '<input type="date" class="text-box" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
+                                   if($info['date_of_birth']?? null != null)
+                                   {
+                                     echo '<input value = "'.$info['date_of_birth'].'" type="date" class="text-box" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
+                                   }
+                                   else
+                                   {
+                                       echo '<input type="date" class="text-box" name = "dateofbirth" id="inputConfirmPassword"  placeholder="Enter date of birth" required/>';
+                                   }
                                  }
-                               }
-                            ?>
+                              ?>
+                           </div>
                          </div>
-                       </div>
-                       <div class="divider-inline2">
-                         <div class="contact-content">
-                           <i class="fas fa-calendar-alt"></i>
-                           <label for="inputConfirmPassword">Date of Latest Promotion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                           <!--date of latest promotion-->
-                           <?php
-                               if(isset($_GET['dateofpromo']))
-                               {
-                                  echo '<input value = "'.$_GET['dateofpromo'].'" type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
-                               }
-                               else
-                               {
-                                 if($info['date_of_latest_promo']?? null != null)
+                         <div class="divider-inline2">
+                           <div class="contact-content">
+                             <i class="fas fa-calendar-alt"></i>
+                             <label for="inputConfirmPassword">Date of Latest Promotion:</label>
+                             <!--date of latest promotion-->
+                             <?php
+                                 if(isset($_GET['dateofpromo']))
                                  {
-                                     echo '<input value = "'.$info['date_of_latest_promo'].'" type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
+                                    echo '<input value = "'.$_GET['dateofpromo'].'" type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
                                  }
                                  else
                                  {
-                                     echo '<input type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
+                                   if($info['date_of_latest_promo']?? null != null)
+                                   {
+                                       echo '<input value = "'.$info['date_of_latest_promo'].'" type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
+                                   }
+                                   else
+                                   {
+                                       echo '<input type = "date" class="text-box" name = "lat-promotion" id="inputConfirmPassword" required/>';
+                                   }
                                  }
-                               }
-                            ?>
+                              ?>
+                           </div>
                          </div>
-                       </div>
-                       <div class="divider-block">
-                         <div class="contact-content">
-                           <i class = "fas fa-calendar"></i>
-                           <label for="inputPassword">Date of Original Appointment:</label>
-                           <!--date of original appointment-->
-                           <?php
-                               if(isset($_GET['orig_appointment']))
-                               {
-                                 echo '<input value = "'.$_GET['orig_appointment'].'" type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
-                               }
-                               else
-                               {
-                                 if($info['date_of_orig_appointment']?? null != null)
+                         <div class="divider-block">
+                           <div class="contact-content">
+                             <i class = "fas fa-calendar"></i>
+                             <label for="inputPassword">Date of Original Appointment:</label>
+                             <!--date of original appointment-->
+                             <?php
+                                 if(isset($_GET['orig_appointment']))
                                  {
-                                   echo '<input value = "'.$info['date_of_orig_appointment'].'" type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
+                                   echo '<input value = "'.$_GET['orig_appointment'].'" type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
                                  }
                                  else
                                  {
-                                     echo '<input type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
+                                   if($info['date_of_orig_appointment']?? null != null)
+                                   {
+                                     echo '<input value = "'.$info['date_of_orig_appointment'].'" type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
+                                   }
+                                   else
+                                   {
+                                       echo '<input type="date" class="text-box" name = "orig-appointment" id="inputPassword" required/>';
+                                   }
                                  }
-                               }
-                            ?>
+                              ?>
+
+                           </div>
 
                          </div>
+                       </ul>
 
-                       </div>
-                     </ul>
+                     </div>
+                     <button class = "btn-primary formpassbtn" type="submit" name="formpass-submit">Submit Form</button>
                    </div>
 
 
-                      <button class = "btn-primary formpassbtn" type="submit" name="formpass-submit">Submit Form</button>
+
                 </div>
 
                   </form>

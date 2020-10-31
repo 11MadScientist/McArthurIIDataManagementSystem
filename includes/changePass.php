@@ -18,7 +18,7 @@ if($_SESSION['user_id'] == null)
         <meta name="author" content="" />
         <title>McArthurII District Attendance</title>
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/editprofile.css" rel="stylesheet" />
+        <link href="css/changepass.css" rel="stylesheet" />
         <script src="js/imageLoader.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
@@ -33,7 +33,6 @@ if($_SESSION['user_id'] == null)
       <div id="layoutSidenav_content">
           <main>
               <div class="container-fluid">
-
                   <div class="profile-box">
 
 
@@ -66,7 +65,7 @@ if($_SESSION['user_id'] == null)
 
                               <form action="forms/changePass.form.php" method="post" id = "currpassform">
                                 <i class = "fas fa-user"></i>
-                                <label class="small mb-1" for="currentpass">Enter Current Password:</label>
+                                <label  class="small mb-1" for="currentpass">Enter Current Password:</label>
                                 <?php
                                         echo '<input class="text-box" name = "currpass" id="currentpass" type="password" placeholder="Enter Current Password" required />';
                                  ?>
@@ -141,6 +140,8 @@ if($_SESSION['user_id'] == null)
                           </ul>
                       </div>
                     </div>
+
+
                   </main>
                   <?php include('footer.php') ?>
                   </div>

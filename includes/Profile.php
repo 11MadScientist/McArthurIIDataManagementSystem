@@ -25,12 +25,7 @@
               <div class="container-fluid">
 
                   <div class="profile-box">
-
-
-                    <!-- sql command for the profile picture -->
-
-                    <?php
-                      $prof_id;
+                    <?php   $prof_id;
                       if(isset($_GET['id']))
                       {
                         $prof_id = $_GET['id'];
@@ -40,71 +35,82 @@
                         $prof_id = $_SESSION['user_id'];
                         echo '  <a id ="editlink" href="EditProfile.php"><u>Edit Profile</u></a>';
                       }
-
-
-
-                     $conn = mysqli_connect("localhost", "root", "", "mddb");
-
-                     $obj = new ProfilePic();
-                     $result = $obj->get_profile($prof_id);
-                        $row = mysqli_fetch_array($result);
-                          if($row != null)
-                           {
-                     ?>
-                              <img class = "profile-pic" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
-                     <?php
-                           }
-
-                           else
-                           {
-                     ?>
-                              <img class = "profile-pic" src="forms/profpic-uploads/unknown.jpg">
-                     <?php
-                           }
-                             mysqli_close($conn);
                       ?>
+                    <div class="heading">
+
+                          <div class="img-cont">
+                            <!-- sql command for the profile picture -->
+
+                            <?php
 
 
-                     <!-- sql command for the add info -->
-                     <?php
-                      $objUser = new User();
-                      $userInfo = $objUser->idChecker($prof_id);
 
-                      $obj = new AddInfo();
-                      $info = $obj->getAddInfo($prof_id?? '');
+                             $conn = mysqli_connect("localhost", "root", "", "mddb");
 
-                      ?>
-                      <!-- name information -->
-                     <div class="name">
+                             $obj = new ProfilePic();
+                             $result = $obj->get_profile($prof_id);
+                                $row = mysqli_fetch_array($result);
+                                  if($row != null)
+                                   {
+                             ?>
+                                      <img class = "profile-pic" src="imageView.php?user_id=<?php echo $row["user_id"]; ?>" />
+                             <?php
+                                   }
 
-                       <ul>
-                         <p><u> User Information</u></p>
-                         <div class="name-content">
-                           <i class = "fas fa-user"></i>
-                           <span>Last Name:</span>
-                           <span class = "content"><?php echo $userInfo['l_name']?? ''; ?></span>
-                         </div>
-
-                         <div class="name-content">
-                           <i class="fas fa-chalkboard-teacher"></i>
-                           <span>First Name:</span>
-                           <span class = "content"><?php  echo $userInfo['f_name']?? ''; ?></span>
-                         </div>
-
-                         <div class="name-content">
-                           <i class = "fas fa-heart"></i>
-                           <span>Middle Name:</span>
-                           <span class = "content"><?php echo $userInfo['m_name']?? ''; ?></span>
-                         </div>
-                         <div class="name-content">
-                           <i class = "fas fa-clock"></i>
-                           <span>Grade:</span>
-                           <span class = "content"><?php echo $info['grade']?? ''; ?></span>
-                         </div>
+                                   else
+                                   {
+                             ?>
+                                      <img class = "profile-pic" src="forms/profpic-uploads/unknown.jpg">
+                             <?php
+                                   }
+                                     mysqli_close($conn);
+                              ?>
 
 
-                       </ul>
-                     </div>
+                          </div>
+
+                             <!-- sql command for the add info -->
+                             <?php
+                              $objUser = new User();
+                              $userInfo = $objUser->idChecker($prof_id);
+
+                              $obj = new AddInfo();
+                              $info = $obj->getAddInfo($prof_id?? '');
+
+                              ?>
+                              <!-- name information -->
+                             <div class="name">
+
+                               <ul>
+                                 <p><u> User Information</u></p>
+                                 <div class="name-content">
+                                   <i class = "fas fa-user"></i>
+                                   <span>Last Name:</span>
+                                   <span class = "content"><?php echo $userInfo['l_name']?? ''; ?></span>
+                                 </div>
+
+                                 <div class="name-content">
+                                   <i class="fas fa-chalkboard-teacher"></i>
+                                   <span>First Name:</span>
+                                   <span class = "content"><?php  echo $userInfo['f_name']?? ''; ?></span>
+                                 </div>
+
+                                 <div class="name-content">
+                                   <i class = "fas fa-heart"></i>
+                                   <span>Middle Name:</span>
+                                   <span class = "content"><?php echo $userInfo['m_name']?? ''; ?></span>
+                                 </div>
+                                 <div class="name-content">
+                                   <i class = "fas fa-clock"></i>
+                                   <span>Grade:</span>
+                                   <span class = "content"><?php echo $info['grade']?? ''; ?></span>
+                                 </div>
+
+
+                               </ul>
+                             </div>
+
+                    </div>
                      <!-- horizontal rule -->
                      <div class="horizontal-rule">
                      </div>

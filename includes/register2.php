@@ -66,7 +66,7 @@
                                         <div class="text">
 
                                           <form action="forms/registration2.form.php" method="post" enctype="multipart/form-data">
-                                            <label class = "pic-lbl" ><u>Upload Profile Picture</u></label>
+                                            <label class = "pic-lbl" >Upload Profile </label>
                                              <input onchange="readURL(this);" class = "input" name="img-profile" type="file">
 
 

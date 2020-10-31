@@ -1,37 +1,26 @@
 /* foregin css */
 
-body
-{
-  padding-right: 20px;
-}
 .group-box
 {
   margin-top: 10%;
   position: relative;
   margin-bottom: 20px;
 }
-
-.group
-{
-  width: 100%;
-  padding-left: 4%
-  /* background: blue; */
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
 }
+
 .text {
-  width: 50%;
-  min-width: 250px;
-  /* background: orange; */
-  display: inline-block;
   float: left;
+  width: 55%;
 }
 
 .images {
-  width: 50%;
-  min-width: 250px;
+  float: left;
+  width: 30%;
   background-image: url('forms/profpic-uploads/unknown.jpg');
-  /* background: red; */
-  display: inline-block;
-  padding-left: 6%;
 }
 
 .image
@@ -47,7 +36,6 @@ body
   float: right;
   margin-top: 40px;
   margin-right:20%;
-  margin-bottom: 10px;
   position: relative;
   width: 50%;
   display: inline;
@@ -81,8 +69,7 @@ body
 .text-box, input
 {
   float: center;
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 160px;
 }
 
 .passbtn
@@ -101,13 +88,14 @@ body
 }
 .formpassbtn
 {
+  margin-left: 25%;
   font-size: 21px;
   text-align: center;
   font-size:
   margin-left:5%;
   position: relative;
   width: 40%;
-  min-width: 200px;
+  height: 50px;
   border-radius: 3px;
 }
 
@@ -126,12 +114,10 @@ body
   display: inline-block;
 }
 .dropdown-container {
- max-width: 370px;
- min-width: 200px;
-  /* margin-left: 16px; */
+  width: 250px;
+  margin-left: 16px;
   position: relative;
   display: inline-block;
-
 
 }
 
@@ -205,6 +191,8 @@ select:focus ~ .select-icon svg.icon {
 .profile-box
 {
   transform: translateX(8%);
+  @media screen
+
   text-align: center;
 	min-width: 270px;
   margin-top: 5%;
@@ -276,16 +264,12 @@ a
   display: block;
 }
 
-.name, .contact
-{
-  text-align: center;
-  font-size: 1em;
-}
 
 .name
 {
+  padding-left: 40px;
   width:100%;
-  min-width: 270px;
+  min-width: 300px;
   background: white;
 	background-size: 100% 100%;
 	margin-bottom: 10px;
@@ -300,8 +284,7 @@ a
 }
 .name-content
 {
-  text-align: center;
-  font-size: 1em;
+  font-size: 1.2em;
   margin-bottom: 15px;
   color: #03C04A;
 }
@@ -331,6 +314,7 @@ a
 .contact-content
 {
   margin-bottom: 25px;
+  margin-right: 55px;
   color: #03C04A;
 }
 .error
@@ -346,25 +330,4 @@ a
   margin-left: 4%;
   font-size: 21px;
   display: inline-block;
-}
-.leftside
-{
-  /* background: red; */
-  width: 80%;
-
-}
-.rightside
-{
-  /* background: red; */
-  width: 80%;
-  text-align: right;
-  padding-left: -200px;
-}
-
-@media screen and (min-width:480px) {
- .leftside
- {
-   margin-left: 10%;
-   text-align: left;
- }
 }
