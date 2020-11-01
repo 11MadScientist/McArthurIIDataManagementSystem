@@ -102,6 +102,16 @@ include('autoloader.inc.php'); ?>
 
                                       while($row = mysqli_fetch_array($res))
                                       {
+                                        if($row['station'] == null)
+                                        {
+                                          $row['station'] == '';
+                                        }
+                                        if($row['grade'] == null)
+                                        {
+                                          echo $row['grade'];
+                                          $row['grade'] == '';
+                                        }
+
                                           echo "<tr>
                                                 <td style=text-align:left;><input type=checkbox class='check' name='request[]' value=".$row['user_id']."><center></center></td>
                                                 <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".

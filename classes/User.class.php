@@ -58,9 +58,8 @@ class User extends Dbh
   public function getRequest()
   {
     $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
-             INNER JOIN add_info ON users.user_id = add_info.user_id
-              WHERE status = ''
-              ORDER BY station, l_name, f_name, m_name, grade";
+             LEFT JOIN add_info ON users.user_id = add_info.user_id
+             WHERE users.status = ''";
     $res = $this->mySqli($sql);
     return $res;
 
@@ -84,8 +83,7 @@ class User extends Dbh
   public function getPersonnel()
   {
     $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
-             INNER JOIN add_info ON users.user_id = add_info.user_id
-              WHERE status != ''
+             LEFT JOIN add_info ON users.user_id = add_info.user_id AND status != ''
               ORDER BY station, l_name, f_name, m_name, grade";
     $res = $this->mySqli($sql);
     return $res;
