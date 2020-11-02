@@ -1,9 +1,12 @@
  <?php
 
  $output = '';
+ if (!isset($_FILES['file']['name'])) {
+   echo "null";
+ }
  if(isset($_FILES['file']['name'][0]))
  {
-   echo "string";
+   echo "true";
       //uploading the files in the upload folder which is a new folder created by me
       foreach($_FILES['file']['name'] as $keys => $values)
       {

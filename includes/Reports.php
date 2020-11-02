@@ -118,7 +118,7 @@
                     <!-- BUTTON AREA -->
                     <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
                         <button type='submit' value='submit' name='deleteReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
-                        <button type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%;">Submit Report</button>
+                        <a href="upload.php" type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%;">Submit Report</a>
                     </div>
 
                 </div>
@@ -187,7 +187,7 @@
                         // of each files
 
                         //try inspect element then console na tab then uncomment below,
-                        // console.log(files_list[i])
+                        console.log(files_list[i]);
                         formData.append('file[]', files_list[i]);
                     }
 
