@@ -15,7 +15,7 @@ include('autoloader.inc.php');
          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
          <meta name="description" content="" />
          <meta name="author" content="" />
-         <title>McArthurII District CreateEvent</title>
+         <title>McArthurII District CreateReport</title>
          <link href="css/styles.css" rel="stylesheet" />
          <link href="css/createEvent.css" rel="stylesheet" />
          <link href="css/lee.css" rel="stylesheet" />
@@ -32,14 +32,14 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">CreateEvent</h1>
+                   <h1 class="mt-4">CreateReport</h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">CreateEvent</li>
+                       <li class="breadcrumb-item active">CreateReport</li>
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                    </ol>
 
                    <div class="createEvent-box">
-                     <p class="header">Event Details</p>
+                     <p class="header">Report Details</p>
                      <?php
                          if(isset($_GET['error']))
                          {
@@ -47,7 +47,7 @@ include('autoloader.inc.php');
                              {
                                echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Title already exists!</p>';
                              }
-                             elseif($_GET['error'] == "imageSizeTooBig")
+                             elseif($_GET['error'] == "fileSizeTooBig")
                              {
                                echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Image uploaded is too big!</p>';
                              }
@@ -57,20 +57,20 @@ include('autoloader.inc.php');
                              }
                              elseif($_GET['error'] == "invalidDateTime")
                              {
-                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalide Date-Time Input!</p>';
+                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Date-Time Input!</p>';
                              }
 
                          }
                          elseif(isset($_GET['success']))
                          {
 
-                           if($_GET['success'] == "eventCreated")
+                           if($_GET['success'] == "reportCreated")
                            {
-                             echo '<p class="success"><i class = "fas fa-check"></i>Event Successfully Created!</p>';
+                             echo '<p class="success"><i class = "fas fa-check"></i>Report Successfully Created!</p>';
                            }
-                           if($_GET['success'] == "eventEdited")
+                           if($_GET['success'] == "reportEdited")
                            {
-                             echo '<p class="success"><i class = "fas fa-check"></i>Event Successfully Edited!</p>';
+                             echo '<p class="success"><i class = "fas fa-check"></i>Report Successfully Edited!</p>';
                            }
                          }
 
@@ -79,109 +79,26 @@ include('autoloader.inc.php');
                          {
                            $obj = new Events();
                            $info = $obj->getOneEvent($_GET['id']);
-                           $start = explode(' ', $info['start_date']);
+                           $start = explode(' ', $info['end_date']);
                            $end = explode(' ', $info['end_date']);
                          }
 
 
                     if(isset($_GET['id']))
                     {
-                      echo '<form id="form" action="forms/editEvent.form.php" method="post" enctype="multipart/form-data">
+                      echo '<form id="form" action="forms/editReport.form.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="'.$_GET['id'].'">';
 
                     }
                     else
                     {
-                      echo '<form class="" action="forms/createEvent.form.php" method="post" enctype="multipart/form-data">';
+                      echo '<form class="" action="forms/createReport.form.php" method="post" enctype="multipart/form-data">';
                     }
                       ?>
 
-                    <a href="Events.php" class = " back" type="submit" name="event-submit"><i class="fas fa-arrow-left"></i>Back</a>
-
-                       <div class="start">
-                         <label for="startdate">Start Date:</label>
-                         <?php
-                            if(isset($_GET['id']))
-                            {
-                                echo '<input value ='.$start[0].' type="date" class="date-time" name="start_date" id = "startdate" value="">';
-                            }
-                            else
-                            {
-                              if(isset($_GET['start_date']))
-                              {
-                                echo '<input value ='.$_GET['start_date'].' type="date" class="date-time" name="start_date" id = "startdate" value="">';
-                              }
-                              else
-                              {
-                                echo '<input type="date" class="date-time" name="start_date" id = "startdate" value="">';
-                              }
-                            }
-                          ?>
+                    <a href="reports-main.php" class = " back" type="submit" name="report-submit"><i class="fas fa-arrow-left"></i>Back</a>
 
 
-
-                         <label for="starttime">Start Time:&nbsp;</label>
-                         <?php
-                            if(isset($_GET['id']))
-                            {
-                               echo ' <input value ='.$start[1].' type="time" class="date-time"  name="start_time" id = "starttime" value="">';
-                            }
-                            else
-                            {
-                              if(isset($_GET['start_time']))
-                              {
-                                echo ' <input value ='.$_GET['start_time'].' type="time" class="date-time"  name="start_time" id = "starttime" value="">';
-                              }
-                              else
-                              {
-                                echo ' <input type="time" class="date-time"  name="start_time" id = "starttime" value="">';
-                              }
-                            }
-                          ?>
-
-                        </div>
-                        <div class="end">
-                          <label for="enddate">End Date:</label>
-                          <?php
-                            if(isset($_GET['id']))
-                            {
-                                echo '<input type="date" class="date-time" name="end_date" id = "enddate" value='.$end[0].'>';
-                            }
-                            else
-                            {
-                              if(isset($_GET['end_time']))
-                              {
-                                echo '<input type="date" class="date-time" name="end_date" id = "enddate" value='.$_GET['end_date'].'>';
-                              }
-                              else
-                              {
-                                 echo '<input type="date" class="date-time" name="end_date" id = "enddate">';
-                              }
-                            }
-                           ?>
-
-
-
-                         <label for="endtime">End Time:&nbsp;</label>
-                         <?php
-                            if(isset($_GET['id']))
-                            {
-                                echo '<input type="time" class="date-time"  name="end_time" id = "endtime" value='.$end[1].'>';
-                            }
-                            else
-                            {
-                              if(isset($_GET['end_time']))
-                              {
-                                  echo '<input type="time" class="date-time"  name="end_time" id = "endtime" value='.$_GET['end_time'].'>';
-                              }
-                              else
-                              {
-                                  echo '<input type="time" class="date-time"  name="end_time" id = "endtime">';
-                              }
-                            }
-                          ?>
-
-                       </div>
 
                        <label class="block-head" style="display:block;" for="title">Title:</label>
                        <?php
@@ -238,9 +155,52 @@ include('autoloader.inc.php');
                             }
                           }
                         ?>
+                        <div class="start">
+                          <label for="startdate">Deadline Date:</label>
+                          <?php
+                             if(isset($_GET['id']))
+                             {
+                                 echo '<input value ='.$start[0].' type="date" class="date-time" name="end_date" id = "startdate" value="">';
+                             }
+                             else
+                             {
+                               if(isset($_GET['end_date']))
+                               {
+                                 echo '<input value ='.$_GET['end_date'].' type="date" class="date-time" name="end_date" id = "startdate" value="">';
+                               }
+                               else
+                               {
+                                 echo '<input type="date" class="date-time" name="end_date" id = "startdate" value="">';
+                               }
+                             }
+                           ?>
+
+                         </div>
+
+                         <div class = "end">
+                          <label for="endtime">Deadline Time:&nbsp;</label>
+                          <?php
+                             if(isset($_GET['id']))
+                             {
+                                 echo '<input type="time" class="date-time"  name="end_time" id = "endtime" value='.$end[1].'>';
+                             }
+                             else
+                             {
+                               if(isset($_GET['end_time']))
+                               {
+                                   echo '<input type="time" class="date-time"  name="end_time" id = "endtime" value='.$_GET['end_time'].'>';
+                               }
+                               else
+                               {
+                                   echo '<input type="time" class="date-time"  name="end_time" id = "endtime">';
+                               }
+                             }
+                           ?>
+
+                        </div>
 
 
-                       <label style="display:block;" for = eventimage>Upload Image:</label>
+                       <label style="display:block;" for = eventimage>Upload Reference File:</label>
                         <input onchange="readURL(this);" class = "event-img" name="event-img" id = "eventimage" type="file" >
 
                         <?php
@@ -261,6 +221,7 @@ include('autoloader.inc.php');
                              document.getElementById("blah").style.display = "none";
                            }
                          </script>
+
 
 
 
@@ -308,6 +269,7 @@ include('autoloader.inc.php');
            function submit(str) {
              alert(`You have successfully submitted your CreateEvent! Timestamp: ${str}`)
            }
+
          </script>
      </body>
  </html>

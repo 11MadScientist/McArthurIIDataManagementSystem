@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php session_start();
+include('autoloader.inc.php');
+ ?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -8,6 +11,7 @@
         <meta name="author" content="" />
         <title>McArthurII District Reports</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/reports-main.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <style>
           .action
@@ -31,7 +35,10 @@
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                       <li class="breadcrumb-item active">Reports</li>
                   </ol>
-
+                  <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
+                      <button type='submit' value='submit' name='deleteReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
+                      <a href="createReport.php" type='submit' value='submit' name='createReport' class='btn btn-primary' style="width:45%; height:100%;">Create Report</a>
+                  </div>
                   <div class = "report-main" style= "width:100%; height:100%; border-style: solid;">
                     <div class="spacing" style="width:100%;height:20px;position: relative;">
                     <div name="progress" style="text-align:left; position:absolute; top:25%; left: 85% "><h11>Your progress</h11></div>
@@ -40,9 +47,12 @@
                     <div class="list_content" style="position: relative; ">
                       <ul class="report_list" style="list-style-type: none;">
                       <?php
+                      $obj = new Reports();
+                      $result = $obj->getReport();
                         //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
-                        for($i=0;$i<5;$i++)
+                        while($row = mysqli_fetch_array($result))
                         {
+
                       ?>
                           <!-- LIST ROW -->
                           <li>
@@ -51,19 +61,20 @@
                               <div style="width:92%; border-bottom: 2px dotted grey; padding-bottom: 5px">
 
                                 <!-- LINK TO REPORT SUBMISSION PHP -->
-                                <a href="Reports.php" style="color: black">
-
                                   <!-- ICON -->
                                   <i class='fas fa-file' style='font-size:25px; padding-bottom: 3px'></i>
                                   <!-- NAME OF REPORT -->
-                                  <span class="report_name" style="font-size: 25px; padding:10px;">REPORT</span>
+                                  <a id="title" href="reports.php?id=<?php echo $row['report_id'] ?>"
+                                    class="report_name" style="font-size: 25px; padding:10px;">
+                                    <u><?php echo $row['report_title'] ?></u></a>
                                 </a>
 
                                 <div class="report_info">
                                   <!-- DESCRIPTION AREA -->
-                                  <span class="reportDescription" style="padding: 10px;">
-                                    DESCRIPTION DESCRIPTION DESCRIPTIONDESC DESC RIPTION DESCRIPTION DESCRIPTIONDESC DESCRIPTION DESCRIPTION DESCRIPTIONDESC DESCRIPTION DESCRIPTION DESCRIPTIONDESC DESC RIPTION DESCRIPTION DESCRIPTIONDESC
+                                  <span id="desc" class="reportDescription" style="padding: 10px;">
+                                    Description: <?php echo $row['report_description'] ?>
                                   </span>
+
 
                                   <!-- STATUS PROGRESS CHECHBOX -->
                                   <span class="action">
@@ -73,20 +84,20 @@
                                   <!-- FILE ATTACHMENT DIVISION -->
                                   <div class="fileAttached" style="padding-left: 5%; width:100%">
                                     <ul style="list-style-type: none;">
-                                      <?php
-                                      //LOOP FOR HOW MANY FILES ATTACHED
-                                      for($c=0;$c<3;$c++)
-                                      {
-                                      ?>
+
                                       <li style="display: inline;">
                                         <!-- ICON -->
-                                        <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
+
                                         <!-- NAME OF REPORT -->
-                                        <span class="report_name" style="font-size: 15px; padding:10px;">REPORT</span>
+                                        <?php if($row['report_sample']?? null !== null){ ?>
+                                          <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $row["report_id"]; ?>">
+                                            <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
+                                            Sample <?php echo $row['report_title'] ?></a>
+                                          <?php } ?>
+
+
                                       </li>
-                                      <?php
-                                      }
-                                      ?>
+
                                     </ul>
                                   </div>
                                 </div>

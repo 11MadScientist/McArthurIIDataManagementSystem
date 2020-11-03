@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php   session_start();
+  include('autoloader.inc.php'); ?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -8,6 +10,7 @@
         <meta name="author" content="" />
         <title>McArthurII District Reports</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/reports.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <style>
            .file_drag_area
@@ -47,27 +50,27 @@
                     <li class="breadcrumb-item active">Report Submission</li>
                 </ol>
 
+                <?php $obj = new Reports();
+                      $result=$obj->getSpecificReport($_GET['id']);
+                 ?>
+
                 <!-- DESCRIPTION AREA -->
                 <div class="reportDescription">
-                  <h4>REPORT TITLE</h4>
-                  <label style="padding-left: 20px">DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descrip tion  DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION descriptionDESCRIPTIONDESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION </label>
+                  <h2 id="hd"><?php echo $result['report_title'] ?></h2>
+                  <p id="desc" style="padding-left: 20px"><?php echo $result['report_description'] ?></p>
 
                   <ul style="list-style-type: none;">
-                    <?php
-                    //LOOP FOR HOW MANY FILES ATTACHED
-                    for($c=0;$c<2;$c++)
-                    {
-                    ?>
+
                     <!-- TO DISPLAY HORIZONTALLY -->
                     <li style="display: inline;">
                       <!-- ICON -->
-                      <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
-                      <!-- NAME OF REPORT -->
-                      <span class="report_name" style="font-size: 15px; padding:10px;">REPORT</span>
+                      <?php if($result['report_sample']?? null !== null){ ?>
+                        <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $result["report_id"]; ?>">
+                          <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
+                          Sample <?php echo $result['report_title'] ?></a>
+                        <?php } ?>
                     </li>
-                    <?php
-                    }
-                    ?>
+
                   </ul>
                 </div>
 
@@ -83,33 +86,24 @@
                         <table  class = "display table table-striped" cellspacing = "0" id = "tableReports" style="position: static;">
                             <thead>
                                 <!-- HEADER -->
-                                <th style ="text-align: left"><input type="checkbox" class="checkAll"> Select all</th>
                                 <th>Name</th>
                                 <th>Last Modified</th>
                                 <th>Size</th>
                                 <th>Type</th>
                             </thead>
                             <tbody>
-                                <?php
-                                    // LOOP FOR ROWTABLE (DEPENDENT TO THE DATA OF FILE TABLE DATABASE(FETCHING))
-                                    for($i=0;$i<10;$i++)
-                                    {
-                                ?>
+
                                     <tr>
                                         <!-- CHECHBOX COLUMN -->
-                                        <td style ="text-align: left"><input type="checkbox" class="check"></td>
                                         <!-- NAME COLUMN -->
-                                        <td>EOF.jpg</td>
+                                        <td id="name">EOF.jpg</td>
                                         <!-- LAST MODIFIED COLUMN -->
-                                        <td>02-15-20</td>
+                                        <td id = "date">02-15-20</td>
                                         <!-- SIZE COLUMN -->
-                                        <td>50.5kb</td>
+                                        <td id="size">50.5kb</td>
                                         <!-- TYPE COLUMN -->
-                                        <td>Image (PNG)</td>
+                                        <td id="type">Image (PNG)</td>
                                     </tr>
-                                <?php
-                                    }
-                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -130,11 +124,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="assets/demo/chart-pie-demo.js"></script>
+
+
 
         <!-- SCRIPT FOR DRAG AND DROPPING FILES TO THE BOX -->
         <script>
@@ -164,7 +155,7 @@
                 //SAVING THE FILE ON DROPPING ON THE DRAG AREA
                 $('.file_drag_area').on('drop', function(e)
                 {
-                    console.log(e);
+                    // console.log(e);
                     e.preventDefault();
                     $(this).removeClass('file_drag_over');
                     $(this).addClass('hide');
@@ -188,6 +179,10 @@
 
                         //try inspect element then console na tab then uncomment below,
                         console.log(files_list[i]);
+                        document.getElementById("name").innerHTML = files_list[i].name;
+                        document.getElementById("size").innerHTML = ((files_list[i].size/1024)/1024).toFixed(2) + 'mb';
+                        document.getElementById("date").innerHTML = files_list[i].lastModifiedDate.getMonth() +"-"+ files_list[i].lastModifiedDate.getDate() +"-"+ files_list[i].lastModifiedDate.getFullYear();
+                        document.getElementById("type").innerHTML = files_list[i].type;
                         formData.append('file[]', files_list[i]);
                     }
 
@@ -204,14 +199,6 @@
             });
         </script>
         <!-- SELECT ALL CHECKBOX -->
-        <script>
-            $(function()
-            {
-                $('.checkAll').click(function()
-                {
-                    $('.check').prop('checked', this.checked)
-                })
-            })
-        </script>
+
     </body>
 </html>

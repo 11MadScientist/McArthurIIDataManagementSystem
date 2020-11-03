@@ -33,7 +33,7 @@
                               <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                               Events
                           </a>
-                          <a class="nav-link" href="Reports.php">
+                          <a class="nav-link" href="Reports-main.php">
                               <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                               Reports
                           </a>
