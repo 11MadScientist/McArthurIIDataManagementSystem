@@ -185,16 +185,25 @@
                         document.getElementById("type").innerHTML = files_list[i].type;
                         formData.append('file[]', files_list[i]);
                     }
+                    console.log(<?php echo $_SESSION['user_id'] ?>);
+                    console.log('<?php echo $result['report_title'] ?>');
+
+                    formData.append('id', <?php echo $_SESSION['user_id'] ?>);
+                    formData.append('filename','<?php echo $result['report_title'] ?>');
+
 
                     $.ajax({
                             // upload.php is a new file located in this same folder
-                            url:"upload.php",
+                            url:"forms/uploadReport.php",
                             method:"POST",
                             data:formData,
                             contentType:false,
                             cache: false,
-                            processData: false
+                            processData: false,
+
                     })
+
+
                 });
             });
         </script>
