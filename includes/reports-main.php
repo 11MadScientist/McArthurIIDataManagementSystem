@@ -35,10 +35,16 @@ include('autoloader.inc.php');
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                       <li class="breadcrumb-item active">Reports</li>
                   </ol>
-                  <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
-                      <button type='submit' value='submit' name='deleteReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
-                      <a href="createReport.php" type='submit' value='submit' name='createReport' class='btn btn-primary' style="width:45%; height:100%;">Create Report</a>
-                  </div>
+                  <?php
+                    if($_SESSION['status'] == 'Administrator')
+                    {
+                      ?>
+                      <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
+                          <a href="createReport.php" type='submit' value='submit' name='createReport' class='btn btn-primary' style="width:45%; height:100%;">Create Report</a>
+                      </div>
+                      <?php
+                    }
+                   ?>
                   <div class = "report-main" style= "width:100%; height:100%; border-style: solid;">
                     <div class="spacing" style="width:100%;height:20px;position: relative;">
                     <div name="progress" style="text-align:left; position:absolute; top:25%; left: 85% "><h11>Your progress</h11></div>
@@ -64,9 +70,24 @@ include('autoloader.inc.php');
                                   <!-- ICON -->
                                   <i class='fas fa-file' style='font-size:25px; padding-bottom: 3px'></i>
                                   <!-- NAME OF REPORT -->
-                                  <a id="title" href="reports.php?id=<?php echo $row['report_id'] ?>"
-                                    class="report_name" style="font-size: 25px; padding:10px;">
-                                    <u><?php echo $row['report_title'] ?></u></a>
+                                  <?php
+                                    if($_SESSION['status'] != 'Administrator')
+                                    {
+                                  ?>
+                                      <a id="title" href="reports.php?id=<?php echo $row['report_id'] ?>"
+                                      class="report_name" style="font-size: 25px; padding:10px;">
+                                      <u><?php echo $row['report_title'] ?></u></a>
+                                  <?php
+                                    }
+                                    else
+                                    {
+                                      ?>
+                                      <a id="title" href="createReport.php?id=<?php echo $row['report_id'] ?>"
+                                        class="report_name" style="font-size: 25px; padding:10px;">
+                                        <u><?php echo $row['report_title'] ?></u></a>
+                                      <?php
+                                    }
+                                   ?>
                                 </a>
 
                                 <div class="report_info">

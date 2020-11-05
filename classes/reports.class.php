@@ -8,6 +8,13 @@ class Reports extends Dbh
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id, $title, $desc, $deadline]);
   }
+  public function editReports($id, $creator_id, $title, $desc, $deadline)
+  {
+    $sql = "UPDATE reports SET creator_id=?, report_title=?, report_description=?, deadline_date=?
+            WHERE report_id=?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$creator_id, $title, $desc, $deadline,$id]);
+  }
   public function insertSample($id, $fileType, $fileData)
   {
     $conn = mysqli_connect("localhost", "root", "", "mddb");
@@ -53,4 +60,14 @@ class Reports extends Dbh
     $info = $stmt->fetch();
     return $info;
   }
+
+  public function deleteReport($id)
+  {
+    $sql = "DELETE FROM reports WHERE report_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+  }
+  // for the submission of reports
+
+
 }

@@ -3,37 +3,48 @@
   include('../autoloader.inc.php');
   date_default_timezone_set('Asia/Manila');
 
-  if(isset($_POST['event-submit']))
+  if(isset($_POST['delete-report']))
+  {
+
+    $title = $_POST['title'];
+    $is = scandir('Reports/'.$title);
+
+    if($is[2]?? null != null)
+    {
+      header("Location: ../createReport.php?error=folderNotEmpty&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time']."&title=".$title.
+      "&description=".$description."&event-img=".$_FILES['event-img']."&id=".$_POST['id']);
+      exit();
+    }
+    else
+    {
+      $obj = new Reports();
+      rmdir('Reports/'.$title);
+      $obj->deleteReport($_POST['id']);
+      header("Location: ../reports-main.php?success=ReportDeleted");
+      exit();
+    }
+
+  }
+
+
+  elseif(isset($_POST['event-submit']))
   {
 
     $end_date = date('Y-m-d H:i:s', strtotime($_POST['end_date'].$_POST['end_time']));
     $title = $_POST['title'];
     $description = $_POST['description'];
 
-    $obj = new Reports();
-    $duplicate = $obj->checkTitle($title);
-
-    if($duplicate?? null !== null)
-    {
-        header("Location: ../createReport.php?error=duplicateTitle&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
-        "&description=".$description."&event-img=".$_FILES['event-img']);
-        exit();
-    }
 
     if(date('Y-m-d H:i:s') > $end_date)
     {
       header("Location: ../createReport.php?error=invalidDateTime&title=".$title.
-      "&description=".$description."&event-img=".$_FILES['event-img']);
+      "&description=".$description."&event-img=".$_FILES['event-img']."&id=".$_POST['id']);
       exit();
     }
 
-
-    $obj->createReports($_SESSION['user_id'],$title, $description, $end_date);
-
-
     $obj = new Reports();
-    $confid = $obj->getId($title);
-
+    $obj->editReports($_POST['id'],$_SESSION['user_id'],$title, $description, $end_date);
+    rename('Reports/'.$_POST['old_title'],'Reports/'.$title);
 //image upload code
 
     if($_FILES['event-img']['name'] != null)
@@ -63,8 +74,8 @@
             $imgData =addslashes(file_get_contents($_FILES['event-img']['tmp_name']));
             $imageProperties = getimageSize($_FILES['event-img']['tmp_name']);
             $obj = new Reports();
-            $obj->insertSample($confid['report_id'], $fileType, $imgData);
-            // exit();
+            $obj->insertSample($_POST['id'], $fileType, $imgData);
+
             header("Location: ../reports-main.php?success=eventCreated&id=".$confid['id']);
             exit();
 
@@ -73,7 +84,7 @@
           {
             echo $fileSize;
             header("Location: ../createReport.php?error=fileSizeTooBig&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
-            "&description=".$description."&event-img=".$_FILES['event-img']."&title=".$title);
+            "&description=".$description."&event-img=".$_FILES['event-img']."&title=".$title."&id=".$_POST['id']);
             exit();
 
           }
@@ -81,8 +92,8 @@
         else
         {
           echo "there was an error in uploading the file";
-          header("Location: ../createReport.php?error=errorInUploadingFileend_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
-          "&description=".$description."&title=".$title);
+          header("Location: ../createReport.php?error=errorInUploadingFile&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
+          "&description=".$description."&title=".$title."&id=".$_POST['id']);
           exit();
         }
       }
@@ -90,11 +101,14 @@
       else
       {
         echo "invalid filetype";
+        header("Location: ../createReport.php?error=invalidTypeofFile&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
+        "&description=".$description."&title=".$title."&id=".$_POST['id']);
+        exit();
       }
     }
     elseif($_FILES['event-img']['name'] == null)
     {
-      header("Location: ../createReport.php?success=reportCreated&id=".$confid['id']);
+      header("Location: ../reports-main.php?success=ReportDeleted");
       exit();
     }
 

@@ -65,8 +65,8 @@
             $obj = new Reports();
             $obj->insertSample($confid['report_id'], $fileType, $imgData);
 
-            mkdir('forms/Reports/'.$title);
-            header("Location: ../reports-main.php?success=eventCreated&id=".$confid['id']);
+            mkdir('Reports/'.$title);
+            header("Location: ../reports-main.php?success=eventCreated");
             exit();
 
           }
@@ -82,7 +82,7 @@
         else
         {
           echo "there was an error in uploading the file";
-          header("Location: ../createReport.php?error=errorInUploadingFileend_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
+          header("Location: ../createReport.php?error=errorInUploadingFile&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
           "&description=".$description."&title=".$title);
           exit();
         }

@@ -74,11 +74,15 @@
                   </ul>
                 </div>
 
+
                 <div class = "submitted_reports" style="position: relative;">
                     <h1 style=" font_size = 24px">Reports Submitted</h1>
+
                     <!-- DRAG AND DROP BOX -->
                     <div class="file_drag_area">
-                        Drag and Drop Files Here to Upload
+                        <div class="drag"><p>Drag and Drop Files Here to Upload</p></div>
+                        <img class="uploadArrow" src="forms/profpic-uploads/uploadArrow.gif" alt="">
+
                     </div>
 
                     <!-- Table for reports submitted -->
@@ -108,12 +112,19 @@
                         </table>
                     </div>
 
-
                     <!-- BUTTON AREA -->
-                    <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
-                        <button type='submit' value='submit' name='deleteReport' class='btn btn-primary' style="width:45%; height:100%; background:red">Delete</button>
-                        <a href="upload.php" type='submit' value='submit' name='submitReport' class='btn btn-primary' style="width:45%; height:100%;">Submit Report</a>
-                    </div>
+                    <?php if($_SESSION['status'] == 'Administrator')
+                          {
+                    ?>
+                            <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
+                              <a href="createReport.php" name='editReport' class='btn btn-primary' style="width:45%; height:100%;">Edit Report</a>
+                            </div>
+                    <?php
+                          }
+                    ?>
+
+
+
 
                 </div>
             </div>
@@ -194,7 +205,7 @@
 
                     $.ajax({
                             // upload.php is a new file located in this same folder
-                            url:"forms/uploadReport.php",
+                            url:"forms/uploadReport.form.php",
                             method:"POST",
                             data:formData,
                             contentType:false,

@@ -7,3 +7,14 @@ h2
 {
   color: #353535;
 }
+.uploadArrow
+{
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin-top: -150px;
+}
+.drag
+{
+  height: 1%;
+}

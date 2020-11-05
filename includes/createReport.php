@@ -32,7 +32,7 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">CreateReport</h1>
+                   <h1 class="mt-4"><?php if(isset($_GET['id'])){echo "EditReport";}else{echo "CreateReport";} ?></h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
                        <li class="breadcrumb-item active">CreateReport</li>
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
@@ -59,6 +59,14 @@ include('autoloader.inc.php');
                              {
                                echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Date-Time Input!</p>';
                              }
+                             elseif($_GET['error'] == "invalidTypeofFile")
+                             {
+                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Invalid Type of File!</p>';
+                             }
+                             elseif($_GET['error'] == "folderNotEmpte")
+                             {
+                               echo '<p class="error"><i class = "fas fa-exclamation-triangle"></i>Folder not empty, cannot delete!</p>';
+                             }
 
                          }
                          elseif(isset($_GET['success']))
@@ -77,10 +85,9 @@ include('autoloader.inc.php');
                          // retrieving information if id is present
                          if(isset($_GET['id']))
                          {
-                           $obj = new Events();
-                           $info = $obj->getOneEvent($_GET['id']);
-                           $start = explode(' ', $info['end_date']);
-                           $end = explode(' ', $info['end_date']);
+                           $obj = new Reports();
+                           $info = $obj->getSpecificReport($_GET['id']);
+                           $end = explode(' ', $info['deadline_date']);
                          }
 
 
@@ -88,6 +95,7 @@ include('autoloader.inc.php');
                     {
                       echo '<form id="form" action="forms/editReport.form.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="'.$_GET['id'].'">';
+                      echo '<input type="hidden" name="old_title" value="'.$info['report_title'].'">';
 
                     }
                     else
@@ -104,7 +112,7 @@ include('autoloader.inc.php');
                        <?php
                           if(isset($_GET['id']))
                           {
-                             echo '<input class="title" type="" id="title" name="title" required value ="'.$info['title'].'">';
+                             echo '<input class="title" type="" id="title" name="title" required value ="'.$info['report_title'].'">';
 
                           }
                           else
@@ -129,7 +137,7 @@ include('autoloader.inc.php');
                             <script>
                                function setData()
                                {
-                                 document.getElementById("description").value = "'.$info['description'].'";
+                                 document.getElementById("description").value = "'.$info['report_description'].'";
 
                                }
                                setData();
@@ -160,7 +168,7 @@ include('autoloader.inc.php');
                           <?php
                              if(isset($_GET['id']))
                              {
-                                 echo '<input value ='.$start[0].' type="date" class="date-time" name="end_date" id = "startdate" value="">';
+                                 echo '<input value ='.$end[0].' type="date" class="date-time" name="end_date" id = "startdate" value="">';
                              }
                              else
                              {
@@ -206,6 +214,14 @@ include('autoloader.inc.php');
                         <?php
                             if(isset($_GET['id']))
                             {
+                              if($info['report_sample'] != null)
+                              {
+                                ?>
+                                <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $row["report_id"]; ?>">
+                                  <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
+                                  Sample <?php echo $info['report_title'] ?></a>
+                                <?php
+                              }
                               ?>
                                 <img class = "main" src="eventImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" onerror="showImg();"  />
                               <?php
@@ -229,7 +245,12 @@ include('autoloader.inc.php');
                          <?php
                           if(isset($_GET['id']))
                           {
-                            echo '<button onclick="return warning()" id="delete" class = "delete" type="submit" name="delete-event">Delete</button>';
+                            echo '<button onclick="return warning()" id="delete" class = "delete" type="submit" name="delete-report">Delete</button>';
+                            echo '<button onclick="return warningEdit()" class = "btn-primary passbtn" type="submit" name="event-submit">Edit</button>';
+                          }
+                          else
+                          {
+                            echo '<button class = "btn-primary passbtn" type="submit" name="event-submit">OK</button>';
                           }
                           ?>
                           <script>
@@ -246,8 +267,22 @@ include('autoloader.inc.php');
                             }
                           }
                           </script>
+                          <script>
+                          function warningEdit()
+                          {
 
-                         <button class = "btn-primary passbtn" type="submit" name="event-submit">OK</button>
+                            var result = confirm("Want to Edit?");
+                            if(!result)
+                            {
+
+                                alert('Submission Canceled');
+                                return false;
+
+                            }
+                          }
+                          </script>
+
+
                        </div>
                      </form>
                    </div>
