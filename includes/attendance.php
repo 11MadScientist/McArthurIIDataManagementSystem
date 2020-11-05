@@ -174,7 +174,7 @@ if($_SESSION['user_id'] == null)
                                       echo 'On-Leave';
                                       $info['pm_status'] = 'On-Leave';
                                     }
-                                    elseif($info['timein_pm']?? null != null)
+                                    elseif($info['timein_pm']?? null != null and date("H:i:sa") <= date("H:i:sa", strtotime('6:30pm')))
                                     {
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">
@@ -359,7 +359,7 @@ if($_SESSION['user_id'] == null)
                                             echo 'On-Leave';
                                             $info['am_status'] = 'On-Leave';
                                           }
-                                          elseif($info['timein_am']?? null !== null)
+                                          elseif($info['timein_am']?? null !== null and date("H:i:sa") <= date("H:i:sa", strtotime('12:00pm')))
                                           {
                                             ?>
                                               <form class="" action="forms/attendance.form.php" method="post">
