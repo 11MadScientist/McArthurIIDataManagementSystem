@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav" style="margin-bottom:-20px;">
         <nav style="background-color:#1F5C2E" class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
+                <div class="small">Logged in as: <?php echo $_SESSION['user_lname'].", ".$_SESSION['user_fname']." ".$_SESSION['user_mname'] ?></div>
                 McArthurII District
             </div>
         </nav>

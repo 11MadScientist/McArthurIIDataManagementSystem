@@ -348,7 +348,7 @@ if($_SESSION['user_id'] == null)
                                         if($in and $in !== false)
                                         {
                                           echo 'On-Leave';
-                                          $info['pm_status'] = 'On-Leave';
+                                          $info['am_status'] = 'On-Leave';
                                         }
                                         else
                                         {
