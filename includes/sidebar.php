@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav" style="margin-bottom:-20px;">
         <nav style="background-color:#1F5C2E" class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">

@@ -26,24 +26,30 @@ if($_SESSION['user_id'] == null)
       <div></div>
       <div id="layoutSidenav_content">
           <main>
-              <div class="container-fluid">
+              <div class="container-fluid mt-auto" style="padding-right:0px" >
                   <h1 class="mt-4">Attendance</h1>
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
                       <li class="breadcrumb-item active">Attendance</li>
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                   </ol>
-
-                  <!--ATTENDANCE TABLE-->
+                  <div class="head">
                   <a href="RequestLeave.php" name='accpt-req' class='but btn-primary'>Request Leave</a>
                   <a href="LeaveRequestList.php" name='accpt-req' class='but btn-primary'>Leave Requests List</a>
-                    <table style='width:100%' class='display table table-hover center' cellspacing='0'>
+
+                  <!--ATTENDANCE TABLE-->
+                    <table style='width:100%'>
+                      <col style="width:1%; height:15px">
+                      <col style="width:20%; height:15px">
+                      <col style=" height:15px">
+                      <col style=" height:15px">
+                      <col style="width:10%; height:15px">
                       <thead>
                         <tr style="text-align: center; vertical-align: middle;">
-                          <th><i class='fas fa-calendar-alt' style='font-size:15px'></i>  Date</th>
-                          <th><i class='fas fa-clock' style='font-size:15px'></i>  AM/PM</th>
-                          <th><i class='fas fa-clock' style='font-size:15px'></i>  Time-In</th>
-                          <th><i class='fas fa-clock' style='font-size:15px'></i>  Time-Out</th>
-                          <th><i class='fas fa-exclamation-circle' style='font-size:15px'></i>  Status</th>
+                          <th><i class='fas fa-calendar-alt' ></i>  Date</th>
+                          <th><i class='fas fa-clock' ></i>  AM/PM</th>
+                          <th><i class='fas fa-clock' ></i>  Time-In</th>
+                          <th><i class='fas fa-clock' ></i>  Time-Out</th>
+                          <th><i class='fas fa-exclamation-circle'></i>  Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -117,7 +123,7 @@ if($_SESSION['user_id'] == null)
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">
                                             <input type="hidden" name="status" value="Present">
-                                            <button type='submit' value='submit' name='timein_pmsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                            <button type='submit' value='submit' name='timein_pmsubmit' class='sub btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
                                         </form>
 
                                       <?php
@@ -179,7 +185,7 @@ if($_SESSION['user_id'] == null)
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">
                                             <input type="hidden" name="status" value="Present">
-                                            <button type='submit' value='submit' name='timeout_pmsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                            <button type='submit' value='submit' name='timeout_pmsubmit' class='sub btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
                                         </form>
 
                                       <?php
@@ -241,8 +247,6 @@ if($_SESSION['user_id'] == null)
                                   {
                                     echo "Absent";
                                   }
-
-
                                 }
                               ?>
                           </td>
@@ -293,7 +297,7 @@ if($_SESSION['user_id'] == null)
                                             ?>
                                               <form class="" action="forms/attendance.form.php" method="post">
                                                   <input type="hidden" name="status" value="Present">
-                                                  <button type='submit' value='submit' name='timein_amsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                                  <button type='submit' value='submit' name='timein_amsubmit' class='sub btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
                                               </form>
 
                                             <?php
@@ -303,8 +307,6 @@ if($_SESSION['user_id'] == null)
                                           echo "No-Time-In";
                                         }
                                       }
-
-
                                   }
                                   else
                                     //timestamp for the previous days
@@ -348,7 +350,7 @@ if($_SESSION['user_id'] == null)
                                         if($in and $in !== false)
                                         {
                                           echo 'On-Leave';
-                                          $info['am_status'] = 'On-Leave';
+                                          $info['pm_status'] = 'On-Leave';
                                         }
                                         else
                                         {
@@ -364,7 +366,7 @@ if($_SESSION['user_id'] == null)
                                             ?>
                                               <form class="" action="forms/attendance.form.php" method="post">
                                                   <input type="hidden" name="status" value="Present">
-                                                  <button type='submit' value='submit' name='timeout_amsubmit' class='btn btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
+                                                  <button type='submit' value='submit' name='timeout_amsubmit' class='sub btn-primary' onclick='submit(\"".$today."\")'>Submit Attendance</button>
                                               </form>
 
                                             <?php
@@ -434,7 +436,7 @@ if($_SESSION['user_id'] == null)
                             ?>
                       </tbody>
                     </table>
-
+                        </div>
               </div>
           </main>
         <?php include('footer.php') ?>
@@ -446,11 +448,5 @@ if($_SESSION['user_id'] == null)
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
-
-        <script>
-          function submit(str) {
-            alert(`You have successfully submitted your attendance! Timestamp: ${str}`)
-          }
-        </script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-th
+/* th
 {
   color: white;
   background-color: #03C04A;
@@ -16,4 +16,92 @@ th
 {
   min-width: 220px;
   height: 50px;
+} */
+
+/*
+th
+{
+  color: white;
+  background-color: #03C04A;
+}
+
+.but
+{
+  display: relative;
+  position: relative;
+  margin-bottom: 20px;
+  float: right;
+  width: 330px;
+  border-radius: 3px;
+}
+.btn
+{
+  min-width: 220px;
+  height: 50px;
+}
+ */
+
+ th
+ {
+     color: white;
+     background-color: #03C04A;
+     height: 50px;
+ }
+
+ .but
+ {
+     display: relative;
+     position: relative;
+     margin-bottom: 20px;
+     float: right;
+     width: 330px;
+     border-radius: 3px;
+
+ }
+
+ .sub
+ {
+     max-width: 220px;
+     height: 50px;
+     width:  100%;
+ }
+ tr
+ {
+     text-align: middle;
+ }
+
+ /* .head
+ {
+   margin: 5px;
+ } */
+
+ @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .but
+  {
+    width:45%;
+    font-size: 10px;
+    margin-right: 13px;
+  }
+
+  /* SUBMIT BUTTON */
+  .sub
+ {
+     max-width: 100px;
+     height: 50px;
+     width:  100%;
+     line-height: 1em;
+ }
+
+ th
+ {
+   font-size: 10px;
+   vertical-align: middle;
+   height: 30px;
+ }
+ tr
+ {
+   font-size:13px;
+ }
+
 }
