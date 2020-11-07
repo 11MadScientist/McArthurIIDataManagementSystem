@@ -42,4 +42,14 @@ class AddInfo extends Dbh
     }
 
   }
+
+  public function getStation($id)
+  {
+    $sql = "SELECT station FROM add_info
+            WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+    $info = $stmt->fetch();
+    return $info;
+  }
 }

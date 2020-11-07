@@ -1,10 +1,14 @@
 <?php
 
 session_start();
-
+$exp = "/Principal/";
+if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
+{
+  header("Location: forms/logout.form.php");
+  exit();
+}
 include('autoloader.inc.php'); ?>
-
-!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -57,12 +61,13 @@ include('autoloader.inc.php'); ?>
                   <div class ="requests">
 
                     <!--REQUESTS TABLE-->
+                    <form class="" action="forms/personnel.form.php" method="post">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"><center>Select All</center></th>
+                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"><center></center></th>
                                         <th>Name</th>
                                         <th>Position</th>
                                         <th>Grade/Subject</th>
@@ -88,11 +93,17 @@ include('autoloader.inc.php'); ?>
                                           echo "<script>alert('Accepted Successfully');</script>";
                                         }
                                       }
+                                        $obj = new User();
+                                        $res;
 
-
-
-                                      $obj = new User();
-                                      $res = $obj->getPersonnel();
+                                      if($_SESSION['status'] == 'Administrator')
+                                      {
+                                        $res = $obj->getPersonnel();
+                                      }
+                                      else
+                                      {
+                                        $res = $obj->getSchoolPersonnel($_SESSION['station']);
+                                      }
 
                                       while($row = mysqli_fetch_array($res))
                                       {
@@ -114,7 +125,9 @@ include('autoloader.inc.php'); ?>
                         </div>
                         <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
 
-                            <button onclick="warndel()" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DECLINE</button>
+                            <button onclick="warndel()" type='submit' value='submit' name='req-delete'
+                             class='btn btn-primary' style="width:35%;margin-right:30px; height:100%;
+                              background:red; border-radius:3px;">DELETE</button>
                             <script>
                             function warndel()
                             {
@@ -130,21 +143,7 @@ include('autoloader.inc.php'); ?>
                             }
                             </script>
 
-                            <button onclick="warnAccpt()" type='submit' value='submit' name='accpt-req' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">ACCEPT</button>
-                            <script>
-                            function warnAccpt()
-                            {
 
-                              var result = confirm("Are you sure you want to accpet checked request/s?");
-                              if(!result)
-                              {
-
-                                  alert('Submission Canceled');
-                                  return false;
-
-                              }
-                            }
-                            </script>
                             </form>
                         </div>
                 </div>

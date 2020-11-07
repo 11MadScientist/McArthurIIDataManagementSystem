@@ -48,6 +48,11 @@ if(isset($_POST['login-user']))
           $_SESSION['designation'] = $user['designation'];
           $_SESSION['status'] = $user['status'];
           $_SESSION['day'] = date('Y-m-d',strtotime('today'));
+
+          $obj = new AddInfo();
+          $res = $obj->getStation($_SESSION['user_id']);
+          $_SESSION['station'] = $res['station'];
+
           header("Location: ../dashboard.php?success");
           exit();
       }

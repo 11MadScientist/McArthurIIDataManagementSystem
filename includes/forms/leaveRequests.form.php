@@ -9,17 +9,13 @@ if(isset($_POST['decline-req']))
     header("Location: ../Requests.php?error=empty");
     exit();
   }
+    $obj = new Leave();
   foreach($_POST['request'] as $id)
   {
-
-    $obj = new Leave();
     $obj->deleteLeave($id);
-    header("Location: ../LeaveRequests.php?success=accptSuccessfully");
-    exit();
   }
-
-
-
+  header("Location: ../LeaveRequests.php?success=deletedSuccessfully");
+  exit();
 
 }
 
@@ -35,12 +31,16 @@ if(isset($_POST['accpt-req']))
 
     $obj = new Leave();
     $obj->acceptLeave($id);
-    header("Location: ../LeaveRequests.php?success=accptSuccessfully");
-    exit();
+
 
   }
+  header("Location: ../LeaveRequests.php?success=accptSuccessfully");
+  exit();
 
 
-
-
+}
+else
+{
+  header("Location: ../logout.form.php");
+  exit();
 }

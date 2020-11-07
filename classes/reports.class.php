@@ -67,7 +67,59 @@ class Reports extends Dbh
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id]);
   }
-  // for the submission of reports
+  // for the submission of reports for users
+  public function submitReport($user_id, $report_id, $file_name, $file_type)
+  {
+    $sql = "SELECT * FROM submitted_reports
+            WHERE user_id=? AND report_id=?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$user_id, $report_id]);
+    $info = $stmt->fetch();
+
+    if($info != null)
+    {
+      $sql = "UPDATE submitted_reports
+              SET file_name=?, file_type = ?
+              WHERE user_id=? AND report_id=?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$file_name, $file_type, $user_id, $report_id]);
+    }
+    else
+    {
+      $sql = "INSERT INTO submitted_reports(user_id, report_id, file_type, file_name)
+              VALUES(?, ?, ?, ?)";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$user_id, $report_id, $file_type, $file_name]);
+    }
+  }
+
+  public function getSubmittedReport($user_id, $report_id)
+  {
+    $sql = "SELECT * FROM submitted_reports
+            WHERE user_id=? AND report_id=?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$user_id, $report_id]);
+    $info = $stmt->fetch();
+    return $info;
+  }
+
+  public function getSubmittedReports($report_id)
+  {
+    $sql = "SELECT l_name, f_name, m_name, designation,
+     users.user_id, station, report_id,
+     date_submitted, file_name, file_type
+    FROM (users INNER JOIN add_info
+      ON users.user_id = add_info.user_id)
+    LEFT JOIN submitted_reports
+    ON users.user_id = submitted_reports.user_id
+    AND report_id={$report_id}
+    ORDER BY station, l_name, f_name, m_name, designation";
+            $info = $this->mySqli($sql);
+            return $info;
+  }
+
+
+
 
 
 }

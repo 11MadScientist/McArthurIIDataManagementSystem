@@ -200,8 +200,9 @@
                     console.log('<?php echo $result['report_title'] ?>');
 
                     formData.append('id', <?php echo $_SESSION['user_id'] ?>);
+                    formData.append('report_id','<?php echo $_GET['id'] ?>');
                     formData.append('filename','<?php echo $result['report_title'] ?>');
-
+                    console.log(<?php ECHO $_GET['id']; ?>);
 
                     $.ajax({
                             // upload.php is a new file located in this same folder

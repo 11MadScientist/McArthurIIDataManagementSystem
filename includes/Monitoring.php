@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if($_SESSION['status'] !=  'Administrator')
+$exp = "/Principal/";
+if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
 {
   header("Location: forms/logout.form.php");
   exit();
@@ -135,7 +136,15 @@ date_default_timezone_set('Asia/Manila');
 
                                     <?php
                                       $obj = new Monitoring();
-                                      $res = $obj->showAttendance($_SESSION['day']);
+                                      $res;
+                                      if($_SESSION['status']  == 'Administrator')
+                                      {
+                                        $res = $obj->showAttendance($_SESSION['day']);
+                                      }
+                                      else
+                                      {
+                                        $res = $obj->showSchoolAttendance($_SESSION['day'], $_SESSION['station']);
+                                      }
 
                                       while($row = mysqli_fetch_array($res))
                                       {

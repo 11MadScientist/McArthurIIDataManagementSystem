@@ -45,7 +45,7 @@
       $fileSize = $_FILES['event-img']['size'];
       $fileError = $_FILES['event-img']['error'];
       $fileType = $_FILES['event-img']['type'];
-
+      $nm = explode('.', $filename);
       $fileExt = explode('.', $filename);
       $fileActualExt = strtolower(end($fileExt));
 
@@ -63,7 +63,7 @@
             $imgData =addslashes(file_get_contents($_FILES['event-img']['tmp_name']));
             $imageProperties = getimageSize($_FILES['event-img']['tmp_name']);
             $obj = new Reports();
-            $obj->insertSample($confid['report_id'], $fileType, $imgData);
+            $obj->insertSample($confid['report_id'], $nm[1], $imgData);
 
             mkdir('Reports/'.$title);
             header("Location: ../reports-main.php?success=eventCreated");

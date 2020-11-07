@@ -30,14 +30,13 @@ if(isset($_POST['accpt-req']))
     header("Location: ../Requests.php?error=empty");
     exit();
   }
+  $obj = new User();
   foreach($_POST['request'] as $id)
   {
-
-    $obj = new User();
     $obj->setStatus($id);
-    header("Location: ../Requests.php?success=accptSuccessfully");
-    exit();
   }
+  header("Location: ../Requests.php?success=accptSuccessfully");
+  exit();
 
 
 
