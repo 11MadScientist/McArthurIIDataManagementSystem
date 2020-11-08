@@ -18,6 +18,7 @@
         <meta name="author" content="" />
         <title>McArthurII District Attendance</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/announcements.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -35,8 +36,8 @@
               <div class="container-fluid">
                   <h1 class="mt-4">Announcements</h1>
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                      <li class="breadcrumb-item active">Announcements</li>
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                      <li class="breadcrumb-item active">Announcements</li>
                   </ol>
 
                   <div class="buttons">
@@ -48,19 +49,16 @@
                      <?php
                       }
                       ?>
-
-
                   </div>
-
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <col style="width:10%">
-        	                   <col style="width:20%">
+                            <col style="width:25%">
+        	                   <col style="width:25%">
         	                    <col style="width:30%">
                               <thead>
                                   <tr>
-                                    <th><i class='fas fa-calendar-alt' style='font-size:15px'></i> Date Created</th>
+                                    <th class="date"><i class='fas fa-calendar-alt' style='font-size:15px'></i> Date Created</th>
                                     <th><i class='fas fa-exclamation-circle' style='font-size:15px'></i> Announcement</th>
-                                    <th><i class='fas fa-info' style='font-size:15px'></i> Description</th>
+                                    <th ><i class='fas fa-info' style='font-size:15px'></i> Description</th>
                                   </tr>
                               </thead>
 
