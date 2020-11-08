@@ -16,8 +16,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>McArthurII District Attendance</title>
+        <title>McArthurII District Events</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/events.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -36,8 +37,8 @@
               <div class="container-fluid">
                   <h1 class="mt-4">Events</h1>
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                       <li class="breadcrumb-item active">Events</li>
-                      <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                   </ol>
 
                   <div class="buttons">
@@ -53,10 +54,10 @@
                   </div>
 
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <col style="width:20%">
-                    <col style="width:20%">
-	                   <col style="width:30%">
-	                    <col style="width:30%">
+                    <col style="width:25%">
+                    <col style="width:25%">
+	                   <col style="width:25%">
+	                    <col style="width:25%">
                       <thead>
                           <tr>
                             <th><i class='fas fa-calendar-alt' style='font-size:15px'></i> Start Date</th>
@@ -98,11 +99,6 @@
 
                       </tbody>
                   </table>
-
-
-
-
-
               </div>
 
           </main>
