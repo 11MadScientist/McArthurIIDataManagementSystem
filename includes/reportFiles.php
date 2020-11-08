@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <?php session_start();
 include('autoloader.inc.php');
- ?>
+$exp = "/Principal/";
+if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
+{
+  header("Location: forms/logout.form.php");
+  exit();
+}
+date_default_timezone_set('Asia/Manila');
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />

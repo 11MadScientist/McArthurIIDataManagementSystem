@@ -52,6 +52,7 @@
 
                 <?php $obj = new Reports();
                       $result=$obj->getSpecificReport($_GET['id']);
+                      $indv = $obj->getSubmittedReport($_SESSION['user_id'], $result['report_id']);
                  ?>
 
                 <!-- DESCRIPTION AREA -->
@@ -76,14 +77,23 @@
 
 
                 <div class = "submitted_reports" style="position: relative;">
-                    <h1 style=" font_size = 24px">Reports Submitted</h1>
+                    <h1>Reports Submitted</h1>
 
                     <!-- DRAG AND DROP BOX -->
-                    <div class="file_drag_area">
+                    <div class="file_drag_area" id="drag">
                         <div class="drag"><p>Drag and Drop Files Here to Upload</p></div>
                         <img class="uploadArrow" src="forms/profpic-uploads/uploadArrow.gif" alt="">
-
                     </div>
+                    <?php
+                      if($indv['file_name']?? null != null)
+                      {
+                        ?>
+                        <script>
+                          document.getElementById("drag").style.display = "none";
+                        </script>
+                        <?php
+                      }
+                     ?>
 
                     <!-- Table for reports submitted -->
                     <div class = "table" style = "width:100%; height:370px; overflow-x: auto; position: relative;">
@@ -91,7 +101,7 @@
                             <thead>
                                 <!-- HEADER -->
                                 <th>Name</th>
-                                <th>Last Modified</th>
+
                                 <th>Size</th>
                                 <th>Type</th>
                             </thead>
@@ -100,9 +110,11 @@
                                     <tr>
                                         <!-- CHECHBOX COLUMN -->
                                         <!-- NAME COLUMN -->
-                                        <td id="name">EOF.jpg</td>
+                                        <td ><a id="name" href='forms/Reports/<?php echo $result['report_title']
+                                        .'/'.$indv['file_name'].$indv['file_type']?>'>
+                                        <?php echo $indv['file_name'].$indv['file_type'] ?></a></td>
                                         <!-- LAST MODIFIED COLUMN -->
-                                        <td id = "date">02-15-20</td>
+
                                         <!-- SIZE COLUMN -->
                                         <td id="size">50.5kb</td>
                                         <!-- TYPE COLUMN -->
@@ -113,15 +125,56 @@
                     </div>
 
                     <!-- BUTTON AREA -->
-                    <?php if($_SESSION['status'] == 'Administrator')
+                    <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv" id="btns">
+
+                        <form style="width:35%;margin-right:30px;  border-radius:3px;" class="" action="forms/uploadReport.form.php" method="post">
+                          <input type="hidden" name="id" value= <?php echo $_SESSION['user_id'] ?>>
+                          <input type="hidden" name="report_id" value=<?php echo $_GET['id'] ?>>
+                          <button onclick="return warndel();" type='submit' value='submit' name='delete-rep' class='btn btn-primary' style="width:100%;margin-right:30px;  background:red; border-radius:3px;">DELETE</button>
+                          <script>
+                          function warndel()
+                          {
+
+                            var result = confirm("Are you sure you want to delete checked request/s?");
+                            if(!result)
+                            {
+
+                                alert('Submission Canceled');
+                                return false;
+
+                            }
+                          }
+                          </script>
+                        </form>
+
+                        <button onclick="edit();" type='submit' value='submit' name='edit-rep' class='btn btn-primary' style="width:35%; border-radius:3px; height:100%;">EDIT</button>
+                        <script>
+                        function edit()
+                        {
+                            document.getElementById("drag").style.display = "block";
+                        }
+                        </script>
+
+
+                    </div>
+                    <?php if(isset($indv['file_name']) == null)
                           {
                     ?>
-                            <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
-                              <a href="createReport.php" name='editReport' class='btn btn-primary' style="width:45%; height:100%;">Edit Report</a>
-                            </div>
+                            <script>
+                              document.getElementById("btns").style.display = "none";
+                            </script>
                     <?php
                           }
+                          else
+                          {
+                            ?>
+                            <script>
+                              document.getElementById("btns").style.display = "flex";
+                            </script>
+                            <?php
+                          }
                     ?>
+
 
 
 
@@ -191,8 +244,7 @@
                         //try inspect element then console na tab then uncomment below,
                         console.log(files_list[i]);
                         document.getElementById("name").innerHTML = files_list[i].name;
-                        document.getElementById("size").innerHTML = ((files_list[i].size/1024)/1024).toFixed(2) + 'mb';
-                        document.getElementById("date").innerHTML = files_list[i].lastModifiedDate.getMonth() +"-"+ files_list[i].lastModifiedDate.getDate() +"-"+ files_list[i].lastModifiedDate.getFullYear();
+                        document.getElementById("size").innerHTML = (files_list[i].size/1024).toFixed(2) + 'kb';
                         document.getElementById("type").innerHTML = files_list[i].type;
                         formData.append('file[]', files_list[i]);
                     }
@@ -203,6 +255,7 @@
                     formData.append('report_id','<?php echo $_GET['id'] ?>');
                     formData.append('filename','<?php echo $result['report_title'] ?>');
                     console.log(<?php ECHO $_GET['id']; ?>);
+                    document.getElementById("btns").style.display = "flex";
 
                     $.ajax({
                             // upload.php is a new file located in this same folder
@@ -212,8 +265,13 @@
                             contentType:false,
                             cache: false,
                             processData: false,
+                            success:function(text)
+                            {
+                                document.getElementById("name").href = text ;
+                            }
 
                     })
+
 
 
                 });

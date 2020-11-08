@@ -45,7 +45,7 @@ include('autoloader.inc.php');
                       <?php
                     }
                    ?>
-                  <div class = "report-main" style= "width:100%; height:100%; border-style: solid;">
+                  <div class = "report-main">
                     <div class="spacing" style="width:100%;height:20px;position: relative;">
                     <div name="progress" style="text-align:left; position:absolute; top:25%; left: 85% "><h11>Your progress</h11></div>
                   </div>
@@ -99,7 +99,21 @@ include('autoloader.inc.php');
 
                                   <!-- STATUS PROGRESS CHECHBOX -->
                                   <span class="action">
-                                    <input type="checkbox" class="check" style="width: 20px; height: 20px">
+                                    <?php
+                                      $indv = $obj->getSubmittedReport($_SESSION['user_id'], $row['report_id']);
+                                      if($indv['file_name']?? null != null)
+                                      {
+                                        echo '<input type="checkbox" class="check" id ="check" >
+                                        <script>
+                                          document.getElementById("check").checked = true;
+                                        </script>
+                                              ';
+                                      }
+                                      else
+                                      {
+                                        echo '<input type="checkbox" class="check"  disabled>';
+                                      }
+                                     ?>
                                   </span>
 
                                   <!-- FILE ATTACHMENT DIVISION -->

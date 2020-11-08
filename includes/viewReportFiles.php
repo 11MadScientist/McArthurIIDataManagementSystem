@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <?php session_start();
 include('autoloader.inc.php');
- ?>
+
+$exp = "/Principal/";
+if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
+{
+  header("Location: forms/logout.form.php");
+  exit();
+}
+date_default_timezone_set('Asia/Manila');
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -48,13 +56,13 @@ include('autoloader.inc.php');
                     <div class="list_content" style="position: relative; ">
                       <ul class="report_list" style="list-style-type: none;">
 
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table" id="dataTable" width="100%">
                           <col style="width:70%">
                           <col style="width:30%">
 
                             <thead>
                                 <tr>
-                                  <th><i class='fas fa-user' style='font-size:15px'></i> Submitted by</th>
+                                  <th style="padding-left:10%;"><i class='fas fa-user' style='font-size:15px;'></i> Submitted by</th>
                                   <th><i class='fas fa-calendar-alt' style='font-size:15px'></i> Date of Submission</th>
                                 </tr>
                             </thead>
@@ -63,7 +71,16 @@ include('autoloader.inc.php');
                               <?php
                               $obj = new Reports();
                               $result = $obj->getSpecificReport($_GET['id']);
-                              $res = $obj->getSubmittedReports($_GET['id']);
+                              $res;
+                              if($_SESSION['status']  == 'Administrator')
+                              {
+                                $res = $obj->getSubmittedReports($_GET['id']);
+                              }
+                              else
+                              {
+                                $res = $obj->getSubmittedSchoolReports($_GET['id'], $_SESSION['station']);
+                              }
+
 
                                 //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
                                 while($row = mysqli_fetch_array($res))
@@ -75,7 +92,7 @@ include('autoloader.inc.php');
                                     <td><li>
                                       <div class="list_div" style="width: 100%; height: 10%; padding-bottom: 20px; " >
                                         <!-- NAME DIV -->
-                                        <div style="width:92%; border-bottom: 2px dotted grey; padding-bottom: 5px">
+                                        <div style="width:100%; border-bottom: 2px dotted grey; padding-bottom: 5px">
 
                                           <!-- LINK TO REPORT SUBMISSION PHP -->
                                             <!-- ICON -->
@@ -97,7 +114,9 @@ include('autoloader.inc.php');
                                                   <?php
                                                   if($row['file_name']?? null !== null)
                                                   { ?>
-                                                    <a class="report_name file_ext" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $result["report_id"]; ?>">
+                                                    <a class="report_name file_ext" style="font-size: 15px; padding:10px;"
+                                                      href='forms/Reports/<?php echo $rep['report_title']
+                                                      .'/'.$row['file_name'].$row['file_type']?>'>
                                                       <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
                                                       Submission: <?php echo $row['file_name'].$row['file_type'] ?></a>
                                                     <?php
@@ -121,12 +140,20 @@ include('autoloader.inc.php');
                                       </div>
                                     </li>
                                   </td>
-                                    <td><?php
+
+                                    <td>
+
+                                    <?php
                                     if($row['date_submitted'] != null)
                                     {
+                                      echo '<div style="width:92%; border-bottom: 2px dotted grey; padding-bottom: 79px">';
                                       echo date('Y-M-d' , strtotime($row['date_submitted']));
+                                      echo '</div>';
                                     }
-                                     ?></td>
+                                     ?>
+
+
+                                   </td>
                                   </tr>
                                 <?php
                                 }

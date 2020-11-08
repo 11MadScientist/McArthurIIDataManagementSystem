@@ -1,3 +1,8 @@
+
+table, th, td
+{
+  border: 0px solid black;
+}
 #title, td
 {
   color:  #FF6600;
@@ -46,4 +51,10 @@ a
 .icn
 {
   color: #353535;
+}
+#check, .check
+{
+
+  width: 20px;
+  height: 20px;
 }

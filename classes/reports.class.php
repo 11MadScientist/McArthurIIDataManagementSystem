@@ -67,6 +67,14 @@ class Reports extends Dbh
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id]);
   }
+
+  public function deleteSubmittedReport($user_id, $report_id)
+  {
+    $sql = "DELETE FROM submitted_reports
+    WHERE user_id = ? AND report_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$user_id, $report_id]);
+  }
   // for the submission of reports for users
   public function submitReport($user_id, $report_id, $file_name, $file_type)
   {
@@ -110,6 +118,20 @@ class Reports extends Dbh
      date_submitted, file_name, file_type
     FROM (users INNER JOIN add_info
       ON users.user_id = add_info.user_id)
+    LEFT JOIN submitted_reports
+    ON users.user_id = submitted_reports.user_id
+    AND report_id={$report_id}
+    ORDER BY station, l_name, f_name, m_name, designation";
+            $info = $this->mySqli($sql);
+            return $info;
+  }
+  public function getSubmittedSchoolReports($report_id, $station)
+  {
+    $sql = "SELECT l_name, f_name, m_name, designation,
+     users.user_id, station, report_id,
+     date_submitted, file_name, file_type
+    FROM (users INNER JOIN add_info
+      ON users.user_id = add_info.user_id AND station = '{$station}')
     LEFT JOIN submitted_reports
     ON users.user_id = submitted_reports.user_id
     AND report_id={$report_id}
