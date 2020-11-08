@@ -48,7 +48,9 @@
 {
   display: inline-block;
   width: 60%;
-  float: right;
+  /* float: right; */
+  margin-left: 40%;
+  /* padding-top: 40%; */
 }
 table
 {
@@ -67,4 +69,63 @@ th
 {
   color: white;
   background-color: #03C04A;
+}
+
+#dataTable_filter
+{
+  width: 100%;
+  padding-left: 70%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  h1
+  {
+      font-size: 2em;
+  }
+
+  th{
+    line-height: 0em;
+    font-size: 1em;
+  }
+
+  #dataTable
+  {
+      font-size: 10px;
+      vertical-align: middle;
+  }
+  
+  .fas{
+    font-size: 5px;
+  }
+
+  .container-fluid
+  {
+      padding-right: 0%;
+  }
+
+  .col-md-6
+  {
+      /* padding-top: 50px; */
+      width: 50%;
+      font-size: 1em;
+      /* height: 50px; */
+  }
+
+  /* SEARCH BOX */
+  #dataTable_filter
+  {
+      width: 100%;
+      padding-left: 50%;
+  }
+
+  .goto-calendar
+  {
+    width:65%;
+    font-size: 10px;
+    height: 1em;
+    line-height: 0em;
+    margin-right: 50%;
+  }
 }
