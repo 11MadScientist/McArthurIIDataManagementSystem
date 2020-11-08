@@ -29,8 +29,8 @@ if($_SESSION['user_id'] == null)
               <div class="container-fluid mt-auto" style="padding-right:0px" >
                   <h1 class="mt-4">Attendance</h1>
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                      <li class="breadcrumb-item active">Attendance</li>
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                      <li class="breadcrumb-item active">Attendance</li>
                   </ol>
                   <div class="head">
                   <a href="RequestLeave.php" name='accpt-req' class='but btn-primary'>Request Leave</a>
