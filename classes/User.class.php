@@ -53,6 +53,17 @@ class User extends Dbh
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$lname, $mname, $fname, $desig, $email,$id]);
   }
+  //delete user
+  public function deleteUser($id)
+  {
+    $sql = "DELETE FROM users WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+
+    $sql = "DELETE FROM add_info WHERE user_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+  }
 
   // request sql
   public function getRequest()
@@ -79,12 +90,25 @@ class User extends Dbh
     $stmt->execute([$id]);
   }
 
+
   // Personnel sql
   public function getPersonnel()
   {
     $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
              LEFT JOIN add_info ON users.user_id = add_info.user_id AND status != ''
               ORDER BY station, l_name, f_name, m_name, grade";
+    $res = $this->mySqli($sql);
+    return $res;
+
+  }
+
+  // personel sql for principals
+  public function getSchoolPersonnel($station)
+  {
+    $sql = "SELECT users.user_id, l_name, f_name, m_name, designation, grade, station FROM users
+             INNER JOIN add_info ON users.user_id = add_info.user_id AND status != ''
+             AND station = '{$station}'
+             ORDER BY station, l_name, f_name, m_name, grade";
     $res = $this->mySqli($sql);
     return $res;
 

@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-if($_SESSION['status']  != 'Administrator')
+$exp = "/Principal/";
+if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
 {
   header("Location: forms/logout.form.php");
   exit();
@@ -25,7 +26,7 @@ include('autoloader.inc.php'); ?>
 
         <meta name="author" content="" />
 
-        <title>McArthurII District LeaveRequests</title>
+        <title>McArthurII District AcceptedLeave</title>
 
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/events.css" rel="stylesheet" />
@@ -49,11 +50,17 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">LeaveRequests</h1>
+                  <h1 class="mt-4">AcceptedLeave</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
-                      <li class="breadcrumb-item active">LeaveRequests</li>
+                      <li class="breadcrumb-item active">AcceptedLeave</li>
+                      <?php if($_SESSION['status']  == 'Administrator')
+                      {
+                        ?>
+                        <li class="breadcrumb-item active"><a href="acceptedLeave.php">AcceptedLeave</a></li>
+                        <?php
+                      } ?>
 
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
 
@@ -65,13 +72,9 @@ include('autoloader.inc.php'); ?>
                     <div class="card-body">
                         <div class="table-responsive">
 
-                            <form class="" action="forms/leaveRequests.form.php" method="post">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <a href="acceptedLeave.php" type='submit' value='submit' name='accpt-req' class='btn btn-primary'
-                              style="width:350px; border-radius:3px; display:inline-block; float:right">ACCEPTED LEAVE</a>
                                 <thead>
                                     <tr>
-                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"></th>
                                         <th>Name</th>
                                         <th>Position</th>
                                         <th>Grade/Subject</th>
@@ -86,14 +89,20 @@ include('autoloader.inc.php'); ?>
                                     <?php
 
                                       $obj = new Leave();
-                                      $res = $obj->leaveList();
-
+                                      $res;
+                                      if($_SESSION['status']  == 'Administrator')
+                                      {
+                                        $res = $obj->acceptedLeaveList();
+                                      }
+                                      else
+                                      {
+                                        $res = $obj->acceptedSchoolLeaveList($_SESSION['station']);
+                                      }
 
 
                                       while($row = mysqli_fetch_array($res))
                                       {
                                           echo "<tr>
-                                                <td style=text-align:left;><input type=checkbox class='check' name='request[]' value=".$row['id']."></td>
                                                 <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
                                                "<td>".$row['designation']."</td>".
                                                "<td>".$row['grade']."</td>".
@@ -143,7 +152,6 @@ include('autoloader.inc.php'); ?>
                               }
                             }
                             </script>
-                            </form>
                         </div>
                 </div>
 

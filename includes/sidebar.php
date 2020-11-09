@@ -41,34 +41,65 @@
                     </div>
 
                     <?php
-                      if($_SESSION['status']  == 'Administrator')
+                    $exp = "/Principal/";
+                      if($_SESSION['status']  == 'Administrator' or preg_match($exp, $_SESSION['designation']))
                       {
-                        echo '  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                          ?>
+                          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                               <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                               Administrator
                               <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                           </a>
                           <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                               <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="Requests.php">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
-                                    Requests
-                                </a>
-                                <a class="nav-link" href="Personnel.php">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
-                                    Personnel
+                                <?php if($_SESSION['status']  == 'Administrator')
+                                {
+                                  echo '<a class="nav-link" href="LeaveRequests.php">';
+                                }
+                                else
+                                {
+                                  echo '<a class="nav-link" href="acceptedLeave.php">';
+                                }
+                                 ?>
+
+                                    <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+                                    Leave
                                 </a>
                                 <a class="nav-link" href="Monitoring.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                     Monitoring
                                 </a>
-                                <a class="nav-link" href="LeaveRequests.php">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
-                                    LeaveRequests
-                                </a>
+                                <a class="nav-link" href="Personnel.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                                    Personnel
+                                <?php
+                                 if($_SESSION['status']  == 'Administrator')
+                                 {
+                                   ?>
+
+                                   </a>
+                                   <a class="nav-link" href="Requests.php">
+                                       <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                                       Requests
+                                   </a>
+
+                                   <?php
+                                 }
+
+                                  ?>
+                                  <a class="nav-link" href="reportFiles.php">
+                                      <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                                      Report Files
+                                  </a>
+
+
+
                               </nav>
                           </div>
-                          ';
+
+
+                          <?php
+
                       }
                      ?>
 

@@ -1,8 +1,65 @@
-#title
+
+table, th, td
+{
+  border: 0px solid black;
+}
+#title, td
+{
+  color:  #FF6600;
+  font-size: 25px;
+
+}
+#info
+{
+  color: #353535;
+  font-size: 16px;
+  margin-left: 40px;
+}
+#desc, h4
+{
+  color: #353535;
+}
+
+#hdr
 {
   color:  #FF6600;
 }
-#desc
+
+.spacing
+{
+  width:70%;
+  height:20px;
+  position: relative;
+}
+.report-main
+{
+  width:80%;
+  height:100%;
+  border-style: solid;
+  border-style: dashed;
+  margin-left: 10%;
+}
+.fileAttached
+{
+  padding-left: 5%;
+  width:100%;
+}
+a
+{
+  font-size:16px;
+}
+.icn
 {
   color: #353535;
+}
+#check, .check
+{
+
+  width: 20px;
+  height: 20px;
+}
+.chckbx
+{
+  width: 20px;
+  height: 20px;
 }

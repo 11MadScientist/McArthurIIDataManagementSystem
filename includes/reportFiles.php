@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <?php session_start();
 include('autoloader.inc.php');
- ?>
+$exp = "/Principal/";
+if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
+{
+  header("Location: forms/logout.form.php");
+  exit();
+}
+date_default_timezone_set('Asia/Manila');
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -33,21 +40,11 @@ include('autoloader.inc.php');
                   <h1 class="mt-4">Reports</h1>
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                      <li class="breadcrumb-item active">Reports</li>
+                      <li class="breadcrumb-item active">ReportFiles</li>
                   </ol>
-                  <?php
-                    if($_SESSION['status'] == 'Administrator')
-                    {
-                      ?>
-                      <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
-                          <a href="createReport.php" type='submit' value='submit' name='createReport' class='btn btn-primary' style="width:45%; height:100%;">Create Report</a>
-                      </div>
-                      <?php
-                    }
-                   ?>
+
                   <div class = "report-main">
-                    <div class="spacing" style="width:100%;height:20px;position: relative;">
-                    <div name="progress" style="text-align:left; position:absolute; top:25%; left: 85% "><h11>Your progress</h11></div>
+                    <div class="spacing" >
                   </div>
 
                     <div class="list_content" style="position: relative; ">
@@ -70,24 +67,9 @@ include('autoloader.inc.php');
                                   <!-- ICON -->
                                   <i class='fas fa-file' style='font-size:25px; padding-bottom: 3px'></i>
                                   <!-- NAME OF REPORT -->
-                                  <?php
-                                    if($_SESSION['status'] != 'Administrator')
-                                    {
-                                  ?>
-                                      <a id="title" href="reports.php?id=<?php echo $row['report_id'] ?>"
-                                      class="report_name" style="font-size: 25px; padding:10px;">
-                                      <u><?php echo $row['report_title'] ?></u></a>
-                                  <?php
-                                    }
-                                    else
-                                    {
-                                      ?>
-                                      <a id="title" href="createReport.php?id=<?php echo $row['report_id'] ?>"
-                                        class="report_name" style="font-size: 25px; padding:10px;">
-                                        <u><?php echo $row['report_title'] ?></u></a>
-                                      <?php
-                                    }
-                                   ?>
+                                <a id="title" href="viewReportFiles.php?id=<?php echo $row['report_id'] ?>"
+                                  class="report_name" style="font-size: 25px; padding:10px;">
+                                  <u><?php echo $row['report_title'] ?></u></a>
                                 </a>
 
                                 <div class="report_info">
@@ -97,47 +79,21 @@ include('autoloader.inc.php');
                                   </span>
 
 
-                                  <!-- STATUS PROGRESS CHECHBOX -->
-                                  <span class="action">
-                                    <?php
-                                      $indv = $obj->getSubmittedReport($_SESSION['user_id'], $row['report_id']);
-                                      if($indv['file_name']?? null != null)
-                                      {
-                                        ?>
-                                          <img class="chckbx" src="forms/profpic-uploads/checked.png" alt="checked">
-                                        <?php
-                                      }
-                                      else
-                                      {
-                                        ?>
-                                          <img class="chckbx" src="forms/profpic-uploads/unchecked.png" alt="unchecked">
-                                        <?php
-                                      }
-                                     ?>
-                                  </span>
+
 
                                   <!-- FILE ATTACHMENT DIVISION -->
-                                  <div class="fileAttached" style="padding-left: 5%; width:100%">
+                                  <div class="fileAttached">
                                     <ul style="list-style-type: none;">
 
                                       <li style="display: inline;">
                                         <!-- ICON -->
 
                                         <!-- NAME OF REPORT -->
-                                        <?php
-                                         if($row['report_sample']?? null !== null)
-                                         { ?>
+                                        <?php if($row['report_sample']?? null !== null){ ?>
                                           <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $row["report_id"]; ?>">
                                             <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
                                             Sample <?php echo $row['report_title'] ?></a>
-                                          <?php
-                                         }
-                                         else
-                                         {
-                                          ?>
-                                            <i class='fas fa-times' style='font-size:15px; padding-bottom: 3px'></i>No Submission
-                                          <?php
-                                         } ?>
+                                          <?php } ?>
 
 
                                       </li>

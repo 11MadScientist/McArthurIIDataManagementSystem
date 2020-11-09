@@ -54,6 +54,28 @@ class Leave extends Dbh
     return $info;
   }
 
+
+
+  public function acceptedLeaveList()
+  {
+    $sql = "SELECT id, users.user_id, start_date, end_date, l_name, f_name, m_name,
+    designation, grade, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
+    AND leave_rqsts.status='Accepted')
+    INNER JOIN add_info ON leave_rqsts.user_id = add_info.user_id)";
+    $info = $this->mySqli($sql);
+    return $info;
+  }
+
+  public function acceptedSchoolLeaveList($station)
+  {
+    $sql = "SELECT id, users.user_id, start_date, end_date, l_name, f_name, m_name,
+    designation, grade, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
+    AND leave_rqsts.status='Accepted')
+    INNER JOIN add_info ON leave_rqsts.user_id = add_info.user_id AND add_info.station = '{$station}')";
+    $info = $this->mySqli($sql);
+    return $info;
+  }
+
   public function acceptLeave($id)
   {
     $sql = "UPDATE  leave_rqsts SET status = 'Accepted'
