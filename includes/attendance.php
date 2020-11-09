@@ -118,7 +118,7 @@ if($_SESSION['user_id'] == null)
                                       echo 'On-Leave';
                                       $info['pm_status'] = 'On-Leave';
                                     }
-                                    elseif(date("H:i:sa") >= date("H:i:sa", strtotime('1:00pm')))
+                                    elseif(date("H:i:sa") >= date("H:i:sa", strtotime('1:00pm')) and date("H:i:sa") <= date("H:i:sa", strtotime('6:00pm')))
                                     {
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">

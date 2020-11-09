@@ -103,15 +103,15 @@ include('autoloader.inc.php');
                                       $indv = $obj->getSubmittedReport($_SESSION['user_id'], $row['report_id']);
                                       if($indv['file_name']?? null != null)
                                       {
-                                        echo '<input type="checkbox" class="check" id ="check" >
-                                        <script>
-                                          document.getElementById("check").checked = true;
-                                        </script>
-                                              ';
+                                        ?>
+                                          <img class="chckbx" src="forms/profpic-uploads/checked.png" alt="checked">
+                                        <?php
                                       }
                                       else
                                       {
-                                        echo '<input type="checkbox" class="check"  disabled>';
+                                        ?>
+                                          <img class="chckbx" src="forms/profpic-uploads/unchecked.png" alt="unchecked">
+                                        <?php
                                       }
                                      ?>
                                   </span>
@@ -124,11 +124,20 @@ include('autoloader.inc.php');
                                         <!-- ICON -->
 
                                         <!-- NAME OF REPORT -->
-                                        <?php if($row['report_sample']?? null !== null){ ?>
+                                        <?php
+                                         if($row['report_sample']?? null !== null)
+                                         { ?>
                                           <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $row["report_id"]; ?>">
                                             <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
                                             Sample <?php echo $row['report_title'] ?></a>
-                                          <?php } ?>
+                                          <?php
+                                         }
+                                         else
+                                         {
+                                          ?>
+                                            <i class='fas fa-times' style='font-size:15px; padding-bottom: 3px'></i>No Submission
+                                          <?php
+                                         } ?>
 
 
                                       </li>
