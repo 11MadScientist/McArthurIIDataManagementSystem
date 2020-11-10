@@ -135,7 +135,7 @@ include('autoloader.inc.php');
                                          else
                                          {
                                           ?>
-                                            <i class='fas fa-times' style='font-size:15px; padding-bottom: 3px'></i>No Submission
+                                            <i class='fas fa-times' style='font-size:15px; padding-bottom: 3px'></i>No Sample
                                           <?php
                                          } ?>
 

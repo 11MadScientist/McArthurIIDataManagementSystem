@@ -76,7 +76,7 @@ class Reports extends Dbh
     $stmt->execute([$user_id, $report_id]);
   }
   // for the submission of reports for users
-  public function submitReport($user_id, $report_id, $file_name, $file_type)
+  public function submitReport($user_id, $report_id, $file_name, $file_type, $file_size)
   {
     $sql = "SELECT * FROM submitted_reports
             WHERE user_id=? AND report_id=?";
@@ -87,17 +87,17 @@ class Reports extends Dbh
     if($info != null)
     {
       $sql = "UPDATE submitted_reports
-              SET file_name=?, file_type = ?
+              SET file_name=?, file_type = ?, file_size = ?
               WHERE user_id=? AND report_id=?";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$file_name, $file_type, $user_id, $report_id]);
+      $stmt->execute([$file_name, $file_type,$file_size, $user_id, $report_id]);
     }
     else
     {
-      $sql = "INSERT INTO submitted_reports(user_id, report_id, file_type, file_name)
-              VALUES(?, ?, ?, ?)";
+      $sql = "INSERT INTO submitted_reports(user_id, report_id, file_type, file_name, file_size)
+              VALUES(?, ?, ?, ?, ?)";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$user_id, $report_id, $file_type, $file_name]);
+      $stmt->execute([$user_id, $report_id, $file_type, $file_name, $file_size]);
     }
   }
 

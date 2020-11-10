@@ -42,7 +42,7 @@ elseif(isset($_FILES['file']['name']))
          if(move_uploaded_file($_FILES['file']['tmp_name'][$keys], 'Reports/'.$_POST['filename'].'/'.$nm[0].'_'.$_POST['id'].'.'.$nm[1]))
          {
 
-           $obj->submitReport($_POST['id'], $_POST['report_id'], $nm[0].'_'.$_POST['id'], '.'.$nm[1]);
+           $obj->submitReport($_POST['id'], $_POST['report_id'], $nm[0].'_'.$_POST['id'], '.'.$nm[1], $_POST['filesize']);
            // echo 'submittedReportsView.php?foldername='.$_POST['filename'].'&filename='.$nm[0].'_'.$_POST['id'].'&filetype='.$nm[1];
            echo 'forms/Reports/'.$_POST['filename'].'/'.$nm[0].'_'.$_POST['id'].'.'.$nm[1];
          }

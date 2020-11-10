@@ -6,6 +6,7 @@ h2
 #desc
 {
   color: #353535;
+  padding-left: 20px;
 }
 .uploadArrow
 {
@@ -14,7 +15,36 @@ h2
   height: 100px;
   margin-top: -150px;
 }
+.deadline
+{
+  padding-left: 20px;
+  color: red;
+  font-weight: bold;
+}
 .drag
 {
   height: 1%;
+}
+#time
+{
+  display: inline-block;
+  margin-left: 5%;
+  color: #03C04A;
+  text-decoration: underline;
+  font-size: 17px;
+}
+#xtime
+{
+  display: inline-block;
+  margin-left: 5%;
+  color: red;
+  text-decoration: underline;
+  font-size: 17px;
+
+
+}
+#timeheader
+{
+  margin-left: 2%;
+  display: inline-block;
 }

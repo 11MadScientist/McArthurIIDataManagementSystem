@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php   session_start();
-  include('autoloader.inc.php'); ?>
+  include('autoloader.inc.php');
+  date_default_timezone_set('Asia/Manila');?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -58,7 +59,10 @@
                 <!-- DESCRIPTION AREA -->
                 <div class="reportDescription">
                   <h2 id="hd"><?php echo $result['report_title'] ?></h2>
-                  <p id="desc" style="padding-left: 20px"><?php echo $result['report_description'] ?></p>
+                  <p class="deadline">Dealine: <?php echo
+                  date('M d, h:i:sa', strtotime($result['deadline_date']))?></p>
+                  <p id="desc" >Description: <?php echo $result['report_description'] ?></p>
+
 
                   <ul style="list-style-type: none;">
 
@@ -77,7 +81,52 @@
 
 
                 <div class = "submitted_reports" style="position: relative;">
-                    <h1>Reports Submitted</h1>
+                    <h1 id="timeheader">Reports Submitted</h1>
+                    <?php
+                        if(isset($indv['date_submitted']))
+                        {
+                          $date1 = date_create($result['deadline_date']);
+                          $date2 = date_create($indv['date_submitted']);
+                          $diff=date_diff($date2, $date1);
+                          $ontime;
+                          if($diff->format("%R%a days")[0] == '-')
+                          {
+                            $tick = str_replace('-','',$diff->format("The report was submitted %R%a days, %h Hours %i Minutes late")) ;
+                            $ontime = false;
+                          }
+                          else
+                          {
+                            $tick = str_replace('+','',$diff->format("The report was submitted %R%a days, %h Hours %i Minutes early"));
+                            $ontime = true;
+                          }
+                        }
+                        else
+                        {
+                          $date1 = date_create($result['deadline_date']);
+                          $date2 = date_create(date('Y-m-d H:i:s'));
+                          $diff = date_diff($date2, $date1);
+                          $tick;
+                          if($diff->format("%R%a days")[0] == '-')
+                          {
+                            $tick = str_replace('-','',$diff->format("The report has been overdue by: %R%a days, %h Hours %i Minutes")) ;
+                            $ontime = false;
+                          }
+                          else
+                          {
+                            $tick = str_replace('+','',$diff->format("%R%a days, %h Hours %i Minutes until deadline"));
+                            $ontime = true;
+                          }
+                        }
+                        if($ontime === true)
+                        {
+                          echo '<p id = "time">'.$tick.'</p>';
+                        }
+                        elseif($ontime === false)
+                        {
+                          echo '<p id = "xtime">'.$tick.'</p>';
+                        }
+                     ?>
+
 
                     <!-- DRAG AND DROP BOX -->
                     <div class="file_drag_area" id="drag">
@@ -101,24 +150,30 @@
                             <thead>
                                 <!-- HEADER -->
                                 <th>Name</th>
-
+                                <th>Last Modified</th>
                                 <th>Size</th>
                                 <th>Type</th>
                             </thead>
                             <tbody>
 
                                     <tr>
-                                        <!-- CHECHBOX COLUMN -->
-                                        <!-- NAME COLUMN -->
-                                        <td ><a id="name" href='forms/Reports/<?php echo $result['report_title']
-                                        .'/'.$indv['file_name'].$indv['file_type']?>'>
-                                        <?php echo $indv['file_name'].$indv['file_type'] ?></a></td>
-                                        <!-- LAST MODIFIED COLUMN -->
-
-                                        <!-- SIZE COLUMN -->
-                                        <td id="size">50.5kb</td>
-                                        <!-- TYPE COLUMN -->
-                                        <td id="type">Image (PNG)</td>
+                                        <?php
+                                          if(isset($indv['file_name']))
+                                          {
+                                            ?>
+                                            <!-- NAME COLUMN -->
+                                            <td ><a id="name" href='forms/Reports/<?php echo $result['report_title']
+                                            .'/'.$indv['file_name'].$indv['file_type']?>'>
+                                            <?php echo $indv['file_name'].$indv['file_type'] ?></a></td>
+                                            <!-- LAST MODIFIED COLUMN -->
+                                            <td><?php echo date('M d,Y h:i:sa', strtotime($indv['date_submitted'])) ?></td>
+                                            <!-- SIZE COLUMN -->
+                                            <td id="size"><?php echo $indv['file_size'] ?></td>
+                                            <!-- TYPE COLUMN -->
+                                            <td id="type"><?php echo $indv['file_type'] ?></td>
+                                            <?php
+                                          }
+                                         ?>
                                     </tr>
                             </tbody>
                         </table>
@@ -242,19 +297,15 @@
                         // of each files
 
                         //try inspect element then console na tab then uncomment below,
-                        console.log(files_list[i]);
-                        document.getElementById("name").innerHTML = files_list[i].name;
-                        document.getElementById("size").innerHTML = (files_list[i].size/1024).toFixed(2) + 'kb';
-                        document.getElementById("type").innerHTML = files_list[i].type;
+
+                        formData.append('filesize',(files_list[i].size/1024).toFixed(2) + 'kb');
                         formData.append('file[]', files_list[i]);
                     }
-                    console.log(<?php echo $_SESSION['user_id'] ?>);
-                    console.log('<?php echo $result['report_title'] ?>');
 
                     formData.append('id', <?php echo $_SESSION['user_id'] ?>);
                     formData.append('report_id','<?php echo $_GET['id'] ?>');
                     formData.append('filename','<?php echo $result['report_title'] ?>');
-                    console.log(<?php ECHO $_GET['id']; ?>);
+
                     document.getElementById("btns").style.display = "flex";
 
                     $.ajax({
@@ -265,9 +316,10 @@
                             contentType:false,
                             cache: false,
                             processData: false,
-                            success:function(text)
+                            success:function()
                             {
-                                document.getElementById("name").href = text ;
+                                location.reload();
+
                             }
 
                     })
