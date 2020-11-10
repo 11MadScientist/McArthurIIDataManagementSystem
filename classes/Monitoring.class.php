@@ -33,7 +33,7 @@ class Monitoring extends Dbh
     timein_pm, timeout_pm, am_status, pm_status
      FROM (users INNER JOIN add_info ON users.user_id = add_info.user_id
       AND add_info.station = '{$station}')
-     INNER JOIN attendance ON users.user_id = attendance.user_id
+     LEFT JOIN attendance ON users.user_id = attendance.user_id
      AND attn_date ="."'".$date."'";
 
     $info = $this->mySqli($sql);

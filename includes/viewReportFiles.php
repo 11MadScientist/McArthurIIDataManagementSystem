@@ -124,7 +124,7 @@ date_default_timezone_set('Asia/Manila');
                                                   else
                                                   {
                                                     ?>
-                                                    <a href="#"><i class='fas fa-border-none file_ext' style='font-size:15px; padding-bottom: 3px'></i>
+                                                    <a href="#"><i class='fas fa-times file_ext' style='font-size:15px; padding-bottom: 3px'></i>
                                                        No Submission</a>
                                                     <?php
                                                   }
