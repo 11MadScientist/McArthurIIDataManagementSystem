@@ -60,7 +60,7 @@
                 <div class="reportDescription">
                   <h2 id="hd"><?php echo $result['report_title'] ?></h2>
                   <p class="deadline">Dealine: <?php echo
-                  date('M d, h:i:sa', strtotime($result['deadline_date']))?></p>
+                  date('M d, Y h:i:sa', strtotime($result['deadline_date']))?></p>
                   <p id="desc" >Description: <?php echo $result['report_description'] ?></p>
 
 
@@ -113,7 +113,7 @@
                           }
                           else
                           {
-                            $tick = str_replace('+','',$diff->format("%R%a days, %h Hours %i Minutes until deadline"));
+                            $tick = str_replace('+','',$diff->format("%R%a days %h Hours and %i Minutes until deadline"));
                             $ontime = true;
                           }
                         }

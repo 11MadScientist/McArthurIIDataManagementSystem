@@ -61,7 +61,9 @@
                           </div>
                           <div class = "user-name">
                               <h2><?php echo $_SESSION['user_fname']." ".$_SESSION['user_mname']." ".$_SESSION['user_lname']; ?></h2>
-                              <h4><?php echo $_SESSION['designation'] ?></h4>
+                              <h4><?php echo $_SESSION['designation']?></h4>
+                              <h4><?php echo ' ('. $_SESSION['station'].')'  ?></h4>
+
                           </div>
 
                           <div class="contact">
@@ -70,7 +72,7 @@
                                 $info = $obj->getAddInfo($_SESSION['user_id']);
 
                              ?>
-                            
+
                               <div class="icon">
                                 <i class="fas fa-phone"> </i>
                                 <span>: <?php echo $info['contact_num']?? '' ?></span>
@@ -133,6 +135,33 @@
                             </div>
 
                         </div>
+                        <!-- for the reports sidebar -->
+                        <div class="sideline" id ="reportside">
+                            <div class="subtag" style="width:100%;margin-bottom:20px;">
+                              <u>Reports</u>
+                            </div>
+                            <div class="event-cont">
+                              <ul>
+                                <?php
+                                  $obj = new Reports();
+                                  $result = $obj->getReport();
+
+                                  while($row = mysqli_fetch_array($result))
+                                  {
+                                    ?>
+                                    <a class="link" id="title" href="reports.php?id=<?php echo $row['report_id'] ?>">
+                                      <i class="fas fa-file"></i>
+                                    <?php echo $row['report_title'] ?></a>
+                                    <?php
+                                  }
+
+                                 ?>
+                              </ul>
+
+                            </div>
+
+                        </div>
+
 
                         <?php
                           $newObj = new Announcement();

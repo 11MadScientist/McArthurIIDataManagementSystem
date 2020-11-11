@@ -1,7 +1,12 @@
 
+td
+{
+  font-size: 16px;
+}
 table, th, td
 {
   border: 0px solid black;
+
 }
 #title, td
 {
@@ -18,6 +23,7 @@ table, th, td
 #desc, h4
 {
   color: #353535;
+  font-size: 18px;
 }
 
 #hdr
@@ -62,4 +68,45 @@ a
 {
   width: 20px;
   height: 20px;
+  margin-left: 55%;
+  margin-top: 3%;
+}
+
+th
+{
+  display: none;
+}
+#opn
+{
+  color: #03C04A;
+  text-decoration: underline;
+  margin-top: 40px;
+  font-size: 20px;
+}
+#cls
+{
+  color: red;
+  text-decoration: underline;
+    margin-top: 40px;
+    font-size: 20px;
+}
+#deadline
+{
+  display: block;
+  color: red;
+  font-size: 17px;
+  margin-left: 2%;
+}
+
+#stato
+{
+  margin-top: 15%;
+  color: #03C04A;
+  display: inline-block;
+}
+#statx
+{
+  display: inline-block;
+  margin-top: 15%;
+  color:red;
 }

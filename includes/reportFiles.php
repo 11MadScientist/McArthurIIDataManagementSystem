@@ -43,87 +43,159 @@ date_default_timezone_set('Asia/Manila');
                       <li class="breadcrumb-item active">ReportFiles</li>
                   </ol>
 
+                  <?php
+                    if($_SESSION['status'] == 'Administrator')
+                    {
+                      ?>
+                      <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
+                          <a href="createReport.php" type='submit' value='submit' name='createReport' class='btn btn-primary' style="width:45%; height:100%; margin-bottom:30px;">Create Report</a>
+                      </div>
+                      <?php
+                    }
+                   ?>
+
                   <div class = "report-main">
                     <div class="spacing" >
                   </div>
 
                     <div class="list_content" style="position: relative; ">
                       <ul class="report_list" style="list-style-type: none;">
-                      <?php
-                      $obj = new Reports();
-                      $result = $obj->getReport();
-                        //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
-                        while($row = mysqli_fetch_array($result))
-                        {
 
-                      ?>
-                          <!-- LIST ROW -->
-                          <li>
-                            <div class="list_div" style="width: 100%; height: 10%; padding-bottom: 20px; " >
-                              <!-- NAME DIV -->
-                              <div style="width:92%; border-bottom: 2px dotted grey; padding-bottom: 5px">
+                        <!-- creating table-->
+                        <table class="table" id="dataTable" width="100%">
+                          <col style="width:50%">
+                          <col style="width:20%">
 
-                                <!-- LINK TO REPORT SUBMISSION PHP -->
-                                  <!-- ICON -->
-                                  <i class='fas fa-file' style='font-size:25px; padding-bottom: 3px'></i>
-                                  <!-- NAME OF REPORT -->
-                                <a id="title" href="viewReportFiles.php?id=<?php echo $row['report_id'] ?>"
-                                  class="report_name" style="font-size: 25px; padding:10px;">
-                                  <u><?php echo $row['report_title'] ?></u></a>
-                                </a>
+                            <thead>
+                                <tr>
+                                  <th style="padding-left:10%;"><i class='fas fa-user' style='font-size:15px;'></i> Submitted by</th>
+                                  <th><i class='fas fa-calendar-alt' style='font-size:15px'></i> Date of Submission</th>
+                                </tr>
+                            </thead>
 
-                                <div class="report_info">
-                                  <!-- DESCRIPTION AREA -->
-                                  <span id="desc" class="reportDescription" style="padding: 10px;">
-                                    Description: <?php echo $row['report_description'] ?>
-                                  </span>
+                            <tbody>
+                              <?php
+                              $obj = new Reports();
+                              $result = $obj->getReport();
+                              $num = 0;
+                                //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
+                                while($row = mysqli_fetch_array($result))
+                                {
+                                  $num++;
+                              ?>
+                                  <!-- LIST result -->
+                                  <tr>
+                                    <td>
+                                      <!-- LIST ROW -->
+                                      <li>
+                                        <div class="list_div" style="width: 100%; height: 10%; padding-bottom: 20px; " >
+                                          <!-- NAME DIV -->
+                                            <!-- LINK TO REPORT SUBMISSION PHP -->
+                                              <!-- ICON -->
+                                              <span><?php echo $num ?></span>
+                                              <i class='fas fa-file' style='font-size:25px; padding-bottom: 3px'></i>
+                                              <!-- NAME OF REPORT -->
+                                            <a id="title" href="viewReportFiles.php?id=<?php echo $row['report_id'] ?>"
+                                              class="report_name" style="font-size: 25px; padding:10px;">
+                                              <u><?php echo $row['report_title'] ?></u></a>
+                                            </a>
+
+                                            <div class="report_info">
+                                              <span id='deadline'>[ Deadline: <?php echo date('M d, Y h:i a', strtotime($row['deadline_date'])) ?> ]</span>
+                                              <!-- DESCRIPTION AREA -->
+                                              <span id="desc" class="reportDescription" style="padding: 10px;">
+                                                Description: <?php echo $row['report_description'] ?>
+                                              </span>
 
 
 
 
-                                  <!-- FILE ATTACHMENT DIVISION -->
-                                  <div class="fileAttached">
-                                    <ul style="list-style-type: none;">
+                                              <!-- FILE ATTACHMENT DIVISION -->
+                                              <div class="fileAttached">
+                                                <ul style="list-style-type: none;">
 
-                                      <li style="display: inline;">
-                                        <!-- ICON -->
+                                                  <li style="display: inline;">
+                                                    <!-- ICON -->
 
-                                        <!-- NAME OF REPORT -->
-                                        <?php if($row['report_sample']?? null !== null){ ?>
-                                          <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $row["report_id"]; ?>">
-                                            <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
-                                            Sample <?php echo $row['report_title'] ?></a>
-                                          <?php } ?>
+                                                    <!-- NAME OF REPORT -->
+                                                    <?php if($row['report_sample']?? null !== null){ ?>
+                                                      <a class="report_name" style="font-size: 15px; padding:10px;" href="reportsView.php?id=<?php echo $row["report_id"]; ?>">
+                                                        <i class='fas fa-file' style='font-size:15px; padding-bottom: 3px'></i>
+                                                        Sample <?php echo $row['report_title'] ?></a>
+                                                      <?php } ?>
+                                                  </li>
 
-
+                                                </ul>
+                                              </div>
+                                            </div>
+                                        </div>
                                       </li>
+                                  </td>
 
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        <?php
-                        }
-                        ?>
+                                    <td>
+                                      <?php
+                                      if($row['status'] == 'Open')
+                                      {
+                                          echo '<a onclick="return warnClose()" type="submit"  name="Open"  href=forms/closeReport.form.php?status=Open&id='.$row['report_id'].'  id = "opn">'. $row['status'].'</p>';
+                                      }
+                                      else
+                                      {
+                                        echo '<a onclick="return warnOpen()" href=forms/closeReport.form.php?status=Close&id='.$row['report_id'].'  id = "cls">'. $row['status'].'</p>';
+                                      }
+
+                                      ?>
+                                      <script>
+                                      function warnOpen()
+                                      {
+
+                                        var result = confirm("Do you want to Open the Report?");
+                                        if(!result)
+                                        {
+                                            return false;
+
+                                        }
+                                      }
+                                      </script>
+                                      <script>
+                                      function warnClose()
+                                      {
+
+                                        var result = confirm("Do you want to Close the Report?");
+                                        if(!result)
+                                        {
+                                            return false;
+
+                                        }
+                                      }
+                                      </script>
+                                   </td>
+                                  </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+
+                        <!-- end of table -->
+
+
                       </ul>
                     </div>
 
                   </div>
+
+
 
               </div>
 
           </main>
         <?php include('footer.php') ?>
         </div>
-
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
     </body>
 </html>

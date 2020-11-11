@@ -128,7 +128,7 @@ if($_SESSION['user_id'] == null)
 
                                       <?php
                                     }
-                                    elseif(date("H:i:sa") > date("H:i:sa", strtotime('6:30pm')))
+                                    elseif(date("H:i:sa") > date("H:i:sa", strtotime('6:00pm')))
                                     {
                                       echo "No-Time-In";
                                     }
@@ -180,7 +180,7 @@ if($_SESSION['user_id'] == null)
                                       echo 'On-Leave';
                                       $info['pm_status'] = 'On-Leave';
                                     }
-                                    elseif($info['timein_pm']?? null != null and date("H:i:sa") <= date("H:i:sa", strtotime('6:30pm')))
+                                    elseif($info['timein_pm']?? null != null and date("H:i:sa") <= date("H:i:sa", strtotime('6:00pm')))
                                     {
                                       ?>
                                         <form class="" action="forms/attendance.form.php" method="post">
@@ -190,7 +190,7 @@ if($_SESSION['user_id'] == null)
 
                                       <?php
                                     }
-                                    elseif(date("H:i:sa") > date("H:i:sa", strtotime('6:30pm')))
+                                    elseif(date("H:i:sa") > date("H:i:sa", strtotime('6:00pm')))
                                     {
                                       echo "No-Time-out";
                                     }
@@ -231,7 +231,7 @@ if($_SESSION['user_id'] == null)
                                   {
                                     echo $info['pm_status'];
                                   }
-                                  elseif(($info['pm_status']?? false == false or $info['am_status'] == '') and date("H:i:sa") >= date("H:i:sa", strtotime('6:30pm')))
+                                  elseif(($info['pm_status']?? false == false or $info['am_status'] == '') and date("H:i:sa") >= date("H:i:sa", strtotime('6:00pm')))
                                   {
                                     echo "Absent";
                                   }
