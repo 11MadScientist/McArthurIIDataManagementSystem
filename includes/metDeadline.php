@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <?php session_start();
 include('autoloader.inc.php');
-$exp = "/Principal/";
-if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
+if($_SESSION['status']  != 'Administrator')
 {
   header("Location: forms/logout.form.php");
   exit();
@@ -37,23 +36,12 @@ date_default_timezone_set('Asia/Manila');
       <div id="layoutSidenav_content">
           <main>
               <div class="container-fluid">
-                  <h1 class="mt-4">Reports</h1>
+                  <h1 class="mt-4">Timed-Out [Open] Reports</h1>
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                      <li class="breadcrumb-item active">ReportFiles</li>
+                      <li class="breadcrumb-item active"><a href="reportFiles.php">ReportFiles</a></li>
+                      <li class="breadcrumb-item active">Timed Out 'Open' Reports</li>
                   </ol>
-
-                  <?php
-                    if($_SESSION['status'] == 'Administrator')
-                    {
-                      ?>
-                      <div class="buttonDiv">
-                          <a href="createReport.php" type='submit' value='submit' name='createReport' class='btn-primary btnref' >Create Report</a>
-                          <a href="metDeadline.php" type='submit' value='submit' name='createReport' class='btn-primary btnref' >[Open] Timed-out Reports</a>
-                      </div>
-                      <?php
-                    }
-                   ?>
 
                   <div class = "report-main">
                     <div class="spacing" >
@@ -76,8 +64,9 @@ date_default_timezone_set('Asia/Manila');
 
                             <tbody>
                               <?php
+                              $now = date('Y-m-d H:i:s');
                               $obj = new Reports();
-                              $result = $obj->getReport();
+                              $result = $obj->timed_outReport($now);
                               $num = 0;
                                 //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
                                 while($row = mysqli_fetch_array($result))
@@ -103,9 +92,7 @@ date_default_timezone_set('Asia/Manila');
 
                                             <div class="report_info">
                                               <span id='deadline'>[ Deadline: <?php echo date('M d, Y h:i a', strtotime($row['deadline_date'])) ?> ]</span>
-                                              <!-- DESCRIPTION AREA -->
-                                              <span id="desc" class="reportDescription" style="padding: 10px;">
-                                                Description: <?php echo $row['report_description'] ?>
+
                                               </span>
 
 
@@ -137,7 +124,7 @@ date_default_timezone_set('Asia/Manila');
                                       <?php
                                       if($row['status'] == 'Open')
                                       {
-                                          echo '<a onclick="return warnClose()" type="submit"  name="Open"  href=forms/closeReport.form.php?status=Open&id='.$row['report_id'].'  id = "opn">'. $row['status'].'</p>';
+                                          echo '<a onclick="return warnClose()" type="submit"  name="Open"  href=forms/closeReport.form.php?dead=line&status=Open&id='.$row['report_id'].'  id = "opn">'. $row['status'].'</p>';
                                       }
                                       else
                                       {

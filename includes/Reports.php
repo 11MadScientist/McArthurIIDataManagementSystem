@@ -134,7 +134,7 @@
                         <img class="uploadArrow" src="forms/profpic-uploads/uploadArrow.gif" alt="">
                     </div>
                     <?php
-                      if($indv['file_name']?? null != null)
+                      if($indv['file_name']?? null != null or $result['status'] == 'Close')
                       {
                         ?>
                         <script>
@@ -171,6 +171,15 @@
                                             <td id="size"><?php echo $indv['file_size'] ?></td>
                                             <!-- TYPE COLUMN -->
                                             <td id="type"><?php echo $indv['file_type'] ?></td>
+                                            <?php
+                                          }
+                                          else
+                                          {
+                                            ?>
+                                              <td>No File Submitted</td>
+                                              <td>--null--</td>
+                                              <td>--null--</td>
+                                              <td>--null--</td>
                                             <?php
                                           }
                                          ?>
@@ -212,7 +221,7 @@
 
 
                     </div>
-                    <?php if(isset($indv['file_name']) == null)
+                    <?php if(isset($indv['file_name']) == null or $result['status'] == 'Close')
                           {
                     ?>
                             <script>

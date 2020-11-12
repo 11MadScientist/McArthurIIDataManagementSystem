@@ -19,7 +19,12 @@ if(isset($_GET['status']) and isset($_GET['id']))
       header("Location: logout.form.php?success=ModifiedSuccessfully");
   }
 
-  header("Location: ../reportFiles.php?success=ModifiedSuccessfully");
+  if(isset($_GET['dead']))
+  {
+    header("Location: ../metDeadline.php?success=ModifiedSuccessfully");
+    exit();
+  }
+    header("Location: ../reportFiles.php?success=ModifiedSuccessfully");
 }
 else
 {

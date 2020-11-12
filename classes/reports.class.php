@@ -156,6 +156,14 @@ class Reports extends Dbh
     $stmt->execute([$id]);
 
   }
+  public function timed_outReport($date)
+  {
+    $sql = "SELECT * FROM reports
+    WHERE status = 'Open' and deadline_date <'{$date}'
+    ORDER BY report_id";
+    $info = $this->mySqli($sql);
+    return $info;
+  }
 
 
 
