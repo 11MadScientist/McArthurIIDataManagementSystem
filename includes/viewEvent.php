@@ -17,7 +17,7 @@ include('autoloader.inc.php');
          <meta name="author" content="" />
          <title>McArthurII District ViewEvent</title>
          <link href="css/styles.css" rel="stylesheet" />
-         <link href="css/createEvent.css" rel="stylesheet" />
+         <!-- <link href="css/createEvent.css" rel="stylesheet" /> -->
          <link href="css/viewEvent.css" rel="stylesheet" />
 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
@@ -33,55 +33,76 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">ViewEvent</h1>
-                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">ViewEvent</li>
-                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                   </ol>
-
-                   <div class="createEvent-box">
-                     <p class = "header">Event Details</p>
+                   <h1 class="mt-4">View Event</h1>
                      <?php
                           $obj = new Events();
                           $info = $obj->getOneEvent($_GET['id']);
                           $start = explode(' ', $info['start_date']);
                           $end = explode(' ', $info['end_date']);
                       ?>
+                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
+                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                       <li class="breadcrumb-item active"><a href="Events.php">Events</a></li>
+                       <li class="breadcrumb-item active"><?php echo $info['title']?></li>
+                   </ol>
 
+                   <div class="createEvent-box">
+                     <p class = "header">Event Details</p>
+                     <?php
+                         $conn = mysqli_connect("localhost", "root", "", "mddb");
 
+                         $obj = new Events();
+                         $result = $obj->get_eventImg($_GET['id']);
+                            $row = mysqli_fetch_array($result);
+                              if($row != null)
+                               {
+                         ?>
+                                  <img class = "main" src="eventImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
+                         <?php
+                               }
+
+                               else
+                               {
+                         ?>
+                                  <img id="blah" />
+                         <?php
+                               }
+                                 mysqli_close($conn);
+                          ?>
+                     <div class="content_box">
+                     <label class="block-head" style="display:block;" for="title">Title</label>
+                     <div class="info1">
+                       <p class="main"><?php echo $info['title']?> </p>
+                     </div>
+                     
                        <div class="start">
-                         <label for="startdate">Start Date:</label>
-                          <p class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($start[0]));?></p>
+                         <label>Start Date:</label>
+                           <p class="info" ><?php echo date('Y-M-d', strtotime($start[0]));?></p>
 
                          <label for="starttime">Start Time:&nbsp;</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($start[1]));?></p>
-
+                         <p class="info" ><?php echo date('Y-M-d', strtotime($start[1]));?></p>
+                         
                         </div>
-
+                        
                         <div class="end">
                           <label for="enddate">End Date:</label>
                           <p class="info"><?php echo date('Y-M-d', strtotime($end[0]));?></p>
+                          
+                          <label for="endtime">End Time:&nbsp;</label>
+                          <p class="info"><?php echo date('Y-M-d', strtotime($end[1]));?></p> 
+                        </div>
 
-                         <label for="endtime">End Time:&nbsp;</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($end[1]));?></p>
+                          <label class="block-head" for="description">Description</label>
+                          <div class="info2"> 
+                            <p class="main"><?php echo $info['description']?></p>
+                          </div>
 
-                       </div>
-
-                       <label class="block-head" style="display:block;" for="title">Title</label>
-                          <p class="main"><?php echo $info['title']?></p>
-
-
-                       <label class="block-head" for="description">Description</label>
-                        <p class="main"><?php echo $info['description']?></p>
-
-
-                        <img class = "main" src="eventImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
-                        <script>
+                      <script>
                           function showImg()
                           {
                             document.getElementById("blah").style.display = "none";
                           }
-                        </script>
+                      </script>
 
                        <a href="Events.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
 
@@ -93,6 +114,7 @@ include('autoloader.inc.php');
                             <?php
                           }
                         ?>
+                     </div>
 
                    </div>
 
