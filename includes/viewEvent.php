@@ -7,7 +7,7 @@ if($_SESSION['user_id'] == null)
 }
 include('autoloader.inc.php');
  ?>
- !DOCTYPE html>
+ <!DOCTYPE html>
  <html lang="en">
      <head>
          <meta charset="utf-8" />
@@ -74,26 +74,26 @@ include('autoloader.inc.php');
                      <div class="info1">
                        <p class="main"><?php echo $info['title']?> </p>
                      </div>
-                     
+
                        <div class="start">
                          <label>Start Date:</label>
                            <p class="info" ><?php echo date('Y-M-d', strtotime($start[0]));?></p>
 
                          <label for="starttime">Start Time:&nbsp;</label>
-                         <p class="info" ><?php echo date('Y-M-d', strtotime($start[1]));?></p>
-                         
+                         <p class="info" ><?php echo date('H:i:sa', strtotime($start[1]));?></p>
+
                         </div>
-                        
+
                         <div class="end">
                           <label for="enddate">End Date:</label>
                           <p class="info"><?php echo date('Y-M-d', strtotime($end[0]));?></p>
-                          
+
                           <label for="endtime">End Time:&nbsp;</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($end[1]));?></p> 
+                          <p class="info"><?php echo date('H:i:sa', strtotime($end[1]));?></p>
                         </div>
 
                           <label class="block-head" for="description">Description</label>
-                          <div class="info2"> 
+                          <div class="info2">
                             <p class="main"><?php echo $info['description']?></p>
                           </div>
 
@@ -120,8 +120,9 @@ include('autoloader.inc.php');
 
 
                </div>
+                <?php include('footer.php') ?>
            </main>
-         <?php include('footer.php') ?>
+
          </div>
 
          <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>

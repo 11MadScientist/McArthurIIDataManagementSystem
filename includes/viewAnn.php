@@ -7,7 +7,7 @@ if($_SESSION['user_id'] == null)
 }
 include('autoloader.inc.php');
  ?>
- !DOCTYPE html>
+ <!DOCTYPE html>
  <html lang="en">
      <head>
          <meta charset="utf-8" />
@@ -46,7 +46,7 @@ include('autoloader.inc.php');
                     <li class="breadcrumb-item active"><a href="Announcements.php">Announcements</a></li>
                     <li class="breadcrumb-item active"><?php echo $info['title']?></li>
                   </ol>
-                  
+
                   <div class="createEvent-box">
                     <p  class="header">Announcement</p>
                     <?php
@@ -79,7 +79,7 @@ include('autoloader.inc.php');
                     </div>
                        <div class="start">
                          <div style="width: 100%;">
-                           
+
                            <label for="startdate">Date Created:</label>
                             <p class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($info['date_created']));?></p>
                          </div>
@@ -119,8 +119,9 @@ include('autoloader.inc.php');
 
 
                </div>
+               <?php include('footer.php') ?>
            </main>
-         <?php include('footer.php') ?>
+
          </div>
 
          <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
