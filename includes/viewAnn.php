@@ -17,8 +17,8 @@ include('autoloader.inc.php');
          <meta name="author" content="" />
          <title>McArthurII District Announcement</title>
          <link href="css/styles.css" rel="stylesheet" />
-         <link href="css/createEvent.css" rel="stylesheet" />
-         <link href="css/viewEvent.css" rel="stylesheet" />
+         <!-- <link href="css/createEvent.css" rel="stylesheet" /> -->
+         <link href="css/viewAnnouncement.css" rel="stylesheet" />
 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
@@ -33,14 +33,6 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">Announcement</h1>
-                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">Announcement</li>
-                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                   </ol>
-
-                   <div class="createEvent-box">
-                     <p  class="header">Announcement</p>
                      <?php
                           $obj = new Announcement();
                           $info = $obj->getSingleAnn($_GET['id']);
@@ -48,25 +40,63 @@ include('autoloader.inc.php');
                           $creator = $obj1->idChecker($info['user_id'])
 
                       ?>
+                   <h1 class="mt-4">View Announcement</h1>
+                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active"><a href="Announcements.php">Announcements</a></li>
+                    <li class="breadcrumb-item active"><?php echo $info['title']?></li>
+                  </ol>
+                  
+                  <div class="createEvent-box">
+                    <p  class="header">Announcement</p>
+                    <?php
+                         $conn = mysqli_connect("localhost", "root", "", "mddb");
+
+                         $obj = new Announcement();
+                         $result = $obj->get_img($_GET['id']);
+                            $row = mysqli_fetch_array($result);
+                              if($row != null)
+                               {
+                         ?>
+                                  <img class = "main" src="annImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
+                         <?php
+                               }
+
+                               else
+                               {
+                         ?>
+                                  <img id="blah" />
+                         <?php
+                               }
+                                 mysqli_close($conn);
+                          ?>
 
 
-                       <div style="width:100%;" class="start">
-                         <label for="startdate">Date Created:</label>
-                          <p style="margin-right:20%;" class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($info['date_created']));?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <label class="block-head" style="display:block;" for="title">Title</label>
+                    <div class="info1">
 
+                      <p class="main"> <?php echo $info['title']?></p>
+                    </div>
+                       <div class="start">
+                         <div style="width: 100%;">
+                           
+                           <label for="startdate">Date Created:</label>
+                            <p class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($info['date_created']));?></p>
+                         </div>
+
+                         <div style="width: 100%;">
                           <label for="startdate">Created By:</label>
                            <p class="info" href="#" id = "startdate"><a href="Profile.php?id=<?php echo $info['user_id'] ?>"><?php echo $creator['f_name']." "
                            .$creator['l_name'];?></a></p>
+                         </div>
                         </div>
 
-                       <label class="block-head" style="display:block;" for="title">Title</label>
-                          <p class="main"><?php echo $info['title']?></p>
 
 
                        <label class="block-head" for="description">Description</label>
+                       <div class="info2">
                         <p class="main"><?php echo $info['description']?></p>
-
-                        <img class = "main" src="annImgView.php?id=<?php echo $_GET["id"]; ?>"  id="blah" src="#" alt="your image" onerror="showImg();"/>
+                       </div>
                         <script>
                           function showImg()
                           {
