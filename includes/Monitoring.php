@@ -56,10 +56,10 @@ date_default_timezone_set('Asia/Manila');
                   <h1 class="mt-4">Monitoring</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
 
                       <li class="breadcrumb-item active">Monitoring</li>
 
-                      <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
 
                   </ol>
 
