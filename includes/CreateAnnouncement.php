@@ -34,8 +34,9 @@ include('autoloader.inc.php');
                <div class="container-fluid">
                    <h1 class="mt-4">Create Announcement</h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">CreateAnnouncement</li>
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                       <li class="breadcrumb-item active"><a href="Announcements.php">Announcements</a></li>
+                       <li class="breadcrumb-item active">Create Announcement</li>
                    </ol>
 
                    <div class="createEvent-box">
