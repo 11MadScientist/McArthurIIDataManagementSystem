@@ -50,19 +50,14 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">AcceptedLeave</h1>
+                  <h1 class="mt-4">Accepted Leave</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
+                    
+                    <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item active"><a href="LeaveRequests.php">Leave Requests</a></li>
+                    <li class="breadcrumb-item active">Accepted Leave</li>
 
-                      <li class="breadcrumb-item active">AcceptedLeave</li>
-                      <?php if($_SESSION['status']  == 'Administrator')
-                      {
-                        ?>
-                        <li class="breadcrumb-item active"><a href="acceptedLeave.php">AcceptedLeave</a></li>
-                        <?php
-                      } ?>
-
-                      <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
 
                   </ol>
 
