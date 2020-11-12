@@ -136,4 +136,12 @@ class Events extends Dbh
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$id]);
   }
+
+  public function get_eventImg($id)
+  {
+    $conn = mysqli_connect("localhost", "root", "", "mddb");
+    $sql = "SELECT id FROM events_img WHERE id =".$id;
+    $result = mysqli_query($conn, $sql);
+    return $result;
+  }
 }
