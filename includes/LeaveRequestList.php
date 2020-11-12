@@ -56,13 +56,14 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">LeaveRequests</h1>
+                  <h1 class="mt-4">Leave Requests</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
-                      <li class="breadcrumb-item active">LeaveRequests</li>
-
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                      <li class="breadcrumb-item active"><a href="attendance.php">Attendance</a></li>
+                      <li class="breadcrumb-item active">Leave Requests</li>
+
 
                   </ol>
 
