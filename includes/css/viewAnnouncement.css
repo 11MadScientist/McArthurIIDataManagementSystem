@@ -1,0 +1,148 @@
+.info
+{
+  display: inline-block;
+  font-size: 23px;
+  color: black;
+  font-family: "Century Gothic";
+
+}
+.main
+{
+  display:block;
+  font-size: 23px;
+  color: black;
+  font-family: "Century Gothic";
+
+}
+
+.createEvent-box
+{
+  text-align: center;
+  min-width: 480px;
+  margin-left: 5%;
+  margin-top: 5%;
+  width: 90%;
+  height: 100%;
+  background: #fff;
+  border-radius:6px;
+  position: relative;
+  box-shadow: 0px 1px 10px 1px #03C04A;
+	background-size: 100% 100%;
+	margin-bottom: 4%;
+  font-size: 18px;
+  font-family: "Century Gothic";
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #03C04A;
+}
+
+label
+{
+  font-size: 21px;
+  font-family: "Century Gothic";
+  font-weight: bold;
+}
+
+.block-head
+{
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Helvetica;
+  float: right;
+  width: 40%;
+  display: block;
+}
+
+.header
+{
+  /* margin-top: 20px; */
+  font-family: Helvetica;
+  font-size: 30px;
+  font-weight: bold;
+  float: right;
+  /* padding-left: 12%; */
+  /* padding-right: 100px; */
+  width: 40%;
+  /* display:block; */
+}
+
+.start
+{
+
+  /* text-align: left;
+  display: block;
+  padding-left: 20px;
+  height: 70px;
+  width: 400px;
+  margin-right: 12%;
+  margin-bottom: 5px;
+  float: right; */
+  text-align: left;
+  display: block;
+  /* padding-right: 50px; */
+  /* height: 70px; */
+  width: 40%;
+  /* height: 50%; */
+  /* margin-bottom: 50px; */
+  float: right;
+}
+
+.end
+{
+
+  text-align: left;
+  display: block;
+  /* padding-right: 50px; */
+  /* height: 70px; */
+  width: 20%;
+  /* height: 50%; */
+  /* margin-bottom: 50px; */
+  float: left;
+}
+
+#blah
+{
+  /* display: block; */
+  width: 55%;
+  height:100%;
+  margin-right: 10px;
+  float: left;
+  background-image: url('../forms/profpic-uploads/no-image.png');
+	background-size: 100% 100%;
+  /* padding-right: 50px; */
+}
+
+/* TITLE AND DESCRIPTION INFO */
+.info1
+{
+  width: 40%;
+  display: block;
+  float: right;
+}
+
+
+.info2
+{
+  width: 40%;
+  display: block;
+  float: right;
+  text-align: left;
+}
+
+.passbtn
+{
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  display: inline-block;
+  font-size:
+  float: right;
+  margin-right:1%;
+  position: relative;
+  width: 30%;
+  height: 50px;
+  display: inline;
+  border-radius: 3px;
+}
