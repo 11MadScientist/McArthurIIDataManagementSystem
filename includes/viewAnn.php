@@ -7,7 +7,7 @@ if($_SESSION['user_id'] == null)
 }
 include('autoloader.inc.php');
  ?>
- !DOCTYPE html>
+ <!DOCTYPE html>
  <html lang="en">
      <head>
          <meta charset="utf-8" />
@@ -46,9 +46,9 @@ include('autoloader.inc.php');
                     <li class="breadcrumb-item active"><a href="Announcements.php">Announcements</a></li>
                     <li class="breadcrumb-item active"><?php echo $info['title']?></li>
                   </ol>
-                  
+
                   <div class="createEvent-box">
-                    <p  class="header">Announcement</p>
+                    <!-- <p  class="header">Announcement</p> -->
                     <?php
                          $conn = mysqli_connect("localhost", "root", "", "mddb");
 
@@ -71,7 +71,8 @@ include('autoloader.inc.php');
                                  mysqli_close($conn);
                           ?>
 
-
+                    <div class="content1">
+                      
                     <label class="block-head" style="display:block;" for="title">Title</label>
                     <div class="info1">
 
@@ -79,7 +80,7 @@ include('autoloader.inc.php');
                     </div>
                        <div class="start">
                          <div style="width: 100%;">
-                           
+
                            <label for="startdate">Date Created:</label>
                             <p class="info" id = "startdate"><?php echo date('Y-M-d', strtotime($info['date_created']));?></p>
                          </div>
@@ -100,10 +101,12 @@ include('autoloader.inc.php');
                         <script>
                           function showImg()
                           {
-                            document.getElementById("blah").style.display = "none";
+                            // document.getElementById("blah").style.backgroundImage = "url('../forms/profpic-uploads/no-image.png')";
+                            // document.getElementById("blah").style.backgroundSize = "100% 100%";
                           }
                         </script>
-
+                      <div class="editBackButtons">
+                        
                        <a href="Announcements.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
 
                        <?php
@@ -114,13 +117,16 @@ include('autoloader.inc.php');
                         <?php
                       }
                          ?>
+                      </div>
+                    </div>
 
                    </div>
 
 
                </div>
+               <?php include('footer.php') ?>
            </main>
-         <?php include('footer.php') ?>
+
          </div>
 
          <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
