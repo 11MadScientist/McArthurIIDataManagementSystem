@@ -1,7 +1,7 @@
 .info
 {
   display: inline-block;
-  font-size: 23px;
+  font-size: 17px;
   color: black;
   font-family: "Century Gothic";
 
@@ -9,7 +9,7 @@
 .main
 {
   display:block;
-  font-size: 23px;
+  /* font-size: 15px; */
   color: black;
   font-family: "Century Gothic";
 
@@ -29,7 +29,7 @@
   box-shadow: 0px 1px 10px 1px #03C04A;
 	background-size: 100% 100%;
 	margin-bottom: 4%;
-  font-size: 18px;
+  /* font-size: 18px; */
   font-family: "Century Gothic";
   padding-bottom: 20px;
   padding-top: 20px;
@@ -40,7 +40,7 @@
 
 label
 {
-  font-size: 21px;
+  font-size: 19px;
   font-family: "Century Gothic";
   font-weight: bold;
 }
@@ -48,25 +48,26 @@ label
 .block-head
 {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 19 px;
   font-family: Helvetica;
   float: right;
   width: 40%;
+  text-align: center;
   display: block;
 }
 
-.header
+/* .header
 {
-  /* margin-top: 20px; */
+  margin-top: 20px;
   font-family: Helvetica;
   font-size: 30px;
   font-weight: bold;
   float: right;
-  /* padding-left: 12%; */
-  /* padding-right: 100px; */
+  padding-left: 12%;
+  padding-right: 100px;
   width: 40%;
-  /* display:block; */
-}
+  display:block;
+} */
 
 .start
 {
@@ -79,12 +80,12 @@ label
   margin-right: 12%;
   margin-bottom: 5px;
   float: right; */
-  text-align: left;
+  text-align: center;
   display: block;
-  padding-left: 40px;
-  /* padding-right: 50px; */
+  padding-left: 60px;
   /* height: 70px; */
   width: 20%;
+  /* height: 100px; */
   /* height: 50%; */
   /* margin-bottom: 50px; */
   float: left;
@@ -93,22 +94,31 @@ label
 .end
 {
 
-  text-align: left;
+  text-align: center;
   display: block;
-  padding-left: 40px;
   /* padding-right: 50px; */
   /* height: 70px; */
   width: 20%;
+  padding-left: 60px;
   /* height: 50%; */
   /* margin-bottom: 50px; */
   float: left;
 }
 
+.content1
+{
+  text-align: center;
+  /* float:right; */
+  /* width: 40%; */
+  /* display: inline-block; */
+}
+
 #blah
 {
   /* display: block; */
+  /* position: relative; */
   width: 55%;
-  height:100%;
+  height: 26rem;
   margin-right: 10px;
   float: left;
   background-image: url('../forms/profpic-uploads/no-image.png');
@@ -128,23 +138,33 @@ label
 .info2
 {
   width: 40%;
+  height: 100px;
   display: block;
   float: right;
   text-align: left;
+  font-size: 15px;
+}
+
+.editBackButtons
+{
+  /* height: 1rem; */
+  position: relative;
+  /* padding: 0px; */
+  /* margin: 0px; */
+
 }
 
 .passbtn
 {
   color: white;
   font-size: 18px;
-  text-align: center;
-  display: inline-block;
-  font-size:
-  float: right;
-  margin-right:1%;
+  /* text-align: center; */
+  /* display: inline-block; */
+  /* float: left; */
+  /* margin-right:1%; */
   position: relative;
-  width: 30%;
+  width: 20%;
   height: 50px;
-  display: inline;
+  /* display: inline; */
   border-radius: 3px;
 }
