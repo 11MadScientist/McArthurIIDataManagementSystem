@@ -140,6 +140,32 @@ class Reports extends Dbh
             return $info;
   }
 
+  public function closeReport($id)
+  {
+    $sql = "UPDATE reports SET status = 'Close'
+    WHERE report_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+
+  }
+  public function openReport($id)
+  {
+    $sql = "UPDATE reports SET status = 'Open'
+    WHERE report_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+
+  }
+  public function timed_outReport($date)
+  {
+    $sql = "SELECT * FROM reports
+    WHERE status = 'Open' and deadline_date <'{$date}'
+    ORDER BY report_id";
+    $info = $this->mySqli($sql);
+    return $info;
+  }
+
+
 
 
 

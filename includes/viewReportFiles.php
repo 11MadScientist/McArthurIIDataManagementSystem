@@ -92,7 +92,7 @@ date_default_timezone_set('Asia/Manila');
                                     <td><li>
                                       <div class="list_div" style="width: 100%; height: 10%; padding-bottom: 20px; " >
                                         <!-- NAME DIV -->
-                                        <div style="width:100%; border-bottom: 2px dotted grey; padding-bottom: 5px">
+
 
                                           <!-- LINK TO REPORT SUBMISSION PHP -->
                                             <!-- ICON -->
@@ -136,7 +136,7 @@ date_default_timezone_set('Asia/Manila');
                                               </ul>
                                             </div>
                                           </div>
-                                        </div>
+
                                       </div>
                                     </li>
                                   </td>
@@ -146,7 +146,6 @@ date_default_timezone_set('Asia/Manila');
                                     <?php
                                     if($row['date_submitted'] != null)
                                     {
-                                      echo '<div style="width:92%; border-bottom: 2px dotted grey; padding-bottom: 79px">';
                                       echo date('Y-M-d' , strtotime($row['date_submitted']));
                                       echo '</div>';
                                     }

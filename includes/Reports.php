@@ -60,7 +60,7 @@
                 <div class="reportDescription">
                   <h2 id="hd"><?php echo $result['report_title'] ?></h2>
                   <p class="deadline">Dealine: <?php echo
-                  date('M d, h:i:sa', strtotime($result['deadline_date']))?></p>
+                  date('M d, Y h:i:sa', strtotime($result['deadline_date']))?></p>
                   <p id="desc" >Description: <?php echo $result['report_description'] ?></p>
 
 
@@ -113,7 +113,7 @@
                           }
                           else
                           {
-                            $tick = str_replace('+','',$diff->format("%R%a days, %h Hours %i Minutes until deadline"));
+                            $tick = str_replace('+','',$diff->format("%R%a days %h Hours and %i Minutes until deadline"));
                             $ontime = true;
                           }
                         }
@@ -134,7 +134,7 @@
                         <img class="uploadArrow" src="forms/profpic-uploads/uploadArrow.gif" alt="">
                     </div>
                     <?php
-                      if($indv['file_name']?? null != null)
+                      if($indv['file_name']?? null != null or $result['status'] == 'Close')
                       {
                         ?>
                         <script>
@@ -171,6 +171,15 @@
                                             <td id="size"><?php echo $indv['file_size'] ?></td>
                                             <!-- TYPE COLUMN -->
                                             <td id="type"><?php echo $indv['file_type'] ?></td>
+                                            <?php
+                                          }
+                                          else
+                                          {
+                                            ?>
+                                              <td>No File Submitted</td>
+                                              <td>--null--</td>
+                                              <td>--null--</td>
+                                              <td>--null--</td>
                                             <?php
                                           }
                                          ?>
@@ -212,7 +221,7 @@
 
 
                     </div>
-                    <?php if(isset($indv['file_name']) == null)
+                    <?php if(isset($indv['file_name']) == null or $result['status'] == 'Close')
                           {
                     ?>
                             <script>
