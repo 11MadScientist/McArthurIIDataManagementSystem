@@ -74,7 +74,7 @@ include('autoloader.inc.php'); ?>
                                         <th style="text-align:left;"><input type="checkbox" id="checkAll"></th>
                                         <th>Name</th>
                                         <th>Position</th>
-                                        <th>Grade/Subject</th>
+                                        <th>Type of Leave</th>
                                         <th>School</th>
                                         <th>Start Date</th>
                                         <th>End Date</th>
@@ -96,7 +96,7 @@ include('autoloader.inc.php'); ?>
                                                 <td style=text-align:left;><input type=checkbox class='check' name='request[]' value=".$row['id']."></td>
                                                 <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
                                                "<td>".$row['designation']."</td>".
-                                               "<td>".$row['grade']."</td>".
+                                               "<td>".$row['leaveType']."</td>".
                                                "<td>".$row['station']."</td>".
                                                "<td>".date('Y-M-d',strtotime($row['start_date']))."</td>".
                                                "<td>".date('Y-M-d',strtotime($row['end_date']))."</td>

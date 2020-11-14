@@ -47,7 +47,7 @@ class Leave extends Dbh
   public function leaveList()
   {
     $sql = "SELECT id, users.user_id, start_date, end_date, l_name, f_name, m_name,
-    designation, grade, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
+    designation, leaveType, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
     AND leave_rqsts.status='')
     INNER JOIN add_info ON leave_rqsts.user_id = add_info.user_id)";
     $info = $this->mySqli($sql);
@@ -59,7 +59,7 @@ class Leave extends Dbh
   public function acceptedLeaveList()
   {
     $sql = "SELECT id, users.user_id, start_date, end_date, l_name, f_name, m_name,
-    designation, grade, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
+    designation, leaveType, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
     AND leave_rqsts.status='Accepted')
     INNER JOIN add_info ON leave_rqsts.user_id = add_info.user_id)";
     $info = $this->mySqli($sql);
@@ -69,7 +69,7 @@ class Leave extends Dbh
   public function acceptedSchoolLeaveList($station)
   {
     $sql = "SELECT id, users.user_id, start_date, end_date, l_name, f_name, m_name,
-    designation, grade, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
+    designation, leaveType, station FROM ((leave_rqsts INNER JOIN users ON leave_rqsts.user_id = users.user_id
     AND leave_rqsts.status='Accepted')
     INNER JOIN add_info ON leave_rqsts.user_id = add_info.user_id AND add_info.station = '{$station}')";
     $info = $this->mySqli($sql);

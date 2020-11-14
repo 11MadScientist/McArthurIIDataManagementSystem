@@ -53,16 +53,16 @@ include('autoloader.inc.php'); ?>
                   <h1 class="mt-4">AcceptedLeave</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-
-                      <li class="breadcrumb-item active">AcceptedLeave</li>
+                      <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                       <?php if($_SESSION['status']  == 'Administrator')
                       {
                         ?>
-                        <li class="breadcrumb-item active"><a href="acceptedLeave.php">AcceptedLeave</a></li>
+                        <li class="breadcrumb-item active"><a href="LeaveRequests.php">LeaveRequests</a></li>
                         <?php
                       } ?>
+                        <li class="breadcrumb-item active">AcceptedLeave</li>
 
-                      <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+
 
                   </ol>
 
@@ -77,7 +77,7 @@ include('autoloader.inc.php'); ?>
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
-                                        <th>Grade/Subject</th>
+                                        <th>Type of Leave</th>
                                         <th>School</th>
                                         <th>Start Date</th>
                                         <th>End Date</th>
@@ -105,7 +105,7 @@ include('autoloader.inc.php'); ?>
                                           echo "<tr>
                                                 <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
                                                "<td>".$row['designation']."</td>".
-                                               "<td>".$row['grade']."</td>".
+                                               "<td>".$row['leaveType']."</td>".
                                                "<td>".$row['station']."</td>".
                                                "<td>".date('Y-M-d',strtotime($row['start_date']))."</td>".
                                                "<td>".date('Y-M-d',strtotime($row['end_date']))."</td>
