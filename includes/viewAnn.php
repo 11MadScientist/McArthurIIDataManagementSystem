@@ -48,7 +48,7 @@ include('autoloader.inc.php');
                   </ol>
 
                   <div class="createEvent-box">
-                    <p  class="header">Announcement</p>
+                    <!-- <p  class="header">Announcement</p> -->
                     <?php
                          $conn = mysqli_connect("localhost", "root", "", "mddb");
 
@@ -71,7 +71,8 @@ include('autoloader.inc.php');
                                  mysqli_close($conn);
                           ?>
 
-
+                    <div class="content1">
+                      
                     <label class="block-head" style="display:block;" for="title">Title</label>
                     <div class="info1">
 
@@ -100,10 +101,12 @@ include('autoloader.inc.php');
                         <script>
                           function showImg()
                           {
-                            document.getElementById("blah").style.display = "none";
+                            // document.getElementById("blah").style.backgroundImage = "url('../forms/profpic-uploads/no-image.png')";
+                            // document.getElementById("blah").style.backgroundSize = "100% 100%";
                           }
                         </script>
-
+                      <div class="editBackButtons">
+                        
                        <a href="Announcements.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
 
                        <?php
@@ -114,6 +117,8 @@ include('autoloader.inc.php');
                         <?php
                       }
                          ?>
+                      </div>
+                    </div>
 
                    </div>
 

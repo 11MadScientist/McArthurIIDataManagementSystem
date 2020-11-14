@@ -47,7 +47,6 @@ include('autoloader.inc.php');
                    </ol>
 
                    <div class="createEvent-box">
-                     <p class = "header">Event Details</p>
                      <?php
                          $conn = mysqli_connect("localhost", "root", "", "mddb");
 
@@ -69,13 +68,39 @@ include('autoloader.inc.php');
                                }
                                  mysqli_close($conn);
                           ?>
-                     <div class="content_box">
+                     <div class="content1">
                      <label class="block-head" style="display:block;" for="title">Title</label>
                      <div class="info1">
                        <p class="main"><?php echo $info['title']?> </p>
                      </div>
 
-                       <div class="start">
+                        <div class="start">
+                         <div style="width: 100%;">
+
+                         <label>Start Date:</label><br>
+                           <p class="info" ><?php echo date('Y-M-d', strtotime($start[0]));?></p>
+                         </div>
+
+                         <div style="width: 100%;">
+                         <label for="starttime">Start Time:</label><br>
+                         <p class="info" ><?php echo date('H:i:sa', strtotime($start[1]));?></p>
+                         </div>
+                        </div>
+
+                        <div class="end">
+                         <div style="width: 100%;">
+
+                         <label for="enddate">End Date:</label><br>
+                          <p class="info"><?php echo date('Y-M-d', strtotime($end[0]));?></p>
+                         </div>
+
+                         <div style="width: 100%;">
+                         <label for="endtime">End Time:&nbsp;</label><br>
+                          <p class="info"><?php echo date('H:i:sa', strtotime($end[1]));?></p>
+                         </div>
+                        </div>
+
+                       <!-- <div class="start">
                          <label>Start Date:</label>
                            <p class="info" ><?php echo date('Y-M-d', strtotime($start[0]));?></p>
 
@@ -90,7 +115,7 @@ include('autoloader.inc.php');
 
                           <label for="endtime">End Time:&nbsp;</label>
                           <p class="info"><?php echo date('H:i:sa', strtotime($end[1]));?></p>
-                        </div>
+                        </div> -->
 
                           <label class="block-head" for="description">Description</label>
                           <div class="info2">
@@ -103,6 +128,7 @@ include('autoloader.inc.php');
                             document.getElementById("blah").style.display = "none";
                           }
                       </script>
+                      <div class="editBackButtons">
 
                        <a href="Events.php" class = "btn-primary passbtn" type="submit" name="event-submit">Back</a>
 
@@ -114,6 +140,7 @@ include('autoloader.inc.php');
                             <?php
                           }
                         ?>
+                      </div>
                      </div>
 
                    </div>
