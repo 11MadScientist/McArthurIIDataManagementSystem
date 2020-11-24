@@ -20,6 +20,8 @@
       $obj = new Reports();
       rmdir('Reports/'.$title);
       $obj->deleteReport($_POST['id']);
+      $objNotif = new Notifications();
+      $objNotif->delNotif('report',$_POST['id']);
       header("Location: ../reports-main.php?success=ReportDeleted");
       exit();
     }
