@@ -29,10 +29,22 @@
 
 
     $obj->createReports($_SESSION['user_id'],$title, $description, $end_date);
-
-
-    $obj = new Reports();
     $confid = $obj->getId($title);
+
+    // LOOP FOR GETTING ALL THE USERS REGISTERED EXCEPT THE ADMINISTRATOR
+    $objNotif = new Notifications();
+    $objUser = new User();
+    $resultUser = $objUser->getAllUserId();
+    while($rowUser = mysqli_fetch_array($resultUser))
+    {
+      // INSERTING EVENTS DATA INTO NOTIFICATIONS TABLE
+      $result = $obj->getAllReports();
+      while($row = mysqli_fetch_array($result))
+      {
+        if($row['report_id'] == $confid['report_id'])
+          $objNotif->insertNotif($rowUser['user_id'], 'report', $row['report_id'], 'unread', $row['date_created']);
+      }
+    }
 
 //image upload code
 
