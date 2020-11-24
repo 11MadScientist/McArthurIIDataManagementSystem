@@ -90,6 +90,28 @@ if(isset($_POST['submit-registry']))
   $obj = new AddInfo();
 
   $obj->setAddInfo($_SESSION['user_id'], $grade, $station, $dateofbirth, $civilstatus, $highesteducattn, $specification, $orig_appointment, $dateofpromo, $contactnum, $fbacct);
+  $objAnn = new Announcement();
+  $objNotif = new Notifications();
+  // INSERTING ANNOUNCEMENTS DATA INTO NOTIFICATIONS TABLE
+  $result = $objAnn->getAllAnn();
+  while($row = mysqli_fetch_array($result))
+  {
+    $objNotif->insertNotif($_SESSION['user_id'], 'announcement', $row['id'], 'unread', $row['date_created']);
+  }
+  // INSERTING EVENTS DATA INTO NOTIFICATIONS TABLE
+  $objEven = new Events();
+  $result = $objEven->getEventsAll();
+  foreach($result as $i)
+  {
+    $objNotif->insertNotif($_SESSION['user_id'], 'event', $i['id'], 'unread', $i['created']);
+  }
+  // INSERTING REPORTS DATA INTO NOTIFICATIONS TABLE
+  $objRep = new Reports();
+  $result = $objRep->getAllReports();
+  foreach($result as $i)
+  {
+    $objNotif->insertNotif($_SESSION['user_id'], 'report', $i['report_id'], 'unread', $i['date_created']);
+  }
   header("Location: ../login.php?success=signedupsuccessfully");
   session_unset();
   session_destroy();
