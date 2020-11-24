@@ -53,6 +53,37 @@ if(isset($_POST['login-user']))
           $res = $obj->getStation($_SESSION['user_id']);
           $_SESSION['station'] = $res['station'];
 
+          $objNotif = new Notifications();
+          // CHECKS IF NOTIFICATION TABLE IS EMPTY
+          // $rowCount = mysqli_num_rows($objNotif->notifChecker());
+          if($objNotif->isNotifTableEmpty()){
+              $objUser = new User();
+              $objAnn = new Announcement();
+              $objReport = new Reports();
+              $objEvent = new Events();
+              $resultUser = $objUser->getAllUserId();
+              foreach($resultUser as $user)
+              {
+                  // INSERTING ANNOUNCEMENTS DATA
+                  $resultAnn = $objAnn->getAllAnn();
+                  foreach($resultAnn as $ann)
+                  {
+                      $objNotif->insertNotif($user['user_id'], 'announcement', $ann['id'], 'unread', $ann['date_created']);
+                  }
+                  // INSERTING EVENTS DATA
+                  $resultEvent = $objEvent->getEventsAll();
+                  foreach($resultEvent as $event)
+                  {
+                      $objNotif->insertNotif($user['user_id'], 'event', $event['id'], 'unread', $event['created']);
+                  }
+                  // INSERTING REPORTS DATA
+                  $resultReport = $objReport->getAllReports();
+                  foreach($resultReport as $rep)
+                  {
+                      $objNotif->insertNotif($user['user_id'], 'report', $rep['report_id'], 'unread', $rep['date_created']);
+                  }
+              }
+          }
           header("Location: ../dashboard.php?success");
           exit();
       }
