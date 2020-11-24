@@ -52,6 +52,20 @@ class Reports extends Dbh
     return $info;
   }
 
+  public function getAllReports()
+  {
+    $sql = "SELECT * FROM reports";
+    $info = $this->mySqli($sql);
+    return $info;
+  }
+
+  public function countAllReports()
+  {
+    $result = $this->connect()->query("SELECT count(*) as total FROM reports");
+    $row = $result->fetchObject()->total;
+    return $row;
+  }
+
   public function getSpecificReport($id)
   {
     $sql = "SELECT * FROM reports WHERE report_id = ?";
@@ -164,10 +178,5 @@ class Reports extends Dbh
     $info = $this->mySqli($sql);
     return $info;
   }
-
-
-
-
-
 
 }
