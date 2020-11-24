@@ -10,6 +10,8 @@
     $event = new Announcement();
     $event->delImg($id);
     $event->delAnn($id);
+    $objNotif = new Notifications();
+    $objNotif->delNotif('announcement',$id);
     echo "<script>alert('Event Deleted Successfully')</script>";
     header("Location: ../Announcements.php?success=deletedsuccessfully");
     exit();
