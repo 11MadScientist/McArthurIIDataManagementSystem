@@ -31,6 +31,23 @@
 
     $obj = new Events();
     $obj->setEvent($_SESSION['user_id'],$start_date, $end_date, $title, $description);
+    $confid = $obj->getId($title);
+
+
+    // LOOP FOR GETTING ALL THE USERS REGISTERED EXCEPT THE ADMINISTRATOR
+    $objNotif = new Notifications();
+    $objUser = new User();
+    $resultUser = $objUser->getAllUserId();
+    while($rowUser = mysqli_fetch_array($resultUser))
+    {
+      // INSERTING EVENTS DATA INTO NOTIFICATIONS TABLE
+      $result = $obj->getEventsAll();
+      while($row = mysqli_fetch_array($result))
+      {
+        if($row['id'] == $confid['id'])
+          $objNotif->insertNotif($rowUser['user_id'], 'event', $row['id'], 'unread', $row['created']);
+      }
+    }
 
 
 
