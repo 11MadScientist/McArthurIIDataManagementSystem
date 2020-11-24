@@ -40,6 +40,20 @@ class Events extends Dbh
     return $info;
   }
 
+  public function getEventsAll()
+  {
+    $sql = "SELECT * FROM events";
+    $info = $this->mySqli($sql);
+    return $info;
+  }
+
+  public function countAllEvents()
+  {
+    $result = $this->connect()->query("SELECT count(*) as total FROM events");
+    $row = $result->fetchObject()->total;
+    return $row;
+  }
+
   public function checkTitle($title)
   {
     $sql = "SELECT title FROM events WHERE title = ?";
