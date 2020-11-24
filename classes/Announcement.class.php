@@ -20,6 +20,15 @@ class Announcement extends Dbh
     return $confid;
   }
 
+  public function getDate($title)
+  {
+    $sql = "SELECT date_created FROM announcement WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$title]);
+    $date = $stmt->fetch();
+    return $date;
+  }
+
   public function insertImg($id, $imageProperties, $imgData)
   {
     $conn = mysqli_connect("localhost", "root", "", "mddb");
@@ -89,6 +98,14 @@ class Announcement extends Dbh
     $info = $stmt->fetch();
     return $info;
   }
+
+  public function countAllAnn()
+  {
+    $result = $this->connect()->query("SELECT count(*) as total FROM announcement");
+    $row = $result->fetchObject()->total;
+    return $row;
+  }
+
   public function getAnn()
   {
     $sql = "SELECT *
@@ -105,6 +122,7 @@ class Announcement extends Dbh
     $info = $this->mySqli($sql);
     return $info;
   }
+
 
   public function delAnn($id)
   {
