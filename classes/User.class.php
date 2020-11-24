@@ -113,4 +113,11 @@ class User extends Dbh
     return $res;
 
   }
+
+  public function getAllUserId()
+  {
+    $sql = "SELECT user_id FROM users WHERE status !='Administrator'";
+    $result = $this->mySqli($sql);
+    return $result;
+  }
 }
