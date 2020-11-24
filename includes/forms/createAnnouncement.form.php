@@ -2,8 +2,6 @@
   session_start();
   include('../autoloader.inc.php');
 
-
-
   if(isset($_POST['ann-submit']))
   {
 
@@ -19,11 +17,24 @@
         exit();
     }
 
-    $obj = new Announcement();
+    // $obj = new Announcement();
     $obj->createAnn($_SESSION['user_id'],$title, $description);
     $confid = $obj->getId($title);
 
-
+    // LOOP FOR GETTING ALL THE USERS REGISTERED EXCEPT THE ADMINISTRATOR
+    $objNotif = new Notifications();
+    $objUser = new User();
+    $resultUser = $objUser->getAllUserId();
+    while($rowUser = mysqli_fetch_array($resultUser))
+    {
+      // INSERTING ANNOUNCEMENTS DATA INTO NOTIFICATIONS TABLE
+      $result = $obj->getAllAnn();
+      while($row = mysqli_fetch_array($result))
+      {
+        if($row['id'] == $confid['id'])
+          $objNotif->insertNotif($rowUser['user_id'], 'announcement', $row['id'], 'unread', $row['date_created']);
+      }
+    }
 
 
 //image upload code
