@@ -38,5 +38,11 @@ class Notifications extends Dbh
         else
             return true;
     }
+
+    function deleteReadNotifications($id){
+        $sql = "DELETE FROM notifications WHERE status='read' AND user_id=?";
+        $stmt =$this->connect()->prepare($sql);
+        $stmt->execute([$id]);
+    }
 }
 ?>

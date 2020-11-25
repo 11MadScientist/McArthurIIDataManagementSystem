@@ -84,6 +84,22 @@ if(isset($_POST['login-user']))
                   }
               }
           }
+
+          // DEADLINE REPORTS NOTIFICATIONS
+          $objNotif = new Notifications();
+          $query = "SELECT * FROM `reports` ORDER BY `deadline_date` DESC";
+          foreach($objNotif->fetchAll($query) as $dl){
+              date_default_timezone_set('Asia/Manila');
+              $today = date('M-d',strtotime('today'));
+              $dl_date = new DateTime($dl['deadline_date']);
+              if($dl_date->format('M-d') == $today){
+                  $diff = date_diff(date_create($dl['deadline_date']),date_create($today));
+                  // CHECKS IF 6 HRS OR LESS BEFORE DEADLINE
+                  if($diff->format('g') <= 6){
+                     $objNotif->insertNotif($_SESSION['user_id'], 'deadline', $dl['report_id'], 'unread', $dl['date_created']); 
+                  }
+              }
+          }
           header("Location: ../dashboard.php?success");
           exit();
       }
