@@ -2,8 +2,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
+
 <script src="js/scripts.js"></script>
 <nav style="background-color:#03C04A;" id = "topbar" class="sb-topnav navbar navbar-expand navbar-dark background">
     <a class="navbar-brand" href="dashboard.php">MDDMS</a>
@@ -31,6 +30,7 @@
                     <span class="badge badge-light"><?php echo count($objNotif->fetchAll($query)); ?></span>
                     <?php
                     }
+
                         ?>
             </a>
 
