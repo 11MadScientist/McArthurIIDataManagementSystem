@@ -20,7 +20,7 @@
     <!-- NOTIFICATION HEADER -->
     <ul class="navbar-nav mr-auto" >
           <li class="nav-item dropdown" >
-            <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications 
+            <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications
                     <?php
                     // COUNT ALL UNREAD NOTIFICATIONS
                     $objNotif = new Notifications();
@@ -61,8 +61,8 @@
                          ?>
                 >
                     <small><i><?php echo date('F j, Y, g:i a',strtotime($i['date'])) ?></i></small><br/>
-                    <?php 
-                    
+                    <?php
+
                     if($i['type']=='announcement')
                         echo "New Announcement";
                     else if($i['type']=='event')
