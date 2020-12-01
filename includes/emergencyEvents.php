@@ -22,7 +22,7 @@ include('autoloader.inc.php');
          <meta name="author" content="" />
          <title>McArthurII District RequestLeave</title>
          <link href="css/styles.css" rel="stylesheet" />
-         <link href="css/createEvent.css" rel="stylesheet" />
+         <link href="css/emergencyEvent.css" rel="stylesheet" />
          <link href="css/lee.css" rel="stylesheet" />
          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
@@ -37,16 +37,16 @@ include('autoloader.inc.php');
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h1 class="mt-4">Request Leave</h1>
+                   <h1 class="mt-4">Training event</h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                        <li class="breadcrumb-item active"><a href="attendance.php">Attendance</a></li>
-                       <li class="breadcrumb-item active"><a href="LeaveRequestList.php">Leave Requests</a></li>
-                       <li class="breadcrumb-item active">Request Leave</li>
+                       <li class="breadcrumb-item active"><a href="TrainingList.php">TrainingList</a></li>
+                       <li class="breadcrumb-item active">Training Event</li>
                    </ol>
 
                    <div class="createEvent-box">
-                     <p class="header">Request Leave Details</p>
+                     <p class="header">Training Event Details</p>
                      <?php
                          if(isset($_GET['error']))
                          {
@@ -60,13 +60,13 @@ include('autoloader.inc.php');
                          elseif(isset($_GET['success']))
                          {
 
-                           if($_GET['success'] == "RequestSubmitted")
+                           if($_GET['success'] == "Trainingsubmitted")
                            {
-                             echo '<p class="success"><i class = "fas fa-check"></i>Leave Request Submitted Successfully!</p>';
+                             echo '<p class="success"><i class = "fas fa-check"></i>Training data sent successfully!</p>';
                            }
-                           if($_GET['success'] == "eventEdited")
+                           if($_GET['success'] == "Trainingdeleted")
                            {
-                             echo '<p class="success"><i class = "fas fa-check"></i>Event Successfully Edited!</p>';
+                             echo '<p class="success"><i class = "fas fa-check"></i>Training data successfully deleted!</p>';
                            }
                          }
 
@@ -74,8 +74,8 @@ include('autoloader.inc.php');
                          $realid;
                          if(isset($_GET['id']))
                          {
-                           $obj = new Leave();
-                           $info = $obj->getIndivLeave($_GET['id']);
+                           $obj = new Monitoring();
+                           $info = $obj->getIndivTraining($_GET['id']);
 
                          }
                          elseif(isset($_POST['request']))
@@ -84,8 +84,8 @@ include('autoloader.inc.php');
                            foreach($_POST['request'] as $id)
                            {
                              $realid = $id;
-                             $obj = new Leave();
-                             $info = $obj->getIndivLeave($id);
+                             $obj = new Monitoring();
+                             $info = $obj->getIndivTraining($id);
                            }
 
                          }
@@ -93,93 +93,89 @@ include('autoloader.inc.php');
 
                     if(isset($_GET['id']))
                     {
-                      echo '<form id="form" action="forms/editRequestLeave.form.php" method="post" enctype="multipart/form-data">
+                      echo '<form id="form" action="forms/editTraining.form.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="'.$_GET['id'].'">';
 
                     }
                     elseif(isset($_POST['request']))
                     {
-                      echo '<form id="form" action="forms/editRequestLeave.form.php" method="post" enctype="multipart/form-data">
+                      echo '<form id="form" action="forms/editTraining.form.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="'.$realid.'">';
 
                     }
                     else
                     {
-                      echo '<form class="" action="forms/createRequestLeave.form.php" method="post" enctype="multipart/form-data">';
+                      echo '<form class="" action="forms/createTraining.form.php" method="post" enctype="multipart/form-data">';
                     }
                       ?>
 
-                    <a href="LeaveRequestList.php" class = " back" type="submit" name="event-submit"><i class="fas fa-arrow-left"></i>Back</a>
+                    <a href="TrainingList.php" class = " back" type="submit" name="event-submit"><i class="fas fa-arrow-left"></i>Back</a>
 
-                       <div class="start">
-                         <label for="startdate">Start Date:</label>
+                       <div class="date" style="">
+                         <label for="startdate">Date: &nbsp;</label>
                          <?php
                             if(isset($_POST['request']) or isset($_GET['id']))
                             {
-                                echo '<input value ='.$info['start_date'].' type="date" class="date-time" name="start_date" id = "startdate" value="">';
+                                echo '<input value ='.$info['training_date'].' type="date" class="date-time" name="start_date" id = "startdate" value="" required>';
                             }
                             else
                             {
-                              if(isset($_GET['start_date']))
+                              if(isset($_GET['training_date']))
                               {
-                                echo '<input value ='.$_GET['start_date'].' type="date" class="date-time" name="start_date" id = "startdate" value="">';
+                                echo '<input value ='.$_GET['training_date'].' type="date" class="date-time" name="start_date" id = "startdate" value="" required>';
                               }
                               else
                               {
-                                echo '<input type="date" class="date-time" name="start_date" id = "startdate" value="">';
+                                echo '<input type="date" class="date-time" name="start_date" id = "startdate" value="" required>';
+                              }
+                            }
+                          ?>
+                        </div>
+
+                       <label class="block-head" style="display:block;" for="title">Division Memorandum Number:</label>
+                       <div class="start">
+                         <label for="startdate">DM Number:&nbsp;</label>
+                         <?php
+                            if(isset($_POST['request']) or isset($_GET['id']))
+                            {
+                                echo '<input value ='.$info['dm_number'].' type="text" class="texts" name="dm_number" id = "startdate" value="" required>';
+                            }
+                            else
+                            {
+                              if(isset($_GET['dm_number']))
+                              {
+                                echo '<input value ='.$_GET['dm_number'].' type="text" class="texts" name="dm_number" id = "startdate" value="" required>';
+                              }
+                              else
+                              {
+                                echo '<input type="text" class="texts" name="dm_number" id = "startdate" value="" required>';
                               }
                             }
                           ?>
 
                         </div>
                         <div class="end">
-                          <label for="enddate">End Date:</label>
+                          <label for="enddate">, s.&nbsp;</label>
                           <?php
                             if(isset($_POST['request']) or isset($_GET['id']))
                             {
-                                echo '<input type="date" class="date-time" name="end_date" id = "enddate" value='.$info['end_date'].'>';
+                                echo '<input type="text" class="texts" name="year" id = "enddate" value='.$info['year'].' required>';
                             }
                             else
                             {
-                              if(isset($_GET['end_time']))
+                              if(isset($_GET['year']))
                               {
-                                echo '<input type="date" class="date-time" name="end_date" id = "enddate" value='.$_GET['end_date'].'>';
+                                echo '<input type="text" class="texts" name="year" id = "enddate" value='.$_GET['year'].'required>';
                               }
                               else
                               {
-                                 echo '<input type="date" class="date-time" name="end_date" id = "enddate">';
+                                 echo '<input type="text" class="texts" name="year" id = "enddate" required>';
                               }
                             }
                            ?>
+                         </div>
 
-                       </div>
-
-                       <label class="block-head" style="display:block;" for="title">Type of Leave:</label>
-                       <?php
-                          if(isset($_POST['request']) or isset($_GET['id']))
-                          {
-                             echo '<input class="title" type="" id="title" name="leaveType" required value ="'.$info['leaveType'].'">';
-
-                          }
-                          else
-                          {
-                            if(isset($_GET['leaveType']))
-                            {
-                                echo '<input class="title" type="text" id="title" name="leaveType" required value = "'.$_GET['leaveType'].'">';
-                            }
-                            else
-                            {
-                                echo '<input class="title" type="text" id="title" name="leaveType" required>';
-                            }
-                          }
-                        ?>
-
-
-
-
-
-
-                       <div class="buttons">
+                       <div class="buttons" style="display: block;">
                          <?php
                           if(isset($_POST['request']) or isset($_GET['id']))
                           {

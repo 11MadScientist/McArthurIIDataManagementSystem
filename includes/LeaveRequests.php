@@ -9,7 +9,7 @@ if($_SESSION['status']  != 'Administrator')
 
 include('autoloader.inc.php'); ?>
 
-!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 

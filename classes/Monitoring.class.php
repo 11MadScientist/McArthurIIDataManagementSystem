@@ -39,4 +39,13 @@ class Monitoring extends Dbh
     $info = $this->mySqli($sql);
     return $info;
   }
+
+  public function getIndivTraining($id)
+  {
+    $sql = "SELECT * FROM training WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id]);
+    $info = $stmt->fetch();
+    return $info;
+  }
 }

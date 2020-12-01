@@ -1,8 +1,7 @@
 <?php
 
 session_start();
-$exp = "/Principal/";
-if($_SESSION['status']  != 'Administrator' AND !preg_match($exp, $_SESSION['designation']))
+if($_SESSION['status']  != 'Administrator')
 {
   header("Location: forms/logout.form.php");
   exit();
@@ -26,7 +25,7 @@ include('autoloader.inc.php'); ?>
 
         <meta name="author" content="" />
 
-        <title>McArthurII District AcceptedLeave</title>
+        <title>McArthurII District LeaveRequests</title>
 
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/events.css" rel="stylesheet" />
@@ -50,13 +49,12 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">Accepted Leave</h1>
+                  <h1 class="mt-4">Training Requests</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
                     <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="LeaveRequests.php">Leave Requests</a></li>
-                    <li class="breadcrumb-item active">Accepted Leave</li>
+                    <li class="breadcrumb-item active">Training Requests</li>
 
 
                   </ol>
@@ -67,57 +65,43 @@ include('autoloader.inc.php'); ?>
                     <div class="card-body">
                         <div class="table-responsive">
 
+                            <form class="" action="forms/acceptTraining.form.php" method="post">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                              <a href="approvedTrainingRequests.php" type='submit' value='submit' name='accpt-req' class='btn btn-primary'
+                              style="width:350px; border-radius:3px; display:inline-block; float:right">Approved Training Requests</a>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Type of Leave</th>
-                                        <th>School</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th style="text-align:left;"><input type="checkbox" id="checkAll"></th>
+                                        <th>Date</th>
+                                        <th>Division Memorandum Number</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
 
-                                    <?php
+                                  <?php
 
-                                      $obj = new Leave();
-                                      $res;
-                                      if($_SESSION['status']  == 'Administrator')
-                                      {
-                                        $res = $obj->acceptedLeaveList();
-                                      }
-                                      else
-                                      {
-                                        $res = $obj->acceptedSchoolLeaveList($_SESSION['station']);
-                                      }
-
-
-                                      while($row = mysqli_fetch_array($res))
-                                      {
-                                          echo "<tr>
-                                                <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
-                                               "<td>".$row['designation']."</td>".
-                                               "<td>".$row['leaveType']."</td>".
-                                               "<td>".$row['station']."</td>".
-                                               "<td>".date('Y-M-d',strtotime($row['start_date']))."</td>".
-                                               "<td>".date('Y-M-d',strtotime($row['end_date']))."</td>
-                                                </tr>";
-
-                                      }
-                                     ?>
-
+                                    $obj = new Training();
+                                    $res = $obj->getTraining($_SESSION['user_id']);
+                                    while($row = mysqli_fetch_array($res))
+                                    {
+                                        echo "<tr>
+                                              <td style=text-align:left;><input id='rad' type=radio class='check' name='request[]' value=".$row['id']."><center></center></td>
+                                              <td>".date('Y-M-d',strtotime($row['training_date']))."</td>".
+                                             "<td>DM No: ".$row['dm_number'].", s.".$row['year']."</td>".
+                                             "<td>".$row['status']."</td>
+                                              </tr>";
+                                    }
+                                   ?>
 
                                 </tbody>
                             </table>
 
                         </div>
-                        <!-- BUTTONS FO FUTURE UPGRADE -->
-                        <!-- <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
+                        <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
 
-                            <button onclick="return warndel();" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DELETE</button>
+                            <button onclick="return warndel();" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DECLINE</button>
                             <script>
                             function warndel()
                             {
@@ -138,7 +122,7 @@ include('autoloader.inc.php'); ?>
                             function warnAccpt()
                             {
 
-                              var result = confirm("Are you sure you want to accpet checked request/s?");
+                              var result = confirm("Are you sure you want to accept checked request/s?");
                               if(!result)
                               {
 
@@ -148,7 +132,8 @@ include('autoloader.inc.php'); ?>
                               }
                             }
                             </script>
-                        </div> -->
+                            </form>
+                        </div>
                 </div>
 
 

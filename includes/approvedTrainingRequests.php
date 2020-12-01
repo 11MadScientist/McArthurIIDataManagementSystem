@@ -50,13 +50,13 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">Accepted Leave</h1>
+                  <h1 class="mt-4">Approved Training Requests</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
                     <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="LeaveRequests.php">Leave Requests</a></li>
-                    <li class="breadcrumb-item active">Accepted Leave</li>
+                    <li class="breadcrumb-item active"><a href="TrainingRequests.php">TrainingRequests</a></li>
+                    <li class="breadcrumb-item active">ApprovedTrainingREquests</li>
 
 
                   </ol>
@@ -70,12 +70,9 @@ include('autoloader.inc.php'); ?>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Type of Leave</th>
-                                        <th>School</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                      <th>Date</th>
+                                      <th>Division Memorandum Number</th>
+                                      <th>Status</th>
                                     </tr>
                                 </thead>
 
@@ -83,38 +80,25 @@ include('autoloader.inc.php'); ?>
 
                                     <?php
 
-                                      $obj = new Leave();
-                                      $res;
-                                      if($_SESSION['status']  == 'Administrator')
-                                      {
-                                        $res = $obj->acceptedLeaveList();
-                                      }
-                                      else
-                                      {
-                                        $res = $obj->acceptedSchoolLeaveList($_SESSION['station']);
-                                      }
+                                      $obj = new Training();
+                                      $res = $obj->getApproved();
 
-
-                                      while($row = mysqli_fetch_array($res))
-                                      {
-                                          echo "<tr>
-                                                <td><a href = Profile.php?id=".$row['user_id'].">".$row['l_name'].", ".$row['f_name']." ". $row['m_name']."</a></td>".
-                                               "<td>".$row['designation']."</td>".
-                                               "<td>".$row['leaveType']."</td>".
-                                               "<td>".$row['station']."</td>".
-                                               "<td>".date('Y-M-d',strtotime($row['start_date']))."</td>".
-                                               "<td>".date('Y-M-d',strtotime($row['end_date']))."</td>
-                                                </tr>";
-
-                                      }
-                                     ?>
+                                        while($row = mysqli_fetch_array($res))
+                                        {
+                                            echo "<tr>
+                                                  <td>".date('Y-M-d',strtotime($row['training_date']))."</td>".
+                                                 "<td>DM No: ".$row['dm_number'].", s.".$row['year']."</td>".
+                                                 "<td>".$row['status']."</td>
+                                                  </tr>";
+                                        }
+                                       ?>
 
 
                                 </tbody>
                             </table>
 
                         </div>
-                        <!-- BUTTONS FO FUTURE UPGRADE -->
+                        <!-- BUTTONS FOR FUTURE PURPOSES -->
                         <!-- <div style = "position: static; display:flex; justify-content:center;" name="buttonDiv">
 
                             <button onclick="return warndel();" type='submit' value='submit' name='decline-req' class='btn btn-primary' style="width:35%;margin-right:30px; height:100%; background:red; border-radius:3px;">DELETE</button>
@@ -148,8 +132,8 @@ include('autoloader.inc.php'); ?>
                               }
                             }
                             </script>
-                        </div> -->
-                </div>
+                        </div>
+                </div> -->
 
 
 

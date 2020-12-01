@@ -72,11 +72,14 @@
                                 <a class="nav-link" href="Personnel.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
                                     Personnel
+                                </a>
                                 <?php
                                  if($_SESSION['status']  == 'Administrator')
                                  {
                                    ?>
-
+                                   <a class="nav-link" href="trainingRequests.php">
+                                       <div class="sb-nav-link-icon"><i class="fas fa-atom"></i></div>
+                                       Training Requests
                                    </a>
                                    <a class="nav-link" href="Requests.php">
                                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>

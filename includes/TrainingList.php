@@ -57,31 +57,30 @@ include('autoloader.inc.php'); ?>
 
               <div class="container-fluid">
 
-                  <h1 class="mt-4">Leave Requests</h1>
+                  <h1 class="mt-4">Training List</h1>
 
                   <ol style = "background-color:#86B898" class="breadcrumb mb-4">
 
                       <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
                       <li class="breadcrumb-item active"><a href="attendance.php">Attendance</a></li>
-                      <li class="breadcrumb-item active">Leave Requests</li>
+                      <li class="breadcrumb-item active">Training List</li>
 
 
                   </ol>
-                  <a href="RequestLeave.php" name='accpt-req' class='but btn-primary'>Request Leave</a>
+                  <a href="emergencyEvents.php" name='accpt-req' class='but btn-primary'>Training Event</a>
 
                   <div class ="requests">
 
                     <!--REQUESTS TABLE-->
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="" action="RequestLeave.php" method="post">
+                            <form class="" action="emergencyEvents.php" method="post">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th style="text-align:left;"></th>
-                                        <th>Type of Leave</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Date</th>
+                                        <th>Division Memorandum Number</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -90,19 +89,14 @@ include('autoloader.inc.php'); ?>
 
                                     <?php
 
-                                      $obj = new Leave();
-                                      $res = $obj->indivLeaveList($_SESSION['user_id']);
+                                      $obj = new Training();
+                                      $res = $obj->getIndivTraining($_SESSION['user_id']);
                                       while($row = mysqli_fetch_array($res))
                                       {
-                                        if($row['status']=='')
-                                        {
-                                          $row['status']='Pending';
-                                        }
                                           echo "<tr>
                                                 <td style=text-align:left;><input id='rad' type=radio class='check' name='request[]' value=".$row['id']."><center></center></td>
-                                                <td>".$row['leaveType']."</td>".
-                                               "<td>".date('Y-M-d',strtotime($row['start_date']))."</td>".
-                                               "<td>".date('Y-M-d',strtotime($row['end_date']))."</td>".
+                                                <td>".date('Y-M-d',strtotime($row['training_date']))."</td>".
+                                               "<td>DM No: ".$row['dm_number'].", s.".$row['year']."</td>".
                                                "<td>".$row['status']."</td>
                                                 </tr>";
                                       }

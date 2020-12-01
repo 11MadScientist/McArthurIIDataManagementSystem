@@ -33,8 +33,8 @@ if($_SESSION['user_id'] == null)
                       <li class="breadcrumb-item active">Attendance</li>
                   </ol>
                   <div class="head">
-                  <a href="RequestLeave.php" name='accpt-req' class='but btn-primary'>Request Leave</a>
                   <a href="LeaveRequestList.php" name='accpt-req' class='but btn-primary'>Leave Requests List</a>
+                  <a href="TrainingList.php" name='accpt-req' class='but btn-primary'>Training List</a>
 
                   <!--ATTENDANCE TABLE-->
                     <table style='width:100%'>
