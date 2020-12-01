@@ -39,9 +39,19 @@ class Training extends Dbh
   }
   public function getApproved()
   {
-    $sql = "SELECT * FROM training WHERE status != 'Pending'";
+    $sql = "SELECT * FROM training WHERE status = 'Approved'";
     $info = $this->mySqli($sql);
     return $info;
+  }
+
+  public function getApprovedTraining($id, $date)
+  {
+    $sql = "SELECT * FROM training WHERE status = 'Approved'
+    AND user_id =? AND training_date = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id, $date]);
+    $date = $stmt->fetch();
+    return $date;
   }
 
   public function acceptTraining($id)

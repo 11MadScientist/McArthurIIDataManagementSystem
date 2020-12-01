@@ -73,27 +73,28 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
                                     Personnel
                                 </a>
+
+                                <a class="nav-link" href="reportFiles.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                                    Report Files
+                                </a>
                                 <?php
                                  if($_SESSION['status']  == 'Administrator')
                                  {
                                    ?>
+                                   <a class="nav-link" href="Requests.php">
+                                       <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                                       Registration
+                                   </a>
                                    <a class="nav-link" href="trainingRequests.php">
                                        <div class="sb-nav-link-icon"><i class="fas fa-atom"></i></div>
                                        Training Requests
-                                   </a>
-                                   <a class="nav-link" href="Requests.php">
-                                       <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
-                                       Requests
                                    </a>
 
                                    <?php
                                  }
 
                                   ?>
-                                  <a class="nav-link" href="reportFiles.php">
-                                      <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
-                                      Report Files
-                                  </a>
 
 
 

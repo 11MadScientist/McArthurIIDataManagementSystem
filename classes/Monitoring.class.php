@@ -48,4 +48,21 @@ class Monitoring extends Dbh
     $info = $stmt->fetch();
     return $info;
   }
+
+  public function getApprovedTraining($id, $date)
+  {
+    $sql = "SELECT * FROM training WHERE status = 'Approved'
+    AND user_id =? AND training_date = ? ";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id, $date]);
+    $date = $stmt->fetch();
+    return $date;
+
+    $sql = "SELECT * FROM training WHERE status = 'Approved'
+    AND user_id =? AND training_date = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$id, $date]);
+    $date = $stmt->fetch();
+    return $date;
+  }
 }

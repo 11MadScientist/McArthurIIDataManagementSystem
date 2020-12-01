@@ -153,10 +153,19 @@ date_default_timezone_set('Asia/Manila');
                                         {
                                           $lv = new Monitoring();
                                           $info = $lv->getLeave($row['user_id'], $_SESSION['day']);
+
+                                          $ymd = date('Y-m-d', strtotime($_SESSION['day']));
+                                          $t = $lv->getApprovedTraining($row['user_id'], $ymd);
+
                                           if($info and $info !== false)
                                           {
-                                            echo $info['start_date'];
+                                            // echo $info['start_date'];
                                             $row['pm_status'] = 'On-Leave';
+                                          }
+                                          elseif($t and $t !== false)
+                                          {
+                                            $row['pm_status'] =  "DM No: ". $t['dm_number'].", s.".$t['year'];
+                                            $row['am_status'] =  "DM No: ". $t['dm_number'].", s.".$t['year'];
                                           }
                                           else
                                           {

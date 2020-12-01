@@ -117,10 +117,17 @@ if($_SESSION['user_id'] == null)
                                   {
                                     $lv = new Monitoring();
                                     $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+
+                                    $trn = new Training();
+                                    $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                     if($in and $in !== false)
                                     {
                                       echo 'On-Leave';
                                       $info['pm_status'] = 'On-Leave';
+                                    }
+                                    elseif($t and $t !== false)
+                                    {
+                                      echo "DM No: ". $t['dm_number'].", s.".$t['year'];
                                     }
                                     elseif(date("H:i:sa") >= date("H:i:sa", strtotime($startpm)) and date("H:i:sa") <= date("H:i:sa", strtotime($endpm)))
                                     {
@@ -144,10 +151,16 @@ if($_SESSION['user_id'] == null)
                               {
                                 $lv = new Monitoring();
                                 $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+                                $trn = new Training();
+                                $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                 if($in and $in !== false)
                                 {
                                   echo 'On-Leave';
                                   $info['pm_status'] = 'On-Leave';
+                                }
+                                elseif($t and $t !== false)
+                                {
+                                  echo "DM No: ". $t['dm_number'].", s.".$t['year'];
                                 }
                                 elseif($info['timein_pm']?? null !== null)
                                 {
@@ -179,10 +192,18 @@ if($_SESSION['user_id'] == null)
                                   {
                                     $lv = new Monitoring();
                                     $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+
+                                    $trn = new Training();
+                                    $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                     if($in and $in !== false)
                                     {
                                       echo 'On-Leave';
                                       $info['pm_status'] = 'On-Leave';
+                                    }
+                                    elseif($t and $t !== false)
+                                    {
+                                      echo "DM No: ". $t['dm_number'].", s.".$t['year'];
+                                      $info['pm_status'] = 'Training';
                                     }
                                     elseif($info['timein_pm']?? null != null and date("H:i:sa") <= date("H:i:sa", strtotime($endpm)))
                                     {
@@ -207,10 +228,17 @@ if($_SESSION['user_id'] == null)
                               {
                                 $lv = new Monitoring();
                                 $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+                                $trn = new Training();
+                                $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                 if($in and $in !== false)
                                 {
                                   echo 'On-Leave';
                                   $info['pm_status'] = 'On-Leave';
+                                }
+                                elseif($t and $t !== false)
+                                {
+                                  echo "DM No: ". $t['dm_number'].", s.".$t['year'];
+                                  $info['pm_status'] = 'Training';
                                 }
                                 elseif($info['timeout_pm']?? null !== null)
                                 {
@@ -291,10 +319,17 @@ if($_SESSION['user_id'] == null)
                                       {
                                         $lv = new Monitoring();
                                         $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+
+                                        $trn = new Training();
+                                        $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                         if($in and $in !== false)
                                         {
                                           echo 'On-Leave';
                                           $info['am_status'] = 'On-Leave';
+                                        }
+                                        elseif($t and $t !== false)
+                                        {
+                                          echo "DM No: ". $t['dm_number'].", s.".$t['year'];
                                         }
                                         elseif(date("H:i:sa") >= date("H:i:sa", strtotime($startam))  and date("H:i:sa") <= date("H:i:sa", strtotime($endam)))
                                         {
@@ -317,10 +352,16 @@ if($_SESSION['user_id'] == null)
                                   {
                                     $lv = new Monitoring();
                                     $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+                                    $lv = new Monitoring();
+                                    $in = $lv->getLeave($_SESSION['user_id'], $ymd);
                                     if($in and $in !== false)
                                     {
                                       echo 'On-Leave';
                                       $info['am_status'] = 'On-Leave';
+                                    }
+                                    elseif($t and $t !== false)
+                                    {
+                                      echo "DM No: ". $t['dm_number'].", s.".$t['year'];
                                     }
                                     elseif($info['timein_am']?? null !== null)
                                     {
@@ -351,10 +392,18 @@ if($_SESSION['user_id'] == null)
                                       {
                                         $lv = new Monitoring();
                                         $in = $lv->getLeave($_SESSION['user_id'], $ymd);
+
+                                        $trn = new Training();
+                                        $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                         if($in and $in !== false)
                                         {
                                           echo 'On-Leave';
                                           $info['pm_status'] = 'On-Leave';
+                                        }
+                                        elseif($t and $t !== false)
+                                        {
+                                          echo "DM No: ". $t['dm_number'].", s.".$t['year'];
+                                          $info['am_status'] = 'Training';
                                         }
                                         else
                                         {
@@ -387,9 +436,16 @@ if($_SESSION['user_id'] == null)
                                   else
                                     //timestamp for the previous days
                                   {
+                                    $trn = new Training();
+                                    $t = $trn->getApprovedTraining($_SESSION['user_id'], $ymd);
                                     if($info['timeout_am']?? null !== null)
                                     {
                                       echo $info['timeout_am'];
+                                    }
+                                    elseif($t and $t !== false)
+                                    {
+                                      echo "DM No: ". $t['dm_number'].", s.".$t['year'];
+                                      $info['am_status'] = 'Training';
                                     }
                                     elseif($info['timeout_am']?? null === null or $info['timeout_am'] == false)
                                     {

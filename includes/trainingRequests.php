@@ -73,6 +73,7 @@ include('autoloader.inc.php'); ?>
                                     <tr>
                                         <th style="text-align:left;"><input type="checkbox" id="checkAll"></th>
                                         <th>Date</th>
+                                        <th>Name</th>
                                         <th>Division Memorandum Number</th>
                                         <th>Status</th>
                                     </tr>
@@ -84,11 +85,15 @@ include('autoloader.inc.php'); ?>
 
                                     $obj = new Training();
                                     $res = $obj->getTraining($_SESSION['user_id']);
+                                    $obj1 = new User();
+
                                     while($row = mysqli_fetch_array($res))
                                     {
+                                      $info = $obj1->idChecker($row['user_id']);
                                         echo "<tr>
                                               <td style=text-align:left;><input id='rad' type=radio class='check' name='request[]' value=".$row['id']."><center></center></td>
                                               <td>".date('Y-M-d',strtotime($row['training_date']))."</td>".
+                                              "<td>".$info['l_name'].", ".$info['f_name']." ".$info['m_name']."</td>".
                                              "<td>DM No: ".$row['dm_number'].", s.".$row['year']."</td>".
                                              "<td>".$row['status']."</td>
                                               </tr>";

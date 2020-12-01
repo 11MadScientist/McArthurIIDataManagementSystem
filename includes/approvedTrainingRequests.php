@@ -71,6 +71,7 @@ include('autoloader.inc.php'); ?>
                                 <thead>
                                     <tr>
                                       <th>Date</th>
+                                      <th>Name</th>
                                       <th>Division Memorandum Number</th>
                                       <th>Status</th>
                                     </tr>
@@ -82,11 +83,14 @@ include('autoloader.inc.php'); ?>
 
                                       $obj = new Training();
                                       $res = $obj->getApproved();
+                                      $obj1 = new User();
 
                                         while($row = mysqli_fetch_array($res))
                                         {
+                                          $info = $obj1->idChecker($row['user_id']);
                                             echo "<tr>
                                                   <td>".date('Y-M-d',strtotime($row['training_date']))."</td>".
+                                                  "<td>".$info['l_name'].", ".$info['f_name']." ".$info['m_name']."</td>".
                                                  "<td>DM No: ".$row['dm_number'].", s.".$row['year']."</td>".
                                                  "<td>".$row['status']."</td>
                                                   </tr>";
