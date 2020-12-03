@@ -77,7 +77,7 @@ date_default_timezone_set('Asia/Manila');
                             <tbody>
                               <?php
                               $obj = new Reports();
-                              $result = $obj->getReport();
+                              $result = $obj->getAllReports();
                               $num = 0;
                                 //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
                                 while($row = mysqli_fetch_array($result))

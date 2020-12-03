@@ -58,7 +58,7 @@ include('autoloader.inc.php');
                             <tbody>
                               <?php
                               $obj = new Reports();
-                              $result = $obj->getReport();
+                              $result = $obj->getAllReports();
                                 //LOOP FOR REPORTS LIST (DEPENDENT TO THE DATA OF REPORTS TO BE SUBMITTED)
                                 $num = 0;
                                 while($row = mysqli_fetch_array($result))

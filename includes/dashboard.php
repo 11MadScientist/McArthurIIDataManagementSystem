@@ -121,8 +121,10 @@
                             <div class="event-cont">
                               <ul>
                                 <?php
-                                  $obj = new Events();
-                                  $result = $obj->getEvents();
+                                $month = date('Y-m',strtotime('today'));
+
+                                $obj = new Events();
+                                $result = $obj->getAllEvents($month);
 
                                   while($row = mysqli_fetch_array($result))
                                   {

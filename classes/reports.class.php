@@ -47,6 +47,7 @@ class Reports extends Dbh
   public function getReport()
   {
     $sql = "SELECT * FROM reports
+    WHERE status = 'Open'
     ORDER BY report_id";
     $info = $this->mySqli($sql);
     return $info;
@@ -54,7 +55,8 @@ class Reports extends Dbh
 
   public function getAllReports()
   {
-    $sql = "SELECT * FROM reports";
+    $sql = "SELECT * FROM reports
+    ORDER BY status desc";
     $info = $this->mySqli($sql);
     return $info;
   }

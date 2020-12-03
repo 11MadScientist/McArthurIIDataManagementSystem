@@ -34,7 +34,7 @@ class Events extends Dbh
             FROM events
             WHERE start_date LIKE '".$date."%'
             OR end_date LIKE '".$date."%'
-            ORDER BY start_date DESC";
+            ORDER BY start_date, end_date, id";
 
     $info = $this->mySqli($sql);
     return $info;

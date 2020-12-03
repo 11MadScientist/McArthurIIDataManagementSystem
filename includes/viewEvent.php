@@ -83,7 +83,7 @@ include('autoloader.inc.php');
 
                          <div style="width: 100%;">
                          <label for="starttime">Start Time:</label><br>
-                         <p class="info" ><?php echo date('H:i:sa', strtotime($start[1]));?></p>
+                         <p class="info" ><?php echo date('h:i:sa', strtotime($start[1]));?></p>
                          </div>
                         </div>
 
@@ -96,26 +96,11 @@ include('autoloader.inc.php');
 
                          <div style="width: 100%;">
                          <label for="endtime">End Time:&nbsp;</label><br>
-                          <p class="info"><?php echo date('H:i:sa', strtotime($end[1]));?></p>
+                          <p class="info"><?php echo date('h:i:sa', strtotime($end[1]));?></p>
                          </div>
                         </div>
 
-                       <!-- <div class="start">
-                         <label>Start Date:</label>
-                           <p class="info" ><?php echo date('Y-M-d', strtotime($start[0]));?></p>
-
-                         <label for="starttime">Start Time:&nbsp;</label>
-                         <p class="info" ><?php echo date('H:i:sa', strtotime($start[1]));?></p>
-
-                        </div>
-
-                        <div class="end">
-                          <label for="enddate">End Date:</label>
-                          <p class="info"><?php echo date('Y-M-d', strtotime($end[0]));?></p>
-
-                          <label for="endtime">End Time:&nbsp;</label>
-                          <p class="info"><?php echo date('H:i:sa', strtotime($end[1]));?></p>
-                        </div> -->
+              
 
                           <label class="block-head" for="description">Description</label>
                           <div class="info2">
