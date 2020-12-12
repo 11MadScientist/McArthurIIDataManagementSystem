@@ -28,23 +28,7 @@
     }
 
 
-    $obj->createReports($_SESSION['user_id'],$title, $description, $end_date);
-    $confid = $obj->getId($title);
 
-    // LOOP FOR GETTING ALL THE USERS REGISTERED EXCEPT THE ADMINISTRATOR
-    $objNotif = new Notifications();
-    $objUser = new User();
-    $resultUser = $objUser->getAllUserId();
-    while($rowUser = mysqli_fetch_array($resultUser))
-    {
-      // INSERTING EVENTS DATA INTO NOTIFICATIONS TABLE
-      $result = $obj->getAllReports();
-      while($row = mysqli_fetch_array($result))
-      {
-        if($row['report_id'] == $confid['report_id'])
-          $objNotif->insertNotif($rowUser['user_id'], 'report', $row['report_id'], 'unread', $row['date_created']);
-      }
-    }
 
 //image upload code
 
@@ -71,6 +55,23 @@
 
           if($fileSize < 16777215)
           {
+            $obj->createReports($_SESSION['user_id'],$title, $description, $end_date);
+            $confid = $obj->getId($title);
+
+            // LOOP FOR GETTING ALL THE USERS REGISTERED EXCEPT THE ADMINISTRATOR
+            $objNotif = new Notifications();
+            $objUser = new User();
+            $resultUser = $objUser->getAllUserId();
+            while($rowUser = mysqli_fetch_array($resultUser))
+            {
+              // INSERTING EVENTS DATA INTO NOTIFICATIONS TABLE
+              $result = $obj->getAllReports();
+              while($row = mysqli_fetch_array($result))
+              {
+                if($row['report_id'] == $confid['report_id'])
+                  $objNotif->insertNotif($rowUser['user_id'], 'report', $row['report_id'], 'unread', $row['date_created']);
+              }
+            }
 
             $imgData =addslashes(file_get_contents($_FILES['event-img']['tmp_name']));
             $imageProperties = getimageSize($_FILES['event-img']['tmp_name']);
@@ -103,6 +104,8 @@
       else
       {
         echo "invalid filetype";
+        header("Location: ../createReport.php?error=invalidTypeofFile&end_date=".$_POST['end_date']."&end_time=".$_POST['end_time'].
+        "&description=".$description."&title=".$title);
       }
     }
     elseif($_FILES['event-img']['name'] == null)

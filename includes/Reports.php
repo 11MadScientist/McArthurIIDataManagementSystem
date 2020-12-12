@@ -53,7 +53,23 @@
 
                 <?php $obj = new Reports();
                       $result=$obj->getSpecificReport($_GET['id']);
+
+                        if($result == null)
+                        {
+                          echo "No Data Received";;
+                          ?>
+                            <script>
+                              alert("This report has been deleted");
+                              window.location.replace("dashboard.php");
+                            </script>
+                          <?php
+                          exit();
+
+                        }
+
                       $indv = $obj->getSubmittedReport($_SESSION['user_id'], $result['report_id']);
+
+
                  ?>
 
                 <!-- DESCRIPTION AREA -->

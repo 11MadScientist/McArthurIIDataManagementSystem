@@ -34,8 +34,9 @@ include('autoloader.inc.php');
                <div class="container-fluid">
                    <h1 class="mt-4"><?php if(isset($_GET['id'])){echo "EditReport";}else{echo "CreateReport";} ?></h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
-                       <li class="breadcrumb-item active">CreateReport</li>
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
+                       <li class="breadcrumb-item active"><a href="reportFiles.php">ReportFiles</a></li>
+                       <li class="breadcrumb-item active">CreateReport</li>
                    </ol>
 
                    <div class="createEvent-box">
@@ -104,7 +105,7 @@ include('autoloader.inc.php');
                     }
                       ?>
 
-                    <a href="reports-main.php" class = " back" type="submit" name="report-submit"><i class="fas fa-arrow-left"></i>Back</a>
+                    <a href="reportFiles.php" class = " back" type="submit" name="report-submit"><i class="fas fa-arrow-left"></i>Back</a>
 
 
 
