@@ -128,6 +128,7 @@ label
   width: 40%;
   display: block;
   float: right;
+  font-size: 25px;
 }
 
 
@@ -138,7 +139,6 @@ label
   display: block;
   float: right;
   text-align: left;
-  font-size: 25px;
 }
 
 .editBackButtons
