@@ -368,7 +368,7 @@
                          <div class="divider-inline2">
                            <div class="contact-content">
                              <i class = "fas fa-address-book"></i>
-                             <label for="inputLastName">Specification:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                             <label for="inputLastName">Specialization:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                              <!--his Specification subject-->
                              <?php
                               if(isset($_GET['specification']))
@@ -490,10 +490,11 @@
                                <!--name of school user is in-->
                                <div class="dropdown-container">
                                  <?php
-                                     if(isset($_GET['station']))
-                                     {
+
+                                   if($info['station']?? "1" != "1")
+                                   {
                                        echo '<select name = "station" id = "station" required>
-                                         <option disabled value = "1" hidden>Choose here</option>
+                                         <option value="Mc ArthurII District">Mc ArthurII District</option>
                                          <option value="Batug E.S">Batug E.S</option>
                                          <option value="CM Closa E.S">CM Closa E.S</option>
                                          <option value="Danao E.S">Danao E.S</option>
@@ -513,75 +514,43 @@
                                          <script>
                                          function myFunction()
                                          {
-                                           document.getElementById("station").value = "'.$_GET['station'].'";
+                                           document.getElementById("station").value = "'.$info['station'].'";
                                          }
                                          myFunction();
                                          </script>';
 
-                                     }
-                                     else
+
+                                   }
+                                   else
                                      {
-                                       if($info['station']?? "1" != "1")
-                                       {
-
-                                           echo '<select name = "station" id = "station" required>
-                                             <option disabled value = "1" hidden>Choose here</option>
-                                             <option value="Batug E.S">Batug E.S</option>
-                                             <option value="CM Closa E.S">CM Closa E.S</option>
-                                             <option value="Danao E.S">Danao E.S</option>
-                                             <option value="Kiling E.S">Kiling E.S</option>
-                                             <option value="Liwayway E.S">Liwayway E.S</option>
-                                             <option value="Maya E.S">Maya E.S</option>
-                                             <option value="Oguisan E.S">Oguisan E.S</option>
-                                             <option value="Olmedo E.S">Olmedo E.S</option>
-                                             <option value="Palale C.S">Palale C.S</option>
-                                             <option value="Salvacion E.S">Salvacion E.S</option>
-                                             <option value="San Antonio E.S">San Antonio E.S</option>
-                                             <option value="San Pedro E.S">San Pedro E.S</option>
-                                             <option value="San Vicente E.S">San Vicente E.S</option>
-                                             <option value="Tin-awan E.S">Tin-awan E.S</option>
-                                             <option value="Villa Imelda E.S">Villa Imelda E.S</option>
-                                             </select>
-                                             <script>
-                                             function myFunction()
-                                             {
-                                               document.getElementById("station").value = "'.$info['station'].'";
-                                             }
-                                             myFunction();
-                                             </script>';
-
-
-                                       }
-                                       else
+                                       echo '<select name = "station" id = "station" required>
+                                         <option disabled  value = "1" hidden>Choose here</option>
+                                         <option value="Batug E.S">Batug E.S</option>
+                                         <option value="CM Closa E.S">CM Closa E.S</option>
+                                         <option value="Danao E.S">Danao E.S</option>
+                                         <option value="Kiling E.S">Kiling E.S</option>
+                                         <option value="Liwayway E.S">Liwayway E.S</option>
+                                         <option value="Maya E.S">Maya E.S</option>
+                                         <option value="Oguisan E.S">Oguisan E.S</option>
+                                         <option value="Olmedo E.S">Olmedo E.S</option>
+                                         <option value="Palale C.S">Palale C.S</option>
+                                         <option value="Salvacion E.S">Salvacion E.S</option>
+                                         <option value="San Antonio E.S">San Antonio E.S</option>
+                                         <option value="San Pedro E.S">San Pedro E.S</option>
+                                         <option value="San Vicente E.S">San Vicente E.S</option>
+                                         <option value="Tin-awan E.S">Tin-awan E.S</option>
+                                         <option value="Villa Imelda E.S">Villa Imelda E.S</option>
+                                         </select>
+                                         <script>
+                                         function myFunction()
                                          {
-                                           echo '<select name = "station" id = "station" required>
-                                             <option disabled  value = "1" hidden>Choose here</option>
-                                             <option value="Batug E.S">Batug E.S</option>
-                                             <option value="CM Closa E.S">CM Closa E.S</option>
-                                             <option value="Danao E.S">Danao E.S</option>
-                                             <option value="Kiling E.S">Kiling E.S</option>
-                                             <option value="Liwayway E.S">Liwayway E.S</option>
-                                             <option value="Maya E.S">Maya E.S</option>
-                                             <option value="Oguisan E.S">Oguisan E.S</option>
-                                             <option value="Olmedo E.S">Olmedo E.S</option>
-                                             <option value="Palale C.S">Palale C.S</option>
-                                             <option value="Salvacion E.S">Salvacion E.S</option>
-                                             <option value="San Antonio E.S">San Antonio E.S</option>
-                                             <option value="San Pedro E.S">San Pedro E.S</option>
-                                             <option value="San Vicente E.S">San Vicente E.S</option>
-                                             <option value="Tin-awan E.S">Tin-awan E.S</option>
-                                             <option value="Villa Imelda E.S">Villa Imelda E.S</option>
-                                             </select>
-                                             <script>
-                                             function myFunction()
-                                             {
-                                               document.getElementById("station").value = 1;
-                                             }
-                                             myFunction();
-                                             </script>';
+                                           document.getElementById("station").value = 1;
                                          }
-
+                                         myFunction();
+                                         </script>';
                                      }
+
+
                                   ?>
                                   <div class="select-icon">
                                     <svg focusable="false" viewBox="0 0 104 128" width="25" height="35" class="icon">

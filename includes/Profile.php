@@ -155,7 +155,7 @@
                          <div class="divider-inline1">
                            <div class="contact-content">
                              <i class = "fas fa-address-book"></i>
-                             <span>Specification:</span>
+                             <span>Specialization:</span>
                              <span class = "content"><?php echo $info['specification']?? ''; ?></span>
                            </div>
 

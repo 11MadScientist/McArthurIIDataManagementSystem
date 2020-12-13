@@ -105,7 +105,8 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="inputLastName">Specification</label>
+                                                      <!-- Specification changed to specialization. but the variable remains as specification for safety purposes -->
+                                                        <label class="small mb-1" for="inputLastName">Specialization</label>
                                                         <!--his specification subject-->
                                                         <?php
                                                             if(isset($_GET['specification']))

@@ -35,8 +35,18 @@ include('autoloader.inc.php');
                    <h1 class="mt-4"><?php if(isset($_GET['id'])){echo "EditReport";}else{echo "CreateReport";} ?></h1>
                    <ol style = "background-color:#86B898" class="breadcrumb mb-4">
                        <li class="breadcrumb-item active"><a href="dashboard.php">Dashboard</a></li>
-                       <li class="breadcrumb-item active"><a href="reportFiles.php">ReportFiles</a></li>
-                       <li class="breadcrumb-item active">CreateReport</li>
+
+                       <?php if(isset($_GET['id']))
+                              {
+                                echo '<li class="breadcrumb-item active"><a href="reports-main.php">Reports</a></li>';
+                                echo '<li class="breadcrumb-item active">EditReport</li>  ';
+                              }
+                              else
+                              {
+                                echo '<li class="breadcrumb-item active"><a href="reportFiles.php">ReportFiles</a></li>';
+                                echo '<li class="breadcrumb-item active">CreateReport</li>';
+                              }
+                      ?>
                    </ol>
 
                    <div class="createEvent-box">
@@ -98,14 +108,20 @@ include('autoloader.inc.php');
                             <input type="hidden" name="id" value="'.$_GET['id'].'">';
                       echo '<input type="hidden" name="old_title" value="'.$info['report_title'].'">';
 
+                      // go back to the work reports if there is id
+                      echo '<a href="reports-main.php" class = " back" type="submit" name="report-submit"><i class="fas fa-arrow-left"></i>Back</a>';
+
                     }
                     else
                     {
                       echo '<form class="" action="forms/createReport.form.php" method="post" enctype="multipart/form-data">';
+
+                      // go back to the administration reportFiles if no id is given
+                      echo '<a href="reportFiles.php" class = " back" type="submit" name="report-submit"><i class="fas fa-arrow-left"></i>Back</a>';
                     }
                       ?>
 
-                    <a href="reportFiles.php" class = " back" type="submit" name="report-submit"><i class="fas fa-arrow-left"></i>Back</a>
+
 
 
 
