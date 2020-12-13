@@ -56,7 +56,7 @@
 
                         if($result == null)
                         {
-                          echo "No Data Received";;
+                          echo "No Data Received";
                           ?>
                             <script>
                               alert("This report has been deleted");
